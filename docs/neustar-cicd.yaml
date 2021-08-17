@@ -88,9 +88,11 @@ x-tagGroups:
     tags:
       - Generate SIP Identity Headers
       - Get Certificate
+      - Errors
   - name: Verification Service
     tags:
-      - Errors
+      - TBD
+      
 
 paths:
   /identity-j_j:

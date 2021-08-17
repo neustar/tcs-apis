@@ -83,6 +83,15 @@ tags:
 - name: Errors
   #description: Endpoint to get a list of all potential errors generated
 
+x-tagGroups:
+  - name: Authentication Service
+    tags:
+      - Generate SIP Identity Headers
+      - Get Certificate
+  - name: Verification Service
+    tags:
+      - Errors
+
 paths:
   /identity-j_j:
     post:

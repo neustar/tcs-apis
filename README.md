@@ -10,6 +10,8 @@ The OpenAPI Specification (OAS) defines a standard, language-agnostic interface 
 
 This document describes the process for proposing, documenting, and implementing changes to the CICD AS & VS project. 
 
+In the spirit of being a public API, we've chosen to publicize the generators that create our documentation. By doing this we hope to be more transparent when we make changes and provide a gateway for our consumers to become contributors.
+
 ## The Proposal Process
 
 The proposal process is the process for reviewing a proposal and reaching

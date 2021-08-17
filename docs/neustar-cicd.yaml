@@ -82,6 +82,11 @@ tags:
   #description: Endpoint to get certificate for verifying SIP Identity headers
 - name: Errors
   #description: Endpoint to get a list of all potential errors generated
+- name: Verifies SIP Identity headers
+- name: Performs CNAM queries
+- name: Performs ECNAM queries
+- name: Gets a list of all potential errors generated
+    
 
 x-tagGroups:
   - name: Authentication Service
@@ -91,7 +96,11 @@ x-tagGroups:
       - Errors
   - name: Verification Service
     tags:
-      - TBD
+      - Verifies SIP Identity headers
+      - Performs CNAM queries
+      - Performs ECNAM queries
+      - Gets a list of all potential errors generated
+
       
 
 paths:

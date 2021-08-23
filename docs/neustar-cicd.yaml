@@ -425,10 +425,6 @@ paths:
             application/json: 
               schema: 
                 $ref: '#/components/schemas/SuccessResponse'
-            text/plain:
-              schema:
-                type: string
-                example: 'INVITE sip:17035550021@proxy.example.com;transport=UDP SIP/2.0From: "Alice" <sip:+15714345500@example.com>Identity: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyI0NDcwMzU1NTAwMDAiXX0sImlhdCI6MTYyMTAxMTQyNSwib3JpZyI6eyJ0biI6IjE1NzE0MzQ1NTAwIn0sIm9yaWdpZCI6Ijc4MzZlYzFkMDYwNzRkNjg4YjYyYzFlYTVlYmQxOTM5In0.RIDQYZP0SNd7ejjJGlcYLQ-55XssLVG5hJ5001v-unKFbD349VVYLderLBt_4h-eCgAcWIsuAW6YSMUqfPk8PA;info=<https://ca.neustarlab.biz/ccid/v2/authn/certs/20001.10001>;alg=ES256;ppt="shaken"Date: Fri, 14 May 2021 16:57:05 GMTTo: "Bob" <sip:+447035550000@example.com>'
         400:
           description: Error Resonse
           content: 
@@ -1623,13 +1619,14 @@ paths:
         200:
           description: successful operation
           content:
-            application/json: 
-              schema: 
-                $ref: '#/components/schemas/SuccessResponse'
-            text/plain:
+            application/json:
               schema:
-                type: string
-                example: 'INVITE sip:17035550021@proxy.example.com;transport=UDP SIP/2.0From: "Alice" <sip:+15714345500@example.com>Identity: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyI0NDcwMzU1NTAwMDAiXX0sImlhdCI6MTYyMTAxMTQyNSwib3JpZyI6eyJ0biI6IjE1NzE0MzQ1NTAwIn0sIm9yaWdpZCI6Ijc4MzZlYzFkMDYwNzRkNjg4YjYyYzFlYTVlYmQxOTM5In0.RIDQYZP0SNd7ejjJGlcYLQ-55XssLVG5hJ5001v-unKFbD349VVYLderLBt_4h-eCgAcWIsuAW6YSMUqfPk8PA;info=<https://ca.neustarlab.biz/ccid/v2/authn/certs/20001.10001>;alg=ES256;ppt="shaken"Date: Fri, 14 May 2021 16:57:05 GMTTo: "Bob" <sip:+447035550000@example.com>'
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: its value is "ok" after the SIP Identity headers are validated with the required verification status
+                    example: 'ok'
         400:
           description: Error Resonse
           content: 

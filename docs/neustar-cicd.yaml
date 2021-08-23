@@ -2099,18 +2099,18 @@ components:
         pai:
           type: array
           description: A list of 'P-Asserted-Identity' header values from SIP INVITE message. If specified, must be one as specified in RFC3325 Section 9.1
-        finger_print:
-          type: array
-          description: A list of SDP 'a=fingerprint' attribute values from SIP INVITE message. If specified, must be one as specified in RFC3325 Section 9.1
-          items:
-            type: object
-            properties: 
-              algorithm: 
-                type: string
-                description: Algorithm name of a SDP 'a=fingerprint' attribute from SIP INVITE message. Cannot be null or empty
-              digest: 
-                type: string
-                description: Digest value of a SDP 'a=fingerprint' attribute from SIP INVITE message. Cannot be null or empty
+        # finger_print:
+        #   type: array
+        #   description: A list of SDP 'a=fingerprint' attribute values from SIP INVITE message. If specified, must be one as specified in RFC3325 Section 9.1
+        #   items:
+        #     type: object
+        #     properties: 
+        #       algorithm: 
+        #         type: string
+        #         description: Algorithm name of a SDP 'a=fingerprint' attribute from SIP INVITE message. Cannot be null or empty
+        #       digest: 
+        #         type: string
+        #         description: Digest value of a SDP 'a=fingerprint' attribute from SIP INVITE message. Cannot be null or empty
         orig_cc: 
           type: string
           description: Default country codes for the originator telephone number. If specified, must be a valid country code

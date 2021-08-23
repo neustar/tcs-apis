@@ -2084,7 +2084,7 @@ components:
           type: string
           example: error
           description: Verification status
-        error:
+        error: 
           type: array
             items:
               type: object

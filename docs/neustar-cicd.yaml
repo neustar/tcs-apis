@@ -2093,9 +2093,9 @@ components:
           type: string
           example: Bob <sip:7035550000@example.com>;reason=away
           description: Verification status requirement. If specified, must be 'none', 'partial' or 'all'
-        date: 
-          type: string
-          description: Date header value from SIP INVITE message. If specified, must be in RFC1123 format
+        # date: 
+        #   type: string
+        #   description: Date header value from SIP INVITE message. If specified, must be in RFC1123 format
         # pai:
         #   type: array
         #   description: A list of 'P-Asserted-Identity' header values from SIP INVITE message. If specified, must be one as specified in RFC3325 Section 9.1

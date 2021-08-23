@@ -2091,6 +2091,26 @@ components:
             properties: 
               id:
                 type: string
+              error_id: 
+                type: string
+                description: The unique error identifier
+                example: IdentitySignatureVerifyFailed
+              http_status_code: 
+                type: integer
+                description: The HTTP response status code
+                example: 400
+              sip_code: 
+                type: integer
+                description: The SIP response code associated with the error
+                example: 438
+              reason: 
+                type: string
+                description: The detailed error text
+                example: Identity signature failed to be verified
+              timestamp: 
+                type: string
+                description: The timestamp when the error is generated
+                example: Identity signature failed to be verified
         cnam_error: 
           type: object
           properties: 

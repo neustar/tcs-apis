@@ -2072,9 +2072,9 @@ components:
           type: array
           example: Bob <sip:5715550000@example.com>
           description: A list of SIP Identity values to be verified
-        # diversion: 
-        #   type: array
-        #   description: A list of 'Diversion' header values from SIP INVITE message. If specified, must be one as specified in RFC5806 Section 4
+        diversion: 
+          type: array
+          description: A list of 'Diversion' header values from SIP INVITE message. If specified, must be one as specified in RFC5806 Section 4
         # resource_priority: 
         #   type: array
         #   description: A list of 'Resource-Priority' header values from SIP INVITE message. If specified, must be one as specified in RFC4412 Section 3.1

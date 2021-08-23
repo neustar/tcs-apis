@@ -2089,10 +2089,10 @@ components:
           type: string
           description: Client supplied request identifier for tracking purpose. If not null, it will be returned back in the response object
           example: X-REQUEST-ID-12345
-        status: 
-          type: string
-          example: Bob <sip:7035550000@example.com>;reason=away
-          description: Verification status requirement. If specified, must be 'none', 'partial' or 'all'
+        # status: 
+        #   type: string
+        #   example: Bob <sip:7035550000@example.com>;reason=away
+        #   description: Verification status requirement. If specified, must be 'none', 'partial' or 'all'
         # date: 
         #   type: string
         #   description: Date header value from SIP INVITE message. If specified, must be in RFC1123 format

@@ -331,6 +331,7 @@ paths:
       parameters:
         - in: query
           name: apiKey
+          required: true
           schema:
             type: string
           description: The API key uniquely identifying the API client. Cannot be null or empty

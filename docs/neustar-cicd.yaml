@@ -2089,8 +2089,6 @@ components:
           items: 
             type: object
             properties: 
-              id:
-                type: string
               error_id: 
                 type: string
                 description: The unique error identifier

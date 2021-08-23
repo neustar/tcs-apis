@@ -581,6 +581,7 @@ paths:
       parameters:
         - in: query
           name: apiKey
+          required: true
           schema:
             type: string
           description: The API key uniquely identifying the API client. Cannot be null or empty
@@ -633,9 +634,6 @@ paths:
               type: string
               example: 'SIP sip:17035550021@proxy.example.com;transport=UDP SIP/2.0 From: Alice <sip:+15714345500@example.com> To: Bob <sip:+447035550000@example.com>'
             required: true
-          application/json:
-            schema:
-              $ref: 
       x-code-samples:
         - lang: Curl
           source: |

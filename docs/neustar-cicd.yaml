@@ -2086,11 +2086,11 @@ components:
           description: Verification status
         error:
           type: array
-          items:
+          items: 
             type: object
-            properties:
-              id:
-                type: integer
+              properties: 
+                id: 
+                  type: string
         cnam_error: 
           type: object
           properties: 

@@ -2085,10 +2085,10 @@ components:
         identity_info: 
           type: boolean
           description: Boolean flag for returning information related to SIP Identity values verified. If specified, must be true or false
-        request_id:
-          type: string
-          description: Client supplied request identifier for tracking purpose. If not null, it will be returned back in the response object
-          example: X-REQUEST-ID-12345
+        # request_id:
+        #   type: string
+        #   description: Client supplied request identifier for tracking purpose. If not null, it will be returned back in the response object
+        #   example: X-REQUEST-ID-12345
         # status: 
         #   type: string
         #   example: Bob <sip:7035550000@example.com>;reason=away

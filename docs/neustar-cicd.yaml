@@ -2096,9 +2096,9 @@ components:
         date: 
           type: string
           description: 'Date' header value from SIP INVITE message. If specified, must be in RFC1123 format
-        pai:
-          type: array
-          description: A list of 'P-Asserted-Identity' header values from SIP INVITE message. If specified, must be one as specified in RFC3325 Section 9.1
+        # pai:
+        #   type: array
+        #   description: A list of 'P-Asserted-Identity' header values from SIP INVITE message. If specified, must be one as specified in RFC3325 Section 9.1
         # finger_print:
         #   type: array
         #   description: A list of SDP 'a=fingerprint' attribute values from SIP INVITE message. If specified, must be one as specified in RFC3325 Section 9.1
@@ -2111,18 +2111,18 @@ components:
         #       digest: 
         #         type: string
         #         description: Digest value of a SDP 'a=fingerprint' attribute from SIP INVITE message. Cannot be null or empty
-        orig_cc: 
-          type: string
-          description: Default country codes for the originator telephone number. If specified, must be a valid country code
-        dest_cc: 
-          type: string
-          description: Default country code for the destination telephone number. If specified, must be a valid country code
-        cnam:
-          type: boolean
-          description: Boolean flag for performing CNAM lookup. If specified, must be true or false
-        ecnam:
-          type: boolean
-          description: Boolean flag for performing ECNAM lookup. If specified, must be true or false
-        robocall:
-          type: boolean
-          description: Boolean flag for returning Robocall Call Insight data. If specified, must be true or false
+        # orig_cc: 
+        #   type: string
+        #   description: Default country codes for the originator telephone number. If specified, must be a valid country code
+        # dest_cc: 
+        #   type: string
+        #   description: Default country code for the destination telephone number. If specified, must be a valid country code
+        # cnam:
+        #   type: boolean
+        #   description: Boolean flag for performing CNAM lookup. If specified, must be true or false
+        # ecnam:
+        #   type: boolean
+        #   description: Boolean flag for performing ECNAM lookup. If specified, must be true or false
+        # robocall:
+        #   type: boolean
+        #   description: Boolean flag for returning Robocall Call Insight data. If specified, must be true or false

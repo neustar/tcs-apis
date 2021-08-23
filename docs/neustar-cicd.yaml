@@ -2084,13 +2084,6 @@ components:
           type: string
           example: error
           description: Verification status
-        error: 
-          type: array
-            items:
-              type: object
-              properties:
-                id:
-                  type: integer
         cnam_error: 
           type: object
           properties: 

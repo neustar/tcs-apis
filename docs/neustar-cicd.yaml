@@ -64,10 +64,10 @@ tags:
   #description: Endpoint to get certificate for verifying SIP Identity headers
 - name: Errors
   #description: Endpoint to get a list of all potential errors generated
-# - name: Verifies SIP Identity headers
-# - name: Performs CNAM queries
-# - name: Performs ECNAM queries
-# - name: Gets a list of all potential errors generated
+- name: Verifies SIP Identity headers
+- name: Performs CNAM queries
+- name: Performs ECNAM queries
+- name: Gets a list of all potential errors generated
     
 
 x-tagGroups:
@@ -76,12 +76,12 @@ x-tagGroups:
       - Generate SIP Identity Headers
       - Get Certificate
       - Errors
-  # - name: Verification Service
-  #   tags:
-  #     - Verifies SIP Identity headers
-  #     - Performs CNAM queries
-  #     - Performs ECNAM queries
-  #     - Gets a list of all potential errors generated
+  - name: Verification Service
+    tags:
+      - Verifies SIP Identity headers
+      - Performs CNAM queries
+      - Performs ECNAM queries
+      - Gets a list of all potential errors generated
 
       
 
@@ -1548,6 +1548,364 @@ paths:
             application/json: 
               schema: 
                 $ref: '#/components/schemas/ErrorAPISuccessResponse'
+  /verify/identity-j_j:
+    post:
+      tags:
+      - Verifies SIP Identity Headers
+      summary:  'Accepts requests and produces responses in JSON Format.'
+      description: |
+        The following is an example for generating SIP Identity headers with minimum request data elements:
+
+        ```
+        curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/verify/identity-j_j?apiKey=%3CapiKey5%3E' \
+        --header 'Content-Type: application/json' \
+        --header 'Accept: application/json' \
+        --data-raw '{
+                  "from" : "'Alice' <sip:alice@example.com>",
+                  "to" : "'Bob' <sip:5715550000@example.com>"
+                }'
+        ```
+
+        #### Compact SIP Identity Header Creation Example
+
+        The following is an example for generating SIP Identity headers in compact form with minimum request data elements:
+
+          ```
+          curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey5%3E' \
+          --header 'Content-Type: application/json' \
+          --header 'Accept: application/json' \
+          --data-raw '{
+                    "from" : "'Alice' <sip:alice@example.com>",
+                    "to" : "'Bob' <sip:5715550000@example.com>",
+                    "compact" : true
+                  }'
+          ```
+        
+        #### Example with Diverted Calls Extension
+
+        The following is an example for generating SIP Identity headers with Diverted Calls extension, by specifying minimum request data elements, and the 'PASSporT' type value as "div":
+
+          ```
+          curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey1%3E' \
+          --header 'Content-Type: application/json' \
+          --header 'Accept: application/json' \
+          --data-raw '{
+                    "from" : "'Alice' <sip:alice@example.com>",
+                    "to" : "'Bob' <sip:5715550000@example.com>",
+                    "passport_type" : "div",
+                    "diversion" : "'Bob' <sip:7035550000@example.com>;reason=away"
+                  }'
+          ```
+        #### Example with Resource-Priority Authorization Extension
+
+        The following is an example for generating SIP Identity headers with Resource-Priority Authorization extension, by specifying minimum request data elements, and the 'PASSporT' type value as "rph":
+
+          ```
+          curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey1%3E' \
+          --header 'Content-Type: application/json' \
+          --header 'Accept: application/json' \
+          --data-raw '{
+            "from" : "'Alice' <sip:alice@example.com>",
+            "to" : "'Bob' <sip:5715550000@example.com>",
+            "passport_type" : "rph",
+            "resource_priority" : [ "ets.0, wps.1", "q735.1" ]
+          }'
+          ```
+        #### Example with Rich Call Data Extension
+
+        The following is an example for generating SIP Identity headers with Rich Call Data extension, by specifying minimum request data elements, and the 'PASSporT' type value as "rcd", with call data fetched via an optional Rich Call Data provider:
+
+          ```
+          curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey1%3E' \
+          --header 'Content-Type: application/json' \
+          --header 'Accept: application/json' \
+          --data-raw '{
+                      "from" : ""Alice" <sip:+17035550001@example.com>",
+                      "to" : ""Bob" <sip:5715550000@example.com>",
+                      "passport_type" : "rcd"
+                    }'
+          ```
+        #### With Call-Info Header Value
+
+        The following is an example for generating SIP Identity headers with Rich Call Data extension, by specifying a SIP Call-Info header value that contains JCARD URI and call reason data, with the CNAM value extracted from the SIP From header:
+
+          ```
+          curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/error' \
+          --header 'Content-Type: application/json' \
+          --header 'Accept: application/json' \
+          --data-raw '{
+            "from" : ""Alice" <sip:+17035550001@example.com>",
+            "to" : ""Bob" <sip:5715550000@example.com>",
+            "passport_type" : "rcd",
+            "call_info" : "<http://example.com/alice.json>;purpose=jcard;call-reason=Adventure"
+          }'
+          ```
+        #### With Supplied JCard Data
+
+        The following is an example for generating SIP Identity headers with Rich Call Data extension, by specifying related call data, including a JCard json string:
+
+          ```
+          curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey1%3E' \
+          --header 'Content-Type: application/json' \
+          --header 'Accept: application/json' \
+          --data-raw '{
+            "from" : ""Alice" <sip:+17035550001@example.com>",
+            "to" : ""Bob" <sip:5715550000@example.com>",
+            "passport_type" : "rcd",
+            "call_reason" : "Travel",
+            "caller_name" : "Alice Liddell",
+            "jcard" : "["vcard",[["version",{},"text","4.0"],["fn",{},"text","Alice Liddell"],[ "email",{},"text","alice@example.com"]]]"
+          }'
+          ```
+        #### With Supplied JCard URI
+
+        The following is an example for generating SIP Identity headers with Rich Call Data extension, by specifying related call data, including a JCard URI:
+
+          ```
+          curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey1%3E' \
+          --header 'Content-Type: application/json' \
+          --header 'Accept: application/json' \
+          --data-raw '{
+            "from" : ""Alice" <sip:+17035550001@example.com>",
+            "to" : ""Bob" <sip:5715550000@example.com>",
+            "passport_type" : "rcd",
+            "call_reason" : "Travel",
+            "caller_name" : "Alice Liddell",
+            "jcard" : "["vcard",[["version",{},"text","4.0"],["fn",{},"text","Alice Liddell"],[ "email",{},"text","alice@example.com"]]]",
+            "jcard_uri" : "cid:123456",
+            "rcd_integrity" : true,
+            "rcd_hash_algorithm" : "sha384"
+          }'
+          ```
+        #### With Pre-Calculated Hash
+
+        The following is an example for generating SIP Identity headers with Rich Call Data extension, by specifying related call data, including a JCard URI with pre-calculated hash signature:
+
+          ```
+          curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey1%3E' \
+          --header 'Content-Type: application/json' \
+          --header 'Accept: application/json' \
+          --data-raw '{
+            "from" : ""Alice" <sip:+17035550001@example.com>",
+            "to" : ""Bob" <sip:5715550000@example.com>",
+            "passport_type" : "rcd",
+            "call_reason" : "Travel",
+            "caller_name" : "Alice Liddell",
+            "jcard_uri" : "http://example.com/alice.json",
+            "rcd_signature" : "sha512-oODCNbWggTlXfGx1wMpFhdA6Kt2vLjNsRnwks+ffezUUTubjGLSUhqLkSjsE3SZKPWG+gywfYmKjcPtz6uMyog==",
+            "rcd_integrity" : false
+          }'
+          ```
+        #### Example with ATIS SHAKEN Extension
+
+        The following is an example for generating SIP Identity headers with ATIS SHAKEN extension, by specifying minimum request data elements, with the default 'PASSporT' type value in the customer profile as "shaken":
+
+          ```
+          curl 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey1%3E' -i -X POST \
+              -H 'Content-Type: application/json' \
+              -H 'Accept: application/json' \
+              -d '{
+            "from" : "'Alice' <sip:alice@example.com>",
+            "to" : "'Bob' <sip:5715550000@example.com>"
+          }'
+          ```
+        #### Example with ATIS SHAKEN Extension and Full Input Data Set
+
+        The following is an example for generating SIP Identity headers with ATIS SHAKEN extension, by specifying the full set of data elements in the request:
+
+          ```
+            curl 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey1%3E' -i -X POST \
+              -H 'Content-Type: application/json' \
+              -H 'Accept: application/json' \
+              -d '{
+            "from" : "'Alice' <sip:alice@example.com>",
+            "to" : "'Bob' <sip:5715550000@example.com>",
+            "date" : "Fri, 14 May 2021 16:57:05 GMT",
+            "pai" : [ "'Alice' <tel:+17035550001>", "'Alice' <sip:+17035550001@example.com>" ],
+            "finger_print" : [ {
+              "algorithm" : "SHA-1",
+              "digest" : "4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB"
+            }, {
+              "algorithm" : "SHA-256",
+              "digest" : "36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7"
+            } ],
+            "dest_cc" : "1",
+            "orig_cc" : "1",
+            "compact" : false,
+            "passport_type" : "shaken",
+            "attest" : "A",
+            "origid" : "3F9C2836-7E40-11E7-BA58-7831C1B8DEBA",
+            "request_id" : "X-REQUEST-ID-12345"
+          }'
+          ```
+        #### Example with ATIS SHAKEN Extension and RCD Data Fields
+
+        ATIS SHAKEN extension may contain optional RCD data fields defined for RCD PASSporT extension, if the specific policy associated with the signing profile is enabled, so that all data fields specific to RCD PASSporT extension can also be supplied in a signing request to generate a SIP Identity header with ATIS SHAKEN extension and RCD data fields.
+
+        The following is an example for generating SIP Identity headers with ATIS SHAKEN extension and RCD data set, by specifying a SIP Call-Info header value containing a Content-ID URI for JCARD and the call reason value, and a JSON string of the JCARD extracted in a multipart SIP INVITE message.
+
+          ```
+          curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey12%3E' \
+              --header 'Content-Type: application/json' \
+              --header 'Accept: application/json' \
+              --data-raw '{
+                "from" : ""Alice" <sip:alice@example.com>",
+                "to" : ""Bob" <sip:5715550000@example.com>",
+                "date" : "Fri, 14 May 2021 16:57:05 GMT",
+                "pai" : [ ""Alice" <tel:+17035550001>", ""Alice" <sip:+17035550001@example.com>" ],
+                "finger_print" : [ {
+                  "algorithm" : "SHA-1",
+                  "digest" : "4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB"
+                }, {
+                  "algorithm" : "SHA-256",
+                  "digest" : "36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7"
+                } ],
+                "dest_cc" : "1",
+                "orig_cc" : "1",
+                "compact" : false,
+                "passport_type" : "shaken",
+                "call_info" : "<cid:example.com/alice.json>;purpose=jcard;call-reason=Adventure",
+                "jcard" : "["vcard",[["version",{},"text","4.0"],["fn",{},"text","Alice Liddell"],[ "email",{},"text","alice@example.com"]]]",
+                "attest" : "A",
+                "origid" : "3F9C2836-7E40-11E7-BA58-7831C1B8DEBA",
+                "request_id" : "X-REQUEST-ID-12345"
+              }'
+          ```
+      operationId: identity-j_j
+      parameters:
+        - in: query
+          name: apiKey
+          required: true
+          schema:
+            type: string
+          description: The API key uniquely identifying the API client. Cannot be null or empty
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyIdentity'
+        required: true
+      x-code-samples:
+        - lang: Curl
+          source: |
+            curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey5%3E' \
+            --header 'Content-Type: application/json' \
+            --header 'Accept: application/json' \
+            --data-raw '{
+              "from" : "'Alice' <sip:alice@example.com>",
+              "to" : "'Bob' <sip:5715550000@example.com>",
+              "date" : "Fri, 11 Aug 2017 04:17:14 GMT",
+              "pai" : [ "'Alice' <tel:+17035550001>", "'Alice' <sip:+17035550001@example.com>" ],
+              "finger_print" : [ {
+                "algorithm" : "SHA-1",
+                "digest" : "4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB"
+              }, {
+                "algorithm" : "SHA-256",
+                "digest" : "36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7"
+              } ],
+              "diversion" : "'Bob' <sip:7035550000@example.com>;reason=away",
+              "attest"  : "A",
+              "origid"  : "d53afeb0-dc48-11e7-a561-7831c1b8deba",
+              "dest_cc" : "1",
+              "orig_cc" : "1",
+              "compact" : false,
+              "passport_type" : "shaken",
+              "attest" : "A",
+              "origid" : "3F9C2836-7E40-11E7-BA58-7831C1B8DEBA",
+              "resource_priority" : [ "ets.0, wps.1", "q735.1" ]
+            }'
+        - lang: Java
+          source: |
+            Unirest.setTimeouts(0, 0);
+            HttpResponse<String> response = Unirest.post("https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey5%3E")
+              .header("Content-Type", "applicat`ion/json")
+              .header("Accept", "application/json")
+              .body("{\n  \"from\" : \"\\\"Alice\\\" <sip:alice@example.com>\",\n  \"to\" : \"\\\"Bob\\\" <sip:5715550000@example.com>\",\n  \"date\" : \"Fri, 11 Aug 2017 04:17:14 GMT\",\n  \"pai\" : [ \"\\\"Alice\\\" <tel:+17035550001>\", \"\\\"Alice\\\" <sip:+17035550001@example.com>\" ],\n  \"finger_print\" : [ {\n    \"algorithm\" : \"SHA-1\",\n    \"digest\" : \"4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB\"\n  }, {\n    \"algorithm\" : \"SHA-256\",\n    \"digest\" : \"36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7\"\n  } ],\n  \"diversion\" : \"\\\"Bob\\\" <sip:7035550000@example.com>;reason=away\",\n  \"attest\"  : \"A\",\n  \"origid\"  : \"d53afeb0-dc48-11e7-a561-7831c1b8deba\",\n  \"dest_cc\" : \"1\",\n  \"orig_cc\" : \"1\",\n  \"compact\" : false,\n  \"passport_type\" : \"shaken\",\n  \"attest\" : \"A\",\n  \"origid\" : \"3F9C2836-7E40-11E7-BA58-7831C1B8DEBA\",\n  \"resource_priority\" : [ \"ets.0, wps.1\", \"q735.1\" ]\n}")
+              .asString();
+        - lang: Python
+          source: |
+            import requests
+            url = "https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey5%3E"
+
+            payload="{\n  \"from\" : \"\\\"Alice\\\" <sip:alice@example.com>\",\n  \"to\" : \"\\\"Bob\\\" <sip:5715550000@example.com>\",\n  \"date\" : \"Fri, 11 Aug 2017 04:17:14 GMT\",\n  \"pai\" : [ \"\\\"Alice\\\" <tel:+17035550001>\", \"\\\"Alice\\\" <sip:+17035550001@example.com>\" ],\n  \"finger_print\" : [ {\n    \"algorithm\" : \"SHA-1\",\n    \"digest\" : \"4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB\"\n  }, {\n    \"algorithm\" : \"SHA-256\",\n    \"digest\" : \"36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7\"\n  } ],\n  \"diversion\" : \"\\\"Bob\\\" <sip:7035550000@example.com>;reason=away\",\n  \"attest\"  : \"A\",\n  \"origid\"  : \"d53afeb0-dc48-11e7-a561-7831c1b8deba\",\n  \"dest_cc\" : \"1\",\n  \"orig_cc\" : \"1\",\n  \"compact\" : false,\n  \"passport_type\" : \"shaken\",\n  \"attest\" : \"A\",\n  \"origid\" : \"3F9C2836-7E40-11E7-BA58-7831C1B8DEBA\",\n  \"resource_priority\" : [ \"ets.0, wps.1\", \"q735.1\" ]\n}"
+            headers = {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            }
+
+            response = requests.request("POST", url, headers=headers, data=payload)
+
+            print(response.text)
+
+                      - lang: Curl
+                        source: |
+                          curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey5%3E' \
+                          --header 'Content-Type: application/json' \
+                          --header 'Accept: application/json' \
+                          --data-raw '{
+                            "from" : "\"Alice\" <sip:alice@example.com>",
+                            "to" : "\"Bob\" <sip:5715550000@example.com>",
+                            "date" : "Fri, 11 Aug 2017 04:17:14 GMT",
+                            "pai" : [ "\"Alice\" <tel:+17035550001>", "\"Alice\" <sip:+17035550001@example.com>" ],
+                            "finger_print" : [ {
+                              "algorithm" : "SHA-1",
+                              "digest" : "4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB"
+                            }, {
+                              "algorithm" : "SHA-256",
+                              "digest" : "36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7"
+                            } ],
+                            "diversion" : "\"Bob\" <sip:7035550000@example.com>;reason=away",
+                            "attest"  : "A",
+                            "origid"  : "d53afeb0-dc48-11e7-a561-7831c1b8deba",
+                            "dest_cc" : "1",
+                            "orig_cc" : "1",
+                            "compact" : false,
+                            "passport_type" : "shaken",
+                            "attest" : "A",
+                            "origid" : "3F9C2836-7E40-11E7-BA58-7831C1B8DEBA",
+                            "resource_priority" : [ "ets.0, wps.1", "q735.1" ]
+                          }'
+        - lang: Ruby
+          source: |
+            require "uri"
+            require "net/http"
+
+            url = URI("https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey5%3E")
+
+            https = Net::HTTP.new(url.host, url.port)
+            https.use_ssl = true
+
+            request = Net::HTTP::Post.new(url)
+            request["Content-Type"] = "application/json"
+            request["Accept"] = "application/json"
+            request.body = "{\n  \"from\" : \"\\\"Alice\\\" <sip:alice@example.com>\",\n  \"to\" : \"\\\"Bob\\\" <sip:5715550000@example.com>\",\n  \"date\" : \"Fri, 11 Aug 2017 04:17:14 GMT\",\n  \"pai\" : [ \"\\\"Alice\\\" <tel:+17035550001>\", \"\\\"Alice\\\" <sip:+17035550001@example.com>\" ],\n  \"finger_print\" : [ {\n    \"algorithm\" : \"SHA-1\",\n    \"digest\" : \"4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB\"\n  }, {\n    \"algorithm\" : \"SHA-256\",\n    \"digest\" : \"36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7\"\n  } ],\n  \"diversion\" : \"\\\"Bob\\\" <sip:7035550000@example.com>;reason=away\",\n  \"attest\"  : \"A\",\n  \"origid\"  : \"d53afeb0-dc48-11e7-a561-7831c1b8deba\",\n  \"dest_cc\" : \"1\",\n  \"orig_cc\" : \"1\",\n  \"compact\" : false,\n  \"passport_type\" : \"shaken\",\n  \"attest\" : \"A\",\n  \"origid\" : \"3F9C2836-7E40-11E7-BA58-7831C1B8DEBA\",\n  \"resource_priority\" : [ \"ets.0, wps.1\", \"q735.1\" ]\n}"
+
+            response = https.request(request)
+            puts response.read_body
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/SuccessResponse'
+            text/plain:
+              schema:
+                type: string
+                example: 'INVITE sip:17035550021@proxy.example.com;transport=UDP SIP/2.0From: "Alice" <sip:+15714345500@example.com>Identity: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyI0NDcwMzU1NTAwMDAiXX0sImlhdCI6MTYyMTAxMTQyNSwib3JpZyI6eyJ0biI6IjE1NzE0MzQ1NTAwIn0sIm9yaWdpZCI6Ijc4MzZlYzFkMDYwNzRkNjg4YjYyYzFlYTVlYmQxOTM5In0.RIDQYZP0SNd7ejjJGlcYLQ-55XssLVG5hJ5001v-unKFbD349VVYLderLBt_4h-eCgAcWIsuAW6YSMUqfPk8PA;info=<https://ca.neustarlab.biz/ccid/v2/authn/certs/20001.10001>;alg=ES256;ppt="shaken"Date: Fri, 14 May 2021 16:57:05 GMTTo: "Bob" <sip:+447035550000@example.com>'
+        400:
+          description: Error Resonse
+          content: 
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/ErrorResponse400'
+        403:
+          description: Error Resonse
+          content: 
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/ErrorResponse403'
 components:
   schemas:
     Identity:
@@ -1559,11 +1917,11 @@ components:
         from:
           type: string
           example: Alice <sip:alice@example.com>
-          description: \"From\"" header value from SIP INVITE message
+          description: \"From\" header value from SIP INVITE message
         to:
           type: string
           example: Bob <sip:5715550000@example.com>
-          description: \"To\"" header value from SIP INVITE message
+          description: \"To\" header value from SIP INVITE message
         compact: 
           type: boolean
           description: Boolean flag for generating compact SIP Identity header, ignored for 'shaken' PASSporT type. If specified, must be true or false
@@ -1913,3 +2271,119 @@ components:
             type: string
             description: The detailed error text
             example: Internal server error
+    VerifyIdentity:
+      required:
+      - from
+      - to
+      - identity
+      type: object
+      properties:
+        from:
+          type: string
+          example: Alice <sip:alice@example.com>
+          description: \"From\" header value from SIP INVITE message
+        to:
+          type: string
+          example: Bob <sip:5715550000@example.com>
+          description: \"To\" header value from SIP INVITE message
+        identity:
+          type: array
+          example: Bob <sip:5715550000@example.com>
+          description: A list of SIP Identity values to be verified
+        diversion: 
+          type: array
+          description: A list of 'Diversion' header values from SIP INVITE message. If specified, must be one as specified in RFC5806 Section 4
+        resource_priority: 
+          type: array
+          description: A list of 'Resource-Priority' header values from SIP INVITE message. If specified, must be one as specified in RFC4412 Section 3.1
+        verstat:
+          type: boolean
+          description: Boolean flag for returning verstat value after SIP Identity values are verified. If specified, must be true or false
+          example: X-REQUEST-ID-12345
+        identity_info: 
+          type: boolean
+          description: Boolean flag for returning information related to SIP Identity values verified. If specified, must be true or false
+        request_id:
+          type: string
+          description: Client supplied request identifier for tracking purpose. If not null, it will be returned back in the response object
+          example: X-REQUEST-ID-12345
+        status: 
+          type: string
+          example: Bob <sip:7035550000@example.com>;reason=away
+          description: Verification status requirement. If specified, must be 'none', 'partial' or 'all'
+        date: 
+          type: string
+          description: 'Date' header value from SIP INVITE message. If specified, must be in RFC1123 format
+        pai:
+          type: array
+          description: A list of 'P-Asserted-Identity' header values from SIP INVITE message. If specified, must be one as specified in RFC3325 Section 9.1
+        finger_print:
+          type: array
+          description: A list of SDP 'a=fingerprint' attribute values from SIP INVITE message. If specified, must be one as specified in RFC3325 Section 9.1
+          items:
+            type: object
+            properties: 
+              algorithm: 
+                type: string
+                description: Algorithm name of a SDP 'a=fingerprint' attribute from SIP INVITE message. Cannot be null or empty
+              digest: 
+                type: string
+                description: Digest value of a SDP 'a=fingerprint' attribute from SIP INVITE message. Cannot be null or empty
+        orig_cc: 
+          type: string
+          description: Default country codes for the originator telephone number. If specified, must be a valid country code
+        dest_cc: 
+          type: string
+          description: Default country code for the destination telephone number. If specified, must be a valid country code
+        cnam:
+          type: boolean
+          description: Boolean flag for performing CNAM lookup. If specified, must be true or false
+        ecnam:
+          type: boolean
+          description: Boolean flag for performing ECNAM lookup. If specified, must be true or false
+        robocall:
+          type: boolean
+          description: Boolean flag for returning Robocall Call Insight data. If specified, must be true or false
+        verstat: 
+          type: boolean
+          description: Boolean flag for returning verstat value after SIP Identity values are verified. If specified, must be true or false
+        identity_info:
+          type: array
+          description: List of 'P-Asserted-Identity' header values from SIP INVITE message. If specified, must be one as specified in RFC3325 Section 9.1
+          items: 
+            type: string
+            example: ['Alice <tel:+17035550001>', 'Alice <sip:+17035550001@example.com>']
+        finger_print:
+          type: array
+          description: List of SDP 'a=fingerprint' attribute values from SIP INVITE message. If specified, must be one as specified in RFC3325 Section 9.1
+          items: 
+            type: string
+            example: [ {
+              'algorithm' : 'SHA-1',
+              'digest' : '4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB'
+            }, {
+              'algorithm' : 'SHA-256',
+              'digest' : '36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7'
+            } ]
+        finger_print[].algorithm:
+          type: string
+          description: Algorithm name of a SDP 'a=fingerprint' attribute from SIP INVITE message. Cannot be null or empty
+        finger_print[].digest: 
+          description: Digest value of a SDP 'a=fingerprint' attribute from SIP INVITE message. Cannot be null or empty
+          type: string
+        orig_cc:
+          type: string
+          description: Default country code for the origination telephone number. If specified, must be a valid country code
+          example: 1
+        dest_cc:
+          type: string
+          description: Default country code for the destination telephone number. If specified, must be a valid country code
+          example: 1
+        attest: 
+          type: string
+          description: attest value defined by ATIS SHAKEN extension. If specified, must not be empty or blank. 
+          example: A
+        origid: 
+          type: string
+          description: Client supplied request identifier for tracking purpose. If not null, it will be returned back in the response object
+          example: 3F9C2836-7E40-11E7-BA58-7831C1B8DEBA

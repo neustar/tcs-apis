@@ -1784,7 +1784,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VerifyIdentity'
+              $ref: '#/components/schemas/Identity'
         required: true
       x-code-samples:
         - lang: Curl
@@ -2347,43 +2347,3 @@ components:
         verstat: 
           type: boolean
           description: Boolean flag for returning verstat value after SIP Identity values are verified. If specified, must be true or false
-        identity_info:
-          type: array
-          description: List of 'P-Asserted-Identity' header values from SIP INVITE message. If specified, must be one as specified in RFC3325 Section 9.1
-          items: 
-            type: string
-            example: ['Alice <tel:+17035550001>', 'Alice <sip:+17035550001@example.com>']
-        finger_print:
-          type: array
-          description: List of SDP 'a=fingerprint' attribute values from SIP INVITE message. If specified, must be one as specified in RFC3325 Section 9.1
-          items: 
-            type: string
-            example: [ {
-              'algorithm' : 'SHA-1',
-              'digest' : '4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB'
-            }, {
-              'algorithm' : 'SHA-256',
-              'digest' : '36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7'
-            } ]
-        finger_print[].algorithm:
-          type: string
-          description: Algorithm name of a SDP 'a=fingerprint' attribute from SIP INVITE message. Cannot be null or empty
-        finger_print[].digest: 
-          description: Digest value of a SDP 'a=fingerprint' attribute from SIP INVITE message. Cannot be null or empty
-          type: string
-        orig_cc:
-          type: string
-          description: Default country code for the origination telephone number. If specified, must be a valid country code
-          example: 1
-        dest_cc:
-          type: string
-          description: Default country code for the destination telephone number. If specified, must be a valid country code
-          example: 1
-        attest: 
-          type: string
-          description: attest value defined by ATIS SHAKEN extension. If specified, must not be empty or blank. 
-          example: A
-        origid: 
-          type: string
-          description: Client supplied request identifier for tracking purpose. If not null, it will be returned back in the response object
-          example: 3F9C2836-7E40-11E7-BA58-7831C1B8DEBA

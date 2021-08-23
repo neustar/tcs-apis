@@ -2084,6 +2084,15 @@ components:
           type: string
           example: error
           description: Verification status
+        error:
+          type: array
+          items: 
+            type: object
+              properties: 
+                error_id: 
+                  type: string
+                  description: The unique error identifier
+                  example: IdentitySignatureVerifyFailed
         cnam_error: 
           type: object
           properties: 

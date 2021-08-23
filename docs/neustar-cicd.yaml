@@ -335,61 +335,6 @@ paths:
           schema:
             type: string
           description: The API key uniquely identifying the API client. Cannot be null or empty
-        - name: compact
-          in: query
-          description: Boolean flag for compact SIP Identity header, ignored for 'shaken' PASSporT type
-          required: false
-          style: form
-          schema:
-            type: string
-        - name: ppt
-          in: query
-          description: PASSporT type value, must be "shaken" or "div" if specified
-          required: false
-          style: form
-          schema:
-            type: string
-        - name: attest
-          in: query
-          required: false
-          description: attest value specified by ATIS SHAKEN extension
-          schema:
-            type: string
-        - name: origid
-          in: query
-          description: origid value specified by ATIS SHAKEN extension
-          required: false
-          style: form
-          schema:
-            type: string
-        - name: origcc
-          in: query
-          description: Default country code for the originator telephone number
-          required: false
-          style: form
-          schema:
-            type: string
-        - name: destcc
-          in: query
-          description: Default country code for the destination telephone number
-          required: false
-          style: form
-          schema:
-            type: string
-        - name: verstat
-          in: query
-          description: Verstat value as defined in ETSI TS 124 299, for performing tagging and the SIP Identity header optionally removed
-          required: false
-          style: form
-          schema:
-            type: string
-        - name: identity
-          in: query
-          description: Boolean flag for including SIP Identity header when the "verstat" parameter is specified, with the default value as "true"
-          required: false
-          style: form
-          schema:
-            type: string
       requestBody:
         description: ''
         content:

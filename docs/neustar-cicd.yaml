@@ -2120,49 +2120,49 @@ components:
                       type: string
                       description: The attribute name of 'signature' in the name/value pair
                       example: mH96Br61sUY2SzexUsJWznLM6MxeRGSxJqnhWRPndFC8YVvfUNO64KEE1ShnTK9y0ADJjpW9yAamO2NeGkHmNw
-        cnam_error: 
-          type: object
-          properties: 
-            error_id:
-              type: string
-              description: The unique error identifier
-              example: CnamDataNotFound
-            http_status_code: 
-              type: integer
-              description: The HTTP response status code
-              example: 400
-            sip_code: 
-              type: integer
-              description: The SIP response code associated with the error
-              example: 400
-            reason: 
-              type: string
-              description: The detailed error text
-              example: CNAM data not found
-            timestamp: 
-              type: string
-              description: The timestamp when the error is generated
-              example: Fri, 16 Apr 2021 02:56:56 GMT
-        ecnam_error: 
-          type: object
-          properties: 
-            error_id:
-              type: string
-              description: The unique error identifier
-              example: EcnamNotAuthorized
-            http_status_code: 
-              type: integer
-              description: The HTTP response status code
-              example: 400
-            sip_code: 
-              type: integer
-              description: The SIP response code associated with the error
-              example: 400
-            reason: 
-              type: string
-              description: The detailed error text
-              example: ECNAM service not authorized
-            timestamp: 
-              type: string
-              description: The timestamp when the error is generated
-              example: Fri, 16 Apr 2021 02:56:56 GMT
+        # cnam_error: 
+        #   type: object
+        #   properties: 
+        #     error_id:
+        #       type: string
+        #       description: The unique error identifier
+        #       example: CnamDataNotFound
+        #     http_status_code: 
+        #       type: integer
+        #       description: The HTTP response status code
+        #       example: 400
+        #     sip_code: 
+        #       type: integer
+        #       description: The SIP response code associated with the error
+        #       example: 400
+        #     reason: 
+        #       type: string
+        #       description: The detailed error text
+        #       example: CNAM data not found
+        #     timestamp: 
+        #       type: string
+        #       description: The timestamp when the error is generated
+        #       example: Fri, 16 Apr 2021 02:56:56 GMT
+        # ecnam_error: 
+        #   type: object
+        #   properties: 
+        #     error_id:
+        #       type: string
+        #       description: The unique error identifier
+        #       example: EcnamNotAuthorized
+        #     http_status_code: 
+        #       type: integer
+        #       description: The HTTP response status code
+        #       example: 400
+        #     sip_code: 
+        #       type: integer
+        #       description: The SIP response code associated with the error
+        #       example: 400
+        #     reason: 
+        #       type: string
+        #       description: The detailed error text
+        #       example: ECNAM service not authorized
+        #     timestamp: 
+        #       type: string
+        #       description: The timestamp when the error is generated
+        #       example: Fri, 16 Apr 2021 02:56:56 GMT

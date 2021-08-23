@@ -108,7 +108,7 @@ paths:
     post:
       tags:
       - Generate SIP Identity Headers
-      summary:  'This API entry point accepts requests and produces responses in JSON Format.'
+      summary:  'Accepts requests and produces responses in JSON Format.'
       description: |
         The following is an example for generating SIP Identity headers with minimum request data elements:
 
@@ -941,6 +941,7 @@ paths:
       parameters:
         - in: query
           name: apiKey
+          required: true
           schema:
             type: string
           description: The API key uniquely identifying the API client. Cannot be null or empty
@@ -1144,7 +1145,7 @@ paths:
       summary: 'Accepts SIP INVITE messages and produces responses in JSON format for SIP proxies'
       operationId: identity/proxy
       description: |
-        This API entry point accepts SIP INVITE messages as requests and produces responses in JSON Format for SIP Proxies.
+        Accepts SIP INVITE messages as requests and produces responses in JSON Format for SIP Proxies.
       parameters:
         - in: query
           name: apiKey
@@ -1269,7 +1270,7 @@ paths:
     get:
       tags:
       - Generate SIP Identity Headers
-      summary: 'This API entry point returns next hop and policy data in JSON Format for SIP Proxies'
+      summary: 'Returns next hop and policy data in JSON Format for SIP Proxies'
       operationId: get-identity/proxy
       description: |
         A successful response in JSON format includes the "status" attribute with a value of "ok". It also contains an optional "next_hop" attribute for indicating the next hop for routing the SIP messages, and an optional "policy" attribute with an opaque string to be consumed by the SIP proxy for manipulating SIP headers and mapping error conditions.
@@ -1366,7 +1367,7 @@ paths:
     get:
       tags:
       - Get Certificate
-      summary: This API entry point is to return the certificate of a customer that does not provide a public accessible URL for fetching its certificate.
+      summary: Returns the certificate of a customer that does not provide a public accessible URL for fetching its certificate.
       description: |
         This API entry point is to return the certificate of a customer that does not provide a public accessible URL for fetching its certificate, so that signatures embedded in the SIP Identity headers generated for the customer can be verified.
 
@@ -1487,7 +1488,7 @@ paths:
     get:
       tags:
       - Errors
-      summary: This API entry point is to return the list of all potential errors that could be generated, so that an API consumer can process those errors accordingly.
+      summary: Returns the list of all potential errors that could be generated, so that an API consumer can process those errors accordingly.
       operationId: /errors
       description: |
       

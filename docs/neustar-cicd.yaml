@@ -1,12 +1,12 @@
 openapi: 3.1.0
 servers:
-  - url: http://ca-authn.neustarlab.biz/ccid/authn/v2
+  - url: http://ca.neustarlab.biz/ccid/v2
     description: http
-  - url: http://ca-authn.neustarlab.biz/ccid/authn/v2
+  - url: http://ca.neustarlab.biz/ccid/v2
     description: https
 info:
   version: 1.0.0
-  title: Neustar Certified Caller Id Authentication Service
+  title: Neustar Certified Caller Id Authentication & Verification Service
   termsOfService: 'https://team.neustar'
   contact:
     name: API Support
@@ -23,7 +23,9 @@ info:
   summary: 
   description: |
     # Overview
-    Neustar’s Certified Caller Id (CCID) Authentication Service (AS) implements the emerging industry standard of IETF RFC8224 specification, as well as ATIS SHAKEN extension, for computing SIP Identity headers to assist with SIP call setup. 
+    Neustar’s Certified Caller Id (CCID) Authentication Service (AS) and Verification Service (VS) implements the emerging industry standard of IETF RFC8224 specification, as well as ATIS SHAKEN extension, for computing and verifying SIP Identity headers to assist with SIP call setup. 
+    Additionally, it provides Ownership Validation, Subscriber-based Policy processing, CNAM, Enhanced CNAM (ECNAM) and/or Robocall Call Insight services for originating telephone numbers
+
     In the following sections, the cURL utility is used as an exemplar REST API client to issue API requests. The API consumers will likely leverage the programming language of their choice to issue API requests
     
     ## API Customer Profile
@@ -104,7 +106,7 @@ x-tagGroups:
       
 
 paths:
-  /identity-j_j:
+  /authn/identity-j_j:
     post:
       tags:
       - Generate SIP Identity Headers
@@ -462,7 +464,7 @@ paths:
             application/json: 
               schema: 
                 $ref: '#/components/schemas/ErrorResponse403'
-  /identity-s_j:
+  /authn/identity-s_j:
     post:
       tags:
       - Generate SIP Identity Headers
@@ -730,7 +732,7 @@ paths:
             application/json: 
               schema: 
                 $ref: '#/components/schemas/ErrorResponse403'
-  /identity-s_s:
+  /authn/identity-s_s:
     post:
       tags:
       - Generate SIP Identity Headers
@@ -1138,7 +1140,7 @@ paths:
                           To: "Bob" <sip:+447035550000@example.com>
                           Reason: SIP;cause=437;text="Credential has expired"
                           Content-Length: 0'
-  /identity/proxy/{addr}/{port}:
+  /authn/identity/proxy/{addr}/{port}:
     post:
       tags:
       - Generate SIP Identity Headers
@@ -1363,7 +1365,7 @@ paths:
             application/json: 
               schema: 
                 $ref: '#/components/schemas/ErrorResponseProxy403'
-  /certs/{id}:
+  /authn/certs/{id}:
     get:
       tags:
       - Get Certificate
@@ -1484,7 +1486,7 @@ paths:
             application/json: 
               schema: 
                 $ref: '#/components/schemas/ErrorResponseCerts400'
-  /error:
+  /authn/error:
     get:
       tags:
       - Errors

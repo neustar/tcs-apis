@@ -2111,18 +2111,18 @@ components:
         #       digest: 
         #         type: string
         #         description: Digest value of a SDP 'a=fingerprint' attribute from SIP INVITE message. Cannot be null or empty
-        # orig_cc: 
-        #   type: string
-        #   description: Default country codes for the originator telephone number. If specified, must be a valid country code
-        # dest_cc: 
-        #   type: string
-        #   description: Default country code for the destination telephone number. If specified, must be a valid country code
-        # cnam:
-        #   type: boolean
-        #   description: Boolean flag for performing CNAM lookup. If specified, must be true or false
-        # ecnam:
-        #   type: boolean
-        #   description: Boolean flag for performing ECNAM lookup. If specified, must be true or false
-        # robocall:
-        #   type: boolean
-        #   description: Boolean flag for returning Robocall Call Insight data. If specified, must be true or false
+        orig_cc: 
+          type: string
+          description: Default country codes for the originator telephone number. If specified, must be a valid country code
+        dest_cc: 
+          type: string
+          description: Default country code for the destination telephone number. If specified, must be a valid country code
+        cnam:
+          type: boolean
+          description: Boolean flag for performing CNAM lookup. If specified, must be true or false
+        ecnam:
+          type: boolean
+          description: Boolean flag for performing ECNAM lookup. If specified, must be true or false
+        robocall:
+          type: boolean
+          description: Boolean flag for returning Robocall Call Insight data. If specified, must be true or false

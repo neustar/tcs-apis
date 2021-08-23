@@ -327,8 +327,6 @@ paths:
                 "request_id" : "X-REQUEST-ID-12345"
               }'
           ```
-        
-        #### Attributes
       operationId: identity-j_j
       parameters:
         - in: query

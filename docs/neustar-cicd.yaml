@@ -2096,9 +2096,9 @@ components:
         date: 
           type: string
           description: Date header value from SIP INVITE message. If specified, must be in RFC1123 format
-        # pai:
-        #   type: array
-        #   description: A list of 'P-Asserted-Identity' header values from SIP INVITE message. If specified, must be one as specified in RFC3325 Section 9.1
+        pai:
+          type: array
+          description: A list of 'P-Asserted-Identity' header values from SIP INVITE message. If specified, must be one as specified in RFC3325 Section 9.1
         # finger_print:
         #   type: array
         #   description: A list of SDP 'a=fingerprint' attribute values from SIP INVITE message. If specified, must be one as specified in RFC3325 Section 9.1

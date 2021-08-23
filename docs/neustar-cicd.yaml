@@ -110,52 +110,6 @@ paths:
       - Generate SIP Identity Headers
       summary:  'This API entry point accepts requests and produces responses in JSON Format.'
       description: |
-        The CCID AS uses the following data elements in SIP INVITE messages for SIP Identity header creation, in addition to the required "apiKey" URL parameter for uniquely identifying an API client
-
-        |SIP Header/SDP Attribute|JSON Attribute Name|Description|
-        |--- |--- |--- |
-        |SIP From header|from|Required|
-        |SIP To header|to|Required|
-        |SIP Date header|date|Optional|
-        |SIP P-Asserted-Identity headers|pai|Optional|
-        |SIP P-Attestation-Indicator header|attest|Optional|
-        |SIP P-Origination-Id header|origid|Optional|
-        |SIP Diversion header|diversion|Optional|
-        |SIP Resource-Priority headers|resource_priority|Optional|
-        |SIP Call-Info header|call_info|Optional|
-        |SIP Request-URI|ruri|Optional & currently, the ruri JSON attribute is only for internal usage in processing API calls for SIP proxies in signing SIP Identity headers for Diverted calls|
-        |SDP a=fingerprint attributes|finger_print|Optional|
-
-        Additionally, an API client may provide additional parameters, either specified in a request message in JSON format, or as API URL parameters if a SIP INVITE message is provided as the input. Those parameters are:
-
-        |JSON Attribute Name|URL Parameter Name|Description|
-        |--- |--- |--- |
-        |orig_cc|origcc|Optional originator country code|
-        |dest_cc|destcc|Optional destination country code|
-        |compact|compact|Optional boolean flag for creating compact headers|
-        |passport_type|ppt|PASSporT type, which must be shaken, rcd, rph, or div if specified|
-        |attest|attest|attest value specified by ATIS SHAKEN extension|
-        |origid|origid|origid value specified by ATIS SHAKEN extension|
-
-        Additionally, the following optional parameter is specific to Diversion (DIV) PASSporT extension, mainly used for out-of-band STIR.
-
-        |JSON Attribute Name|URL Parameter Name|Description|
-        |--- |--- |--- |
-        |original_passport|N/A|Optional opt value specified by DIV PASSporT extension|
-
-        Furthermore, the following optional parameters are specific to Rich Call Data (RCD) PASSporT extension, and to SHAKEN PASSporT extension if RCD data fields are enabled.
-
-        |JSON Attribute Name|URL Parameter Name|Description|
-        |--- |--- |--- |
-        |caller_reason|N/A|Optional crn value specified by RCD PASSporT extension|
-        |caller_name|N/A|Optional nam value specified by RCD PASSporT extension|
-        |jcard|N/A|Optional JSON string for jcd value specified by RCD PASSporT extension|
-        |jcard_uri|N/A|Optional jcl value specified by RCD PASSporT extension|
-        |rcd_signature|N/A|Optional rcdi value specified by RCD PASSporT extension|
-        |rcd_integrity|N/A|Optional boolean flag for generating rcdi value|
-        |rcd_hash_algorithm|N/A|Optional hash algorithm for generating rcdi value|
-        |call_info|N/A|Optional Call-Info header value for extracting crn and jcard_uri values|
-
         The following is an example for generating SIP Identity headers with minimum request data elements:
 
         ```

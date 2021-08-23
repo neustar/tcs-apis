@@ -2084,42 +2084,42 @@ components:
           type: string
           example: error
           description: Verification status
-        error:
-          type: array
-          items: 
-            type: object
-              properties: 
-                error_id: 
-                  type: string
-                  description: The unique error identifier
-                  example: IdentitySignatureVerifyFailed
-                http_status_code: 
-                  type: integer
-                  description: The HTTP response status code
-                  example: 400
-                sip_code: 
-                  type: integer
-                  description: The SIP response code associated with the error
-                  example: 438
-                reason: 
-                  type: string
-                  description: The detailed error text
-                  example: Identity signature failed to be verified
-                timestamp: 
-                  type: string
-                  description: The timestamp when the error is generated
-                  example: Identity signature failed to be verified
-                attributes: 
-                  type: object
-                  properties: 
-                    payload: 
-                      type: string
-                      description: The attribute name of 'payload' in the name/value pair
-                      example: eyJhbGciOiJFUzI1NiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTksIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9fQ
-                    signature: 
-                      type: string
-                      description: The attribute name of 'signature' in the name/value pair
-                      example: mH96Br61sUY2SzexUsJWznLM6MxeRGSxJqnhWRPndFC8YVvfUNO64KEE1ShnTK9y0ADJjpW9yAamO2NeGkHmNw
+        # error:
+        #   type: array
+        #   items: 
+        #     type: object
+        #       properties: 
+        #         error_id: 
+        #           type: string
+        #           description: The unique error identifier
+        #           example: IdentitySignatureVerifyFailed
+        #         http_status_code: 
+        #           type: integer
+        #           description: The HTTP response status code
+        #           example: 400
+        #         sip_code: 
+        #           type: integer
+        #           description: The SIP response code associated with the error
+        #           example: 438
+        #         reason: 
+        #           type: string
+        #           description: The detailed error text
+        #           example: Identity signature failed to be verified
+        #         timestamp: 
+        #           type: string
+        #           description: The timestamp when the error is generated
+        #           example: Identity signature failed to be verified
+        #         attributes: 
+        #           type: object
+        #           properties: 
+        #             payload: 
+        #               type: string
+        #               description: The attribute name of 'payload' in the name/value pair
+        #               example: eyJhbGciOiJFUzI1NiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTksIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9fQ
+        #             signature: 
+        #               type: string
+        #               description: The attribute name of 'signature' in the name/value pair
+        #               example: mH96Br61sUY2SzexUsJWznLM6MxeRGSxJqnhWRPndFC8YVvfUNO64KEE1ShnTK9y0ADJjpW9yAamO2NeGkHmNw
         # cnam_error: 
         #   type: object
         #   properties: 

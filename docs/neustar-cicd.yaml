@@ -59,11 +59,8 @@ info:
     Currently, a REST API client is required to provide an apiKey query parameter with a pre-provisioned value to access API calls that are restricted. If the apiKey parameter is not specified, the client IP address may be used as the backup authentication mechanism if the client CIDR block is pre-provisioned.
 tags:
 - name: Generate SIP Identity Headers
-  #description: Endpoints to generate SIP Identity headers
 - name: Get Certificate
-  #description: Endpoint to get certificate for verifying SIP Identity headers
 - name: Errors
-  #description: Endpoint to get a list of all potential errors generated
 - name: Verifies SIP Identity headers
 - name: Performs CNAM queries
 - name: Performs ECNAM queries
@@ -1551,7 +1548,7 @@ paths:
   /verify/identity-j_j:
     post:
       tags:
-      - Verifies SIP Identity Headers
+      - Generate SIP Identity Headers
       summary:  'Accepts requests and produces responses in JSON Format.'
       description: |
         The following is an example for generating SIP Identity headers with minimum request data elements:

@@ -1571,46 +1571,29 @@ paths:
       x-code-samples:
         - lang: Curl
           source: |
-            curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey5%3E' \
+            curl --location --request POST 'https://ca-verify.neustarlab.biz/ccid/verify/v2/identity?apiKey=%3CapiKey1%3E' \
             --header 'Content-Type: application/json' \
             --header 'Accept: application/json' \
             --data-raw '{
-              "from" : "'Alice' <sip:alice@example.com>",
-              "to" : "'Bob' <sip:5715550000@example.com>",
-              "date" : "Fri, 11 Aug 2017 04:17:14 GMT",
-              "pai" : [ "'Alice' <tel:+17035550001>", "'Alice' <sip:+17035550001@example.com>" ],
-              "finger_print" : [ {
-                "algorithm" : "SHA-1",
-                "digest" : "4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB"
-              }, {
-                "algorithm" : "SHA-256",
-                "digest" : "36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7"
-              } ],
-              "diversion" : "'Bob' <sip:7035550000@example.com>;reason=away",
-              "attest"  : "A",
-              "origid"  : "d53afeb0-dc48-11e7-a561-7831c1b8deba",
-              "dest_cc" : "1",
-              "orig_cc" : "1",
-              "compact" : false,
-              "passport_type" : "shaken",
-              "attest" : "A",
-              "origid" : "3F9C2836-7E40-11E7-BA58-7831C1B8DEBA",
-              "resource_priority" : [ "ets.0, wps.1", "q735.1" ]
+              "from" : ""alice" <sip:+15715550000@example.com>",
+              "to" : ""bob" <sip:+15715550001@example.com>",
+              "identity" : [ "eyJhbGciOiJFUzI1NiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTYsIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9fQ.amEa2CXEarp4H6S2EqUh-fj-8oCKQHpLXI6xL--KgvP_tI2bdfjXDWlABGpxLz2qwkCKBe0tCIFvMHLgeVsOTw;info=<http://ca.example.com/test.der>;alg=ES256" ]
             }'
         - lang: Java
           source: |
             Unirest.setTimeouts(0, 0);
-            HttpResponse<String> response = Unirest.post("https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey5%3E")
-              .header("Content-Type", "applicat`ion/json")
+            HttpResponse<String> response = Unirest.post("https://ca-verify.neustarlab.biz/ccid/verify/v2/identity?apiKey=%3CapiKey1%3E")
+              .header("Content-Type", "application/json")
               .header("Accept", "application/json")
-              .body("{\n  \"from\" : \"\\\"Alice\\\" <sip:alice@example.com>\",\n  \"to\" : \"\\\"Bob\\\" <sip:5715550000@example.com>\",\n  \"date\" : \"Fri, 11 Aug 2017 04:17:14 GMT\",\n  \"pai\" : [ \"\\\"Alice\\\" <tel:+17035550001>\", \"\\\"Alice\\\" <sip:+17035550001@example.com>\" ],\n  \"finger_print\" : [ {\n    \"algorithm\" : \"SHA-1\",\n    \"digest\" : \"4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB\"\n  }, {\n    \"algorithm\" : \"SHA-256\",\n    \"digest\" : \"36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7\"\n  } ],\n  \"diversion\" : \"\\\"Bob\\\" <sip:7035550000@example.com>;reason=away\",\n  \"attest\"  : \"A\",\n  \"origid\"  : \"d53afeb0-dc48-11e7-a561-7831c1b8deba\",\n  \"dest_cc\" : \"1\",\n  \"orig_cc\" : \"1\",\n  \"compact\" : false,\n  \"passport_type\" : \"shaken\",\n  \"attest\" : \"A\",\n  \"origid\" : \"3F9C2836-7E40-11E7-BA58-7831C1B8DEBA\",\n  \"resource_priority\" : [ \"ets.0, wps.1\", \"q735.1\" ]\n}")
+              .body("{\n  \"from\" : \"\"alice\" <sip:+15715550000@example.com>\",\n  \"to\" : \"\"bob\" <sip:+15715550001@example.com>\",\n  \"identity\" : [ \"eyJhbGciOiJFUzI1NiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTYsIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9fQ.amEa2CXEarp4H6S2EqUh-fj-8oCKQHpLXI6xL--KgvP_tI2bdfjXDWlABGpxLz2qwkCKBe0tCIFvMHLgeVsOTw;info=<http://ca.example.com/test.der>;alg=ES256\" ]\n}")
               .asString();
         - lang: Python
           source: |
             import requests
-            url = "https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey5%3E"
 
-            payload="{\n  \"from\" : \"\\\"Alice\\\" <sip:alice@example.com>\",\n  \"to\" : \"\\\"Bob\\\" <sip:5715550000@example.com>\",\n  \"date\" : \"Fri, 11 Aug 2017 04:17:14 GMT\",\n  \"pai\" : [ \"\\\"Alice\\\" <tel:+17035550001>\", \"\\\"Alice\\\" <sip:+17035550001@example.com>\" ],\n  \"finger_print\" : [ {\n    \"algorithm\" : \"SHA-1\",\n    \"digest\" : \"4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB\"\n  }, {\n    \"algorithm\" : \"SHA-256\",\n    \"digest\" : \"36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7\"\n  } ],\n  \"diversion\" : \"\\\"Bob\\\" <sip:7035550000@example.com>;reason=away\",\n  \"attest\"  : \"A\",\n  \"origid\"  : \"d53afeb0-dc48-11e7-a561-7831c1b8deba\",\n  \"dest_cc\" : \"1\",\n  \"orig_cc\" : \"1\",\n  \"compact\" : false,\n  \"passport_type\" : \"shaken\",\n  \"attest\" : \"A\",\n  \"origid\" : \"3F9C2836-7E40-11E7-BA58-7831C1B8DEBA\",\n  \"resource_priority\" : [ \"ets.0, wps.1\", \"q735.1\" ]\n}"
+            url = "https://ca-verify.neustarlab.biz/ccid/verify/v2/identity?apiKey=%3CapiKey1%3E"
+
+            payload="{\n  \"from\" : \"\"alice\" <sip:+15715550000@example.com>\",\n  \"to\" : \"\"bob\" <sip:+15715550001@example.com>\",\n  \"identity\" : [ \"eyJhbGciOiJFUzI1NiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTYsIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9fQ.amEa2CXEarp4H6S2EqUh-fj-8oCKQHpLXI6xL--KgvP_tI2bdfjXDWlABGpxLz2qwkCKBe0tCIFvMHLgeVsOTw;info=<http://ca.example.com/test.der>;alg=ES256\" ]\n}"
             headers = {
               'Content-Type': 'application/json',
               'Accept': 'application/json'
@@ -1619,41 +1602,12 @@ paths:
             response = requests.request("POST", url, headers=headers, data=payload)
 
             print(response.text)
-
-                      - lang: Curl
-                        source: |
-                          curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey5%3E' \
-                          --header 'Content-Type: application/json' \
-                          --header 'Accept: application/json' \
-                          --data-raw '{
-                            "from" : "\"Alice\" <sip:alice@example.com>",
-                            "to" : "\"Bob\" <sip:5715550000@example.com>",
-                            "date" : "Fri, 11 Aug 2017 04:17:14 GMT",
-                            "pai" : [ "\"Alice\" <tel:+17035550001>", "\"Alice\" <sip:+17035550001@example.com>" ],
-                            "finger_print" : [ {
-                              "algorithm" : "SHA-1",
-                              "digest" : "4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB"
-                            }, {
-                              "algorithm" : "SHA-256",
-                              "digest" : "36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7"
-                            } ],
-                            "diversion" : "\"Bob\" <sip:7035550000@example.com>;reason=away",
-                            "attest"  : "A",
-                            "origid"  : "d53afeb0-dc48-11e7-a561-7831c1b8deba",
-                            "dest_cc" : "1",
-                            "orig_cc" : "1",
-                            "compact" : false,
-                            "passport_type" : "shaken",
-                            "attest" : "A",
-                            "origid" : "3F9C2836-7E40-11E7-BA58-7831C1B8DEBA",
-                            "resource_priority" : [ "ets.0, wps.1", "q735.1" ]
-                          }'
         - lang: Ruby
           source: |
             require "uri"
             require "net/http"
 
-            url = URI("https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey5%3E")
+            url = URI("https://ca-verify.neustarlab.biz/ccid/verify/v2/identity?apiKey=%3CapiKey1%3E")
 
             https = Net::HTTP.new(url.host, url.port)
             https.use_ssl = true
@@ -1661,7 +1615,7 @@ paths:
             request = Net::HTTP::Post.new(url)
             request["Content-Type"] = "application/json"
             request["Accept"] = "application/json"
-            request.body = "{\n  \"from\" : \"\\\"Alice\\\" <sip:alice@example.com>\",\n  \"to\" : \"\\\"Bob\\\" <sip:5715550000@example.com>\",\n  \"date\" : \"Fri, 11 Aug 2017 04:17:14 GMT\",\n  \"pai\" : [ \"\\\"Alice\\\" <tel:+17035550001>\", \"\\\"Alice\\\" <sip:+17035550001@example.com>\" ],\n  \"finger_print\" : [ {\n    \"algorithm\" : \"SHA-1\",\n    \"digest\" : \"4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB\"\n  }, {\n    \"algorithm\" : \"SHA-256\",\n    \"digest\" : \"36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7\"\n  } ],\n  \"diversion\" : \"\\\"Bob\\\" <sip:7035550000@example.com>;reason=away\",\n  \"attest\"  : \"A\",\n  \"origid\"  : \"d53afeb0-dc48-11e7-a561-7831c1b8deba\",\n  \"dest_cc\" : \"1\",\n  \"orig_cc\" : \"1\",\n  \"compact\" : false,\n  \"passport_type\" : \"shaken\",\n  \"attest\" : \"A\",\n  \"origid\" : \"3F9C2836-7E40-11E7-BA58-7831C1B8DEBA\",\n  \"resource_priority\" : [ \"ets.0, wps.1\", \"q735.1\" ]\n}"
+            request.body = "{\n  \"from\" : \"\"alice\" <sip:+15715550000@example.com>\",\n  \"to\" : \"\"bob\" <sip:+15715550001@example.com>\",\n  \"identity\" : [ \"eyJhbGciOiJFUzI1NiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTYsIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9fQ.amEa2CXEarp4H6S2EqUh-fj-8oCKQHpLXI6xL--KgvP_tI2bdfjXDWlABGpxLz2qwkCKBe0tCIFvMHLgeVsOTw;info=<http://ca.example.com/test.der>;alg=ES256\" ]\n}"
 
             response = https.request(request)
             puts response.read_body

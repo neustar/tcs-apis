@@ -1632,13 +1632,7 @@ paths:
           content: 
             application/json: 
               schema: 
-                $ref: '#/components/schemas/ErrorResponse400'
-        403:
-          description: Error Resonse
-          content: 
-            application/json: 
-              schema: 
-                $ref: '#/components/schemas/ErrorResponse403'
+                $ref: '#/components/schemas/VerifyErrorResponse400'
 components:
   schemas:
     Identity:

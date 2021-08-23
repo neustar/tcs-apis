@@ -57,9 +57,9 @@ info:
 
     ## REST API Servers
     Currently the base URL of the CCID AS REST API Server is : 
-    - http://ca-authn.neustarlab.biz/ccid/authn/v2
+    - http://ca.neustarlab.biz/ccid/v2
     or
-    - https://ca-authn.neustarlab.biz/ccid/authn/v2
+    - https://ca.neustarlab.biz/ccid/v2
     if HTTPs is required
   
     ## REST API Authentication
@@ -115,7 +115,7 @@ paths:
         The following is an example for generating SIP Identity headers with minimum request data elements:
 
         ```
-        curl --location --request POST 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-j_j?apiKey=%3CapiKey5%3E' \
+        curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey5%3E' \
         --header 'Content-Type: application/json' \
         --header 'Accept: application/json' \
         --data-raw '{
@@ -129,7 +129,7 @@ paths:
         The following is an example for generating SIP Identity headers in compact form with minimum request data elements:
 
           ```
-          curl --location --request POST 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-j_j?apiKey=%3CapiKey5%3E' \
+          curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey5%3E' \
           --header 'Content-Type: application/json' \
           --header 'Accept: application/json' \
           --data-raw '{
@@ -144,7 +144,7 @@ paths:
         The following is an example for generating SIP Identity headers with Diverted Calls extension, by specifying minimum request data elements, and the 'PASSporT' type value as "div":
 
           ```
-          curl --location --request POST 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-j_j?apiKey=%3CapiKey1%3E' \
+          curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey1%3E' \
           --header 'Content-Type: application/json' \
           --header 'Accept: application/json' \
           --data-raw '{
@@ -159,7 +159,7 @@ paths:
         The following is an example for generating SIP Identity headers with Resource-Priority Authorization extension, by specifying minimum request data elements, and the 'PASSporT' type value as "rph":
 
           ```
-          curl --location --request POST 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-j_j?apiKey=%3CapiKey1%3E' \
+          curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey1%3E' \
           --header 'Content-Type: application/json' \
           --header 'Accept: application/json' \
           --data-raw '{
@@ -174,7 +174,7 @@ paths:
         The following is an example for generating SIP Identity headers with Rich Call Data extension, by specifying minimum request data elements, and the 'PASSporT' type value as "rcd", with call data fetched via an optional Rich Call Data provider:
 
           ```
-          curl --location --request POST 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-j_j?apiKey=%3CapiKey1%3E' \
+          curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey1%3E' \
           --header 'Content-Type: application/json' \
           --header 'Accept: application/json' \
           --data-raw '{
@@ -188,7 +188,7 @@ paths:
         The following is an example for generating SIP Identity headers with Rich Call Data extension, by specifying a SIP Call-Info header value that contains JCARD URI and call reason data, with the CNAM value extracted from the SIP From header:
 
           ```
-          curl --location --request POST 'https://ca-authn.neustarlab.biz/ccid/authn/v2/error' \
+          curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/error' \
           --header 'Content-Type: application/json' \
           --header 'Accept: application/json' \
           --data-raw '{
@@ -203,7 +203,7 @@ paths:
         The following is an example for generating SIP Identity headers with Rich Call Data extension, by specifying related call data, including a JCard json string:
 
           ```
-          curl --location --request POST 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-j_j?apiKey=%3CapiKey1%3E' \
+          curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey1%3E' \
           --header 'Content-Type: application/json' \
           --header 'Accept: application/json' \
           --data-raw '{
@@ -220,7 +220,7 @@ paths:
         The following is an example for generating SIP Identity headers with Rich Call Data extension, by specifying related call data, including a JCard URI:
 
           ```
-          curl --location --request POST 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-j_j?apiKey=%3CapiKey1%3E' \
+          curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey1%3E' \
           --header 'Content-Type: application/json' \
           --header 'Accept: application/json' \
           --data-raw '{
@@ -240,7 +240,7 @@ paths:
         The following is an example for generating SIP Identity headers with Rich Call Data extension, by specifying related call data, including a JCard URI with pre-calculated hash signature:
 
           ```
-          curl --location --request POST 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-j_j?apiKey=%3CapiKey1%3E' \
+          curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey1%3E' \
           --header 'Content-Type: application/json' \
           --header 'Accept: application/json' \
           --data-raw '{
@@ -259,7 +259,7 @@ paths:
         The following is an example for generating SIP Identity headers with ATIS SHAKEN extension, by specifying minimum request data elements, with the default 'PASSporT' type value in the customer profile as "shaken":
 
           ```
-          curl 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-j_j?apiKey=%3CapiKey1%3E' -i -X POST \
+          curl 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey1%3E' -i -X POST \
               -H 'Content-Type: application/json' \
               -H 'Accept: application/json' \
               -d '{
@@ -272,7 +272,7 @@ paths:
         The following is an example for generating SIP Identity headers with ATIS SHAKEN extension, by specifying the full set of data elements in the request:
 
           ```
-            curl 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-j_j?apiKey=%3CapiKey1%3E' -i -X POST \
+            curl 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey1%3E' -i -X POST \
               -H 'Content-Type: application/json' \
               -H 'Accept: application/json' \
               -d '{
@@ -303,7 +303,7 @@ paths:
         The following is an example for generating SIP Identity headers with ATIS SHAKEN extension and RCD data set, by specifying a SIP Call-Info header value containing a Content-ID URI for JCARD and the call reason value, and a JSON string of the JCARD extracted in a multipart SIP INVITE message.
 
           ```
-          curl --location --request POST 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-j_j?apiKey=%3CapiKey12%3E' \
+          curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey12%3E' \
               --header 'Content-Type: application/json' \
               --header 'Accept: application/json' \
               --data-raw '{
@@ -347,7 +347,7 @@ paths:
       x-code-samples:
         - lang: Curl
           source: |
-            curl --location --request POST 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-j_j?apiKey=%3CapiKey5%3E' \
+            curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey5%3E' \
             --header 'Content-Type: application/json' \
             --header 'Accept: application/json' \
             --data-raw '{
@@ -376,7 +376,7 @@ paths:
         - lang: Java
           source: |
             Unirest.setTimeouts(0, 0);
-            HttpResponse<String> response = Unirest.post("https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-j_j?apiKey=%3CapiKey5%3E")
+            HttpResponse<String> response = Unirest.post("https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey5%3E")
               .header("Content-Type", "applicat`ion/json")
               .header("Accept", "application/json")
               .body("{\n  \"from\" : \"\\\"Alice\\\" <sip:alice@example.com>\",\n  \"to\" : \"\\\"Bob\\\" <sip:5715550000@example.com>\",\n  \"date\" : \"Fri, 11 Aug 2017 04:17:14 GMT\",\n  \"pai\" : [ \"\\\"Alice\\\" <tel:+17035550001>\", \"\\\"Alice\\\" <sip:+17035550001@example.com>\" ],\n  \"finger_print\" : [ {\n    \"algorithm\" : \"SHA-1\",\n    \"digest\" : \"4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB\"\n  }, {\n    \"algorithm\" : \"SHA-256\",\n    \"digest\" : \"36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7\"\n  } ],\n  \"diversion\" : \"\\\"Bob\\\" <sip:7035550000@example.com>;reason=away\",\n  \"attest\"  : \"A\",\n  \"origid\"  : \"d53afeb0-dc48-11e7-a561-7831c1b8deba\",\n  \"dest_cc\" : \"1\",\n  \"orig_cc\" : \"1\",\n  \"compact\" : false,\n  \"passport_type\" : \"shaken\",\n  \"attest\" : \"A\",\n  \"origid\" : \"3F9C2836-7E40-11E7-BA58-7831C1B8DEBA\",\n  \"resource_priority\" : [ \"ets.0, wps.1\", \"q735.1\" ]\n}")
@@ -384,7 +384,7 @@ paths:
         - lang: Python
           source: |
             import requests
-            url = "https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-j_j?apiKey=%3CapiKey5%3E"
+            url = "https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey5%3E"
 
             payload="{\n  \"from\" : \"\\\"Alice\\\" <sip:alice@example.com>\",\n  \"to\" : \"\\\"Bob\\\" <sip:5715550000@example.com>\",\n  \"date\" : \"Fri, 11 Aug 2017 04:17:14 GMT\",\n  \"pai\" : [ \"\\\"Alice\\\" <tel:+17035550001>\", \"\\\"Alice\\\" <sip:+17035550001@example.com>\" ],\n  \"finger_print\" : [ {\n    \"algorithm\" : \"SHA-1\",\n    \"digest\" : \"4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB\"\n  }, {\n    \"algorithm\" : \"SHA-256\",\n    \"digest\" : \"36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7\"\n  } ],\n  \"diversion\" : \"\\\"Bob\\\" <sip:7035550000@example.com>;reason=away\",\n  \"attest\"  : \"A\",\n  \"origid\"  : \"d53afeb0-dc48-11e7-a561-7831c1b8deba\",\n  \"dest_cc\" : \"1\",\n  \"orig_cc\" : \"1\",\n  \"compact\" : false,\n  \"passport_type\" : \"shaken\",\n  \"attest\" : \"A\",\n  \"origid\" : \"3F9C2836-7E40-11E7-BA58-7831C1B8DEBA\",\n  \"resource_priority\" : [ \"ets.0, wps.1\", \"q735.1\" ]\n}"
             headers = {
@@ -398,7 +398,7 @@ paths:
 
                       - lang: Curl
                         source: |
-                          curl --location --request POST 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-j_j?apiKey=%3CapiKey5%3E' \
+                          curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey5%3E' \
                           --header 'Content-Type: application/json' \
                           --header 'Accept: application/json' \
                           --data-raw '{
@@ -429,7 +429,7 @@ paths:
             require "uri"
             require "net/http"
 
-            url = URI("https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-j_j?apiKey=%3CapiKey5%3E")
+            url = URI("https://ca.neustarlab.biz/ccid/v2/authn/identity-j_j?apiKey=%3CapiKey5%3E")
 
             https = Net::HTTP.new(url.host, url.port)
             https.use_ssl = true
@@ -451,7 +451,7 @@ paths:
             text/plain:
               schema:
                 type: string
-                example: 'INVITE sip:17035550021@proxy.example.com;transport=UDP SIP/2.0From: "Alice" <sip:+15714345500@example.com>Identity: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyI0NDcwMzU1NTAwMDAiXX0sImlhdCI6MTYyMTAxMTQyNSwib3JpZyI6eyJ0biI6IjE1NzE0MzQ1NTAwIn0sIm9yaWdpZCI6Ijc4MzZlYzFkMDYwNzRkNjg4YjYyYzFlYTVlYmQxOTM5In0.RIDQYZP0SNd7ejjJGlcYLQ-55XssLVG5hJ5001v-unKFbD349VVYLderLBt_4h-eCgAcWIsuAW6YSMUqfPk8PA;info=<https://ca-authn.neustarlab.biz/ccid/authn/v2/certs/20001.10001>;alg=ES256;ppt="shaken"Date: Fri, 14 May 2021 16:57:05 GMTTo: "Bob" <sip:+447035550000@example.com>'
+                example: 'INVITE sip:17035550021@proxy.example.com;transport=UDP SIP/2.0From: "Alice" <sip:+15714345500@example.com>Identity: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyI0NDcwMzU1NTAwMDAiXX0sImlhdCI6MTYyMTAxMTQyNSwib3JpZyI6eyJ0biI6IjE1NzE0MzQ1NTAwIn0sIm9yaWdpZCI6Ijc4MzZlYzFkMDYwNzRkNjg4YjYyYzFlYTVlYmQxOTM5In0.RIDQYZP0SNd7ejjJGlcYLQ-55XssLVG5hJ5001v-unKFbD349VVYLderLBt_4h-eCgAcWIsuAW6YSMUqfPk8PA;info=<https://ca.neustarlab.biz/ccid/v2/authn/certs/20001.10001>;alg=ES256;ppt="shaken"Date: Fri, 14 May 2021 16:57:05 GMTTo: "Bob" <sip:+447035550000@example.com>'
         400:
           description: Error Resonse
           content: 
@@ -480,7 +480,7 @@ paths:
         The following is an example for generating SIP Identity headers by submitting a SIP INVITE message as the request:
 
           ```
-          curl 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-s_j?apiKey=%3CapiKey1%3E' -i -X POST \
+          curl 'https://ca.neustarlab.biz/ccid/v2/authn/identity-s_j?apiKey=%3CapiKey1%3E' -i -X POST \
               -H 'Content-Type: text/plain' \
               -H 'Accept: application/json' \
               -d 'INVITE sip:17035550021@proxy.example.com;transport=UDP SIP/2.0
@@ -493,7 +493,7 @@ paths:
         The following is an example for generating SIP Identity headers by submitting a SIP INVITE message as the request with all available URL parameters:
 
           ```
-          curl 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-s_j?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
+          curl 'https://ca.neustarlab.biz/ccid/v2/authn/identity-s_j?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
               -H 'Content-Type: text/plain' \
               -H 'Accept: application/json' \
               -d 'INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0
@@ -534,7 +534,7 @@ paths:
         The following is an example for generating SIP Identity headers by submitting a multiple part SIP INVITE message as the request with a Call-Info header and JCARD content:
 
           ```
-          curl 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-s_j?apiKey=%3CapiKey1%3E&compact=false&ppt=rcd&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
+          curl 'https://ca.neustarlab.biz/ccid/v2/authn/identity-s_j?apiKey=%3CapiKey1%3E&compact=false&ppt=rcd&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: application/json' \
                 -d 'INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0
@@ -639,7 +639,7 @@ paths:
       x-code-samples:
         - lang: Curl
           source: |
-            curl --location --request POST 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-s_j?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' \
+            curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-s_j?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' \
             --header 'Content-Type: text/plain' \
             --header 'Accept: application/json' \
             --data-raw 'INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0
@@ -677,7 +677,7 @@ paths:
         - lang: Java
           source: |
             Unirest.setTimeouts(0, 0);
-            HttpResponse<String> response = Unirest.post("https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-s_j?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC")
+            HttpResponse<String> response = Unirest.post("https://ca.neustarlab.biz/ccid/v2/authn/identity-s_j?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC")
               .header("Content-Type", "text/plain")
               .header("Accept", "application/json")
               .body("INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0\nv: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK\nMax-Forwards: 70\nm: \"Alice\" <sip:5715550001@proxy.example.com:39089;transport=UDP>\nt: \"Bob\" <sip:+17035550002@example.com>\nf: \"Alice\" <sip:+15715550001@example.com>;tag=1f4e4f40\ni: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.\nP-Asserted-Identity: Alice <sip:+15715550001@example.com>\nCSeq: 2 INVITE\nAllow: INVITE, ACK, CANCEL, BYE, NOTIFY, REFER, MESSAGE, OPTIONS, INFO, SUBSCRIBE\nc: application/sdp\nDate: Fri, 14 May 2021 16:57:04 GMT\nk: replaces, norefersub, extended-refer, timer, X-cisco-serviceuri\nUser-Agent: Z 3.3.25608 r25552\nAllow-Events: presence, kpml\nl: 425\n\nv=0\no=Z 0 0 IN IP4 10.31.32.251\ns=Z\nc=IN IP4 10.31.32.251\nt=0 0\nm=audio 8000 RTP/AVP 8 0 3 110 98 101\na=fingerprint:md5 14:75:8F:1A:FD:44:C0:9B:79:92:07:3C:CF:00:B4:3D\na=fingerprint:sha-256 AE:C0:70:64:5F:E5:3E:E3:B3:76:30:59:37:61:34:F0:58:CC:33:72:47:C9:78:AD:D1:78:B6:CC:DF:B0:01:9F\na=rtpmap:110 speex/8000\na=rtpmap:98 iLBC/8000\na=fmtp:98 mode=20\na=rtpmap:101 telephone-event/8000\na=fmtp:101 0-15\na=sendrecv\n")
@@ -685,7 +685,7 @@ paths:
         - lang: Python
           source: |
             import requests
-            url = "https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-s_j?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC"
+            url = "https://ca.neustarlab.biz/ccid/v2/authn/identity-s_j?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC"
 
             payload="INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0\nv: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK\nMax-Forwards: 70\nm: \"Alice\" <sip:5715550001@proxy.example.com:39089;transport=UDP>\nt: \"Bob\" <sip:+17035550002@example.com>\nf: \"Alice\" <sip:+15715550001@example.com>;tag=1f4e4f40\ni: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.\nP-Asserted-Identity: Alice <sip:+15715550001@example.com>\nCSeq: 2 INVITE\nAllow: INVITE, ACK, CANCEL, BYE, NOTIFY, REFER, MESSAGE, OPTIONS, INFO, SUBSCRIBE\nc: application/sdp\nDate: Fri, 14 May 2021 16:57:04 GMT\nk: replaces, norefersub, extended-refer, timer, X-cisco-serviceuri\nUser-Agent: Z 3.3.25608 r25552\nAllow-Events: presence, kpml\nl: 425\n\nv=0\no=Z 0 0 IN IP4 10.31.32.251\ns=Z\nc=IN IP4 10.31.32.251\nt=0 0\nm=audio 8000 RTP/AVP 8 0 3 110 98 101\na=fingerprint:md5 14:75:8F:1A:FD:44:C0:9B:79:92:07:3C:CF:00:B4:3D\na=fingerprint:sha-256 AE:C0:70:64:5F:E5:3E:E3:B3:76:30:59:37:61:34:F0:58:CC:33:72:47:C9:78:AD:D1:78:B6:CC:DF:B0:01:9F\na=rtpmap:110 speex/8000\na=rtpmap:98 iLBC/8000\na=fmtp:98 mode=20\na=rtpmap:101 telephone-event/8000\na=fmtp:101 0-15\na=sendrecv\n"
             headers = {
@@ -701,7 +701,7 @@ paths:
             require "uri"
             require "net/http"
 
-            url = URI("https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-s_j?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC")
+            url = URI("https://ca.neustarlab.biz/ccid/v2/authn/identity-s_j?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC")
 
             https = Net::HTTP.new(url.host, url.port)
             https.use_ssl = true
@@ -761,7 +761,7 @@ paths:
         The following is an example of submitting a SIP INVITE message as the request and producing a new SIP INVITE message with the generated SIP Identity header, and the SIP Date header:
 
           ```
-          curl 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-s_s?apiKey=%3CapiKey1%3E' -i -X POST \
+          curl 'https://ca.neustarlab.biz/ccid/v2/authn/identity-s_s?apiKey=%3CapiKey1%3E' -i -X POST \
               -H 'Content-Type: text/plain' \
               -H 'Accept: text/plain' \
               -d 'INVITE sip:17035550021@proxy.example.com;transport=UDP SIP/2.0
@@ -775,7 +775,7 @@ paths:
         The following is an example for generating SIP Identity headers by submitting a multiple part SIP INVITE message as the request with a Call-Info header and JCARD content:
 
           ```
-          curl 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-s_s?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC&verstat=TN-Validation-Passed&identity=true' -i -X POST \
+          curl 'https://ca.neustarlab.biz/ccid/v2/authn/identity-s_s?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC&verstat=TN-Validation-Passed&identity=true' -i -X POST \
               -H 'Content-Type: text/plain' \
               -H 'Accept: text/plain' \
               -d 'INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0
@@ -816,7 +816,7 @@ paths:
         The following is an example for generating SIP Identity headers by submitting a multiple part SIP INVITE message as the request with a Call-Info header and JCARD content:
 
           ```
-          curl 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-s_s?apiKey=%3CapiKey1%3E&compact=false&ppt=rcd&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC&identity=true' -i -X POST \
+          curl 'https://ca.neustarlab.biz/ccid/v2/authn/identity-s_s?apiKey=%3CapiKey1%3E&compact=false&ppt=rcd&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC&identity=true' -i -X POST \
               -H 'Content-Type: text/plain' \
               -H 'Accept: text/plain' \
               -d 'INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0
@@ -876,7 +876,7 @@ paths:
           m: "Alice" <sip:5715550001@proxy.example.com:39089;transport=UDP>
           t: "Bob" <sip:+17035550002@example.com>
           f: "Alice" <sip:+15715550001@example.com>;tag=1f4e4f40
-          y: eyJhbGciOiJFUzI1NiIsInBwdCI6InJjZCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJjcm4iOiJUcmF2ZWwiLCJkZXN0Ijp7InRuIjpbIjE3MDM1NTUwMDAyIl19LCJpYXQiOjE2MjEwMTE0MjUsIm1reSI6W3siYWxnIjoibWQ1IiwiZGlnIjoiMTQ3NThGMUFGRDQ0QzA5Qjc5OTIwNzNDQ0YwMEI0M0QifSx7ImFsZyI6InNoYS0yNTYiLCJkaWciOiJBRUMwNzA2NDVGRTUzRUUzQjM3NjMwNTkzNzYxMzRGMDU4Q0MzMzcyNDdDOTc4QUREMTc4QjZDQ0RGQjAwMTlGIn1dLCJvcmlnIjp7InRuIjoiMTU3MTU1NTAwMDEifSwicmNkIjp7ImpjbCI6ImNpZDphbGljZS1qY2FyZEBleGFtcGxlLmNvbSIsIm5hbSI6IkFsaWNlIn0sInJjZGkiOiJzaGEyNTYtRUpUdHdWK0JVb04zQUdQclgrNXJ3WVp3RUVEYXdXdmE4T2hDYnFPZmtxbz0ifQ.Olm6qNJerSTFq6DRVQg567q3v5vKwrf5rKt9S7HJeWy8mUnOEWZgm4lMYf3ckDuuUJzAVez4CiQb2gCZF1gGkg;info=<https://ca-authn.neustarlab.biz/ccid/authn/v2/certs/20001.10001>;alg=ES256;ppt="rcd"
+          y: eyJhbGciOiJFUzI1NiIsInBwdCI6InJjZCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJjcm4iOiJUcmF2ZWwiLCJkZXN0Ijp7InRuIjpbIjE3MDM1NTUwMDAyIl19LCJpYXQiOjE2MjEwMTE0MjUsIm1reSI6W3siYWxnIjoibWQ1IiwiZGlnIjoiMTQ3NThGMUFGRDQ0QzA5Qjc5OTIwNzNDQ0YwMEI0M0QifSx7ImFsZyI6InNoYS0yNTYiLCJkaWciOiJBRUMwNzA2NDVGRTUzRUUzQjM3NjMwNTkzNzYxMzRGMDU4Q0MzMzcyNDdDOTc4QUREMTc4QjZDQ0RGQjAwMTlGIn1dLCJvcmlnIjp7InRuIjoiMTU3MTU1NTAwMDEifSwicmNkIjp7ImpjbCI6ImNpZDphbGljZS1qY2FyZEBleGFtcGxlLmNvbSIsIm5hbSI6IkFsaWNlIn0sInJjZGkiOiJzaGEyNTYtRUpUdHdWK0JVb04zQUdQclgrNXJ3WVp3RUVEYXdXdmE4T2hDYnFPZmtxbz0ifQ.Olm6qNJerSTFq6DRVQg567q3v5vKwrf5rKt9S7HJeWy8mUnOEWZgm4lMYf3ckDuuUJzAVez4CiQb2gCZF1gGkg;info=<https://ca.neustarlab.biz/ccid/v2/authn/certs/20001.10001>;alg=ES256;ppt="rcd"
           i: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
           P-Asserted-Identity: Alice <sip:+15715550001@example.com>
           CSeq: 2 INVITE
@@ -918,7 +918,7 @@ paths:
         The following is an example of error responses in SIP format produced by the CCID AS if there are any errors encountered during the SIP Identity header creation for a SIP INVITE message:
 
           ```
-          $ curl 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-s_s?apiKey=%3CapiKey2%3E' -i -X POST \
+          $ curl 'https://ca.neustarlab.biz/ccid/v2/authn/identity-s_s?apiKey=%3CapiKey2%3E' -i -X POST \
               -H 'Content-Type: text/plain' \
               -H 'Accept: text/plain' \
               -d 'INVITE sip:17035550021@proxy.example.com;transport=UDP SIP/2.0
@@ -1006,7 +1006,7 @@ paths:
       x-code-samples:
         - lang: Curl
           source: |
-            curl --location --request POST 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-s_s?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC&verstat=TN-Validation-Passed&identity=true' \
+            curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity-s_s?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC&verstat=TN-Validation-Passed&identity=true' \
             --header 'Content-Type: text/plain' \
             --header 'Accept: text/plain' \
             --data-raw 'INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0
@@ -1044,7 +1044,7 @@ paths:
         - lang: Java
           source: |
             Unirest.setTimeouts(0, 0);
-            HttpResponse<String> response = Unirest.post("https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-s_s?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC&verstat=TN-Validation-Passed&identity=true")
+            HttpResponse<String> response = Unirest.post("https://ca.neustarlab.biz/ccid/v2/authn/identity-s_s?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC&verstat=TN-Validation-Passed&identity=true")
               .header("Content-Type", "text/plain")
               .header("Accept", "text/plain")
               .body("INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0\nv: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK\nMax-Forwards: 70\nm: \"Alice\" <sip:5715550001@proxy.example.com:39089;transport=UDP>\nt: \"Bob\" <sip:+17035550002@example.com>\nf: \"Alice\" <sip:+15715550001@example.com>;tag=1f4e4f40\ni: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.\nP-Asserted-Identity: Alice <sip:+15715550001@example.com>\nCSeq: 2 INVITE\nAllow: INVITE, ACK, CANCEL, BYE, NOTIFY, REFER, MESSAGE, OPTIONS, INFO, SUBSCRIBE\nc: application/sdp\nDate: Fri, 14 May 2021 16:57:02 GMT\nk: replaces, norefersub, extended-refer, timer, X-cisco-serviceuri\nUser-Agent: Z 3.3.25608 r25552\nAllow-Events: presence, kpml\nl: 425\n\nv=0\no=Z 0 0 IN IP4 10.31.32.251\ns=Z\nc=IN IP4 10.31.32.251\nt=0 0\nm=audio 8000 RTP/AVP 8 0 3 110 98 101\na=fingerprint:md5 14:75:8F:1A:FD:44:C0:9B:79:92:07:3C:CF:00:B4:3D\na=fingerprint:sha-256 AE:C0:70:64:5F:E5:3E:E3:B3:76:30:59:37:61:34:F0:58:CC:33:72:47:C9:78:AD:D1:78:B6:CC:DF:B0:01:9F\na=rtpmap:110 speex/8000\na=rtpmap:98 iLBC/8000\na=fmtp:98 mode=20\na=rtpmap:101 telephone-event/8000\na=fmtp:101 0-15\na=sendrecv\n")
@@ -1052,7 +1052,7 @@ paths:
         - lang: Python
           source: |
             import requests
-            url = "https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-s_s?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC&verstat=TN-Validation-Passed&identity=true"
+            url = "https://ca.neustarlab.biz/ccid/v2/authn/identity-s_s?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC&verstat=TN-Validation-Passed&identity=true"
 
             payload="INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0\nv: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK\nMax-Forwards: 70\nm: \"Alice\" <sip:5715550001@proxy.example.com:39089;transport=UDP>\nt: \"Bob\" <sip:+17035550002@example.com>\nf: \"Alice\" <sip:+15715550001@example.com>;tag=1f4e4f40\ni: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.\nP-Asserted-Identity: Alice <sip:+15715550001@example.com>\nCSeq: 2 INVITE\nAllow: INVITE, ACK, CANCEL, BYE, NOTIFY, REFER, MESSAGE, OPTIONS, INFO, SUBSCRIBE\nc: application/sdp\nDate: Fri, 14 May 2021 16:57:02 GMT\nk: replaces, norefersub, extended-refer, timer, X-cisco-serviceuri\nUser-Agent: Z 3.3.25608 r25552\nAllow-Events: presence, kpml\nl: 425\n\nv=0\no=Z 0 0 IN IP4 10.31.32.251\ns=Z\nc=IN IP4 10.31.32.251\nt=0 0\nm=audio 8000 RTP/AVP 8 0 3 110 98 101\na=fingerprint:md5 14:75:8F:1A:FD:44:C0:9B:79:92:07:3C:CF:00:B4:3D\na=fingerprint:sha-256 AE:C0:70:64:5F:E5:3E:E3:B3:76:30:59:37:61:34:F0:58:CC:33:72:47:C9:78:AD:D1:78:B6:CC:DF:B0:01:9F\na=rtpmap:110 speex/8000\na=rtpmap:98 iLBC/8000\na=fmtp:98 mode=20\na=rtpmap:101 telephone-event/8000\na=fmtp:101 0-15\na=sendrecv\n"
             headers = {
@@ -1068,7 +1068,7 @@ paths:
             require "uri"
             require "net/http"
 
-            url = URI("https://ca-authn.neustarlab.biz/ccid/authn/v2/identity-s_s?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC")
+            url = URI("https://ca.neustarlab.biz/ccid/v2/authn/identity-s_s?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC")
 
             https = Net::HTTP.new(url.host, url.port)
             https.use_ssl = true
@@ -1097,7 +1097,7 @@ paths:
                           m: "Alice" <sip:5715550001@proxy.example.com:39089;transport=UDP>
                           t: "Bob" <sip:+17035550002@example.com>
                           f: "Alice" <sip:+15715550001;verstat=TN-Validation-Passed@example.com>;tag=1f4e4f40
-                          y: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJDIiwiZGVzdCI6eyJ0biI6WyIxNzAzNTU1MDAwMiJdfSwiaWF0IjoxNjIxMDExNDIyLCJta3kiOlt7ImFsZyI6Im1kNSIsImRpZyI6IjE0NzU4RjFBRkQ0NEMwOUI3OTkyMDczQ0NGMDBCNDNEIn0seyJhbGciOiJzaGEtMjU2IiwiZGlnIjoiQUVDMDcwNjQ1RkU1M0VFM0IzNzYzMDU5Mzc2MTM0RjA1OENDMzM3MjQ3Qzk3OEFERDE3OEI2Q0NERkIwMDE5RiJ9XSwib3JpZyI6eyJ0biI6IjE1NzE1NTUwMDAxIn0sIm9yaWdpZCI6ImZkYTYyM2EyLWE4OWQtMTFlOS1hZjgzLTAwNTA1NjlhYmIzNCJ9.pV58sy9KSKUCsM9VT_MzJ5srxib53d5xyoKcGBV9o-SJiAdaTB7t3vuxAh8WX8b6BMc_1P8mAk8WfKD3uSXGaA;info=<https://ca-authn.neustarlab.biz/ccid/authn/v2/certs/20001.10001>;alg=ES256;ppt="shaken"
+                          y: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJDIiwiZGVzdCI6eyJ0biI6WyIxNzAzNTU1MDAwMiJdfSwiaWF0IjoxNjIxMDExNDIyLCJta3kiOlt7ImFsZyI6Im1kNSIsImRpZyI6IjE0NzU4RjFBRkQ0NEMwOUI3OTkyMDczQ0NGMDBCNDNEIn0seyJhbGciOiJzaGEtMjU2IiwiZGlnIjoiQUVDMDcwNjQ1RkU1M0VFM0IzNzYzMDU5Mzc2MTM0RjA1OENDMzM3MjQ3Qzk3OEFERDE3OEI2Q0NERkIwMDE5RiJ9XSwib3JpZyI6eyJ0biI6IjE1NzE1NTUwMDAxIn0sIm9yaWdpZCI6ImZkYTYyM2EyLWE4OWQtMTFlOS1hZjgzLTAwNTA1NjlhYmIzNCJ9.pV58sy9KSKUCsM9VT_MzJ5srxib53d5xyoKcGBV9o-SJiAdaTB7t3vuxAh8WX8b6BMc_1P8mAk8WfKD3uSXGaA;info=<https://ca.neustarlab.biz/ccid/v2/authn/certs/20001.10001>;alg=ES256;ppt="shaken"
                           P-Attestation-Indicator: A
                           P-Origination-Id: AAA-BBB-CCCC
                           i: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
@@ -1177,7 +1177,7 @@ paths:
       x-code-samples:
         - lang: Curl
           source: |
-            curl --location --request POST 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity/proxy/127.0.0.1/5060?apiKey=%3CapiKey1%3E' \
+            curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/authn/identity/proxy/127.0.0.1/5060?apiKey=%3CapiKey1%3E' \
             --header 'Content-Type: text/plain' \
             --header 'Accept: application/json' \
             --data-raw 'INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0
@@ -1215,7 +1215,7 @@ paths:
         - lang: Java
           source: |
             Unirest.setTimeouts(0, 0);
-            HttpResponse<String> response = Unirest.post("https://ca-authn.neustarlab.biz/ccid/authn/v2/identity/proxy/127.0.0.1/5060?apiKey=%3CapiKey1%3E")
+            HttpResponse<String> response = Unirest.post("https://ca.neustarlab.biz/ccid/v2/authn/identity/proxy/127.0.0.1/5060?apiKey=%3CapiKey1%3E")
               .header("Content-Type", "text/plain")
               .header("Accept", "application/json")
               .body("INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0\nVia: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK\nMax-Forwards: 70\nContact: \"Alice\" <sip:5715550001@proxy.example.com:39089;transport=UDP>\nTo: \"Bob\" <sip:+17035550002@example.com>\nFrom: \"Alice\" <sip:+15715550001@example.com>;tag=1f4e4f40\nCall-ID: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.\nP-Asserted-Identity: Alice <sip:+15715550001@example.com>\nCSeq: 2 INVITE\nAllow: INVITE, ACK, CANCEL, BYE, NOTIFY, REFER, MESSAGE, OPTIONS, INFO, SUBSCRIBE\nContent-Type: application/sdp\nDate: Fri, 14 May 2021 16:57:02 GMT\nSupported: replaces, norefersub, extended-refer, timer, X-cisco-serviceuri\nUser-Agent: Z 3.3.25608 r25552\nAllow-Events: presence, kpml\nContent-Length: 425\n\nv=0\no=Z 0 0 IN IP4 10.31.32.251\ns=Z\nc=IN IP4 10.31.32.251\nt=0 0\nm=audio 8000 RTP/AVP 8 0 3 110 98 101\na=fingerprint:md5 14:75:8F:1A:FD:44:C0:9B:79:92:07:3C:CF:00:B4:3D\na=fingerprint:sha-256 AE:C0:70:64:5F:E5:3E:E3:B3:76:30:59:37:61:34:F0:58:CC:33:72:47:C9:78:AD:D1:78:B6:CC:DF:B0:01:9F\na=rtpmap:110 speex/8000\na=rtpmap:98 iLBC/8000\na=fmtp:98 mode=20\na=rtpmap:101 telephone-event/8000\na=fmtp:101 0-15\na=sendrecv\n")
@@ -1224,7 +1224,7 @@ paths:
           source: |
             import requests
 
-            url = "https://ca-authn.neustarlab.biz/ccid/authn/v2/identity/proxy/127.0.0.1/5060?apiKey=%3CapiKey1%3E"
+            url = "https://ca.neustarlab.biz/ccid/v2/authn/identity/proxy/127.0.0.1/5060?apiKey=%3CapiKey1%3E"
 
             payload="INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0\nVia: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK\nMax-Forwards: 70\nContact: \"Alice\" <sip:5715550001@proxy.example.com:39089;transport=UDP>\nTo: \"Bob\" <sip:+17035550002@example.com>\nFrom: \"Alice\" <sip:+15715550001@example.com>;tag=1f4e4f40\nCall-ID: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.\nP-Asserted-Identity: Alice <sip:+15715550001@example.com>\nCSeq: 2 INVITE\nAllow: INVITE, ACK, CANCEL, BYE, NOTIFY, REFER, MESSAGE, OPTIONS, INFO, SUBSCRIBE\nContent-Type: application/sdp\nDate: Fri, 14 May 2021 16:57:02 GMT\nSupported: replaces, norefersub, extended-refer, timer, X-cisco-serviceuri\nUser-Agent: Z 3.3.25608 r25552\nAllow-Events: presence, kpml\nContent-Length: 425\n\nv=0\no=Z 0 0 IN IP4 10.31.32.251\ns=Z\nc=IN IP4 10.31.32.251\nt=0 0\nm=audio 8000 RTP/AVP 8 0 3 110 98 101\na=fingerprint:md5 14:75:8F:1A:FD:44:C0:9B:79:92:07:3C:CF:00:B4:3D\na=fingerprint:sha-256 AE:C0:70:64:5F:E5:3E:E3:B3:76:30:59:37:61:34:F0:58:CC:33:72:47:C9:78:AD:D1:78:B6:CC:DF:B0:01:9F\na=rtpmap:110 speex/8000\na=rtpmap:98 iLBC/8000\na=fmtp:98 mode=20\na=rtpmap:101 telephone-event/8000\na=fmtp:101 0-15\na=sendrecv\n"
             headers = {
@@ -1240,7 +1240,7 @@ paths:
             require "uri"
             require "net/http"
 
-            url = URI("https://ca-authn.neustarlab.biz/ccid/authn/v2/identity/proxy/127.0.0.1/5060?apiKey=%3CapiKey1%3E")
+            url = URI("https://ca.neustarlab.biz/ccid/v2/authn/identity/proxy/127.0.0.1/5060?apiKey=%3CapiKey1%3E")
 
             https = Net::HTTP.new(url.host, url.port)
             https.use_ssl = true
@@ -1262,7 +1262,7 @@ paths:
             text/plain:
               schema:
                 type: string
-                example: 'INVITE sip:17035550021@proxy.example.com;transport=UDP SIP/2.0From: "Alice" <sip:+15714345500@example.com>Identity: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyI0NDcwMzU1NTAwMDAiXX0sImlhdCI6MTYyMTAxMTQyNSwib3JpZyI6eyJ0biI6IjE1NzE0MzQ1NTAwIn0sIm9yaWdpZCI6Ijc4MzZlYzFkMDYwNzRkNjg4YjYyYzFlYTVlYmQxOTM5In0.RIDQYZP0SNd7ejjJGlcYLQ-55XssLVG5hJ5001v-unKFbD349VVYLderLBt_4h-eCgAcWIsuAW6YSMUqfPk8PA;info=<https://ca-authn.neustarlab.biz/ccid/authn/v2/certs/20001.10001>;alg=ES256;ppt="shaken"Date: Fri, 14 May 2021 16:57:05 GMTTo: "Bob" <sip:+447035550000@example.com>'
+                example: 'INVITE sip:17035550021@proxy.example.com;transport=UDP SIP/2.0From: "Alice" <sip:+15714345500@example.com>Identity: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyI0NDcwMzU1NTAwMDAiXX0sImlhdCI6MTYyMTAxMTQyNSwib3JpZyI6eyJ0biI6IjE1NzE0MzQ1NTAwIn0sIm9yaWdpZCI6Ijc4MzZlYzFkMDYwNzRkNjg4YjYyYzFlYTVlYmQxOTM5In0.RIDQYZP0SNd7ejjJGlcYLQ-55XssLVG5hJ5001v-unKFbD349VVYLderLBt_4h-eCgAcWIsuAW6YSMUqfPk8PA;info=<https://ca.neustarlab.biz/ccid/v2/authn/certs/20001.10001>;alg=ES256;ppt="shaken"Date: Fri, 14 May 2021 16:57:05 GMTTo: "Bob" <sip:+447035550000@example.com>'
         403:
           description: Error Resonse
           content: 
@@ -1299,19 +1299,19 @@ paths:
       x-code-samples:
         - lang: Curl
           source: |
-            curl --location --request GET 'https://ca-authn.neustarlab.biz/ccid/authn/v2/identity/proxy/192.168.1.1/5060?apiKey=%3CapiKey1%3E' \
+            curl --location --request GET 'https://ca.neustarlab.biz/ccid/v2/authn/identity/proxy/192.168.1.1/5060?apiKey=%3CapiKey1%3E' \
             --header 'Accept: application/json'
         - lang: Java
           source: |
             Unirest.setTimeouts(0, 0);
-            HttpResponse<String> response = Unirest.get("https://ca-authn.neustarlab.biz/ccid/authn/v2/identity/proxy/192.168.1.1/5060?apiKey=%3CapiKey1%3E")
+            HttpResponse<String> response = Unirest.get("https://ca.neustarlab.biz/ccid/v2/authn/identity/proxy/192.168.1.1/5060?apiKey=%3CapiKey1%3E")
               .header("Accept", "application/json")
               .asString();
         - lang: Python
           source: |
             import requests
 
-            url = "https://ca-authn.neustarlab.biz/ccid/authn/v2/identity/proxy/192.168.1.1/5060?apiKey=%3CapiKey1%3E"
+            url = "https://ca.neustarlab.biz/ccid/v2/authn/identity/proxy/192.168.1.1/5060?apiKey=%3CapiKey1%3E"
 
             payload={}
             headers = {
@@ -1326,7 +1326,7 @@ paths:
             require "uri"
             require "net/http"
 
-            url = URI("https://ca-authn.neustarlab.biz/ccid/authn/v2/identity/proxy/192.168.1.1/5060?apiKey=%3CapiKey1%3E")
+            url = URI("https://ca.neustarlab.biz/ccid/v2/authn/identity/proxy/192.168.1.1/5060?apiKey=%3CapiKey1%3E")
 
             https = Net::HTTP.new(url.host, url.port)
             https.use_ssl = true
@@ -1376,7 +1376,7 @@ paths:
         The following is an example of retrieving the certificate of a customer:
 
         ```
-          $ curl 'https://ca-authn.neustarlab.biz/ccid/authn/v2/certs/20001' -i \
+          $ curl 'https://ca.neustarlab.biz/ccid/v2/authn/certs/20001' -i \
           -H 'Accept: application/json'
         ```
 
@@ -1435,19 +1435,19 @@ paths:
       x-code-samples:
         - lang: Curl
           source: |
-            curl --location --request GET 'https://ca-authn.neustarlab.biz/ccid/authn/v2/certs/20001' \
+            curl --location --request GET 'https://ca.neustarlab.biz/ccid/v2/authn/certs/20001' \
             --header 'Accept: application/json'     
         - lang: Java
           source: |
             Unirest.setTimeouts(0, 0);
-            HttpResponse<String> response = Unirest.get("https://ca-authn.neustarlab.biz/ccid/authn/v2/certs/20001")
+            HttpResponse<String> response = Unirest.get("https://ca.neustarlab.biz/ccid/v2/authn/certs/20001")
               .header("Accept", "application/json")
               .asString();
         - lang: Python
           source: |
             import requests
 
-            url = "https://ca-authn.neustarlab.biz/ccid/authn/v2/certs/20001"
+            url = "https://ca.neustarlab.biz/ccid/v2/authn/certs/20001"
 
             payload={}
             headers = {
@@ -1462,7 +1462,7 @@ paths:
             require "uri"
             require "net/http"
 
-            url = URI("https://ca-authn.neustarlab.biz/ccid/authn/v2/certs/20001")
+            url = URI("https://ca.neustarlab.biz/ccid/v2/authn/certs/20001")
 
             https = Net::HTTP.new(url.host, url.port)
             https.use_ssl = true
@@ -1498,7 +1498,7 @@ paths:
         The following is an example of listing all potential errors generated by the CCID AS:
 
         ```
-          $ curl 'https://ca-authn.neustarlab.biz/ccid/authn/v2/error' -i \
+          $ curl 'https://ca.neustarlab.biz/ccid/v2/authn/error' -i \
          -H 'Accept: application/json'
         ```
 
@@ -1524,19 +1524,19 @@ paths:
       x-code-samples:
         - lang: Curl
           source: |
-            curl --location --request GET 'https://ca-authn.neustarlab.biz/ccid/authn/v2/error' \
+            curl --location --request GET 'https://ca.neustarlab.biz/ccid/v2/authn/error' \
             --header 'Accept: application/json'
         - lang: Java
           source: |
             Unirest.setTimeouts(0, 0);
-            HttpResponse<String> response = Unirest.get("https://ca-authn.neustarlab.biz/ccid/authn/v2/error")
+            HttpResponse<String> response = Unirest.get("https://ca.neustarlab.biz/ccid/v2/authn/error")
               .header("Accept", "application/json")
               .asString();
         - lang: Python
           source: |
             import requests
 
-            url = "https://ca-authn.neustarlab.biz/ccid/authn/v2/error"
+            url = "https://ca.neustarlab.biz/ccid/v2/authn/error"
 
             payload={}
             headers = {
@@ -1551,7 +1551,7 @@ paths:
             require "uri"
             require "net/http"
 
-            url = URI("https://ca-authn.neustarlab.biz/ccid/authn/v2/error")
+            url = URI("https://ca.neustarlab.biz/ccid/v2/authn/error")
 
             https = Net::HTTP.new(url.host, url.port)
             https.use_ssl = true
@@ -1725,7 +1725,7 @@ components:
               value:
                 type: string
                 description: The value of the SIP header or RequestLine to be added or removed
-                example: 'eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJDIiwiZGVzdCI6eyJ0biI6WyIxNzAzNTU1MDAwMiJdfSwiaWF0IjoxNjIxMDExNDI1LCJta3kiOlt7ImFsZyI6Im1kNSIsImRpZyI6IjE0NzU4RjFBRkQ0NEMwOUI3OTkyMDczQ0NGMDBCNDNEIn0seyJhbGciOiJzaGEtMjU2IiwiZGlnIjoiQUVDMDcwNjQ1RkU1M0VFM0IzNzYzMDU5Mzc2MTM0RjA1OENDMzM3MjQ3Qzk3OEFERDE3OEI2Q0NERkIwMDE5RiJ9XSwib3JpZyI6eyJ0biI6IjE1NzE1NTUwMDAxIn0sIm9yaWdpZCI6ImZkYTYyM2EyLWE4OWQtMTFlOS1hZjgzLTAwNTA1NjlhYmIzNCJ9.ulLtqgsrg4GQiDC6kcNA94rRI_oXhBbClLYMkejJlPKUK2N0WW5Jkawbo88nyprUVStu1WWQQGR8Ha6Qnm41pg;info=<https://ca-authn.neustarlab.biz/ccid/authn/v2/certs/20001.10001>;alg=ES256;ppt=\"shaken\""'
+                example: 'eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJDIiwiZGVzdCI6eyJ0biI6WyIxNzAzNTU1MDAwMiJdfSwiaWF0IjoxNjIxMDExNDI1LCJta3kiOlt7ImFsZyI6Im1kNSIsImRpZyI6IjE0NzU4RjFBRkQ0NEMwOUI3OTkyMDczQ0NGMDBCNDNEIn0seyJhbGciOiJzaGEtMjU2IiwiZGlnIjoiQUVDMDcwNjQ1RkU1M0VFM0IzNzYzMDU5Mzc2MTM0RjA1OENDMzM3MjQ3Qzk3OEFERDE3OEI2Q0NERkIwMDE5RiJ9XSwib3JpZyI6eyJ0biI6IjE1NzE1NTUwMDAxIn0sIm9yaWdpZCI6ImZkYTYyM2EyLWE4OWQtMTFlOS1hZjgzLTAwNTA1NjlhYmIzNCJ9.ulLtqgsrg4GQiDC6kcNA94rRI_oXhBbClLYMkejJlPKUK2N0WW5Jkawbo88nyprUVStu1WWQQGR8Ha6Qnm41pg;info=<https://ca.neustarlab.biz/ccid/v2/authn/certs/20001.10001>;alg=ES256;ppt=\"shaken\""'
     ErrorResponse400:
       required:
       - error_id

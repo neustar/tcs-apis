@@ -2380,186 +2380,186 @@ components:
       verstat: 
         type: "string"
         example: "TN-Validation-Passed"
-      identity_info: 
-        type: "array"
-        items: 
-          type: "object"
-          properties: 
-            status: 
-              type: "string"
-              example: "Ok"
-            params: 
-              type: "string"
-              example: "info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"shaken\""
-            header:
-              properties: 
-                alg: 
-                  type: "string"
-                  example: "ES256"
-                ppt: 
-                  type: "string"
-                  example: "shaken"
-                typ: 
-                  type: "string"
-                  example: "passport"
-                x5u: 
-                  type: "string"
-                  example: "http://ca.example.com/test.der"
-              type: "object"
-            claim: 
-              properties: 
-                attest: 
-                  type: "string"
-                  example: "A"
-                dest: 
-                  required: 
-                    - "tn"
-                  properties: 
-                    tn: 
-                      type: "array"
-                      items: 
-                        type: "string"
-                      example: 
-                        - "15715550001"
-                  type: "object"
-                iat: 
-                  type: "number"
-                  example: 1618541811
-                mky: 
-                  type: "array"
-                  items: 
-                    type: "object"
-                    properties: 
-                      alg: 
-                        type: "string"
-                        example: "SHA-1"
-                      dig: 
-                        type: "string"
-                        example: "4AADB9B13F82183B540212DF3E5D496B19E57CAB"
-                orig: 
-                  properties: 
-                    tn: 
-                      type: "string"
-                      example: "17035550001"
-                  type: "object"
-                origid: 
-                  type: "string"
-                  example: "123456-ABCD-999999"
-              type: "object"
-            certificate_info: 
-              properties: 
-                subject: 
-                  type: "string"
-                  example: "C=US, ST=VA, L=Somewhere, O=\"AcmeTelecom, Inc.\", OU=VOIP, CN=TEST-EC-256-EXT-TN-JWT"
-                issuer: 
-                  type: "string"
-                  example: "C=US, O=Neustar IOT Lab, CN=CallAuthnCA"
-                tn_auth_list: 
-                  type: "array"
-                  items: 
-                    type: "object"
-                    properties: 
-                      spc: 
-                        type: "string"
-                        example: "X001"
-              type: "object"
-      cnam: 
-        type: "string"
-        example: "Alice In Wonderland"
-      ecnam: 
-        required: 
-        properties: 
-          display_template: 
-            type: "string"
-            example: "none"
-          business_name: 
-            type: "string"
-            example: "Disney World"
-          department: 
-            type: "string"
-            example: "Theme Park"
-          line_type: 
-            type: "string"
-            example: "Wireline"
-          subscriber_type: 
-            type: "string"
-            example: "Business"
-          business_type: 
-            type: "string"
-            example: "Entertainment"
-          business_address: 
-            type: "string"
-            example: "Walt Disney World Resort"
-          locality: 
-            type: "string"
-            example: "Orlando, FL"
-          city: 
-            type: "string"
-            example: "Orlando"
-          state: 
-            type: "string"
-            example: "FL"
-          country: 
-            type: "string"
-            example: "US"
-          postal_code: 
-            type: "string"
-            example: "32830"
-          website_url: 
-            type: "string"
-            example: "http://movies.disney.com/alice-in-wonderland-1951"
-          logo_url: 
-            type: "string"
-            example: "https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png"
-          tagline: 
-            type: "string"
-            example: "#AliceInWonderLand"
-          employee_name: 
-            type: "string"
-            example: "Alice"
-          first_name: 
-            type: "string"
-            example: "Alice"
-          last_name: 
-            type: "string"
-            example: "Liddell"
-          job_title: 
-            type: "string"
-            example: "Adventurer"
-          headshot_url: 
-            type: "string"
-            example: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I"
-          email: 
-            type: "string"
-            example: "alice@disney.com"
-          cnam: 
-            type: "string"
-            example: "Alice In Wonderland"
-          call_purpose: 
-            type: "string"
-            example: "Customer Support"
-          social_media_info: 
-            properties: 
-              Facebook: 
-                type: "string"
-                example: "https://www.facebook.com/DisneyAliceInWonderland"
-              Twitter: 
-                type: "string"
-                example: "https://twitter.com/Disney"
-            type: "object"
-          p_asserted_identity: 
-            type: "string"
-            example: "\"Alice In Wonderland\" <sip:alice@example.com;tmpl=none;bn=Disney%20World;dept=Theme%20Park;lt=Wireline;st=Business;bt=Entertainment;ba=Walt%20Disney%20World%20Resort;cs=Orlando, FL;city=Orlando;state=FL;ct=US;zip=32830;wb=http://movies.disney.com/alice-in-wonderland-1951;lg=https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png;tg=#AliceInWonderLand;sm=%7B%22Facebook%22%3A%22https%3A%2F%2Fwww.facebook.com%2FDisneyAliceInWonderland%22%2C%22Twitter%22%3A%22https%3A%2F%2Ftwitter.com%2FDisney%22%7D;nm=Alice;fn=Alice;ln=Liddell;jt=Adventurer;hs=https://encrypted-tbn0.gstatic.com/images?q%3dtbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I;cp=Customer Support;email=alice@disney.com>"
-        type: "object"
-      call_insight: 
-        properties: 
-          call_treatment: 
-            type: "string"
-            example: "allow"
-          fraud_score: 
-            type: "number"
-            example: 0
-          original_calling_name: 
-            type: "string"
-            example: "Alice"
-        type: "object"
+      # identity_info: 
+      #   type: "array"
+      #   items: 
+      #     type: "object"
+      #     properties: 
+      #       status: 
+      #         type: "string"
+      #         example: "Ok"
+      #       params: 
+      #         type: "string"
+      #         example: "info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"shaken\""
+      #       header:
+      #         properties: 
+      #           alg: 
+      #             type: "string"
+      #             example: "ES256"
+      #           ppt: 
+      #             type: "string"
+      #             example: "shaken"
+      #           typ: 
+      #             type: "string"
+      #             example: "passport"
+      #           x5u: 
+      #             type: "string"
+      #             example: "http://ca.example.com/test.der"
+      #         type: "object"
+      #       claim: 
+      #         properties: 
+      #           attest: 
+      #             type: "string"
+      #             example: "A"
+      #           dest: 
+      #             required: 
+      #               - "tn"
+      #             properties: 
+      #               tn: 
+      #                 type: "array"
+      #                 items: 
+      #                   type: "string"
+      #                 example: 
+      #                   - "15715550001"
+      #             type: "object"
+      #           iat: 
+      #             type: "number"
+      #             example: 1618541811
+      #           mky: 
+      #             type: "array"
+      #             items: 
+      #               type: "object"
+      #               properties: 
+      #                 alg: 
+      #                   type: "string"
+      #                   example: "SHA-1"
+      #                 dig: 
+      #                   type: "string"
+      #                   example: "4AADB9B13F82183B540212DF3E5D496B19E57CAB"
+      #           orig: 
+      #             properties: 
+      #               tn: 
+      #                 type: "string"
+      #                 example: "17035550001"
+      #             type: "object"
+      #           origid: 
+      #             type: "string"
+      #             example: "123456-ABCD-999999"
+      #         type: "object"
+      #       certificate_info: 
+      #         properties: 
+      #           subject: 
+      #             type: "string"
+      #             example: "C=US, ST=VA, L=Somewhere, O=\"AcmeTelecom, Inc.\", OU=VOIP, CN=TEST-EC-256-EXT-TN-JWT"
+      #           issuer: 
+      #             type: "string"
+      #             example: "C=US, O=Neustar IOT Lab, CN=CallAuthnCA"
+      #           tn_auth_list: 
+      #             type: "array"
+      #             items: 
+      #               type: "object"
+      #               properties: 
+      #                 spc: 
+      #                   type: "string"
+      #                   example: "X001"
+      #         type: "object"
+      # cnam: 
+      #   type: "string"
+      #   example: "Alice In Wonderland"
+      # ecnam: 
+      #   required: 
+      #   properties: 
+      #     display_template: 
+      #       type: "string"
+      #       example: "none"
+      #     business_name: 
+      #       type: "string"
+      #       example: "Disney World"
+      #     department: 
+      #       type: "string"
+      #       example: "Theme Park"
+      #     line_type: 
+      #       type: "string"
+      #       example: "Wireline"
+      #     subscriber_type: 
+      #       type: "string"
+      #       example: "Business"
+      #     business_type: 
+      #       type: "string"
+      #       example: "Entertainment"
+      #     business_address: 
+      #       type: "string"
+      #       example: "Walt Disney World Resort"
+      #     locality: 
+      #       type: "string"
+      #       example: "Orlando, FL"
+      #     city: 
+      #       type: "string"
+      #       example: "Orlando"
+      #     state: 
+      #       type: "string"
+      #       example: "FL"
+      #     country: 
+      #       type: "string"
+      #       example: "US"
+      #     postal_code: 
+      #       type: "string"
+      #       example: "32830"
+      #     website_url: 
+      #       type: "string"
+      #       example: "http://movies.disney.com/alice-in-wonderland-1951"
+      #     logo_url: 
+      #       type: "string"
+      #       example: "https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png"
+      #     tagline: 
+      #       type: "string"
+      #       example: "#AliceInWonderLand"
+      #     employee_name: 
+      #       type: "string"
+      #       example: "Alice"
+      #     first_name: 
+      #       type: "string"
+      #       example: "Alice"
+      #     last_name: 
+      #       type: "string"
+      #       example: "Liddell"
+      #     job_title: 
+      #       type: "string"
+      #       example: "Adventurer"
+      #     headshot_url: 
+      #       type: "string"
+      #       example: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I"
+      #     email: 
+      #       type: "string"
+      #       example: "alice@disney.com"
+      #     cnam: 
+      #       type: "string"
+      #       example: "Alice In Wonderland"
+      #     call_purpose: 
+      #       type: "string"
+      #       example: "Customer Support"
+      #     social_media_info: 
+      #       properties: 
+      #         Facebook: 
+      #           type: "string"
+      #           example: "https://www.facebook.com/DisneyAliceInWonderland"
+      #         Twitter: 
+      #           type: "string"
+      #           example: "https://twitter.com/Disney"
+      #       type: "object"
+      #     p_asserted_identity: 
+      #       type: "string"
+      #       example: "\"Alice In Wonderland\" <sip:alice@example.com;tmpl=none;bn=Disney%20World;dept=Theme%20Park;lt=Wireline;st=Business;bt=Entertainment;ba=Walt%20Disney%20World%20Resort;cs=Orlando, FL;city=Orlando;state=FL;ct=US;zip=32830;wb=http://movies.disney.com/alice-in-wonderland-1951;lg=https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png;tg=#AliceInWonderLand;sm=%7B%22Facebook%22%3A%22https%3A%2F%2Fwww.facebook.com%2FDisneyAliceInWonderland%22%2C%22Twitter%22%3A%22https%3A%2F%2Ftwitter.com%2FDisney%22%7D;nm=Alice;fn=Alice;ln=Liddell;jt=Adventurer;hs=https://encrypted-tbn0.gstatic.com/images?q%3dtbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I;cp=Customer Support;email=alice@disney.com>"
+      #   type: "object"
+      # call_insight: 
+      #   properties: 
+      #     call_treatment: 
+      #       type: "string"
+      #       example: "allow"
+      #     fraud_score: 
+      #       type: "number"
+      #       example: 0
+      #     original_calling_name: 
+      #       type: "string"
+      #       example: "Alice"
+      #   type: "object"

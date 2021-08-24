@@ -1539,13 +1539,13 @@ paths:
               $ref: '#/components/schemas/VerifyIdentity'
         required: true
       responses:
-        200:
-          description: |
-            successful operation
-          content: 
-            application/json: 
-              schema: 
-                $ref: '#/components/schemas/VerifyResponse'
+        # 200:
+        #   description: |
+        #     successful operation
+        #   content: 
+        #     application/json: 
+        #       schema: 
+        #         $ref: '#/components/schemas/VerifyResponse'
                 # description: | 
                 #   Its value is "ok" after the SIP Identity headers are validated with the required verification status. There are three possible "status" values specified in the request
                 #     * **none** - This status value indicates that the SIP Identity headers specified in the request are not required to be verified

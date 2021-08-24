@@ -2119,13 +2119,11 @@ paths:
                 $ref: '#/components/schemas/ErrorResponseProxy403'
     get:
       tags:
-      - Generate SIP Identity Headers
+      - Verifies SIP Identity Headers
       summary: 'Returns next hop and policy data in JSON Format for SIP Proxies'
       operationId: get-identity/proxy
       description: |
-        A successful response in JSON format includes the "status" attribute with a value of "ok". It also contains an optional "next_hop" attribute for indicating the next hop for routing the SIP messages, and an optional "policy" attribute with an opaque string to be consumed by the SIP proxy for manipulating SIP headers and mapping error conditions.
 
-        A failure response in JSON format includes the "status" attribute with a value of "error", and an "error" attribute, containing a list of error conditions that result in the failure.
       parameters:
         - in: query
           name: apiKey
@@ -2194,7 +2192,8 @@ paths:
                 properties:
                   status:
                     type: string
-                    description: The status of STIR authentication operation for SIP proxy
+                    description: | 
+                      A successful response in JSON format includes the "status" attribute with a value of "ok". It also contains an optional "next_hop" attribute for indicating the next hop for routing the SIP messages, and an optional "policy" attribute with an opaque string to be consumed by the SIP proxy for manipulating SIP headers and mapping error conditions.
                     example: ok
                     required: true
                   next_hop:
@@ -2344,7 +2343,8 @@ components:
         status:
           type: string
           example: ok
-          description: The status of STIR authentication operation for SIP proxy
+          description: |
+            The status of STIR authentication operation for SIP proxy. A successful response in JSON format includes the "status" attribute with a value of "ok". It also contains an optional "next_hop" attribute for indicating the next hop for routing the SIP messages, and an optional "policy" attribute with an opaque string to be consumed by the SIP proxy for manipulating SIP headers and mapping error conditions. Finally, it contains an optional "header" attribute, containing a list of SIP headers to be added to or removed from the SIP INVITE message.
         next_hop:
           type: string
           example: 'udp:192.168.1.1:5060'
@@ -2465,7 +2465,7 @@ components:
         status:
           type: string
           example: error
-          description: The status of STIR authentication operation for SIP proxy
+          description: A failure response in JSON format includes the "status" attribute with a value of "error", and an "error" attribute, containing a list of error conditions that result in the failure.
         error: 
           description: A list of errors encountered in STIR authentication operation for SIP proxy
           type: array

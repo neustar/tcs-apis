@@ -2296,7 +2296,7 @@ paths:
       tags:
       - Performs CNAM queries
       summary: 'Returns CNAM name of a specific telephone number'
-      operationId: cnamget
+      operationId: cnampost
       description: |
         For a successful CNAM lookup, a response in JSON format will be returned with the "cnam" attribute; otherwise, the "cnam_error" attribute will be returned if there are any errors encountered in the CNAM lookup.
       parameters:

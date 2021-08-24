@@ -1647,7 +1647,7 @@ paths:
 
                       If the "robocall" attribute is specified as "true" in the request, a "call_insight" attribute will be returned, if any.
 
-                    example: 'ok' or 'and'
+                    example: 'ok'
         400:
           description: Error Resonse
           content: 

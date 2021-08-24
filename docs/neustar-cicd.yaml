@@ -1646,7 +1646,7 @@ paths:
                       If the "ecnam" attribute is specified as "true" in the request, an "ecnam" attribute will be returned, if the ECNAM lookup is successful; otherwise, an "ecnam_error" attribute will be returned for the specific error condition.
 
                       If the "robocall" attribute is specified as "true" in the request, a "call_insight" attribute will be returned, if any.
-                    example: 'ok' / 'error'
+                    example: 'ok' // 'error'
         400:
           description: Error Resonse
           content: 

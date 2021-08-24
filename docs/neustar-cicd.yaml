@@ -1638,7 +1638,15 @@ paths:
 
                         * **ok** - This status value indicates that the verification result of SIP Identity headers has met the verification status requirement specified in the request
                         * **error** - This status value indicates that the verification result of SIP Identity headers has not met the verification status requirement specified in the request
-                    example: 'ok'
+                      
+                      If there are any errors encountered in the verification process, an "error" attribute in the response will list all of those errors.
+
+                      If the "cnam" attribute is specified as "true" in the request, a "cnam" attribute will be returned in the response if the CNAM lookup is successful; otherwise, a "cnam_error" attribute will be returned for the specific error condition.
+
+                      If the "ecnam" attribute is specified as "true" in the request, an "ecnam" attribute will be returned, if the ECNAM lookup is successful; otherwise, an "ecnam_error" attribute will be returned for the specific error condition.
+
+                      If the "robocall" attribute is specified as "true" in the request, a "call_insight" attribute will be returned, if any.
+                    example: 'ok' / 'error'
         400:
           description: Error Resonse
           content: 

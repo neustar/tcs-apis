@@ -1634,7 +1634,7 @@ paths:
 
                         * **all** - This status value indicates that all SIP Identity headers specified in the request are required to be verified
 
-                        Based on the verification status requirement specified in the request, the CCID VS will return a "status" attribute in the response with the following two possible values: 
+                      Based on the verification status requirement specified in the request, the CCID VS will return a "status" attribute in the response with the following two possible values: 
 
                         * **ok** - This status value indicates that the verification result of SIP Identity headers has met the verification status requirement specified in the request
                         * **error** - This status value indicates that the verification result of SIP Identity headers has not met the verification status requirement specified in the request

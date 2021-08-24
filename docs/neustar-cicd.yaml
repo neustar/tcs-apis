@@ -2368,7 +2368,7 @@ components:
               type: string
               description: The timestamp when the error is generated
               example: Fri, 16 Apr 2021 02:56:56 GMT
-    VerifyResponse2:
+    VerifyResponse:
       type: object
       properties: 
         status: 

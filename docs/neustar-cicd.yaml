@@ -419,12 +419,6 @@ paths:
             response = https.request(request)
             puts response.read_body
       responses:
-        200:
-          description: successful operation
-          content:
-            application/json: 
-              schema: 
-                $ref: '#/components/schemas/SuccessResponse'
         400:
           description: Error Response
           content: 
@@ -687,12 +681,6 @@ paths:
             response = https.request(request)
             puts response.read_body
       responses:
-        200:
-          description: successful operation
-          content:
-            application/json: 
-              schema: 
-                $ref: '#/components/schemas/SuccessResponse'
         400:
           description: Error Response
           content: 
@@ -1226,12 +1214,6 @@ paths:
             response = https.request(request)
             puts response.read_body
       responses:
-        200:
-          description: successful operation
-          content:
-            application/json: 
-              schema: 
-                $ref: '#/components/schemas/SuccessResponseProxy'
             text/plain:
               schema:
                 type: string
@@ -1535,12 +1517,6 @@ paths:
             response = https.request(request)
             puts response.read_body
       responses:
-        200:
-          description: successful operation
-          content:
-            application/json: 
-              schema: 
-                $ref: '#/components/schemas/ErrorAPISuccessResponse'
   /verify/identity-j_j:
     post:
       tags:

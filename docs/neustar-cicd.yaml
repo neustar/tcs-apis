@@ -1960,7 +1960,6 @@ paths:
 
             response = https.request(request)
             puts response.read_body
-
       responses:
         200:
           description: successful operation

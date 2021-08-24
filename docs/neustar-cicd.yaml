@@ -2461,100 +2461,100 @@ components:
         cnam: 
           type: "string"
           example: "Alice In Wonderland"
-        # ecnam: 
-        #   required: 
-        #   properties: 
-        #     display_template: 
-        #       type: "string"
-        #       example: "none"
-        #     business_name: 
-        #       type: "string"
-        #       example: "Disney World"
-        #     department: 
-        #       type: "string"
-        #       example: "Theme Park"
-        #     line_type: 
-        #       type: "string"
-        #       example: "Wireline"
-        #     subscriber_type: 
-        #       type: "string"
-        #       example: "Business"
-        #     business_type: 
-        #       type: "string"
-        #       example: "Entertainment"
-        #     business_address: 
-        #       type: "string"
-        #       example: "Walt Disney World Resort"
-        #     locality: 
-        #       type: "string"
-        #       example: "Orlando, FL"
-        #     city: 
-        #       type: "string"
-        #       example: "Orlando"
-        #     state: 
-        #       type: "string"
-        #       example: "FL"
-        #     country: 
-        #       type: "string"
-        #       example: "US"
-        #     postal_code: 
-        #       type: "string"
-        #       example: "32830"
-        #     website_url: 
-        #       type: "string"
-        #       example: "http://movies.disney.com/alice-in-wonderland-1951"
-        #     logo_url: 
-        #       type: "string"
-        #       example: "https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png"
-        #     tagline: 
-        #       type: "string"
-        #       example: "#AliceInWonderLand"
-        #     employee_name: 
-        #       type: "string"
-        #       example: "Alice"
-        #     first_name: 
-        #       type: "string"
-        #       example: "Alice"
-        #     last_name: 
-        #       type: "string"
-        #       example: "Liddell"
-        #     job_title: 
-        #       type: "string"
-        #       example: "Adventurer"
-        #     headshot_url: 
-        #       type: "string"
-        #       example: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I"
-        #     email: 
-        #       type: "string"
-        #       example: "alice@disney.com"
-        #     cnam: 
-        #       type: "string"
-        #       example: "Alice In Wonderland"
-        #     call_purpose: 
-        #       type: "string"
-        #       example: "Customer Support"
-        #     social_media_info: 
-        #       properties: 
-        #         Facebook: 
-        #           type: "string"
-        #           example: "https://www.facebook.com/DisneyAliceInWonderland"
-        #         Twitter: 
-        #           type: "string"
-        #           example: "https://twitter.com/Disney"
-        #       type: "object"
-        #     p_asserted_identity: 
-        #       type: "string"
-        #       example: "\"Alice In Wonderland\" <sip:alice@example.com;tmpl=none;bn=Disney%20World;dept=Theme%20Park;lt=Wireline;st=Business;bt=Entertainment;ba=Walt%20Disney%20World%20Resort;cs=Orlando, FL;city=Orlando;state=FL;ct=US;zip=32830;wb=http://movies.disney.com/alice-in-wonderland-1951;lg=https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png;tg=#AliceInWonderLand;sm=%7B%22Facebook%22%3A%22https%3A%2F%2Fwww.facebook.com%2FDisneyAliceInWonderland%22%2C%22Twitter%22%3A%22https%3A%2F%2Ftwitter.com%2FDisney%22%7D;nm=Alice;fn=Alice;ln=Liddell;jt=Adventurer;hs=https://encrypted-tbn0.gstatic.com/images?q%3dtbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I;cp=Customer Support;email=alice@disney.com>"
-        #   type: "object"
-        # call_insight: 
-        #   properties: 
-        #     call_treatment: 
-        #       type: "string"
-        #       example: "allow"
-        #     fraud_score: 
-        #       type: "number"
-        #       example: 0
-        #     original_calling_name: 
-        #       type: "string"
-        #       example: "Alice"
-        #   type: "object"
+        ecnam: 
+          required: 
+          properties: 
+            display_template: 
+              type: "string"
+              example: "none"
+            business_name: 
+              type: "string"
+              example: "Disney World"
+            department: 
+              type: "string"
+              example: "Theme Park"
+            line_type: 
+              type: "string"
+              example: "Wireline"
+            subscriber_type: 
+              type: "string"
+              example: "Business"
+            business_type: 
+              type: "string"
+              example: "Entertainment"
+            business_address: 
+              type: "string"
+              example: "Walt Disney World Resort"
+            locality: 
+              type: "string"
+              example: "Orlando, FL"
+            city: 
+              type: "string"
+              example: "Orlando"
+            state: 
+              type: "string"
+              example: "FL"
+            country: 
+              type: "string"
+              example: "US"
+            postal_code: 
+              type: "string"
+              example: "32830"
+            website_url: 
+              type: "string"
+              example: "http://movies.disney.com/alice-in-wonderland-1951"
+            logo_url: 
+              type: "string"
+              example: "https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png"
+            tagline: 
+              type: "string"
+              example: "#AliceInWonderLand"
+            employee_name: 
+              type: "string"
+              example: "Alice"
+            first_name: 
+              type: "string"
+              example: "Alice"
+            last_name: 
+              type: "string"
+              example: "Liddell"
+            job_title: 
+              type: "string"
+              example: "Adventurer"
+            headshot_url: 
+              type: "string"
+              example: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I"
+            email: 
+              type: "string"
+              example: "alice@disney.com"
+            cnam: 
+              type: "string"
+              example: "Alice In Wonderland"
+            call_purpose: 
+              type: "string"
+              example: "Customer Support"
+            social_media_info: 
+              properties: 
+                Facebook: 
+                  type: "string"
+                  example: "https://www.facebook.com/DisneyAliceInWonderland"
+                Twitter: 
+                  type: "string"
+                  example: "https://twitter.com/Disney"
+              type: "object"
+            p_asserted_identity: 
+              type: "string"
+              example: "\"Alice In Wonderland\" <sip:alice@example.com;tmpl=none;bn=Disney%20World;dept=Theme%20Park;lt=Wireline;st=Business;bt=Entertainment;ba=Walt%20Disney%20World%20Resort;cs=Orlando, FL;city=Orlando;state=FL;ct=US;zip=32830;wb=http://movies.disney.com/alice-in-wonderland-1951;lg=https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png;tg=#AliceInWonderLand;sm=%7B%22Facebook%22%3A%22https%3A%2F%2Fwww.facebook.com%2FDisneyAliceInWonderland%22%2C%22Twitter%22%3A%22https%3A%2F%2Ftwitter.com%2FDisney%22%7D;nm=Alice;fn=Alice;ln=Liddell;jt=Adventurer;hs=https://encrypted-tbn0.gstatic.com/images?q%3dtbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I;cp=Customer Support;email=alice@disney.com>"
+          type: "object"
+        call_insight: 
+          properties: 
+            call_treatment: 
+              type: "string"
+              example: "allow"
+            fraud_score: 
+              type: "number"
+              example: 0
+            original_calling_name: 
+              type: "string"
+              example: "Alice"
+          type: "object"

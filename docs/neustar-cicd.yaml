@@ -2291,6 +2291,97 @@ paths:
             application/json: 
               schema: 
                 $ref: '#/components/schemas/CNAM-Error'
+  /verify/cnam:
+    post:
+      tags:
+      - Performs CNAM queries
+      summary: 'Returns CNAM name of a specific telephone number'
+      operationId: cnamget
+      description: |
+        For a successful CNAM lookup, a response in JSON format will be returned with the "cnam" attribute; otherwise, the "cnam_error" attribute will be returned if there are any errors encountered in the CNAM lookup.
+      parameters:
+        - in: query
+          name: apiKey
+          required: true
+          schema:
+            type: string
+          description: The API key uniquely identifying the API client. Cannot be null or empty
+        - name: digits
+          in: path
+          description: The numeric telephone number
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: 
+                from: 
+                  type: string
+                  description: 'From' header value from SIP INVITE message
+                  example: "Alice" <sip:+15715550001@example.com>
+        required: true
+      x-code-samples:
+        - lang: Curl
+          source: |
+            curl --location --request GET 'https://ca-verify.neustarlab.biz/ccid/verify/v2/cnam/tn/15715550000?apiKey=%3CapiKey1%3E' \
+            --header 'Accept: application/json'
+        - lang: Java
+          source: |
+            Unirest.setTimeouts(0, 0);
+            HttpResponse<String> response = Unirest.get("https://ca-verify.neustarlab.biz/ccid/verify/v2/cnam/tn/15715550000?apiKey=%3CapiKey1%3E")
+              .header("Accept", "application/json")
+              .asString();
+        - lang: Python
+          source: |
+            import requests
+
+            url = "https://ca-verify.neustarlab.biz/ccid/verify/v2/cnam/tn/15715550000?apiKey=%3CapiKey1%3E"
+
+            payload={}
+            headers = {
+              'Accept': 'application/json'
+            }
+
+            response = requests.request("GET", url, headers=headers, data=payload)
+
+            print(response.text)
+        - lang: Ruby
+          source: |
+            require "uri"
+            require "net/http"
+
+            url = URI("https://ca-verify.neustarlab.biz/ccid/verify/v2/cnam/tn/15715550000?apiKey=%3CapiKey1%3E")
+
+            https = Net::HTTP.new(url.host, url.port)
+            https.use_ssl = true
+
+            request = Net::HTTP::Get.new(url)
+            request["Accept"] = "application/json"
+
+            response = https.request(request)
+            puts response.read_body
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json: 
+              schema: 
+                type: object
+                properties:
+                  cnam:
+                    type: string
+                    description: CNAM data
+                    example: Alice In Wonderland
+        403:
+          description: Error Response
+          content: 
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/CNAM-Error'
 components:
   schemas:
     Identity:

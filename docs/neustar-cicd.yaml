@@ -1617,7 +1617,16 @@ paths:
             puts response.read_body
       responses:
         200:
-          description: successful operation
+          description: |
+            successful operation
+            VerifyErrorResponse400
+            asdfas
+            dfas
+            dfas
+            dfa
+            sdf
+            asdf
+            asdf
           content:
             application/json:
               schema:

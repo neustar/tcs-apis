@@ -2532,15 +2532,15 @@ components:
               type: "string"
               example: "Alice"
           type: "object"
-    VerifyResponse-SJ:
-      type: object
-        properties: 
-          status: 
-            type: "string"
-            example: "ok"
-          cnam: 
-            type: "string"
-            example: "Alice In Wonderland"
+    # VerifyResponse-SJ:
+    #   type: object
+    #     properties: 
+    #       status: 
+    #         type: "string"
+    #         example: "ok"
+    #       cnam: 
+    #         type: "string"
+    #         example: "Alice In Wonderland"
           # ecnam: 
           #   properties: 
           #     display_template: 

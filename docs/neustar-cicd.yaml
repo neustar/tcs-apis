@@ -2462,7 +2462,6 @@ components:
           type: "string"
           example: "Alice In Wonderland"
         ecnam: 
-          required: 
           properties: 
             display_template: 
               type: "string"

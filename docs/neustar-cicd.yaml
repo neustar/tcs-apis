@@ -2309,10 +2309,14 @@ paths:
       requestBody:
         description: ''
         content:
-          text/plain:
+          application/json:
             schema:
-              type: string
-              example: 'SIP sip:17035550021@proxy.example.com;transport=UDP SIP/2.0 From: Alice <sip:+15714345500@example.com> To: Bob <sip:+447035550000@example.com>'
+              type: object
+              properties: 
+                from: 
+                  type: string
+                  description: 'From' header value from SIP INVITE message
+                  example: 'Alice' <sip:+15715550001@example.com>
             required: true
       # requestBody:
       #   description: ''

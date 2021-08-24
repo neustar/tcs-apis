@@ -2310,7 +2310,7 @@ paths:
         description: ''
         content:
           application/json:
-          required: true
+            required: true
             schema: 
               type: object
               properties:

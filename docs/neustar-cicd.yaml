@@ -2310,9 +2310,14 @@ paths:
         description: ''
         content:
           application/json:
-            schema:
-              $ref: '#/components/schemas/VerifyIdentity'
-        required: true
+          required: true
+            schema: 
+              type: object
+              properties:
+                from:
+                  type: string
+                  description: 'From' header value from SIP INVITE message
+                  example: Alice <sip:+15715550001@example.com>
       x-code-samples:
         - lang: Curl
           source: |

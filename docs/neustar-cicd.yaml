@@ -2317,7 +2317,7 @@ paths:
                 from:
                   type: string
                   description: 'From' header value from SIP INVITE message
-                  example: Alice <sip:+15715550001@example.com>
+                  example: Alice 
       x-code-samples:
         - lang: Curl
           source: |

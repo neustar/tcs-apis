@@ -2508,7 +2508,7 @@ components:
               example: "https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png"
             tagline: 
               type: "string"
-              example: "#AliceInWonderLand"
+              example: "AliceInWonderLand"
             employee_name: 
               type: "string"
               example: "Alice"

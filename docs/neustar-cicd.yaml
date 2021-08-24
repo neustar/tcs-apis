@@ -2458,9 +2458,9 @@ components:
         #                   type: "string"
         #                   example: "X001"
         #         type: "object"
-        # cnam: 
-        #   type: "string"
-        #   example: "Alice In Wonderland"
+        cnam: 
+          type: "string"
+          example: "Alice In Wonderland"
         # ecnam: 
         #   required: 
         #   properties: 

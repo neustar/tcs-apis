@@ -1628,11 +1628,11 @@ paths:
                     type: string
                     description: | 
                       Its value is "ok" after the SIP Identity headers are validated with the required verification status. There are three possible "status" values specified in the request
-                        * none - This status value indicates that the SIP Identity headers specified in the request are not required to be verified
+                        * **none** - This status value indicates that the SIP Identity headers specified in the request are not required to be verified
 
-                        * partial - This status value indicates that one or more SIP Identity headers specified in the request are required to be verified
+                        * **partial** - This status value indicates that one or more SIP Identity headers specified in the request are required to be verified
 
-                        * all - This status value indicates that all SIP Identity headers specified in the request are required to be verified
+                        * **all** - This status value indicates that all SIP Identity headers specified in the request are required to be verified
                     example: 'ok'
         400:
           description: Error Resonse

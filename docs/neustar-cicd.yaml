@@ -2391,12 +2391,7 @@ components:
             params: 
               type: "string"
               example: "info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"shaken\""
-            header: 
-              required: 
-                - "alg"
-                - "ppt"
-                - "typ"
-                - "x5u"
+            header:
               properties: 
                 alg: 
                   type: "string"
@@ -2412,13 +2407,6 @@ components:
                   example: "http://ca.example.com/test.der"
               type: "object"
             claim: 
-              required: 
-                - "attest"
-                - "dest"
-                - "iat"
-                - "mky"
-                - "orig"
-                - "origid"
               properties: 
                 attest: 
                   type: "string"
@@ -2449,8 +2437,6 @@ components:
                         type: "string"
                         example: "4AADB9B13F82183B540212DF3E5D496B19E57CAB"
                 orig: 
-                  required: 
-                    - "tn"
                   properties: 
                     tn: 
                       type: "string"
@@ -2461,10 +2447,6 @@ components:
                   example: "123456-ABCD-999999"
               type: "object"
             certificate_info: 
-              required: 
-                - "subject"
-                - "issuer"
-                - "tn_auth_list"
               properties: 
                 subject: 
                   type: "string"
@@ -2486,31 +2468,6 @@ components:
         example: "Alice In Wonderland"
       ecnam: 
         required: 
-          - "display_template"
-          - "business_name"
-          - "department"
-          - "line_type"
-          - "subscriber_type"
-          - "business_type"
-          - "business_address"
-          - "locality"
-          - "city"
-          - "state"
-          - "country"
-          - "postal_code"
-          - "website_url"
-          - "logo_url"
-          - "tagline"
-          - "employee_name"
-          - "first_name"
-          - "last_name"
-          - "job_title"
-          - "headshot_url"
-          - "email"
-          - "cnam"
-          - "call_purpose"
-          - "social_media_info"
-          - "p_asserted_identity"
         properties: 
           display_template: 
             type: "string"
@@ -2582,9 +2539,6 @@ components:
             type: "string"
             example: "Customer Support"
           social_media_info: 
-            required: 
-              - "Facebook"
-              - "Twitter"
             properties: 
               Facebook: 
                 type: "string"
@@ -2598,10 +2552,6 @@ components:
             example: "\"Alice In Wonderland\" <sip:alice@example.com;tmpl=none;bn=Disney%20World;dept=Theme%20Park;lt=Wireline;st=Business;bt=Entertainment;ba=Walt%20Disney%20World%20Resort;cs=Orlando, FL;city=Orlando;state=FL;ct=US;zip=32830;wb=http://movies.disney.com/alice-in-wonderland-1951;lg=https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png;tg=#AliceInWonderLand;sm=%7B%22Facebook%22%3A%22https%3A%2F%2Fwww.facebook.com%2FDisneyAliceInWonderland%22%2C%22Twitter%22%3A%22https%3A%2F%2Ftwitter.com%2FDisney%22%7D;nm=Alice;fn=Alice;ln=Liddell;jt=Adventurer;hs=https://encrypted-tbn0.gstatic.com/images?q%3dtbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I;cp=Customer Support;email=alice@disney.com>"
         type: "object"
       call_insight: 
-        required: 
-          - "call_treatment"
-          - "fraud_score"
-          - "original_calling_name"
         properties: 
           call_treatment: 
             type: "string"

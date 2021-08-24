@@ -419,6 +419,12 @@ paths:
             response = https.request(request)
             puts response.read_body
       responses:
+        200:
+          description: successful operation
+          content:
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/SuccessResponse'
         400:
           description: Error Response
           content: 
@@ -681,6 +687,12 @@ paths:
             response = https.request(request)
             puts response.read_body
       responses:
+        200:
+          description: successful operation
+          content:
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/SuccessResponse'
         400:
           description: Error Response
           content: 
@@ -1214,6 +1226,12 @@ paths:
             response = https.request(request)
             puts response.read_body
       responses:
+        200:
+          description: successful operation
+          content:
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/SuccessResponseProxy'
             text/plain:
               schema:
                 type: string
@@ -1517,12 +1535,20 @@ paths:
             response = https.request(request)
             puts response.read_body
       responses:
+        200:
+          description: successful operation
+          content:
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/ErrorAPISuccessResponse'
   /verify/identity-j_j:
     post:
       tags:
       - Verifies SIP Identity headers
       summary:  'Accepts requests and produces responses in JSON Format'
-      description: ''
+      description: |
+
+
       operationId: verify/identity-j_j
       parameters:
         - in: query
@@ -1538,40 +1564,6 @@ paths:
             schema:
               $ref: '#/components/schemas/VerifyIdentity'
         required: true
-      responses:
-        # 200:
-        #   description: |
-        #     successful operation
-        #   content: 
-        #     application/json: 
-        #       schema: 
-        #         $ref: '#/components/schemas/VerifyResponse'
-                # description: | 
-                #   Its value is "ok" after the SIP Identity headers are validated with the required verification status. There are three possible "status" values specified in the request
-                #     * **none** - This status value indicates that the SIP Identity headers specified in the request are not required to be verified
-
-                #     * **partial** - This status value indicates that one or more SIP Identity headers specified in the request are required to be verified
-
-                #     * **all** - This status value indicates that all SIP Identity headers specified in the request are required to be verified
-
-                #   Based on the verification status requirement specified in the request, the CCID VS will return a "status" attribute in the response with the following two possible values: 
-
-                #     * **ok** - This status value indicates that the verification result of SIP Identity headers has met the verification status requirement specified in the request
-                #     * **error** - This status value indicates that the verification result of SIP Identity headers has not met the verification status requirement specified in the request
-                  
-                #   If there are any errors encountered in the verification process, an "error" attribute in the response will list all of those errors.
-
-                #   If the "cnam" attribute is specified as "true" in the request, a "cnam" attribute will be returned in the response if the CNAM lookup is successful; otherwise, a "cnam_error" attribute will be returned for the specific error condition.
-
-                #   If the "ecnam" attribute is specified as "true" in the request, an "ecnam" attribute will be returned, if the ECNAM lookup is successful; otherwise, an "ecnam_error" attribute will be returned for the specific error condition.
-
-                #   If the "robocall" attribute is specified as "true" in the request, a "call_insight" attribute will be returned, if any
-        400:
-          description: Error Response
-          content: 
-            application/json: 
-              schema: 
-                $ref: '#/components/schemas/VerifyErrorResponse400'
       x-code-samples:
         - lang: Curl
           source: |
@@ -1623,6 +1615,45 @@ paths:
 
             response = https.request(request)
             puts response.read_body
+      responses:
+        200:
+          description: |
+            successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: | 
+                      Its value is "ok" after the SIP Identity headers are validated with the required verification status. There are three possible "status" values specified in the request
+                        * **none** - This status value indicates that the SIP Identity headers specified in the request are not required to be verified
+
+                        * **partial** - This status value indicates that one or more SIP Identity headers specified in the request are required to be verified
+
+                        * **all** - This status value indicates that all SIP Identity headers specified in the request are required to be verified
+
+                      Based on the verification status requirement specified in the request, the CCID VS will return a "status" attribute in the response with the following two possible values: 
+
+                        * **ok** - This status value indicates that the verification result of SIP Identity headers has met the verification status requirement specified in the request
+                        * **error** - This status value indicates that the verification result of SIP Identity headers has not met the verification status requirement specified in the request
+                      
+                      If there are any errors encountered in the verification process, an "error" attribute in the response will list all of those errors.
+
+                      If the "cnam" attribute is specified as "true" in the request, a "cnam" attribute will be returned in the response if the CNAM lookup is successful; otherwise, a "cnam_error" attribute will be returned for the specific error condition.
+
+                      If the "ecnam" attribute is specified as "true" in the request, an "ecnam" attribute will be returned, if the ECNAM lookup is successful; otherwise, an "ecnam_error" attribute will be returned for the specific error condition.
+
+                      If the "robocall" attribute is specified as "true" in the request, a "call_insight" attribute will be returned, if any.
+
+                    example: ok
+        400:
+          description: Error Response
+          content: 
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/VerifyErrorResponse400'
   /verify/identity-s_j:
     post:
       tags:

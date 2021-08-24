@@ -2375,89 +2375,89 @@ components:
         verstat: 
           type: "string"
           example: "TN-Validation-Passed"
-        # identity_info: 
-        #   type: "array"
-        #   items: 
-        #     type: "object"
-        #     properties: 
-        #       status: 
-        #         type: "string"
-        #         example: "Ok"
-        #       params: 
-        #         type: "string"
-        #         example: "info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"shaken\""
-        #       header:
-        #         properties: 
-        #           alg: 
-        #             type: "string"
-        #             example: "ES256"
-        #           ppt: 
-        #             type: "string"
-        #             example: "shaken"
-        #           typ: 
-        #             type: "string"
-        #             example: "passport"
-        #           x5u: 
-        #             type: "string"
-        #             example: "http://ca.example.com/test.der"
-        #         type: "object"
-        #       claim: 
-        #         properties: 
-        #           attest: 
-        #             type: "string"
-        #             example: "A"
-        #           dest: 
-        #             required: 
-        #               - "tn"
-        #             properties: 
-        #               tn: 
-        #                 type: "array"
-        #                 items: 
-        #                   type: "string"
-        #                 example: 
-        #                   - "15715550001"
-        #             type: "object"
-        #           iat: 
-        #             type: "number"
-        #             example: 1618541811
-        #           mky: 
-        #             type: "array"
-        #             items: 
-        #               type: "object"
-        #               properties: 
-        #                 alg: 
-        #                   type: "string"
-        #                   example: "SHA-1"
-        #                 dig: 
-        #                   type: "string"
-        #                   example: "4AADB9B13F82183B540212DF3E5D496B19E57CAB"
-        #           orig: 
-        #             properties: 
-        #               tn: 
-        #                 type: "string"
-        #                 example: "17035550001"
-        #             type: "object"
-        #           origid: 
-        #             type: "string"
-        #             example: "123456-ABCD-999999"
-        #         type: "object"
-        #       certificate_info: 
-        #         properties: 
-        #           subject: 
-        #             type: "string"
-        #             example: "C=US, ST=VA, L=Somewhere, O=\"AcmeTelecom, Inc.\", OU=VOIP, CN=TEST-EC-256-EXT-TN-JWT"
-        #           issuer: 
-        #             type: "string"
-        #             example: "C=US, O=Neustar IOT Lab, CN=CallAuthnCA"
-        #           tn_auth_list: 
-        #             type: "array"
-        #             items: 
-        #               type: "object"
-        #               properties: 
-        #                 spc: 
-        #                   type: "string"
-        #                   example: "X001"
-        #         type: "object"
+        identity_info: 
+          type: "array"
+          items: 
+            type: "object"
+            properties: 
+              status: 
+                type: "string"
+                example: "Ok"
+              params: 
+                type: "string"
+                example: "info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"shaken\""
+              header:
+                properties: 
+                  alg: 
+                    type: "string"
+                    example: "ES256"
+                  ppt: 
+                    type: "string"
+                    example: "shaken"
+                  typ: 
+                    type: "string"
+                    example: "passport"
+                  x5u: 
+                    type: "string"
+                    example: "http://ca.example.com/test.der"
+                type: "object"
+              claim: 
+                properties: 
+                  attest: 
+                    type: "string"
+                    example: "A"
+                  dest: 
+                    required: 
+                      - "tn"
+                    properties: 
+                      tn: 
+                        type: "array"
+                        items: 
+                          type: "string"
+                        example: 
+                          - "15715550001"
+                    type: "object"
+                  iat: 
+                    type: "number"
+                    example: 1618541811
+                  mky: 
+                    type: "array"
+                    items: 
+                      type: "object"
+                      properties: 
+                        alg: 
+                          type: "string"
+                          example: "SHA-1"
+                        dig: 
+                          type: "string"
+                          example: "4AADB9B13F82183B540212DF3E5D496B19E57CAB"
+                  orig: 
+                    properties: 
+                      tn: 
+                        type: "string"
+                        example: "17035550001"
+                    type: "object"
+                  origid: 
+                    type: "string"
+                    example: "123456-ABCD-999999"
+                type: "object"
+              certificate_info: 
+                properties: 
+                  subject: 
+                    type: "string"
+                    example: "C=US, ST=VA, L=Somewhere, O=\"AcmeTelecom, Inc.\", OU=VOIP, CN=TEST-EC-256-EXT-TN-JWT"
+                  issuer: 
+                    type: "string"
+                    example: "C=US, O=Neustar IOT Lab, CN=CallAuthnCA"
+                  tn_auth_list: 
+                    type: "array"
+                    items: 
+                      type: "object"
+                      properties: 
+                        spc: 
+                          type: "string"
+                          example: "X001"
+                type: "object"
         cnam: 
           type: "string"
           example: "Alice In Wonderland"
@@ -2507,7 +2507,7 @@ components:
               example: "https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png"
             tagline: 
               type: "string"
-              example: "AliceInWonderLand"
+              example: "#AliceInWonderLand"
             employee_name: 
               type: "string"
               example: "Alice"

@@ -1987,6 +1987,232 @@ paths:
                           To: "Bob" <sip:+447035550000@example.com>
                           Reason: SIP;cause=437;text="Credential has expired"
                           Content-Length: 0'
+  /verify/identity/proxy/{addr}/{port}:
+    post:
+      tags:
+      - Verifies SIP Identity headers
+      summary: 'Accepts SIP INVITE messages and produces responses in JSON format for SIP proxies'
+      operationId: identity/proxy
+      description: |
+        Accepts SIP INVITE messages as requests and produces responses in JSON Format for SIP Proxies.
+      parameters:
+        - in: query
+          name: apiKey
+          required: true
+          schema:
+            type: string
+          description: The API key uniquely identifying the API client. Cannot be null or empty
+        - name: addr
+          in: path
+          description: The remote IP address from which the SIP INVITE message is originated
+          required: true
+          schema:
+            type: string
+        - name: port
+          in: path
+          description: The remote port from which the SIP INVITE message is originated
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: 'SIP sip:17035550021@proxy.example.com;transport=UDP SIP/2.0
+                        From: Alice <sip:+15714345500@example.com>
+                        To: Bob <sip:+447035550000@example.com>
+                        Identity: ey.x.oQ;info=<http://.../cert/123>;alg=ES256'
+        required: true
+      x-code-samples:
+        - lang: Curl
+          source: |
+            curl --location --request POST 'https://ca-verify.neustarlab.biz/ccid/verify/v2/identity/proxy/127.0.0.2/5060?apiKey=%3CapiKey7%3E' \
+            --header 'Content-Type: text/plain' \
+            --header 'Accept: application/json' \
+            --data-raw 'INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
+            Via: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za
+            Max-Forwards: 70
+            Contact: "alice" <sip:alice@proxy.example.com:39089;transport=UDP>
+            From: "alice" <sip:+15715550000@example.com>;tag=1f4e4f40
+            To: "bob" <sip:+15715550001@example.com>
+            Date: Fri, 16 Apr 2021 02:56:56 GMT
+            Call-ID: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
+            Identity: eyJhbGciOiJFUzI1NiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTYsIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9fQ.l0M2I9W8agfAWSeYOXxLu5XAPYgUMPSH53daRzsABYeT9JcxPwIPSY2O1FFhqyUjBz_P1Lm6Bhe3I-ktbjI6Zg;info=<http://ca.example.com/test.der>;alg=ES256
+            CSeq: 2 INVITE
+            Content-Type: application/sdp
+            User-Agent: Z 3.3.25608 r25552
+            Supported: replaces, norefersub, extended-refer, timer
+            Allow-Events: presence, kpml
+            Content-Length: 239
+
+            v=0
+            o=Z 0 0 IN IP4 10.31.32.251
+            s=Z
+            c=IN IP4 10.31.32.251
+            t=0 0
+            m=audio 8000 RTP/AVP 8 0 3 110 98 101
+            a=rtpmap:110 speex/8000
+            a=rtpmap:98 iLBC/8000
+            a=fmtp:98 mode=20
+            a=rtpmap:101 telephone-event/8000
+            a=fmtp:101 0-15
+            a=sendrecv
+            '
+        - lang: Java
+          source: |
+            Unirest.setTimeouts(0, 0);
+            HttpResponse<String> response = Unirest.post("https://ca-verify.neustarlab.biz/ccid/verify/v2/identity/proxy/127.0.0.2/5060?apiKey=%3CapiKey7%3E")
+              .header("Content-Type", "text/plain")
+              .header("Accept", "application/json")
+              .body("INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0\nVia: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za\nMax-Forwards: 70\nContact: \"alice\" <sip:alice@proxy.example.com:39089;transport=UDP>\nFrom: \"alice\" <sip:+15715550000@example.com>;tag=1f4e4f40\nTo: \"bob\" <sip:+15715550001@example.com>\nDate: Fri, 16 Apr 2021 02:56:56 GMT\nCall-ID: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.\nIdentity: eyJhbGciOiJFUzI1NiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTYsIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9fQ.l0M2I9W8agfAWSeYOXxLu5XAPYgUMPSH53daRzsABYeT9JcxPwIPSY2O1FFhqyUjBz_P1Lm6Bhe3I-ktbjI6Zg;info=<http://ca.example.com/test.der>;alg=ES256\nCSeq: 2 INVITE\nContent-Type: application/sdp\nUser-Agent: Z 3.3.25608 r25552\nSupported: replaces, norefersub, extended-refer, timer\nAllow-Events: presence, kpml\nContent-Length: 239\n\nv=0\no=Z 0 0 IN IP4 10.31.32.251\ns=Z\nc=IN IP4 10.31.32.251\nt=0 0\nm=audio 8000 RTP/AVP 8 0 3 110 98 101\na=rtpmap:110 speex/8000\na=rtpmap:98 iLBC/8000\na=fmtp:98 mode=20\na=rtpmap:101 telephone-event/8000\na=fmtp:101 0-15\na=sendrecv\n")
+              .asString();
+        - lang: Python
+          source: |
+            import requests
+
+            url = "https://ca-verify.neustarlab.biz/ccid/verify/v2/identity/proxy/127.0.0.2/5060?apiKey=%3CapiKey7%3E"
+
+            payload="INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0\nVia: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za\nMax-Forwards: 70\nContact: \"alice\" <sip:alice@proxy.example.com:39089;transport=UDP>\nFrom: \"alice\" <sip:+15715550000@example.com>;tag=1f4e4f40\nTo: \"bob\" <sip:+15715550001@example.com>\nDate: Fri, 16 Apr 2021 02:56:56 GMT\nCall-ID: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.\nIdentity: eyJhbGciOiJFUzI1NiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTYsIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9fQ.l0M2I9W8agfAWSeYOXxLu5XAPYgUMPSH53daRzsABYeT9JcxPwIPSY2O1FFhqyUjBz_P1Lm6Bhe3I-ktbjI6Zg;info=<http://ca.example.com/test.der>;alg=ES256\nCSeq: 2 INVITE\nContent-Type: application/sdp\nUser-Agent: Z 3.3.25608 r25552\nSupported: replaces, norefersub, extended-refer, timer\nAllow-Events: presence, kpml\nContent-Length: 239\n\nv=0\no=Z 0 0 IN IP4 10.31.32.251\ns=Z\nc=IN IP4 10.31.32.251\nt=0 0\nm=audio 8000 RTP/AVP 8 0 3 110 98 101\na=rtpmap:110 speex/8000\na=rtpmap:98 iLBC/8000\na=fmtp:98 mode=20\na=rtpmap:101 telephone-event/8000\na=fmtp:101 0-15\na=sendrecv\n"
+            headers = {
+              'Content-Type': 'text/plain',
+              'Accept': 'application/json'
+            }
+
+            response = requests.request("POST", url, headers=headers, data=payload)
+
+            print(response.text)
+        - lang: Ruby
+          source: |
+            require "uri"
+            require "net/http"
+
+            url = URI("https://ca-verify.neustarlab.biz/ccid/verify/v2/identity/proxy/127.0.0.2/5060?apiKey=%3CapiKey7%3E")
+
+            https = Net::HTTP.new(url.host, url.port)
+            https.use_ssl = true
+
+            request = Net::HTTP::Post.new(url)
+            request["Content-Type"] = "text/plain"
+            request["Accept"] = "application/json"
+            request.body = "INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0\nVia: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za\nMax-Forwards: 70\nContact: \"alice\" <sip:alice@proxy.example.com:39089;transport=UDP>\nFrom: \"alice\" <sip:+15715550000@example.com>;tag=1f4e4f40\nTo: \"bob\" <sip:+15715550001@example.com>\nDate: Fri, 16 Apr 2021 02:56:56 GMT\nCall-ID: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.\nIdentity: eyJhbGciOiJFUzI1NiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTYsIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9fQ.l0M2I9W8agfAWSeYOXxLu5XAPYgUMPSH53daRzsABYeT9JcxPwIPSY2O1FFhqyUjBz_P1Lm6Bhe3I-ktbjI6Zg;info=<http://ca.example.com/test.der>;alg=ES256\nCSeq: 2 INVITE\nContent-Type: application/sdp\nUser-Agent: Z 3.3.25608 r25552\nSupported: replaces, norefersub, extended-refer, timer\nAllow-Events: presence, kpml\nContent-Length: 239\n\nv=0\no=Z 0 0 IN IP4 10.31.32.251\ns=Z\nc=IN IP4 10.31.32.251\nt=0 0\nm=audio 8000 RTP/AVP 8 0 3 110 98 101\na=rtpmap:110 speex/8000\na=rtpmap:98 iLBC/8000\na=fmtp:98 mode=20\na=rtpmap:101 telephone-event/8000\na=fmtp:101 0-15\na=sendrecv\n"
+
+            response = https.request(request)
+            puts response.read_body
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/SuccessResponseProxy'
+            text/plain:
+              schema:
+                type: string
+                example: 'INVITE sip:17035550021@proxy.example.com;transport=UDP SIP/2.0From: "Alice" <sip:+15714345500@example.com>Identity: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyI0NDcwMzU1NTAwMDAiXX0sImlhdCI6MTYyMTAxMTQyNSwib3JpZyI6eyJ0biI6IjE1NzE0MzQ1NTAwIn0sIm9yaWdpZCI6Ijc4MzZlYzFkMDYwNzRkNjg4YjYyYzFlYTVlYmQxOTM5In0.RIDQYZP0SNd7ejjJGlcYLQ-55XssLVG5hJ5001v-unKFbD349VVYLderLBt_4h-eCgAcWIsuAW6YSMUqfPk8PA;info=<https://ca.neustarlab.biz/ccid/v2/authn/certs/20001.10001>;alg=ES256;ppt="shaken"Date: Fri, 14 May 2021 16:57:05 GMTTo: "Bob" <sip:+447035550000@example.com>'
+        403:
+          description: Error Response
+          content: 
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/ErrorResponseProxy403'
+    get:
+      tags:
+      - Generate SIP Identity Headers
+      summary: 'Returns next hop and policy data in JSON Format for SIP Proxies'
+      operationId: get-identity/proxy
+      description: |
+        A successful response in JSON format includes the "status" attribute with a value of "ok". It also contains an optional "next_hop" attribute for indicating the next hop for routing the SIP messages, and an optional "policy" attribute with an opaque string to be consumed by the SIP proxy for manipulating SIP headers and mapping error conditions.
+
+        A failure response in JSON format includes the "status" attribute with a value of "error", and an "error" attribute, containing a list of error conditions that result in the failure.
+      parameters:
+        - in: query
+          name: apiKey
+          schema:
+            type: string
+          description: The API key uniquely identifying the API client. Cannot be null or empty
+        - name: addr
+          in: path
+          description: The remote IP address from which the SIP INVITE message is originated
+          required: true
+          schema:
+            type: string
+        - name: port
+          in: path
+          description: The remote port from which the SIP INVITE message is originated
+          required: true
+          schema:
+            type: string
+      x-code-samples:
+        - lang: Curl
+          source: |
+            curl --location --request GET 'https://ca.neustarlab.biz/ccid/v2/authn/identity/proxy/192.168.1.1/5060?apiKey=%3CapiKey1%3E' \
+            --header 'Accept: application/json'
+        - lang: Java
+          source: |
+            Unirest.setTimeouts(0, 0);
+            HttpResponse<String> response = Unirest.get("https://ca.neustarlab.biz/ccid/v2/authn/identity/proxy/192.168.1.1/5060?apiKey=%3CapiKey1%3E")
+              .header("Accept", "application/json")
+              .asString();
+        - lang: Python
+          source: |
+            import requests
+
+            url = "https://ca.neustarlab.biz/ccid/v2/authn/identity/proxy/192.168.1.1/5060?apiKey=%3CapiKey1%3E"
+
+            payload={}
+            headers = {
+              'Accept': 'application/json'
+            }
+
+            response = requests.request("GET", url, headers=headers, data=payload)
+
+            print(response.text)      
+        - lang: Ruby
+          source: |
+            require "uri"
+            require "net/http"
+
+            url = URI("https://ca.neustarlab.biz/ccid/v2/authn/identity/proxy/192.168.1.1/5060?apiKey=%3CapiKey1%3E")
+
+            https = Net::HTTP.new(url.host, url.port)
+            https.use_ssl = true
+
+            request = Net::HTTP::Get.new(url)
+            request["Accept"] = "application/json"
+
+            response = https.request(request)
+            puts response.read_body
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: The status of STIR authentication operation for SIP proxy
+                    example: ok
+                    required: true
+                  next_hop:
+                    type: string
+                    description: The URI of next hop
+                    example: udp:192.168.1.1:5060
+                    required: false
+                  policy:
+                    type: string
+                    description: The policy for processing the SIP message
+                    example: '{\"stateful\":false,\"via\":false,\"max_forwards\":false,\"route\":false,\"record_route\":false,\"error_action\":[{\"error\":\"default\",\"action\":\"passthru\"},{\"error\":\"438\",\"action\":\"custom\",\"sip_code\":481}]}"'
+                    required: false
+        403:
+          description: Error Response
+          content: 
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/ErrorResponseProxy403'
 components:
   schemas:
     Identity:

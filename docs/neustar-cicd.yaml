@@ -2312,18 +2312,18 @@ paths:
           required: true
           schema:
             type: string
-      requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: 
-                from: 
-                  type: string
-                  description: 'From' header value from SIP INVITE message
-                  example: "Alice" <sip:+15715550001@example.com>
-        required: true
+      # requestBody:
+      #   description: ''
+      #   content:
+      #     application/json:
+      #       schema:
+      #         type: object
+      #         properties: 
+      #           from: 
+      #             type: string
+      #             description: 'From' header value from SIP INVITE message
+      #             example: "Alice" <sip:+15715550001@example.com>
+      #   required: true
       x-code-samples:
         - lang: Curl
           source: |

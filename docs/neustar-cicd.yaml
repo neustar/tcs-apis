@@ -1653,7 +1653,7 @@ paths:
           content: 
             application/json: 
               schema: 
-                $ref: '#/components/schemas/VerifyErrorResponse400'
+                $ref: '#/components/schemas/VerifyResponse'
   /verify/identity-s_j:
     post:
       tags:

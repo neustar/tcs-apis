@@ -426,13 +426,13 @@ paths:
               schema: 
                 $ref: '#/components/schemas/SuccessResponse'
         400:
-          description: Error Resonse
+          description: Error Response
           content: 
             application/json: 
               schema: 
                 $ref: '#/components/schemas/ErrorResponse400'
         403:
-          description: Error Resonse
+          description: Error Response
           content: 
             application/json: 
               schema: 
@@ -694,13 +694,13 @@ paths:
               schema: 
                 $ref: '#/components/schemas/SuccessResponse'
         400:
-          description: Error Resonse
+          description: Error Response
           content: 
             application/json: 
               schema: 
                 $ref: '#/components/schemas/ErrorResponse400'
         403:
-          description: Error Resonse
+          description: Error Response
           content: 
             application/json: 
               schema: 
@@ -1099,7 +1099,7 @@ paths:
                           a=fmtp:101 0-15
                           a=sendrecv'
         403:
-          description: Error Resonse
+          description: Error Response
           content: 
             text/plain:
               schema:
@@ -1237,7 +1237,7 @@ paths:
                 type: string
                 example: 'INVITE sip:17035550021@proxy.example.com;transport=UDP SIP/2.0From: "Alice" <sip:+15714345500@example.com>Identity: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyI0NDcwMzU1NTAwMDAiXX0sImlhdCI6MTYyMTAxMTQyNSwib3JpZyI6eyJ0biI6IjE1NzE0MzQ1NTAwIn0sIm9yaWdpZCI6Ijc4MzZlYzFkMDYwNzRkNjg4YjYyYzFlYTVlYmQxOTM5In0.RIDQYZP0SNd7ejjJGlcYLQ-55XssLVG5hJ5001v-unKFbD349VVYLderLBt_4h-eCgAcWIsuAW6YSMUqfPk8PA;info=<https://ca.neustarlab.biz/ccid/v2/authn/certs/20001.10001>;alg=ES256;ppt="shaken"Date: Fri, 14 May 2021 16:57:05 GMTTo: "Bob" <sip:+447035550000@example.com>'
         403:
-          description: Error Resonse
+          description: Error Response
           content: 
             application/json: 
               schema: 
@@ -1333,7 +1333,7 @@ paths:
                     example: '{\"stateful\":false,\"via\":false,\"max_forwards\":false,\"route\":false,\"record_route\":false,\"error_action\":[{\"error\":\"default\",\"action\":\"passthru\"},{\"error\":\"438\",\"action\":\"custom\",\"sip_code\":481}]}"'
                     required: false
         403:
-          description: Error Resonse
+          description: Error Response
           content: 
             application/json: 
               schema: 
@@ -1454,7 +1454,7 @@ paths:
                 type: string
                 example: '-----BEGIN CERTIFICATE-----MII...-----END CERTIFICATE-----'
         403:
-          description: Error Resonse
+          description: Error Response
           content: 
             application/json: 
               schema: 
@@ -1647,9 +1647,196 @@ paths:
 
                       If the "robocall" attribute is specified as "true" in the request, a "call_insight" attribute will be returned, if any.
 
-                    example: ok or error
+                    example: ok
         400:
-          description: Error Resonse
+          description: Error Response
+          content: 
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/VerifyErrorResponse400'
+  /verify/identity-s_j:
+    post:
+      tags:
+      - Verifies SIP Identity headers
+      summary:  'Accepts SIP INVITE messages with SIP Identity headers as requests and produces responses in JSON Format'
+      operationId: verify-identity-s_j
+      description: | 
+        
+      parameters:
+        - in: query
+          name: apiKey
+          required: true
+          schema:
+            type: string
+          description: The API key uniquely identifying the API client. Cannot be null or empty
+        - name: status
+          in: query
+          description: The verification status requirement
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: origcc
+          in: query
+          description: Default country codes for the originator telephone number
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: destcc
+          in: query
+          required: false
+          description: Default country code for the destination telephone number
+          schema:
+            type: string
+        - name: cnam
+          in: query
+          description: Flag for performing CNAM lookup
+          required: false
+          style: form
+          schema:
+            type: boolean
+        - name: ecnam
+          in: query
+          description: Flag for performing ECNAM lookup
+          required: false
+          style: form
+          schema:
+            type: boolean
+        - name: robocall
+          in: query
+          description: Flag for returning Robocall Call Insight data
+          required: false
+          style: form
+          schema:
+            type: boolean
+      requestBody:
+        description: ''
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: 'INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
+              From: "alice" <sip:+15715550000@example.com>;tag=1f4e4f40
+              To: "bob" <sip:+15715550001@example.com>
+              Date: Thu, 17 Aug 2017 15:09:27 GMT
+              Identity: ey.x.oQ;info=<http://www.example.com/cert/123>;alg=ES256'
+            required: true
+      x-code-samples:
+        - lang: Curl
+          source: |
+            curl --location --request POST 'https://ca-verify.neustarlab.biz/ccid/verify/v2/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true' \
+            --header 'Content-Type: text/plain' \
+            --header 'Accept: application/json' \
+            --data-raw 'INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
+            v: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za
+            Max-Forwards: 70
+            m: "alice" <sip:alice@proxy.example.com:39089;transport=UDP>
+            f: "alice" <sip:+15715550000@example.com>;tag=1f4e4f40
+            t: "bob" <sip:+15715550001@example.com>
+            Date: Fri, 16 Apr 2021 02:56:54 GMT
+            i: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
+            y: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMSJdfSwiaWF0IjoxNjE4NTQxODE0LCJta3kiOlt7ImFsZyI6IlNIQS0xIiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQiJ9LHsiYWxnIjoiU0hBLTI1NiIsImRpZyI6IjM2M0JBRTEyOTU5NUY1OTcyREY3RTA4NEZFQ0RGMUJDQUQ3QTcwNjRGN0U3NEY3RUE2MDIwNjBFMzc1NENGRjcifV0sIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJvcmlnaWQiOiIxMjM0NTYtQUJDRC05OTk5OTkifQ.yd8hFUIVEbXiZI4NTbLeepUkuEpkKAo_DQZmc2BivqJxGAnbZO2j4iljprTrka-3jLOj6ZSXo-y91879cUYZ-A;info=<http://ca.example.com/test.der>;alg=ES256;ppt="shaken"
+            P-Asserted-Identity: "Alice" <tel:+17035550001>
+            P-Asserted-Identity: "Alice" <sip:+17035550001@example.com>
+            CSeq: 2 INVITE
+            c: application/sdp
+            User-Agent: Z 3.3.25608 r25552
+            k: replaces, norefersub, extended-refer, timer
+            Allow-Events: presence, kpml
+            l: 439
+
+            v=0
+            o=Z 0 0 IN IP4 10.31.32.251
+            s=Z
+            c=IN IP4 10.31.32.251
+            t=0 0
+            m=audio 8000 RTP/AVP 8 0 3 110 98 101
+            a=fingerprint:SHA-1 4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB
+            a=fingerprint:SHA-256 36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7
+            a=rtpmap:110 speex/8000
+            a=rtpmap:98 iLBC/8000
+            a=fmtp:98 mode=20
+            a=rtpmap:101 telephone-event/8000
+            a=fmtp:101 0-15
+            a=sendrecv
+            '
+        - lang: Java
+          source: |
+            Unirest.setTimeouts(0, 0);
+            HttpResponse<String> response = Unirest.post("https://ca-verify.neustarlab.biz/ccid/verify/v2/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true")
+              .header("Content-Type", "text/plain")
+              .header("Accept", "application/json")
+              .body("INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0\nv: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za\nMax-Forwards: 70\nm: \"alice\" <sip:alice@proxy.example.com:39089;transport=UDP>\nf: \"alice\" <sip:+15715550000@example.com>;tag=1f4e4f40\nt: \"bob\" <sip:+15715550001@example.com>\nDate: Fri, 16 Apr 2021 02:56:54 GMT\ni: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.\ny: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMSJdfSwiaWF0IjoxNjE4NTQxODE0LCJta3kiOlt7ImFsZyI6IlNIQS0xIiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQiJ9LHsiYWxnIjoiU0hBLTI1NiIsImRpZyI6IjM2M0JBRTEyOTU5NUY1OTcyREY3RTA4NEZFQ0RGMUJDQUQ3QTcwNjRGN0U3NEY3RUE2MDIwNjBFMzc1NENGRjcifV0sIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJvcmlnaWQiOiIxMjM0NTYtQUJDRC05OTk5OTkifQ.yd8hFUIVEbXiZI4NTbLeepUkuEpkKAo_DQZmc2BivqJxGAnbZO2j4iljprTrka-3jLOj6ZSXo-y91879cUYZ-A;info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"shaken\"\nP-Asserted-Identity: \"Alice\" <tel:+17035550001>\nP-Asserted-Identity: \"Alice\" <sip:+17035550001@example.com>\nCSeq: 2 INVITE\nc: application/sdp\nUser-Agent: Z 3.3.25608 r25552\nk: replaces, norefersub, extended-refer, timer\nAllow-Events: presence, kpml\nl: 439\n\nv=0\no=Z 0 0 IN IP4 10.31.32.251\ns=Z\nc=IN IP4 10.31.32.251\nt=0 0\nm=audio 8000 RTP/AVP 8 0 3 110 98 101\na=fingerprint:SHA-1 4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB\na=fingerprint:SHA-256 36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7\na=rtpmap:110 speex/8000\na=rtpmap:98 iLBC/8000\na=fmtp:98 mode=20\na=rtpmap:101 telephone-event/8000\na=fmtp:101 0-15\na=sendrecv\n")
+              .asString();
+        - lang: Python
+          source: |
+            import requests
+
+            url = "https://ca-verify.neustarlab.biz/ccid/verify/v2/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true"
+
+            payload="INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0\nv: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za\nMax-Forwards: 70\nm: \"alice\" <sip:alice@proxy.example.com:39089;transport=UDP>\nf: \"alice\" <sip:+15715550000@example.com>;tag=1f4e4f40\nt: \"bob\" <sip:+15715550001@example.com>\nDate: Fri, 16 Apr 2021 02:56:54 GMT\ni: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.\ny: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMSJdfSwiaWF0IjoxNjE4NTQxODE0LCJta3kiOlt7ImFsZyI6IlNIQS0xIiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQiJ9LHsiYWxnIjoiU0hBLTI1NiIsImRpZyI6IjM2M0JBRTEyOTU5NUY1OTcyREY3RTA4NEZFQ0RGMUJDQUQ3QTcwNjRGN0U3NEY3RUE2MDIwNjBFMzc1NENGRjcifV0sIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJvcmlnaWQiOiIxMjM0NTYtQUJDRC05OTk5OTkifQ.yd8hFUIVEbXiZI4NTbLeepUkuEpkKAo_DQZmc2BivqJxGAnbZO2j4iljprTrka-3jLOj6ZSXo-y91879cUYZ-A;info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"shaken\"\nP-Asserted-Identity: \"Alice\" <tel:+17035550001>\nP-Asserted-Identity: \"Alice\" <sip:+17035550001@example.com>\nCSeq: 2 INVITE\nc: application/sdp\nUser-Agent: Z 3.3.25608 r25552\nk: replaces, norefersub, extended-refer, timer\nAllow-Events: presence, kpml\nl: 439\n\nv=0\no=Z 0 0 IN IP4 10.31.32.251\ns=Z\nc=IN IP4 10.31.32.251\nt=0 0\nm=audio 8000 RTP/AVP 8 0 3 110 98 101\na=fingerprint:SHA-1 4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB\na=fingerprint:SHA-256 36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7\na=rtpmap:110 speex/8000\na=rtpmap:98 iLBC/8000\na=fmtp:98 mode=20\na=rtpmap:101 telephone-event/8000\na=fmtp:101 0-15\na=sendrecv\n"
+            headers = {
+              'Content-Type': 'text/plain',
+              'Accept': 'application/json'
+            }
+
+            response = requests.request("POST", url, headers=headers, data=payload)
+
+            print(response.text)
+
+        - lang: Ruby
+          source: |
+            require "uri"
+            require "net/http"
+
+            url = URI("https://ca-verify.neustarlab.biz/ccid/verify/v2/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true")
+
+            https = Net::HTTP.new(url.host, url.port)
+            https.use_ssl = true
+
+            request = Net::HTTP::Post.new(url)
+            request["Content-Type"] = "text/plain"
+            request["Accept"] = "application/json"
+            request.body = "INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0\nv: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za\nMax-Forwards: 70\nm: \"alice\" <sip:alice@proxy.example.com:39089;transport=UDP>\nf: \"alice\" <sip:+15715550000@example.com>;tag=1f4e4f40\nt: \"bob\" <sip:+15715550001@example.com>\nDate: Fri, 16 Apr 2021 02:56:54 GMT\ni: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.\ny: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMSJdfSwiaWF0IjoxNjE4NTQxODE0LCJta3kiOlt7ImFsZyI6IlNIQS0xIiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQiJ9LHsiYWxnIjoiU0hBLTI1NiIsImRpZyI6IjM2M0JBRTEyOTU5NUY1OTcyREY3RTA4NEZFQ0RGMUJDQUQ3QTcwNjRGN0U3NEY3RUE2MDIwNjBFMzc1NENGRjcifV0sIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJvcmlnaWQiOiIxMjM0NTYtQUJDRC05OTk5OTkifQ.yd8hFUIVEbXiZI4NTbLeepUkuEpkKAo_DQZmc2BivqJxGAnbZO2j4iljprTrka-3jLOj6ZSXo-y91879cUYZ-A;info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"shaken\"\nP-Asserted-Identity: \"Alice\" <tel:+17035550001>\nP-Asserted-Identity: \"Alice\" <sip:+17035550001@example.com>\nCSeq: 2 INVITE\nc: application/sdp\nUser-Agent: Z 3.3.25608 r25552\nk: replaces, norefersub, extended-refer, timer\nAllow-Events: presence, kpml\nl: 439\n\nv=0\no=Z 0 0 IN IP4 10.31.32.251\ns=Z\nc=IN IP4 10.31.32.251\nt=0 0\nm=audio 8000 RTP/AVP 8 0 3 110 98 101\na=fingerprint:SHA-1 4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB\na=fingerprint:SHA-256 36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7\na=rtpmap:110 speex/8000\na=rtpmap:98 iLBC/8000\na=fmtp:98 mode=20\na=rtpmap:101 telephone-event/8000\na=fmtp:101 0-15\na=sendrecv\n"
+
+            response = https.request(request)
+            puts response.read_body
+      responses:
+        200:
+          description: |
+            successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: | 
+                      Its value is "ok" after the SIP Identity headers are validated with the required verification status. There are three possible "status" values specified in the request
+                        * **none** - This status value indicates that the SIP Identity headers specified in the request are not required to be verified
+
+                        * **partial** - This status value indicates that one or more SIP Identity headers specified in the request are required to be verified
+
+                        * **all** - This status value indicates that all SIP Identity headers specified in the request are required to be verified
+
+                      Based on the verification status requirement specified in the request, the CCID VS will return a "status" attribute in the response with the following two possible values: 
+
+                        * **ok** - This status value indicates that the verification result of SIP Identity headers has met the verification status requirement specified in the request
+                        * **error** - This status value indicates that the verification result of SIP Identity headers has not met the verification status requirement specified in the request
+                      
+                      If there are any errors encountered in the verification process, an "error" attribute in the response will list all of those errors.
+
+                      If the "cnam" attribute is specified as "true" in the request, a "cnam" attribute will be returned in the response if the CNAM lookup is successful; otherwise, a "cnam_error" attribute will be returned for the specific error condition.
+
+                      If the "ecnam" attribute is specified as "true" in the request, an "ecnam" attribute will be returned, if the ECNAM lookup is successful; otherwise, an "ecnam_error" attribute will be returned for the specific error condition.
+
+                      If the "robocall" attribute is specified as "true" in the request, a "call_insight" attribute will be returned, if any.
+
+                    example: ok
+        400:
+          description: Error Response
           content: 
             application/json: 
               schema: 

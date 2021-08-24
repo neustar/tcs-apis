@@ -1622,7 +1622,7 @@ paths:
           content: 
             application/json: 
               schema: 
-                $ref: '#/components/schemas/VerifyErrorResponse'
+                $ref: '#/components/schemas/VerifyResponse'
         400:
           description: Error Response
           content: 

@@ -2534,10 +2534,10 @@ components:
           type: "object"
     VerifyResponse-SJ:
       type: object
-        properties: 
-          status: 
-            type: "string"
-            example: "ok"
+      properties: 
+        status: 
+          type: "string"
+          example: "ok"
     #       cnam: 
     #         type: "string"
     #         example: "Alice In Wonderland"

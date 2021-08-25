@@ -2306,13 +2306,13 @@ paths:
           schema:
             type: string
           description: The API key uniquely identifying the API client. Cannot be null or empty
-      # requestBody:
-      #   description: ''
-      #   content:
-      #     application/json:
-      #       schema:
-      #         $ref: '#/components/schemas/CNAM-Error'
-      #   required: true
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CNAM-Error'
+        required: true
       x-code-samples:
         - lang: Curl
           source: |
@@ -3244,4 +3244,5 @@ components:
       properties: 
         from: 
           type: "string"
-          example: "ok"
+          example: "alice <sip:+15715550000@example.com>"
+          description: "'From' header value from SIP INVITE message"

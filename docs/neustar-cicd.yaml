@@ -3242,7 +3242,6 @@ components:
     CNAM-Input:
       type: object
       properties: 
-        from:
-          type: string
-          example: dd
-          description: 'From' header value from SIP INVITE message
+        from: 
+          type: "string"
+          example: "ok"

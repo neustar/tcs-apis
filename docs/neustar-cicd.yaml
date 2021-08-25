@@ -2310,14 +2310,9 @@ paths:
         description: ''
         content:
           application/json:
-            # required: true
-            schema: 
-              type: object
-              properties:
-                from:
-                  type: string
-                  description: 'From' header value from SIP INVITE message
-                  example: Alice 
+            schema:
+              $ref: '#/components/schemas/CNAM-Input'
+        required: true
       x-code-samples:
         - lang: Curl
           source: |
@@ -3244,3 +3239,10 @@ components:
               type: "string"
               example: "Fri, 16 Apr 2021 02:56:55 GMT"
           type: "object"
+    CNAM-Input:
+      type: object
+      properties: 
+        from:
+          type: string
+          example: Alice <sip:+15715550001@example.com>
+          description: 'From' header value from SIP INVITE message

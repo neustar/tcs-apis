@@ -2444,6 +2444,90 @@ paths:
             application/json: 
               schema: 
                 $ref: '#/components/schemas/ECNAM-Error'
+  /verify/ecnam:
+    post:
+      tags:
+      - Performs ECNAM queries
+      summary: 'Returns ECNAM name of a specific telephone number'
+      operationId: ecnampost
+      description: |
+        For a successful ECNAM lookup, a response in JSON format will be returned with the "ecnam" attribute, along with an optional "call_insight" attribute, if any; otherwise, the "ecnam_error" attribute will be returned if there are any errors encountered in the ECNAM lookup.
+      parameters:
+        - in: query
+          name: apiKey
+          required: true
+          schema:
+            type: string
+          description: The API key uniquely identifying the API client. Cannot be null or empty
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CNAM-Input'
+        required: true
+      x-code-samples:
+        - lang: Curl
+          source: |
+            curl --location --request POST 'https://ca-verify.neustarlab.biz/ccid/verify/v2/ecnam?apiKey=%3CapiKey1%3E' \
+            --header 'Content-Type: application/json' \
+            --header 'Accept: application/json' \
+            --data-raw '{
+              "from" : ""alice" <sip:+15715550000@example.com>"
+            }'
+        - lang: Java
+          source: |
+            Unirest.setTimeouts(0, 0);
+            HttpResponse<String> response = Unirest.post("https://ca-verify.neustarlab.biz/ccid/verify/v2/ecnam?apiKey=%3CapiKey1%3E")
+              .header("Content-Type", "application/json")
+              .header("Accept", "application/json")
+              .body("{\n  \"from\" : \"\"alice\" <sip:+15715550000@example.com>\"\n}")
+              .asString();
+        - lang: Python
+          source: |
+            import requests
+
+            url = "https://ca-verify.neustarlab.biz/ccid/verify/v2/ecnam?apiKey=%3CapiKey1%3E"
+
+            payload="{\n  \"from\" : \"\"alice\" <sip:+15715550000@example.com>\"\n}"
+            headers = {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            }
+
+            response = requests.request("POST", url, headers=headers, data=payload)
+
+            print(response.text)
+        - lang: Ruby
+          source: |
+            require "uri"
+            require "net/http"
+
+            url = URI("https://ca-verify.neustarlab.biz/ccid/verify/v2/ecnam?apiKey=%3CapiKey1%3E")
+
+            https = Net::HTTP.new(url.host, url.port)
+            https.use_ssl = true
+
+            request = Net::HTTP::Post.new(url)
+            request["Content-Type"] = "application/json"
+            request["Accept"] = "application/json"
+            request.body = "{\n  \"from\" : \"\"alice\" <sip:+15715550000@example.com>\"\n}"
+
+            response = https.request(request)
+            puts response.read_body
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json: 
+              schema:
+                $ref: '#/components/schemas/ECNAM-Response' 
+        403:
+          description: Error Response
+          content: 
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/ECNAM-Error'
 components:
   schemas:
     Identity:

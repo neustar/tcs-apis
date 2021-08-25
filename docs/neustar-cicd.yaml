@@ -935,7 +935,7 @@ paths:
       x-code-samples:
         - lang: Curl
           source: |
-            curl --location --request POST 'https://ca-verify.neustarlab.biz/ccid/verify/v2/identity?apiKey=%3CapiKey1%3E' \
+            curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/identity?apiKey=%3CapiKey1%3E' \
             --header 'Content-Type: application/json' \
             --header 'Accept: application/json' \
             --data-raw '{
@@ -946,7 +946,7 @@ paths:
         - lang: Java
           source: |
             Unirest.setTimeouts(0, 0);
-            HttpResponse<String> response = Unirest.post("https://ca-verify.neustarlab.biz/ccid/verify/v2/identity?apiKey=%3CapiKey1%3E")
+            HttpResponse<String> response = Unirest.post("https://ca.neustarlab.biz/ccid/v2/identity?apiKey=%3CapiKey1%3E")
               .header("Content-Type", "application/json")
               .header("Accept", "application/json")
               .body("{\n  \"from\" : \"\"alice\" <sip:+15715550000@example.com>\",\n  \"to\" : \"\"bob\" <sip:+15715550001@example.com>\",\n  \"identity\" : [ \"eyJhbGciOiJFUzI1NiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTYsIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9fQ.amEa2CXEarp4H6S2EqUh-fj-8oCKQHpLXI6xL--KgvP_tI2bdfjXDWlABGpxLz2qwkCKBe0tCIFvMHLgeVsOTw;info=<http://ca.example.com/test.der>;alg=ES256\" ]\n}")
@@ -955,7 +955,7 @@ paths:
           source: |
             import requests
 
-            url = "https://ca-verify.neustarlab.biz/ccid/verify/v2/identity?apiKey=%3CapiKey1%3E"
+            url = "https://ca.neustarlab.biz/ccid/v2/identity?apiKey=%3CapiKey1%3E"
 
             payload="{\n  \"from\" : \"\"alice\" <sip:+15715550000@example.com>\",\n  \"to\" : \"\"bob\" <sip:+15715550001@example.com>\",\n  \"identity\" : [ \"eyJhbGciOiJFUzI1NiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTYsIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9fQ.amEa2CXEarp4H6S2EqUh-fj-8oCKQHpLXI6xL--KgvP_tI2bdfjXDWlABGpxLz2qwkCKBe0tCIFvMHLgeVsOTw;info=<http://ca.example.com/test.der>;alg=ES256\" ]\n}"
             headers = {
@@ -971,7 +971,7 @@ paths:
             require "uri"
             require "net/http"
 
-            url = URI("https://ca-verify.neustarlab.biz/ccid/verify/v2/identity?apiKey=%3CapiKey1%3E")
+            url = URI("https://ca.neustarlab.biz/ccid/v2/identity?apiKey=%3CapiKey1%3E")
 
             https = Net::HTTP.new(url.host, url.port)
             https.use_ssl = true
@@ -1068,7 +1068,7 @@ paths:
       x-code-samples:
         - lang: Curl
           source: |
-            curl --location --request POST 'https://ca-verify.neustarlab.biz/ccid/verify/v2/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true' \
+            curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true' \
             --header 'Content-Type: text/plain' \
             --header 'Accept: application/json' \
             --data-raw 'INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
@@ -1107,7 +1107,7 @@ paths:
         - lang: Java
           source: |
             Unirest.setTimeouts(0, 0);
-            HttpResponse<String> response = Unirest.post("https://ca-verify.neustarlab.biz/ccid/verify/v2/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true")
+            HttpResponse<String> response = Unirest.post("https://ca.neustarlab.biz/ccid/v2/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true")
               .header("Content-Type", "text/plain")
               .header("Accept", "application/json")
               .body("INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0\nv: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za\nMax-Forwards: 70\nm: \"alice\" <sip:alice@proxy.example.com:39089;transport=UDP>\nf: \"alice\" <sip:+15715550000@example.com>;tag=1f4e4f40\nt: \"bob\" <sip:+15715550001@example.com>\nDate: Fri, 16 Apr 2021 02:56:54 GMT\ni: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.\ny: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMSJdfSwiaWF0IjoxNjE4NTQxODE0LCJta3kiOlt7ImFsZyI6IlNIQS0xIiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQiJ9LHsiYWxnIjoiU0hBLTI1NiIsImRpZyI6IjM2M0JBRTEyOTU5NUY1OTcyREY3RTA4NEZFQ0RGMUJDQUQ3QTcwNjRGN0U3NEY3RUE2MDIwNjBFMzc1NENGRjcifV0sIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJvcmlnaWQiOiIxMjM0NTYtQUJDRC05OTk5OTkifQ.yd8hFUIVEbXiZI4NTbLeepUkuEpkKAo_DQZmc2BivqJxGAnbZO2j4iljprTrka-3jLOj6ZSXo-y91879cUYZ-A;info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"shaken\"\nP-Asserted-Identity: \"Alice\" <tel:+17035550001>\nP-Asserted-Identity: \"Alice\" <sip:+17035550001@example.com>\nCSeq: 2 INVITE\nc: application/sdp\nUser-Agent: Z 3.3.25608 r25552\nk: replaces, norefersub, extended-refer, timer\nAllow-Events: presence, kpml\nl: 439\n\nv=0\no=Z 0 0 IN IP4 10.31.32.251\ns=Z\nc=IN IP4 10.31.32.251\nt=0 0\nm=audio 8000 RTP/AVP 8 0 3 110 98 101\na=fingerprint:SHA-1 4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB\na=fingerprint:SHA-256 36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7\na=rtpmap:110 speex/8000\na=rtpmap:98 iLBC/8000\na=fmtp:98 mode=20\na=rtpmap:101 telephone-event/8000\na=fmtp:101 0-15\na=sendrecv\n")
@@ -1116,7 +1116,7 @@ paths:
           source: |
             import requests
 
-            url = "https://ca-verify.neustarlab.biz/ccid/verify/v2/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true"
+            url = "https://ca.neustarlab.biz/ccid/v2/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true"
 
             payload="INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0\nv: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za\nMax-Forwards: 70\nm: \"alice\" <sip:alice@proxy.example.com:39089;transport=UDP>\nf: \"alice\" <sip:+15715550000@example.com>;tag=1f4e4f40\nt: \"bob\" <sip:+15715550001@example.com>\nDate: Fri, 16 Apr 2021 02:56:54 GMT\ni: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.\ny: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMSJdfSwiaWF0IjoxNjE4NTQxODE0LCJta3kiOlt7ImFsZyI6IlNIQS0xIiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQiJ9LHsiYWxnIjoiU0hBLTI1NiIsImRpZyI6IjM2M0JBRTEyOTU5NUY1OTcyREY3RTA4NEZFQ0RGMUJDQUQ3QTcwNjRGN0U3NEY3RUE2MDIwNjBFMzc1NENGRjcifV0sIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJvcmlnaWQiOiIxMjM0NTYtQUJDRC05OTk5OTkifQ.yd8hFUIVEbXiZI4NTbLeepUkuEpkKAo_DQZmc2BivqJxGAnbZO2j4iljprTrka-3jLOj6ZSXo-y91879cUYZ-A;info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"shaken\"\nP-Asserted-Identity: \"Alice\" <tel:+17035550001>\nP-Asserted-Identity: \"Alice\" <sip:+17035550001@example.com>\nCSeq: 2 INVITE\nc: application/sdp\nUser-Agent: Z 3.3.25608 r25552\nk: replaces, norefersub, extended-refer, timer\nAllow-Events: presence, kpml\nl: 439\n\nv=0\no=Z 0 0 IN IP4 10.31.32.251\ns=Z\nc=IN IP4 10.31.32.251\nt=0 0\nm=audio 8000 RTP/AVP 8 0 3 110 98 101\na=fingerprint:SHA-1 4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB\na=fingerprint:SHA-256 36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7\na=rtpmap:110 speex/8000\na=rtpmap:98 iLBC/8000\na=fmtp:98 mode=20\na=rtpmap:101 telephone-event/8000\na=fmtp:101 0-15\na=sendrecv\n"
             headers = {
@@ -1133,7 +1133,7 @@ paths:
             require "uri"
             require "net/http"
 
-            url = URI("https://ca-verify.neustarlab.biz/ccid/verify/v2/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true")
+            url = URI("https://ca.neustarlab.biz/ccid/v2/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true")
 
             https = Net::HTTP.new(url.host, url.port)
             https.use_ssl = true
@@ -1251,7 +1251,7 @@ paths:
       x-code-samples:
         - lang: Curl
           source: |
-            curl --location --request POST 'https://ca-verify.neustarlab.biz/ccid/verify/v2/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true&cnamPrefix=%E2%9C%94,%E2%9C%98&verstat=TN-Validation-Passed&identity=true' \
+            curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true&cnamPrefix=%E2%9C%94,%E2%9C%98&verstat=TN-Validation-Passed&identity=true' \
             --header 'Content-Type: text/plain' \
             --header 'Accept: text/plain' \
             --data-raw 'INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
@@ -1290,7 +1290,7 @@ paths:
         - lang: Java
           source: |
             Unirest.setTimeouts(0, 0);
-            HttpResponse<String> response = Unirest.post("https://ca-verify.neustarlab.biz/ccid/verify/v2/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true&cnamPrefix=%E2%9C%94,%E2%9C%98&verstat=TN-Validation-Passed&identity=true")
+            HttpResponse<String> response = Unirest.post("https://ca.neustarlab.biz/ccid/v2/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true&cnamPrefix=%E2%9C%94,%E2%9C%98&verstat=TN-Validation-Passed&identity=true")
               .header("Content-Type", "text/plain")
               .header("Accept", "text/plain")
               .body("INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0\nv: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za\nMax-Forwards: 70\nm: \"alice\" <sip:alice@proxy.example.com:39089;transport=UDP>\nf: \"alice\" <sip:+15715550000@example.com>;tag=1f4e4f40\nt: \"bob\" <sip:+15715550001@example.com>\nDate: Fri, 16 Apr 2021 02:56:52 GMT\ni: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.\ny: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMSJdfSwiaWF0IjoxNjE4NTQxODEyLCJta3kiOlt7ImFsZyI6IlNIQS0xIiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQiJ9LHsiYWxnIjoiU0hBLTI1NiIsImRpZyI6IjM2M0JBRTEyOTU5NUY1OTcyREY3RTA4NEZFQ0RGMUJDQUQ3QTcwNjRGN0U3NEY3RUE2MDIwNjBFMzc1NENGRjcifV0sIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJvcmlnaWQiOiIxMjM0NTYtQUJDRC05OTk5OTkifQ.HJzTVP6kSWIGrrAW23GJX920-WXqV7lSsLr4WzUlIJWdCVaLFNBVfze3PJ0Bq9qQnvhIZztjrdUR_hAUseaA8g;info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"shaken\"\nP-Asserted-Identity: \"Alice\" <tel:+17035550001>\nP-Asserted-Identity: \"Alice\" <sip:+17035550001@example.com>\nCSeq: 2 INVITE\nc: application/sdp\nUser-Agent: Z 3.3.25608 r25552\nk: replaces, norefersub, extended-refer, timer\nAllow-Events: presence, kpml\nl: 439\n\nv=0\no=Z 0 0 IN IP4 10.31.32.251\ns=Z\nc=IN IP4 10.31.32.251\nt=0 0\nm=audio 8000 RTP/AVP 8 0 3 110 98 101\na=fingerprint:SHA-1 4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB\na=fingerprint:SHA-256 36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7\na=rtpmap:110 speex/8000\na=rtpmap:98 iLBC/8000\na=fmtp:98 mode=20\na=rtpmap:101 telephone-event/8000\na=fmtp:101 0-15\na=sendrecv\n")
@@ -1299,7 +1299,7 @@ paths:
           source: |
             import requests
 
-            url = "https://ca-verify.neustarlab.biz/ccid/verify/v2/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true&cnamPrefix=%E2%9C%94,%E2%9C%98&verstat=TN-Validation-Passed&identity=true"
+            url = "https://ca.neustarlab.biz/ccid/v2/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true&cnamPrefix=%E2%9C%94,%E2%9C%98&verstat=TN-Validation-Passed&identity=true"
 
             payload="INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0\nv: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za\nMax-Forwards: 70\nm: \"alice\" <sip:alice@proxy.example.com:39089;transport=UDP>\nf: \"alice\" <sip:+15715550000@example.com>;tag=1f4e4f40\nt: \"bob\" <sip:+15715550001@example.com>\nDate: Fri, 16 Apr 2021 02:56:52 GMT\ni: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.\ny: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMSJdfSwiaWF0IjoxNjE4NTQxODEyLCJta3kiOlt7ImFsZyI6IlNIQS0xIiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQiJ9LHsiYWxnIjoiU0hBLTI1NiIsImRpZyI6IjM2M0JBRTEyOTU5NUY1OTcyREY3RTA4NEZFQ0RGMUJDQUQ3QTcwNjRGN0U3NEY3RUE2MDIwNjBFMzc1NENGRjcifV0sIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJvcmlnaWQiOiIxMjM0NTYtQUJDRC05OTk5OTkifQ.HJzTVP6kSWIGrrAW23GJX920-WXqV7lSsLr4WzUlIJWdCVaLFNBVfze3PJ0Bq9qQnvhIZztjrdUR_hAUseaA8g;info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"shaken\"\nP-Asserted-Identity: \"Alice\" <tel:+17035550001>\nP-Asserted-Identity: \"Alice\" <sip:+17035550001@example.com>\nCSeq: 2 INVITE\nc: application/sdp\nUser-Agent: Z 3.3.25608 r25552\nk: replaces, norefersub, extended-refer, timer\nAllow-Events: presence, kpml\nl: 439\n\nv=0\no=Z 0 0 IN IP4 10.31.32.251\ns=Z\nc=IN IP4 10.31.32.251\nt=0 0\nm=audio 8000 RTP/AVP 8 0 3 110 98 101\na=fingerprint:SHA-1 4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB\na=fingerprint:SHA-256 36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7\na=rtpmap:110 speex/8000\na=rtpmap:98 iLBC/8000\na=fmtp:98 mode=20\na=rtpmap:101 telephone-event/8000\na=fmtp:101 0-15\na=sendrecv\n"
             headers = {
@@ -1316,7 +1316,7 @@ paths:
             require "uri"
             require "net/http"
 
-            url = URI("https://ca-verify.neustarlab.biz/ccid/verify/v2/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true&cnamPrefix=%E2%9C%94,%E2%9C%98&verstat=TN-Validation-Passed&identity=true")
+            url = URI("https://ca.neustarlab.biz/ccid/v2/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true&cnamPrefix=%E2%9C%94,%E2%9C%98&verstat=TN-Validation-Passed&identity=true")
 
             https = Net::HTTP.new(url.host, url.port)
             https.use_ssl = true
@@ -1396,7 +1396,7 @@ paths:
       x-code-samples:
         - lang: Curl
           source: |
-            curl --location --request POST 'https://ca-verify.neustarlab.biz/ccid/verify/v2/identity/proxy/127.0.0.2/5060?apiKey=%3CapiKey7%3E' \
+            curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/identity/proxy/127.0.0.2/5060?apiKey=%3CapiKey7%3E' \
             --header 'Content-Type: text/plain' \
             --header 'Accept: application/json' \
             --data-raw 'INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
@@ -1431,7 +1431,7 @@ paths:
         - lang: Java
           source: |
             Unirest.setTimeouts(0, 0);
-            HttpResponse<String> response = Unirest.post("https://ca-verify.neustarlab.biz/ccid/verify/v2/identity/proxy/127.0.0.2/5060?apiKey=%3CapiKey7%3E")
+            HttpResponse<String> response = Unirest.post("https://ca.neustarlab.biz/ccid/v2/identity/proxy/127.0.0.2/5060?apiKey=%3CapiKey7%3E")
               .header("Content-Type", "text/plain")
               .header("Accept", "application/json")
               .body("INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0\nVia: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za\nMax-Forwards: 70\nContact: \"alice\" <sip:alice@proxy.example.com:39089;transport=UDP>\nFrom: \"alice\" <sip:+15715550000@example.com>;tag=1f4e4f40\nTo: \"bob\" <sip:+15715550001@example.com>\nDate: Fri, 16 Apr 2021 02:56:56 GMT\nCall-ID: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.\nIdentity: eyJhbGciOiJFUzI1NiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTYsIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9fQ.l0M2I9W8agfAWSeYOXxLu5XAPYgUMPSH53daRzsABYeT9JcxPwIPSY2O1FFhqyUjBz_P1Lm6Bhe3I-ktbjI6Zg;info=<http://ca.example.com/test.der>;alg=ES256\nCSeq: 2 INVITE\nContent-Type: application/sdp\nUser-Agent: Z 3.3.25608 r25552\nSupported: replaces, norefersub, extended-refer, timer\nAllow-Events: presence, kpml\nContent-Length: 239\n\nv=0\no=Z 0 0 IN IP4 10.31.32.251\ns=Z\nc=IN IP4 10.31.32.251\nt=0 0\nm=audio 8000 RTP/AVP 8 0 3 110 98 101\na=rtpmap:110 speex/8000\na=rtpmap:98 iLBC/8000\na=fmtp:98 mode=20\na=rtpmap:101 telephone-event/8000\na=fmtp:101 0-15\na=sendrecv\n")
@@ -1440,7 +1440,7 @@ paths:
           source: |
             import requests
 
-            url = "https://ca-verify.neustarlab.biz/ccid/verify/v2/identity/proxy/127.0.0.2/5060?apiKey=%3CapiKey7%3E"
+            url = "https://ca.neustarlab.biz/ccid/v2/identity/proxy/127.0.0.2/5060?apiKey=%3CapiKey7%3E"
 
             payload="INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0\nVia: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za\nMax-Forwards: 70\nContact: \"alice\" <sip:alice@proxy.example.com:39089;transport=UDP>\nFrom: \"alice\" <sip:+15715550000@example.com>;tag=1f4e4f40\nTo: \"bob\" <sip:+15715550001@example.com>\nDate: Fri, 16 Apr 2021 02:56:56 GMT\nCall-ID: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.\nIdentity: eyJhbGciOiJFUzI1NiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTYsIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9fQ.l0M2I9W8agfAWSeYOXxLu5XAPYgUMPSH53daRzsABYeT9JcxPwIPSY2O1FFhqyUjBz_P1Lm6Bhe3I-ktbjI6Zg;info=<http://ca.example.com/test.der>;alg=ES256\nCSeq: 2 INVITE\nContent-Type: application/sdp\nUser-Agent: Z 3.3.25608 r25552\nSupported: replaces, norefersub, extended-refer, timer\nAllow-Events: presence, kpml\nContent-Length: 239\n\nv=0\no=Z 0 0 IN IP4 10.31.32.251\ns=Z\nc=IN IP4 10.31.32.251\nt=0 0\nm=audio 8000 RTP/AVP 8 0 3 110 98 101\na=rtpmap:110 speex/8000\na=rtpmap:98 iLBC/8000\na=fmtp:98 mode=20\na=rtpmap:101 telephone-event/8000\na=fmtp:101 0-15\na=sendrecv\n"
             headers = {
@@ -1456,7 +1456,7 @@ paths:
             require "uri"
             require "net/http"
 
-            url = URI("https://ca-verify.neustarlab.biz/ccid/verify/v2/identity/proxy/127.0.0.2/5060?apiKey=%3CapiKey7%3E")
+            url = URI("https://ca.neustarlab.biz/ccid/v2/identity/proxy/127.0.0.2/5060?apiKey=%3CapiKey7%3E")
 
             https = Net::HTTP.new(url.host, url.port)
             https.use_ssl = true
@@ -1604,19 +1604,19 @@ paths:
       x-code-samples:
         - lang: Curl
           source: |
-            curl --location --request GET 'https://ca-verify.neustarlab.biz/ccid/verify/v2/cnam/tn/15715550000?apiKey=%3CapiKey1%3E' \
+            curl --location --request GET 'https://ca.neustarlab.biz/ccid/v2/cnam/tn/15715550000?apiKey=%3CapiKey1%3E' \
             --header 'Accept: application/json'
         - lang: Java
           source: |
             Unirest.setTimeouts(0, 0);
-            HttpResponse<String> response = Unirest.get("https://ca-verify.neustarlab.biz/ccid/verify/v2/cnam/tn/15715550000?apiKey=%3CapiKey1%3E")
+            HttpResponse<String> response = Unirest.get("https://ca.neustarlab.biz/ccid/v2/cnam/tn/15715550000?apiKey=%3CapiKey1%3E")
               .header("Accept", "application/json")
               .asString();
         - lang: Python
           source: |
             import requests
 
-            url = "https://ca-verify.neustarlab.biz/ccid/verify/v2/cnam/tn/15715550000?apiKey=%3CapiKey1%3E"
+            url = "https://ca.neustarlab.biz/ccid/v2/cnam/tn/15715550000?apiKey=%3CapiKey1%3E"
 
             payload={}
             headers = {
@@ -1631,7 +1631,7 @@ paths:
             require "uri"
             require "net/http"
 
-            url = URI("https://ca-verify.neustarlab.biz/ccid/verify/v2/cnam/tn/15715550000?apiKey=%3CapiKey1%3E")
+            url = URI("https://ca.neustarlab.biz/ccid/v2/cnam/tn/15715550000?apiKey=%3CapiKey1%3E")
 
             https = Net::HTTP.new(url.host, url.port)
             https.use_ssl = true
@@ -1684,19 +1684,19 @@ paths:
       x-code-samples:
         - lang: Curl
           source: |
-            curl --location --request GET 'https://ca-verify.neustarlab.biz/ccid/verify/v2/cnam/tn/15715550000?apiKey=%3CapiKey1%3E' \
+            curl --location --request GET 'https://ca.neustarlab.biz/ccid/v2/cnam/tn/15715550000?apiKey=%3CapiKey1%3E' \
             --header 'Accept: application/json'
         - lang: Java
           source: |
             Unirest.setTimeouts(0, 0);
-            HttpResponse<String> response = Unirest.get("https://ca-verify.neustarlab.biz/ccid/verify/v2/cnam/tn/15715550000?apiKey=%3CapiKey1%3E")
+            HttpResponse<String> response = Unirest.get("https://ca.neustarlab.biz/ccid/v2/cnam/tn/15715550000?apiKey=%3CapiKey1%3E")
               .header("Accept", "application/json")
               .asString();
         - lang: Python
           source: |
             import requests
 
-            url = "https://ca-verify.neustarlab.biz/ccid/verify/v2/cnam/tn/15715550000?apiKey=%3CapiKey1%3E"
+            url = "https://ca.neustarlab.biz/ccid/v2/cnam/tn/15715550000?apiKey=%3CapiKey1%3E"
 
             payload={}
             headers = {
@@ -1711,7 +1711,7 @@ paths:
             require "uri"
             require "net/http"
 
-            url = URI("https://ca-verify.neustarlab.biz/ccid/verify/v2/cnam/tn/15715550000?apiKey=%3CapiKey1%3E")
+            url = URI("https://ca.neustarlab.biz/ccid/v2/cnam/tn/15715550000?apiKey=%3CapiKey1%3E")
 
             https = Net::HTTP.new(url.host, url.port)
             https.use_ssl = true
@@ -1763,12 +1763,12 @@ paths:
       x-code-samples:
         - lang: Curl
           source: |
-            curl --location --request GET 'https://ca-verify.neustarlab.biz/ccid/verify/v2/ecnam/tn/15715550000?apiKey=%3CapiKey1%3E' \
+            curl --location --request GET 'https://ca.neustarlab.biz/ccid/v2/ecnam/tn/15715550000?apiKey=%3CapiKey1%3E' \
             --header 'Accept: application/json'
         - lang: Java
           source: |
             Unirest.setTimeouts(0, 0);
-            HttpResponse<String> response = Unirest.get("https://ca-verify.neustarlab.biz/ccid/verify/v2/ecnam/tn/15715550000?apiKey=%3CapiKey1%3E")
+            HttpResponse<String> response = Unirest.get("https://ca.neustarlab.biz/ccid/v2/ecnam/tn/15715550000?apiKey=%3CapiKey1%3E")
               .header("Accept", "application/json")
               .asString();
         - lang: Python
@@ -1789,7 +1789,7 @@ paths:
             require "uri"
             require "net/http"
 
-            url = URI("https://ca-verify.neustarlab.biz/ccid/verify/v2/ecnam/tn/15715550000?apiKey=%3CapiKey1%3E")
+            url = URI("https://ca.neustarlab.biz/ccid/v2/ecnam/tn/15715550000?apiKey=%3CapiKey1%3E")
 
             https = Net::HTTP.new(url.host, url.port)
             https.use_ssl = true
@@ -1837,7 +1837,7 @@ paths:
       x-code-samples:
         - lang: Curl
           source: |
-            curl --location --request POST 'https://ca-verify.neustarlab.biz/ccid/verify/v2/ecnam?apiKey=%3CapiKey1%3E' \
+            curl --location --request POST 'https://ca.neustarlab.biz/ccid/v2/ecnam?apiKey=%3CapiKey1%3E' \
             --header 'Content-Type: application/json' \
             --header 'Accept: application/json' \
             --data-raw '{
@@ -1846,7 +1846,7 @@ paths:
         - lang: Java
           source: |
             Unirest.setTimeouts(0, 0);
-            HttpResponse<String> response = Unirest.post("https://ca-verify.neustarlab.biz/ccid/verify/v2/ecnam?apiKey=%3CapiKey1%3E")
+            HttpResponse<String> response = Unirest.post("https://ca.neustarlab.biz/ccid/v2/ecnam?apiKey=%3CapiKey1%3E")
               .header("Content-Type", "application/json")
               .header("Accept", "application/json")
               .body("{\n  \"from\" : \"\"alice\" <sip:+15715550000@example.com>\"\n}")
@@ -1855,7 +1855,7 @@ paths:
           source: |
             import requests
 
-            url = "https://ca-verify.neustarlab.biz/ccid/verify/v2/ecnam?apiKey=%3CapiKey1%3E"
+            url = "https://ca.neustarlab.biz/ccid/v2/ecnam?apiKey=%3CapiKey1%3E"
 
             payload="{\n  \"from\" : \"\"alice\" <sip:+15715550000@example.com>\"\n}"
             headers = {
@@ -1871,7 +1871,7 @@ paths:
             require "uri"
             require "net/http"
 
-            url = URI("https://ca-verify.neustarlab.biz/ccid/verify/v2/ecnam?apiKey=%3CapiKey1%3E")
+            url = URI("https://ca.neustarlab.biz/ccid/v2/ecnam?apiKey=%3CapiKey1%3E")
 
             https = Net::HTTP.new(url.host, url.port)
             https.use_ssl = true
@@ -1908,19 +1908,19 @@ paths:
       x-code-samples:
         - lang: Curl
           source: |
-            curl --location --request GET 'https://ca-verify.neustarlab.biz/ccid/verify/v2/error' \
+            curl --location --request GET 'https://ca.neustarlab.biz/ccid/v2/error' \
             --header 'Accept: application/json'
         - lang: Java
           source: |
             Unirest.setTimeouts(0, 0);
-            HttpResponse<String> response = Unirest.get("https://ca-verify.neustarlab.biz/ccid/verify/v2/error")
+            HttpResponse<String> response = Unirest.get("https://ca.neustarlab.biz/ccid/v2/error")
               .header("Accept", "application/json")
               .asString();
         - lang: Python
           source: |
             import requests
 
-            url = "https://ca-verify.neustarlab.biz/ccid/verify/v2/error"
+            url = "https://ca.neustarlab.biz/ccid/v2/error"
 
             payload={}
             headers = {
@@ -1935,7 +1935,7 @@ paths:
             require "uri"
             require "net/http"
 
-            url = URI("https://ca-verify.neustarlab.biz/ccid/verify/v2/error")
+            url = URI("https://ca.neustarlab.biz/ccid/v2/error")
 
             https = Net::HTTP.new(url.host, url.port)
             https.use_ssl = true

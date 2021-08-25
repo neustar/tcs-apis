@@ -2311,7 +2311,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CNAM-Input'
+              $ref: '#/components/schemas/CNAM-Error'
         required: true
       x-code-samples:
         - lang: Curl

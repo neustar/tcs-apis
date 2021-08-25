@@ -2443,7 +2443,7 @@ paths:
           content: 
             application/json: 
               schema: 
-                $ref: '#/components/schemas/CNAM-Error'
+                $ref: '#/components/schemas/ECNAM-Error'
 components:
   schemas:
     Identity:
@@ -3312,6 +3312,27 @@ components:
               type: "string"
               example: "Fri, 16 Apr 2021 02:56:55 GMT"
           type: "object"
+    ECNAM-Error:
+      type: object
+      properties: 
+        ecnam_error: 
+          properties: 
+            error_id: 
+              type: "string"
+              example: "CnamNotAuthorized"
+            http_status_code: 
+              type: "number"
+              example: 400
+            sip_code: 
+              type: "number"
+              example: 400
+            reason: 
+              type: "string"
+              example: "CNAM service not authorized"
+            timestamp: 
+              type: "string"
+              example: "Fri, 16 Apr 2021 02:56:55 GMT"
+          type: "object"
     CNAM-Input:
       type: object
       properties: 
@@ -3435,7 +3456,7 @@ components:
               description: Value as 'allow as SIP P-Asserted-Identity header
           type: "object"
         call_insight: 
-          description: 
+          description: Call insight info
           properties: 
             call_treatment: 
               type: "string"

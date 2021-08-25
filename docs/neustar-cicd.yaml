@@ -2306,13 +2306,13 @@ paths:
           schema:
             type: string
           description: The API key uniquely identifying the API client. Cannot be null or empty
-      requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CNAM-Error'
-        required: true
+      # requestBody:
+      #   description: ''
+      #   content:
+      #     application/json:
+      #       schema:
+      #         $ref: '#/components/schemas/CNAM-Error'
+      #   required: true
       x-code-samples:
         - lang: Curl
           source: |

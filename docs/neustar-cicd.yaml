@@ -2528,6 +2528,62 @@ paths:
             application/json: 
               schema: 
                 $ref: '#/components/schemas/ECNAM-Error'
+  /verify/error:
+    get:
+      tags:
+      - Gets a list of all potential errors generated
+      summary: Return the list of all potential errors that could be generated, so that an API consumer can process those errors accordingly.
+      operationId: /errors
+      description: |
+
+
+      x-code-samples:
+        - lang: Curl
+          source: |
+            curl --location --request GET 'https://ca-verify.neustarlab.biz/ccid/verify/v2/error' \
+            --header 'Accept: application/json'
+        - lang: Java
+          source: |
+            Unirest.setTimeouts(0, 0);
+            HttpResponse<String> response = Unirest.get("https://ca-verify.neustarlab.biz/ccid/verify/v2/error")
+              .header("Accept", "application/json")
+              .asString();
+        - lang: Python
+          source: |
+            import requests
+
+            url = "https://ca-verify.neustarlab.biz/ccid/verify/v2/error"
+
+            payload={}
+            headers = {
+              'Accept': 'application/json'
+            }
+
+            response = requests.request("GET", url, headers=headers, data=payload)
+
+            print(response.text)
+        - lang: Ruby
+          source: |
+            require "uri"
+            require "net/http"
+
+            url = URI("https://ca-verify.neustarlab.biz/ccid/verify/v2/error")
+
+            https = Net::HTTP.new(url.host, url.port)
+            https.use_ssl = true
+
+            request = Net::HTTP::Get.new(url)
+            request["Accept"] = "application/json"
+
+            response = https.request(request)
+            puts response.read_body
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/ErrorAPISuccessResponse'
 components:
   schemas:
     Identity:

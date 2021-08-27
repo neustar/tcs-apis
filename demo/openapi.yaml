@@ -7,19 +7,19 @@ servers:
 info:
   version: 1.0.0
   title: Neustar Certified Caller Id Authentication & Verification Service
-  termsOfService: 'https://team.neustar'
-  contact:
-    name: API Support
-    email: ccid-support@team.neustar
-    url: https://www.home.neustar/trusted-call-solutions/certified-caller
+  # termsOfService: 'https://team.neustar'
+  # contact:
+  #   name: API Support
+  #   email: ccid-support@team.neustar
+  #    url: https://www.home.neustar/trusted-call-solutions/certified-caller
   x-logo:
     url: 'https://raw.githubusercontent.com/rishagit/cicd-oas/main/docs/neustar-logo.png'
     altText: Neustar
     backgroundColor": "#05cc7a"
-  license:
-    name: Neustar
-    url: 'http://team.neustar'
-    identifier: Neustar
+  # license:
+  #   name: Neustar
+  #   url: 'https://www.home.neustar/trusted-call-solutions/certified-caller'
+  #   identifier: Neustar
   summary: 
   description: |
     # Overview
@@ -30,8 +30,8 @@ info:
     Currently, a REST API cli ent is required to provide an apiKey query parameter with a pre-provisioned value to access API calls that are restricted. If the apiKey parameter is not specified, the client IP address may be used as the backup authentication mechanism if the client CIDR block is pre-provisioned.
 tags:
 - name: Generate SIP Identity Headers
-- name: Get Certificate
-- name: Errors
+- name: Certificate
+- name: Error
 - name: Verifies SIP Identity headers
 - name: Performs CNAM queries
 - name: Performs ECNAM queries
@@ -42,17 +42,14 @@ x-tagGroups:
   - name: Authentication Service
     tags:
       - Generate SIP Identity Headers
-      - Get Certificate
-      - Errors
+      - Certificate
+      - Error
   - name: Verification Service
     tags:
       - Verifies SIP Identity headers
       - Performs CNAM queries
       - Performs ECNAM queries
       - Gets a list of all potential errors generated
-
-      
-
 paths:
   /authn/identity-j_j:
     post:
@@ -60,6 +57,7 @@ paths:
       - Generate SIP Identity Headers
       summary:  'Accepts requests and produces responses in JSON Format.'
       description: |
+        Accepts SIP INVITE messages as requests in JSON format and produces responses in JSON Format.
         
       operationId: identity-j_j
       parameters:
@@ -199,7 +197,8 @@ paths:
       summary:  'Accepts SIP INVITE messages and produces responses in JSON format'
       operationId: identity-s_j
       description: | 
-        
+        Accepts SIP INVITE messages as requests in SIP format and produces responses in JSON Format.
+
       parameters:
         - in: query
           name: apiKey
@@ -359,7 +358,8 @@ paths:
       summary:  'Accepts SIP INVITE messages and produces responses in SIP format'
       operationId: identity-s_s
       description: |
-        
+        Accepts SIP INVITE messages as requests in SIP format and produces responses in SIP Format.
+
       parameters:
         - in: query
           name: apiKey
@@ -788,10 +788,10 @@ paths:
   /authn/certs/{id}:
     get:
       tags:
-      - Get Certificate
-      summary: Returns the certificate of a customer that does not provide a public accessible URL for fetching its certificate.
+      - Certificate
+      summary: Get Certificate
       description: |
-        
+        This API entry point is to return the certificate of a customer that does not provide a public accessible URL for fetching its certificate, so that signatures embedded in the SIP Identity headers generated for the customer can be verified.
       operationId: /certs/{id}
       parameters:
         - name: id
@@ -857,11 +857,11 @@ paths:
   /authn/error:
     get:
       tags:
-      - Errors
-      summary: Returns the list of all potential errors that could be generated, so that an API consumer can process those errors accordingly.
+      - Error
+      summary: Get Error
       operationId: /errors
       description: |
-
+        Returns the list of all potential errors that could be generated, so that an API consumer can process those errors accordingly.
       x-code-samples:
         - lang: Curl
           source: |

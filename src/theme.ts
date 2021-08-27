@@ -111,9 +111,9 @@ const defaultTheme: ThemeInterface = {
     smoothing: 'antialiased',
     optimizeSpeed: true,
     headings: {
-      fontFamily: 'Montserrat, sans-serif',
+      fontFamily: 'Roboto, sans-serif',
       fontWeight: 'normal',
-      lineHeight: '1.6em',
+      lineHeight: '1em',
     },
     code: {
       fontSize: '11px',
@@ -125,7 +125,7 @@ const defaultTheme: ThemeInterface = {
       wrap: false,
     },
     links: {
-      color: ({ colors }) => colors.primary.main,
+      color: '#3366BB',
       visited: ({ typography }) => typography.links.color,
       hover: ({ typography }) => lighten(0.2, typography.links.color),
     },
@@ -140,6 +140,8 @@ const defaultTheme: ThemeInterface = {
         : theme.colors.primary.main,
     groupItems: {
       textTransform: 'uppercase',
+      textColor: '#05cc7a',
+      fontWeight: 'bold',
     },
     level1Items: {
       textTransform: 'none',
@@ -316,6 +318,8 @@ export interface ResolvedThemeInterface {
     activeTextColor: string;
     groupItems: {
       textTransform: string;
+      textColor: string;
+      fontWeight: string;
     };
     level1Items: {
       textTransform: string;

@@ -1968,6 +1968,10 @@ components:
           type: string
           example: Bob <sip:5715550000@example.com>
           description: \"To\" header value from SIP INVITE message
+        date:
+          type: string
+          example: Fri, 11 Aug 2017 04:17:14 GMT
+          description: SIP Date header
         compact: 
           type: boolean
           description: Flag for generating compact SIP Identity header, ignored for 'shaken' PASSporT type. If specified, must be true or false

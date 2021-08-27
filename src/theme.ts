@@ -2,7 +2,7 @@ import { darken, desaturate, lighten, readableColor, transparentize } from 'poli
 
 const defaultTheme: ThemeInterface = {
   spacing: {
-    unit: 5,
+    unit: 2,
     sectionHorizontal: ({ spacing }) => spacing.unit * 8,
     sectionVertical: ({ spacing }) => spacing.unit * 8,
   },
@@ -12,9 +12,9 @@ const defaultTheme: ThemeInterface = {
     large: '105rem',
   },
   colors: {
-    tonalOffset: 0.2,
+    tonalOffset: 0.1,
     primary: {
-      main: '#32329f',
+      main: '#000000',
       light: ({ colors }) => lighten(colors.tonalOffset, colors.primary.main),
       dark: ({ colors }) => darken(colors.tonalOffset, colors.primary.main),
       contrastText: ({ colors }) => readableColor(colors.primary.main),
@@ -102,7 +102,7 @@ const defaultTheme: ThemeInterface = {
     },
   },
   typography: {
-    fontSize: '14px',
+    fontSize: '13px',
     lineHeight: '1.5em',
     fontWeightRegular: '400',
     fontWeightBold: '600',
@@ -112,16 +112,16 @@ const defaultTheme: ThemeInterface = {
     optimizeSpeed: true,
     headings: {
       fontFamily: 'Montserrat, sans-serif',
-      fontWeight: '400',
+      fontWeight: 'normal',
       lineHeight: '1.6em',
     },
     code: {
-      fontSize: '13px',
+      fontSize: '11px',
       fontFamily: 'Courier, monospace',
       lineHeight: ({ typography }) => typography.lineHeight,
       fontWeight: ({ typography }) => typography.fontWeightRegular,
-      color: '#e53935',
-      backgroundColor: 'rgba(38, 50, 56, 0.05)',
+      color: '#eae7e8',
+      backgroundColor: '#eae7e8',
       wrap: false,
     },
     links: {
@@ -133,7 +133,7 @@ const defaultTheme: ThemeInterface = {
   sidebar: {
     width: '260px',
     backgroundColor: '#fafafa',
-    textColor: '#333333',
+    textColor: '#000000',
     activeTextColor: theme =>
       theme.sidebar.textColor !== defaultTheme.sidebar!.textColor
         ? theme.sidebar.textColor
@@ -155,12 +155,12 @@ const defaultTheme: ThemeInterface = {
     gutter: '2px',
   },
   rightPanel: {
-    backgroundColor: '#263238',
+    backgroundColor: '#FFFFFF',
     width: '40%',
-    textColor: '#ffffff',
+    textColor: '#c5c5c5',
   },
   codeBlock: {
-    backgroundColor: ({ rightPanel }) => darken(0.1, rightPanel.backgroundColor),
+    backgroundColor: ({ rightPanel }) => darken(0.8, rightPanel.backgroundColor),
   },
 };
 

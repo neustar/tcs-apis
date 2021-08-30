@@ -1,8 +1,8 @@
-# Proposing Changes to CICD AS & VS APIs
+# Proposing Changes to CID AS & VS APIs
 
 ## Introduction
 
-Neustar’s Certified Caller Id (CCID) Authenitcaiton Service (AS) and Verification Service (VS) implements the emerging industry standard of IETF RFC8224 specification, as well as ATIS SHAKEN extension, for computing and verifying SIP Identity headers to assist with SIP call setup. 
+Neustar’s Certified Caller Id (CID) Authenitcaiton Service (AS) and Verification Service (VS) implements the emerging industry standard of IETF RFC8224 specification, as well as ATIS SHAKEN extension, for computing and verifying SIP Identity headers to assist with SIP call setup. 
 
 This document contains all the APIs that are available for AS and VS in OpenAPI Specification (OAS) format
 

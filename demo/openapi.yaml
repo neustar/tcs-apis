@@ -13,7 +13,7 @@ info:
   #   email: ccid-support@team.neustar
   #    url: https://www.home.neustar/trusted-call-solutions/certified-caller
   x-logo:
-    url: 'https://raw.githubusercontent.com/rishagit/cicd-oas/main/docs/neustar-logo.png'
+    url: 'https://raw.githubusercontent.com/neustar/tcs-apis/main/docs/neustar-logo.png'
     altText: Neustar
     backgroundColor": "#05cc7a"
   # license:

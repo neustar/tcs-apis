@@ -97,13 +97,12 @@ export const MenuItemLi = styled.li<{ depth: number }>`
 
 export const menuItemDepth = {
   0: css`
-    opacity: 2;
+    opacity: 0.7;
     text-transform: ${({ theme }) => theme.sidebar.groupItems.textTransform};
-    font-size: .9em;
+    font-size: 0.8em;
     padding-bottom: 0;
     cursor: default;
-    color: ${props => props.theme.sidebar.groupItems.textColor};
-    font-weight: ${props => props.theme.sidebar.groupItems.fontWeight};
+    color: ${props => props.theme.sidebar.textColor};
   `,
   1: css`
     font-size: 0.929em;

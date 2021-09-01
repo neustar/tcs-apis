@@ -10,7 +10,7 @@ import { resolve } from 'path';
 
 describe('SSR', () => {
   it('should render in SSR mode', async () => {
-    const spec = yaml.load(readFileSync(resolve(__dirname, '../../demo/openapi.yaml'), 'utf-8'));
+    const spec = yaml.load(readFileSync(resolve(__dirname, '../../docs/openapi.yaml'), 'utf-8'));
     const store = await createStore(spec, '');
     expect(() => {
       renderToString(<Redoc store={store} />);

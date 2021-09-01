@@ -7,19 +7,19 @@ servers:
 info:
   version: 1.0.0
   title: Neustar Certified Caller Id Authentication & Verification Service
-  termsOfService: 'https://team.neustar'
-  contact:
-    name: API Support
-    email: ccid-support@team.neustar
-    url: https://www.home.neustar/trusted-call-solutions/certified-caller
+  # termsOfService: 'https://team.neustar'
+  # contact:
+  #   name: API Support
+  #   email: ccid-support@team.neustar
+  #    url: https://www.home.neustar/trusted-call-solutions/certified-caller
   x-logo:
     url: 'https://raw.githubusercontent.com/neustar/tcs-apis/main/docs/neustar-logo.png'
     altText: Neustar
     backgroundColor": "#05cc7a"
-  license:
-    name: Neustar
-    url: 'http://team.neustar'
-    identifier: Neustar
+  # license:
+  #   name: Neustar
+  #   url: 'https://www.home.neustar/trusted-call-solutions/certified-caller'
+  #   identifier: Neustar
   summary: 
   description: |
     # Overview
@@ -30,8 +30,8 @@ info:
     Currently, a REST API cli ent is required to provide an apiKey query parameter with a pre-provisioned value to access API calls that are restricted. If the apiKey parameter is not specified, the client IP address may be used as the backup authentication mechanism if the client CIDR block is pre-provisioned.
 tags:
 - name: Generate SIP Identity Headers
-- name: Get Certificate
-- name: Errors
+- name: Certificate
+- name: Error
 - name: Verifies SIP Identity headers
 - name: Performs CNAM queries
 - name: Performs ECNAM queries
@@ -42,17 +42,14 @@ x-tagGroups:
   - name: Authentication Service
     tags:
       - Generate SIP Identity Headers
-      - Get Certificate
-      - Errors
+      - Certificate
+      - Error
   - name: Verification Service
     tags:
       - Verifies SIP Identity headers
       - Performs CNAM queries
       - Performs ECNAM queries
       - Gets a list of all potential errors generated
-
-      
-
 paths:
   /authn/identity-j_j:
     post:
@@ -60,6 +57,7 @@ paths:
       - Generate SIP Identity Headers
       summary:  'Accepts requests and produces responses in JSON Format.'
       description: |
+        Accepts SIP INVITE messages as requests in JSON format and produces responses in JSON Format.
         
       operationId: identity-j_j
       parameters:
@@ -199,7 +197,8 @@ paths:
       summary:  'Accepts SIP INVITE messages and produces responses in JSON format'
       operationId: identity-s_j
       description: | 
-        
+        Accepts SIP INVITE messages as requests in SIP format and produces responses in JSON Format.
+
       parameters:
         - in: query
           name: apiKey
@@ -359,7 +358,8 @@ paths:
       summary:  'Accepts SIP INVITE messages and produces responses in SIP format'
       operationId: identity-s_s
       description: |
-        
+        Accepts SIP INVITE messages as requests in SIP format and produces responses in SIP Format.
+
       parameters:
         - in: query
           name: apiKey
@@ -381,6 +381,20 @@ paths:
           style: form
           schema:
             type: string
+        - name: origcc
+          in: query
+          description: Default country code for the originator telephone number
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: destcc
+          in: query
+          description: Default country code for the destination telephone number
+          required: false
+          style: form
+          schema:
+            type: string
         - name: attest
           in: query
           required: false
@@ -390,13 +404,6 @@ paths:
         - name: origid
           in: query
           description: origid value specified by ATIS SHAKEN extension
-          required: false
-          style: form
-          schema:
-            type: string
-        - name: origcc
-          in: query
-          description: Default country code for the originator telephone number
           required: false
           style: form
           schema:
@@ -507,7 +514,8 @@ paths:
             text/plain:
               schema:
                 type: string
-                example: 'HTTP/1.1 200 OK
+                example: |
+                          'HTTP/1.1 200 OK
                           Content-Type: text/plain;charset=UTF-8
                           Content-Length: 1981
 
@@ -695,9 +703,8 @@ paths:
       summary: 'Returns next hop and policy data in JSON Format for SIP Proxies'
       operationId: get-identity/proxy
       description: |
-        A successful response in JSON format includes the "status" attribute with a value of "ok". It also contains an optional "next_hop" attribute for indicating the next hop for routing the SIP messages, and an optional "policy" attribute with an opaque string to be consumed by the SIP proxy for manipulating SIP headers and mapping error conditions.
-
-        A failure response in JSON format includes the "status" attribute with a value of "error", and an "error" attribute, containing a list of error conditions that result in the failure.
+        This API entry point returns next hop and policy data in JSON Format for SIP Proxies.
+        
       parameters:
         - in: query
           name: apiKey
@@ -766,7 +773,9 @@ paths:
                 properties:
                   status:
                     type: string
-                    description: The status of STIR authentication operation for SIP proxy
+                    description: |
+                      The status of STIR authentication operation for SIP proxy. A successful response in JSON format includes the "status" attribute with a value of "ok". It also contains an optional "next_hop" attribute for indicating the next hop for routing the SIP messages, and an optional "policy" attribute with an opaque string to be consumed by the SIP proxy for manipulating SIP headers and mapping error conditions. Finally, it contains an optional "header" attribute, containing a list of SIP headers to be added to or removed from the SIP INVITE message.
+                    
                     example: ok
                     required: true
                   next_hop:
@@ -788,10 +797,10 @@ paths:
   /authn/certs/{id}:
     get:
       tags:
-      - Get Certificate
-      summary: Returns the certificate of a customer that does not provide a public accessible URL for fetching its certificate.
+      - Certificate
+      summary: Get Certificate
       description: |
-        
+        This API entry point is to return the certificate of a customer that does not provide a public accessible URL for fetching its certificate, so that signatures embedded in the SIP Identity headers generated for the customer can be verified.
       operationId: /certs/{id}
       parameters:
         - name: id
@@ -857,11 +866,11 @@ paths:
   /authn/error:
     get:
       tags:
-      - Errors
-      summary: Returns the list of all potential errors that could be generated, so that an API consumer can process those errors accordingly.
+      - Error
+      summary: Get Error
       operationId: /errors
       description: |
-
+        Returns the list of all potential errors that could be generated, so that an API consumer can process those errors accordingly.
       x-code-samples:
         - lang: Curl
           source: |
@@ -915,7 +924,7 @@ paths:
       - Verifies SIP Identity headers
       summary:  'Accepts requests and produces responses in JSON Format'
       description: |
-
+        This API entry point verifies SIP Identity headers by accepting request in JSON format and produces response in JSON format. 
 
       operationId: verify/identity-j_j
       parameters:
@@ -1004,7 +1013,8 @@ paths:
       summary:  'Accepts SIP INVITE messages with SIP Identity headers as requests and produces responses in JSON Format'
       operationId: verify-identity-s_j
       description: | 
-        
+        This API entry point verifies SIP Identity headers by accepting request in SIP INVITE message format and produces response in JSON format. 
+
       parameters:
         - in: query
           name: apiKey
@@ -1166,6 +1176,7 @@ paths:
       summary:  'Accepts SIP INVITE messages and produces responses in SIP format'
       operationId: verify-identity-s_s
       description: |
+        This API entry point verifies SIP Identity headers by accepting request in SIP INVITE message format and produces response in SIP format. 
 
       parameters:
         - in: query
@@ -1362,7 +1373,7 @@ paths:
       summary: 'Accepts SIP INVITE messages and produces responses in JSON format for SIP proxies'
       operationId: identity/proxy
       description: |
-        Accepts SIP INVITE messages as requests and produces responses in JSON Format for SIP Proxies.
+        This API entry point verifies SIP Identity headers by accepting request in SIP INVITE message format and produces response in JSON Format for SIP Proxies. 
       parameters:
         - in: query
           name: apiKey
@@ -1968,6 +1979,10 @@ components:
           type: string
           example: Bob <sip:5715550000@example.com>
           description: \"To\" header value from SIP INVITE message
+        date:
+          type: string
+          example: Fri, 11 Aug 2017 04:17:14 GMT
+          description: SIP Date header
         compact: 
           type: boolean
           description: Flag for generating compact SIP Identity header, ignored for 'shaken' PASSporT type. If specified, must be true or false
@@ -2400,6 +2415,7 @@ components:
           description: Verification status
         error: 
           type: array
+          description: "Array of errors"
           items: 
             type: object
             properties: 
@@ -2436,6 +2452,7 @@ components:
                     example: mH96Br
         cnam_error: 
           type: object
+          description: "CNAM Error"
           properties: 
             error_id:
               type: string
@@ -2459,6 +2476,7 @@ components:
               example: Fri, 16 Apr 2021 02:56:56 GMT
         ecnam_error: 
           type: object
+          description: "ECNAM Error"
           properties: 
             error_id:
               type: string
@@ -2509,10 +2527,13 @@ components:
         request_id: 
           type: "string"
           example: "X-REQUEST-ID-12345"
+          description: "Client supplied request identifier for tracking purpose"
         verstat: 
           type: "string"
           example: "TN-Validation-Passed"
+          description: "'verstat' value defined by ETSI TS 124 299"
         identity_info: 
+          description: "A list of information related to SIP Identity headers verified"
           type: "array"
           items: 
             type: "object"
@@ -2520,9 +2541,11 @@ components:
               status: 
                 type: "string"
                 example: "Ok"
+                description: "The verification status of a SIP Identity header"
               params: 
                 type: "string"
                 example: "info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"shaken\""
+                description: "The parameters in a SIP Identity header"
               header:
                 properties: 
                   alg: 
@@ -2538,7 +2561,9 @@ components:
                     type: "string"
                     example: "http://ca.example.com/test.der"
                 type: "object"
+                description: "The decoded PASSporT header object in a SIP Identity header"
               claim: 
+                description: "The decoded PASSporT claim object in a SIP Identity header"
                 properties: 
                   attest: 
                     type: "string"
@@ -2579,120 +2604,158 @@ components:
                     example: "123456-ABCD-999999"
                 type: "object"
               certificate_info: 
+                description: "The basic information of the certificate used in a SIP Identity header"
                 properties: 
                   subject: 
                     type: "string"
                     example: "C=US, ST=VA, L=Somewhere, O=\"AcmeTelecom, Inc.\", OU=VOIP, CN=TEST-EC-256-EXT-TN-JWT"
+                    description: "The subject of the certificate used in a SIP Identity header"
                   issuer: 
                     type: "string"
                     example: "C=US, O=Neustar IOT Lab, CN=CallAuthnCA"
+                    description: "The issuer of the certificate used in a SIP Identity header"
                   tn_auth_list: 
                     type: "array"
+                    description: "The TN Authorization List of the certificate used in a SIP Identity header"
                     items: 
                       type: "object"
                       properties: 
                         spc: 
                           type: "string"
                           example: "X001"
+                          description: "A Service Provider Code in TN Authorization List"
                 type: "object"
         cnam: 
           type: "string"
           example: "Alice In Wonderland"
+          description: "CNAM data"
         ecnam: 
+          description: "ECNAM data"
           properties: 
             display_template: 
               type: "string"
               example: "none"
+              description: "ECNAM data display template"
             business_name: 
               type: "string"
               example: "Disney World"
+              description: "Full business name"
             department: 
               type: "string"
               example: "Theme Park"
+              description: "Department name"
             line_type: 
               type: "string"
               example: "Wireline"
+              description: "Line type, such as wireline, wireless, etc."
             subscriber_type: 
               type: "string"
               example: "Business"
+              description: "Subscriber type, such as business, residential, etc."
             business_type: 
               type: "string"
               example: "Entertainment"
+              description: "Business type"
             business_address: 
               type: "string"
               example: "Walt Disney World Resort"
+              description: "Business address"
             locality: 
               type: "string"
               example: "Orlando, FL"
+              description: Locality, such as 'Sterling, VA'
             city: 
               type: "string"
               example: "Orlando"
+              description: "City, such as 'Sterling'"
             state: 
               type: "string"
               example: "FL"
+              description: "State, such as 'VA'"
             country: 
               type: "string"
               example: "US"
+              description: "Country code, such as US"
             postal_code: 
               type: "string"
               example: "32830"
+              description: "Postal code, such as 20166-1234"
             website_url: 
               type: "string"
               example: "http://movies.disney.com/alice-in-wonderland-1951"
+              description: "Website URL"
             logo_url: 
               type: "string"
               example: "https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png"
+              description: "Logo URL"
             tagline: 
               type: "string"
               example: "#AliceInWonderLand"
+              description: "Tagline"
             employee_name: 
               type: "string"
               example: "Alice"
+              description: "Employee’s name, such as John Smith"
             first_name: 
               type: "string"
               example: "Alice"
+              description: "Employee’s first name, such as John"
             last_name: 
               type: "string"
               example: "Liddell"
+              description: "Employee’s last name, such as Smith"
             job_title: 
               type: "string"
               example: "Adventurer"
+              description: "Job title"
             headshot_url: 
               type: "string"
               example: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I"
+              description: "Headshot/avatar image URL"
             email: 
               type: "string"
               example: "alice@disney.com"
+              description: "Email address"
             cnam: 
               type: "string"
               example: "Alice In Wonderland"
+              description: "CNAM data"
             call_purpose: 
               type: "string"
               example: "Customer Support"
+              description: "The purpose for calls originated from the telephone number"
             social_media_info: 
+              description: "Social media info, as an object map of name/value pairs"
               properties: 
                 Facebook: 
                   type: "string"
                   example: "https://www.facebook.com/DisneyAliceInWonderland"
+                  description: "Facebook URL"
                 Twitter: 
                   type: "string"
                   example: "https://twitter.com/Disney"
+                  description: "Twitter URL"
               type: "object"
             p_asserted_identity: 
               type: "string"
               example: "\"Alice In Wonderland\" <sip:alice@example.com;tmpl=none;bn=Disney%20World;dept=Theme%20Park;lt=Wireline;st=Business;bt=Entertainment;ba=Walt%20Disney%20World%20Resort;cs=Orlando, FL;city=Orlando;state=FL;ct=US;zip=32830;wb=http://movies.disney.com/alice-in-wonderland-1951;lg=https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png;tg=#AliceInWonderLand;sm=%7B%22Facebook%22%3A%22https%3A%2F%2Fwww.facebook.com%2FDisneyAliceInWonderland%22%2C%22Twitter%22%3A%22https%3A%2F%2Ftwitter.com%2FDisney%22%7D;nm=Alice;fn=Alice;ln=Liddell;jt=Adventurer;hs=https://encrypted-tbn0.gstatic.com/images?q%3dtbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I;cp=Customer Support;email=alice@disney.com>"
+              description: "Value as 'allow as SIP P-Asserted-Identity header"
           type: "object"
         call_insight: 
+          description: "Call insight details"
           properties: 
             call_treatment: 
               type: "string"
               example: "allow"
+              description: "Call treatment method, such as 'allow', 'deny', 'send_to_vm' or 'none'"
             fraud_score: 
               type: "number"
               example: 0
+              description: "Numeric fraud score between 0 and 100"
             original_calling_name: 
               type: "string"
               example: "Alice"
+              description: "Original calling name value"
           type: "object"
     VerifyResponse-SJ:
       type: object
@@ -2700,146 +2763,213 @@ components:
         status: 
           type: "string"
           example: "ok"
+          description: | 
+            Its value is "ok" after the SIP Identity headers are validated with the required verification status. There are three possible "status" values specified in the request
+              * **none** - This status value indicates that the SIP Identity headers specified in the request are not required to be verified
+
+              * **partial** - This status value indicates that one or more SIP Identity headers specified in the request are required to be verified
+
+              * **all** - This status value indicates that all SIP Identity headers specified in the request are required to be verified
+
+            Based on the verification status requirement specified in the request, the CCID VS will return a "status" attribute in the response with the following two possible values: 
+
+              * **ok** - This status value indicates that the verification result of SIP Identity headers has met the verification status requirement specified in the request
+              * **error** - This status value indicates that the verification result of SIP Identity headers has not met the verification status requirement specified in the request
+            
+            If there are any errors encountered in the verification process, an "error" attribute in the response will list all of those errors.
+
+            If the "cnam" attribute is specified as "true" in the request, a "cnam" attribute will be returned in the response if the CNAM lookup is successful; otherwise, a "cnam_error" attribute will be returned for the specific error condition.
+
+            If the "ecnam" attribute is specified as "true" in the request, an "ecnam" attribute will be returned, if the ECNAM lookup is successful; otherwise, an "ecnam_error" attribute will be returned for the specific error condition.
+
+            If the "robocall" attribute is specified as "true" in the request, a "call_insight" attribute will be returned, if any.
         cnam: 
           type: "string"
           example: "Alice In Wonderland"
+          description: "CNAM data"
         ecnam: 
+          description: "ECNAM data"
           properties: 
             display_template: 
               type: "string"
               example: "none"
+              description: "ECNAM data display template"
             business_name: 
               type: "string"
               example: "Disney World"
+              description: "Full business name"
             department: 
               type: "string"
               example: "Theme Park"
+              description: "Department name"
             line_type: 
               type: "string"
               example: "Wireline"
+              description: "Line type, such as wireline, wireless, etc."
             subscriber_type: 
               type: "string"
               example: "Business"
+              description: "Subscriber type, such as business, residential, etc."
             business_type: 
               type: "string"
               example: "Entertainment"
+              description: "Business type"
             business_address: 
               type: "string"
               example: "Walt Disney World Resort"
+              description: "Business address"
             locality: 
               type: "string"
               example: "Orlando, FL"
+              description: Locality, such as 'Sterling, VA'
             city: 
               type: "string"
               example: "Orlando"
+              description: "City, such as 'Sterling'"
             state: 
               type: "string"
               example: "FL"
+              description: "State, such as 'VA'"
             country: 
               type: "string"
               example: "US"
+              description: "Country code, such as US"
             postal_code: 
               type: "string"
               example: "32830"
+              description: "Postal code, such as 20166-1234"
             website_url: 
               type: "string"
               example: "http://movies.disney.com/alice-in-wonderland-1951"
+              description: "Website URL"
             logo_url: 
               type: "string"
               example: "https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png"
+              description: "Logo URL"
             tagline: 
               type: "string"
               example: "#AliceInWonderLand"
+              description: "Tagline"
             employee_name: 
               type: "string"
               example: "Alice"
+              description: "Employee’s name, such as John Smith"
             first_name: 
               type: "string"
               example: "Alice"
+              description: "Employee’s first name, such as John"
             last_name: 
               type: "string"
               example: "Liddell"
+              description: "Employee’s last name, such as Smith"
             job_title: 
               type: "string"
               example: "Adventurer"
+              description: "Job title"
             headshot_url: 
               type: "string"
               example: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I"
+              description: "Headshot/avatar image URL"
             email: 
               type: "string"
               example: "alice@disney.com"
+              description: "Email address"
             cnam: 
               type: "string"
               example: "Alice In Wonderland"
+              description: "CNAM data"
             call_purpose: 
               type: "string"
               example: "Customer Support"
+              description: "The purpose for calls originated from the telephone number"
             social_media_info: 
+              description: "Social media info, as an object map of name/value pairs"
               properties: 
                 Facebook: 
                   type: "string"
                   example: "https://www.facebook.com/DisneyAliceInWonderland"
+                  description: "Facebook URL"
                 Twitter: 
                   type: "string"
                   example: "https://twitter.com/Disney"
+                  description: "Twitter URL"
               type: "object"
             p_asserted_identity: 
               type: "string"
               example: "\"Alice In Wonderland\" <sip:alice@example.com;tmpl=none;bn=Disney%20World;dept=Theme%20Park;lt=Wireline;st=Business;bt=Entertainment;ba=Walt%20Disney%20World%20Resort;cs=Orlando, FL;city=Orlando;state=FL;ct=US;zip=32830;wb=http://movies.disney.com/alice-in-wonderland-1951;lg=https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png;tg=#AliceInWonderLand;sm=%7B%22Facebook%22%3A%22https%3A%2F%2Fwww.facebook.com%2FDisneyAliceInWonderland%22%2C%22Twitter%22%3A%22https%3A%2F%2Ftwitter.com%2FDisney%22%7D;nm=Alice;fn=Alice;ln=Liddell;jt=Adventurer;hs=https://encrypted-tbn0.gstatic.com/images?q%3dtbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I;cp=Customer Support;email=alice@disney.com>"
+              description: "Value as 'allow as SIP P-Asserted-Identity header"
           type: "object"
         call_insight: 
+          description: "Call insight details"
           properties: 
             call_treatment: 
               type: "string"
               example: "allow"
+              description: "Call treatment method, such as 'allow', 'deny', 'send_to_vm' or 'none'"
             fraud_score: 
               type: "number"
               example: 0
+              description: "Numeric fraud score between 0 and 100"
             original_calling_name: 
               type: "string"
               example: "Alice"
+              description: "Original calling name value"
           type: "object"
     CNAM-Error:
       type: object
+      description: "The error encountered in CNAM lookup"
       properties: 
         cnam_error: 
+          description: "The error encountered in CNAM lookup"
           properties: 
             error_id: 
               type: "string"
               example: "CnamNotAuthorized"
+              description: "The unique error identifier"
             http_status_code: 
               type: "number"
               example: 400
+              description: "The HTTP response status code"
             sip_code: 
               type: "number"
               example: 400
+              description: "The SIP response code associated with the error"
             reason: 
               type: "string"
               example: "CNAM service not authorized"
+              description: "The detailed error text"
             timestamp: 
               type: "string"
               example: "Fri, 16 Apr 2021 02:56:55 GMT"
+              description: "The timestamp when the error is generated"
           type: "object"
     ECNAM-Error:
       type: object
+      description: "The error encountered in ECNAM lookup"
       properties: 
         ecnam_error: 
+          description: "The error encountered in ECNAM lookup"
           properties: 
             error_id: 
               type: "string"
               example: "CnamNotAuthorized"
+              description: "The unique error identifier"
             http_status_code: 
               type: "number"
               example: 400
+              description: "The HTTP response status code"
             sip_code: 
               type: "number"
               example: 400
+              description: "The SIP response code associated with the error"
             reason: 
               type: "string"
               example: "CNAM service not authorized"
+              description: "The detailed error text"
             timestamp: 
               type: "string"
               example: "Fri, 16 Apr 2021 02:56:55 GMT"
+              description: "The timestamp when the error is generated"
           type: "object"
     CNAM-Input:
       type: object

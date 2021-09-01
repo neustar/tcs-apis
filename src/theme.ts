@@ -2,7 +2,7 @@ import { darken, desaturate, lighten, readableColor, transparentize } from 'poli
 
 const defaultTheme: ThemeInterface = {
   spacing: {
-    unit: 2,
+    unit: 5,
     sectionHorizontal: ({ spacing }) => spacing.unit * 8,
     sectionVertical: ({ spacing }) => spacing.unit * 8,
   },
@@ -12,9 +12,9 @@ const defaultTheme: ThemeInterface = {
     large: '105rem',
   },
   colors: {
-    tonalOffset: 0.1,
+    tonalOffset: 0.2,
     primary: {
-      main: '#000000',
+      main: '#32329f',
       light: ({ colors }) => lighten(colors.tonalOffset, colors.primary.main),
       dark: ({ colors }) => darken(colors.tonalOffset, colors.primary.main),
       contrastText: ({ colors }) => readableColor(colors.primary.main),
@@ -102,7 +102,7 @@ const defaultTheme: ThemeInterface = {
     },
   },
   typography: {
-    fontSize: '13px',
+    fontSize: '14px',
     lineHeight: '1.5em',
     fontWeightRegular: '400',
     fontWeightBold: '600',
@@ -111,21 +111,21 @@ const defaultTheme: ThemeInterface = {
     smoothing: 'antialiased',
     optimizeSpeed: true,
     headings: {
-      fontFamily: 'Roboto, sans-serif',
-      fontWeight: 'normal',
-      lineHeight: '1em',
+      fontFamily: 'Montserrat, sans-serif',
+      fontWeight: '400',
+      lineHeight: '1.6em',
     },
     code: {
-      fontSize: '11px',
+      fontSize: '13px',
       fontFamily: 'Courier, monospace',
       lineHeight: ({ typography }) => typography.lineHeight,
       fontWeight: ({ typography }) => typography.fontWeightRegular,
-      color: '#eae7e8',
-      backgroundColor: '#eae7e8',
+      color: '#e53935',
+      backgroundColor: 'rgba(38, 50, 56, 0.05)',
       wrap: false,
     },
     links: {
-      color: '#3366BB',
+      color: ({ colors }) => colors.primary.main,
       visited: ({ typography }) => typography.links.color,
       hover: ({ typography }) => lighten(0.2, typography.links.color),
     },
@@ -133,15 +133,13 @@ const defaultTheme: ThemeInterface = {
   sidebar: {
     width: '260px',
     backgroundColor: '#fafafa',
-    textColor: '#000000',
+    textColor: '#333333',
     activeTextColor: theme =>
       theme.sidebar.textColor !== defaultTheme.sidebar!.textColor
         ? theme.sidebar.textColor
         : theme.colors.primary.main,
     groupItems: {
       textTransform: 'uppercase',
-      textColor: '#05cc7a',
-      fontWeight: 'bold',
     },
     level1Items: {
       textTransform: 'none',
@@ -157,12 +155,12 @@ const defaultTheme: ThemeInterface = {
     gutter: '2px',
   },
   rightPanel: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#263238',
     width: '40%',
-    textColor: '#c5c5c5',
+    textColor: '#ffffff',
   },
   codeBlock: {
-    backgroundColor: ({ rightPanel }) => darken(0.8, rightPanel.backgroundColor),
+    backgroundColor: ({ rightPanel }) => darken(0.1, rightPanel.backgroundColor),
   },
 };
 
@@ -318,8 +316,6 @@ export interface ResolvedThemeInterface {
     activeTextColor: string;
     groupItems: {
       textTransform: string;
-      textColor: string;
-      fontWeight: string;
     };
     level1Items: {
       textTransform: string;

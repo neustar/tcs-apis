@@ -17,7 +17,7 @@ In the spirit of being a public API, we've chosen to publicize the generators th
 The proposal process is the process for reviewing a proposal and reaching
 a decision about whether to accept or decline the proposal.
 
-1. The proposal author [creates a brief issue](https://github.com/rishagit/cicd-oas/issues) describing the proposal.\
+1. The proposal author [creates a brief issue](https://github.com/neustar/tcs-apis/issues) describing the proposal.\
    Note: There is no need for a design document at this point.\
    Note: A non-proposal issue can be turned into a proposal by simply adding the proposal label.\
 

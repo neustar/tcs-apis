@@ -123,7 +123,7 @@ export default (env: { playground?: boolean; bench?: boolean } = {}, { mode }) =
     webpackIgnore(/json-schema-ref-parser\/lib\/dereference\.js/),
     webpackIgnore(/^\.\/SearchWorker\.worker$/),
     new CopyWebpackPlugin({
-      patterns: ['docs/openapi.yaml'],
+      patterns: ['docs/oas-spec.yaml'],
     }),
   ],
 });

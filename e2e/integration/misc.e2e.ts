@@ -17,7 +17,7 @@ describe('Servers', () => {
 
   it('should have valid server', () => {
     cy.window().then(async win => {
-      const spec = await loadSpec('/docs/openapi.yaml');
+      const spec = await loadSpec('/docs/oas-spec.yaml');
       initReDoc(win, spec, {});
 
       // TODO add cy-data attributes
@@ -35,7 +35,7 @@ describe('Servers', () => {
 
   it('should have valid server for when servers not provided', () => {
     cy.window().then(async win => {
-      const spec = await loadSpec('/docs/openapi.yaml');
+      const spec = await loadSpec('/docs/oas-spec.yaml');
       delete spec.servers;
       initReDoc(win, spec, {});
 
@@ -50,7 +50,7 @@ describe('Servers', () => {
   it('should have valid server for when servers not provided at .html pages', () => {
     cy.visit('e2e/e2e.html');
     cy.window().then(async win => {
-      const spec = await loadSpec('/docs/openapi.yaml');
+      const spec = await loadSpec('/docs/oas-spec.yaml');
       delete spec.servers;
       initReDoc(win, spec, {});
 

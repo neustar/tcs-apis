@@ -82,7 +82,7 @@ In the worst case, skipping these steps only leads to an unnecessary design doc.
 
 ### Proposal Review
 
-A group of Go team members holds “proposal review meetings”
+A group of team members holds “proposal review meetings”
 approximately weekly to review pending proposals.
 
 The principal goal of the review meeting is to make sure that proposals

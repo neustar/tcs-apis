@@ -47,7 +47,7 @@ function startFullTime(redocs, resolvedSpec) {
     revisions.forEach((rev, idx) => {
       const redoc = redocs[idx];
       suite.add(rev.name, () => {
-        const store = new redoc.AppStore(resolvedSpec, 'openapi.yaml');
+        const store = new redoc.AppStore(resolvedSpec, 'oas-spec.yaml');
         renderRoot(redoc.Redoc, { store });
         unmountComponentAtNode(node!);
       });
@@ -77,7 +77,7 @@ function startInitStore(redocs, resolvedSpec) {
     revisions.forEach((rev, idx) => {
       const redoc = redocs[idx];
       suite.add(rev.name, () => {
-        const store = new redoc.AppStore(resolvedSpec, 'openapi.yaml');
+        const store = new redoc.AppStore(resolvedSpec, 'oas-spec.yaml');
         store.dispose();
       });
     });
@@ -106,7 +106,7 @@ function startRenderTime(redocs, resolvedSpec) {
 
     revisions.forEach((rev, idx) => {
       const redoc = redocs[idx];
-      const store = new redoc.AppStore(resolvedSpec, 'openapi.yaml');
+      const store = new redoc.AppStore(resolvedSpec, 'oas-spec.yaml');
       suite.add(rev.name, () => {
         renderRoot(redoc.Redoc, { store });
       });
@@ -118,7 +118,7 @@ function startRenderTime(redocs, resolvedSpec) {
 
 async function runBenchmarks() {
   const redocs: any[] = await importRedocs();
-  const resolvedSpec = await loadAndBundleSpec('openapi.yaml');
+  const resolvedSpec = await loadAndBundleSpec('oas-spec.yaml');
   await startInitStore(redocs, resolvedSpec);
   await startRenderTime(redocs, resolvedSpec);
   await startFullTime(redocs, resolvedSpec);

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`#loadAndBundleSpec should load And Bundle Spec demo/openapi.yaml 1`] = `
+exports[`#loadAndBundleSpec should load And Bundle Spec demo/oas-spec.yaml 1`] = `
 Object {
   "components": Object {
     "examples": Object {

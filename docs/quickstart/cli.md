@@ -68,7 +68,7 @@ The CLI includes the following commands:
 Bundle with the main color changed to `orange`:
 
 ```bash
-redoc-cli bundle openapi.yaml --options.theme.colors.primary.main=orange
+redoc-cli bundle oas-spec.yaml --options.theme.colors.primary.main=orange
 ```
 
 Bundle using a custom Handlebars template and add custom `templateOptions`:

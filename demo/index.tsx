@@ -5,18 +5,18 @@ import { resolve as urlResolve } from 'url';
 import { RedocStandalone } from '../src';
 import ComboBox from './ComboBox';
 
-const DEFAULT_SPEC = 'openapi.yaml';
+const DEFAULT_SPEC = 'oas-spec.yaml';
 const NEW_VERSION_SPEC = 'openapi-3-1.yaml';
 
 const demos = [
   { value: NEW_VERSION_SPEC, label: 'Petstore OpenAPI 3.1' },
   { value: 'https://api.apis.guru/v2/specs/instagram.com/1.0.0/swagger.yaml', label: 'Instagram' },
   {
-    value: 'https://api.apis.guru/v2/specs/googleapis.com/calendar/v3/openapi.yaml',
+    value: 'https://api.apis.guru/v2/specs/googleapis.com/calendar/v3/oas-spec.yaml',
     label: 'Google Calendar',
   },
-  { value: 'https://api.apis.guru/v2/specs/slack.com/1.7.0/openapi.yaml', label: 'Slack' },
-  { value: 'https://api.apis.guru/v2/specs/zoom.us/2.0.0/openapi.yaml', label: 'Zoom.us' },
+  { value: 'https://api.apis.guru/v2/specs/slack.com/1.7.0/oas-spec.yaml', label: 'Slack' },
+  { value: 'https://api.apis.guru/v2/specs/zoom.us/2.0.0/oas-spec.yaml', label: 'Zoom.us' },
   { value: 'https://docs.graphhopper.com/openapi.json', label: 'GraphHopper' },
 ];
 

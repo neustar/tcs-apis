@@ -53,7 +53,7 @@ If you have [OpenAPI CLI](https://redoc.ly/docs/cli/#installation-and-usage) ins
 project directory and run the following command:
 
 ```bash
-openapi preview-docs openapi.yaml
+openapi preview-docs oas-spec.yaml
 ```
 
 By default, without providing a port, the preview starts on port 8080, and can be accessed at `http://localhost:8080`.

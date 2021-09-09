@@ -16,7 +16,7 @@ const server = http.createServer(async (request, response) => {
   if (request.url === '/redoc.standalone.js') {
     fs.createReadStream('bundles/redoc.standalone.js', 'utf8').pipe(response);
   } else if (request.url === '/') {
-    const spec = yaml.load(readFileSync(resolve(__dirname, '../openapi.yaml'), 'utf-8'));
+    const spec = yaml.load(readFileSync(resolve(__dirname, '../oas-spec.yaml'), 'utf-8'));
     const store = await createStore(spec, 'path/to/spec.yaml');
 
     const sheet = new ServerStyleSheet();

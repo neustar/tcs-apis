@@ -3,6 +3,9 @@ servers:
   - url: http://{hostname}:{port}/{optionalRoutingPath} 
     description: http
 info:
+  x-logo:
+    url: 'https://raw.githubusercontent.com/neustar/tcs-apis/main/docs/neustar-logo.png'
+    altText: Neustar
   version: 1.0.0
   title: Authentication & Verification Service
   summary: 

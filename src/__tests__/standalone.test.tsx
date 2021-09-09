@@ -11,7 +11,7 @@ import { Loading, RedocStandalone } from '../components/';
 describe('Components', () => {
   describe('RedocStandalone', () => {
     test('should show loading first', () => {
-      const spec = yaml.load(readFileSync(resolve(__dirname, '../../docs/openapi.yaml'), 'utf-8'));
+      const spec = yaml.load(readFileSync(resolve(__dirname, '../../docs/oas-spec.yaml'), 'utf-8'));
 
       const inst = mount(<RedocStandalone spec={spec} options={{}} />);
       expect(inst.find(Loading)).toHaveLength(1);

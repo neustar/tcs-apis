@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Neustar’s Certified Caller Id (CID) Authenitcaiton Service (AS) and Verification Service (VS) implements the emerging industry standard of IETF RFC8224 specification, as well as ATIS SHAKEN extension, for computing and verifying SIP Identity headers to assist with SIP call setup. 
+A Call Authentication Service (AS) and Verification Service (VS) is defined in IETF RFC 8224 specification and embodied in the ATIS SHAKEN framework.  This specification and framework is used to securely compute and verify SIP Identity headers as part of call authentication. 
 
 This document contains all the APIs that are available for AS and VS in OpenAPI Specification (OAS) format
 

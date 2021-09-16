@@ -1843,11 +1843,11 @@ components:
         orig_cc:
           type: string
           description: Default country code for the origination telephone number. If specified, must be a valid country code
-          example: 1
+          example: "1"
         dest_cc:
           type: string
           description: Default country code for the destination telephone number. If specified, must be a valid country code
-          example: 1
+          example: "1"
         attest: 
           type: string
           description: attest value defined by ATIS SHAKEN extension. If specified, must not be empty or blank. 
@@ -1905,7 +1905,7 @@ components:
               name:
                 type: string
                 description: The name of the SIP header or RequestLine to be added or removed
-                example: y
+                example: Identity
               value:
                 type: string
                 description: The value of the SIP header or RequestLine to be added or removed
@@ -1929,7 +1929,7 @@ components:
           description: The HTTP response status code
         sip_code: 
           type: string
-          example: 416
+          example: "416"
           description: The SIP response code associated with the error
         reason:
           type: string
@@ -1970,7 +1970,7 @@ components:
           description: The HTTP response status code
         sip_code: 
           type: string
-          example: 437
+          example: "437"
           description: The SIP response code associated with the error
         reason:
           type: string
@@ -2021,7 +2021,7 @@ components:
                 description: The HTTP response status code
               sip_code: 
                 type: string
-                example: 403
+                example: "403"
                 description: The SIP response code associated with the error
               reason:
                 type: string
@@ -2072,7 +2072,7 @@ components:
           description: The HTTP response status code
         sip_code: 
           type: string
-          example: 437
+          example: "437"
           description: The SIP response code associated with the error
         reason:
           type: string
@@ -2163,6 +2163,7 @@ components:
         date: 
           type: string
           description: Date header value from SIP INVITE message. If specified, must be in RFC1123 format
+          example: Fri, 16 Apr 2021 02:56:51 GMT
         pai:
           type: array
           description: A list of 'P-Asserted-Identity' header values from SIP INVITE message. If specified, must be one as specified in RFC3325 Section 9.1
@@ -2179,11 +2180,13 @@ components:
                 type: string
                 description: Digest value of a SDP 'a=fingerprint' attribute from SIP INVITE message. Cannot be null or empty
         orig_cc: 
-          type: string
+          type: array
           description: Default country codes for the originator telephone number. If specified, must be a valid country code
+          example: [ "1", "44" ]
         dest_cc: 
           type: string
           description: Default country code for the destination telephone number. If specified, must be a valid country code
+          example: "1"
         cnam:
           type: boolean
           description: Flag for performing CNAM lookup. If specified, must be true or false

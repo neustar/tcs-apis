@@ -7,15 +7,15 @@ info:
     url: 'https://raw.githubusercontent.com/neustar/tcs-apis/main/docs/neustar-logo.png'
     altText: Neustar
   version: 1.0.0
-  title: Authentication & Verification Service
+  title: STIR/SHAKEN Authentication & Verification Service
   summary: 
   description: |
     # Overview
-    Authentication Service (AS) and Verification Service (VS) implements the emerging industry standard of IETF RFC8224 specification, as well as ATIS SHAKEN extension, for computing and verifying SIP Identity headers to assist with SIP call setup. 
-    Additionally, it provides Ownership Validation, Subscriber-based Policy processing, CNAM, Enhanced CNAM (ECNAM) and/or Robocall Call Insight services for originating telephone numbers
+    The Authentication Service (AS) and Verification Service (VS) implement the IETF RFC 8224 specification, as well as the SHAKEN framework extensions (ATIS-1000074), for securely computing, transiting and verifying SIP Identity headers for caller identity authentication. 
+    Additionally, it provides supplemental features including telephone number ownership validation, subscriber-based policy processing, Caller Name (CNAM), Resource Priority?, Enhanced CNAM (ECNAM)/Rich Call Data? and/or robocall analytics.
   
-    ## REST API Authentication
-    Currently, a REST API cli ent is required to provide an 'apiKey' query parameter with a pre-provisioned value to access API calls that are restricted. If the 'apiKey' parameter is not specified, the client IP address may be used as the backup authentication mechanism if the client CIDR block is pre-provisioned.
+    ## RESTful API Authentication Service
+    Currently, a RESTful API client is required to provide an 'apiKey' query parameter with a pre-provisioned value to access API calls that are restricted. If the 'apiKey' parameter is not specified, the client IP address may be used as the backup authentication mechanism if pre-provisioned.
 tags:
 - name: Generate SIP Identity Headers
 - name: Certificate
@@ -44,7 +44,7 @@ paths:
       tags:
       - Generate SIP Identity Headers
       description: |
-        This API uses the following data elements in SIP INVITE messages for SIP Identity header creation, in addition to the required 'apiKey' URL parameter for uniquely identifying an API client.
+        This API uses the following data elements in SIP INVITE messages for SIP Identity header creation, in addition to the required 'apiKey' query parameter for uniquely identifying an API client.
         Three different API entry points are defined for SIP Identity header creation:
           * Accepts requests in JSON format and produces responses in JSON format (J-J)
           * Accepts SIP INVITE messages and produces responses in JSON format (S-J)
@@ -727,7 +727,7 @@ paths:
                   status:
                     type: string
                     description: |
-                      The status of STIR authentication operation for SIP proxy. A successful response in JSON format includes the "status" attribute with a value of "ok". It also contains an optional "next_hop" attribute for indicating the next hop for routing the SIP messages, and an optional "policy" attribute with an opaque string to be consumed by the SIP proxy for manipulating SIP headers and mapping error conditions. Finally, it contains an optional "header" attribute, containing a list of SIP headers to be added to or removed from the SIP INVITE message.
+                      The status of Authentication Service operation for SIP proxy. A successful response in JSON format includes the "status" attribute with a value of "ok". It also contains an optional "next_hop" attribute for indicating the next hop for routing the SIP messages, and an optional "policy" attribute with an opaque string to be consumed by the SIP proxy for manipulating SIP headers and mapping error conditions. Finally, it contains an optional "header" attribute, containing a list of SIP headers to be added to or removed from the SIP INVITE message.
                     
                     example: ok
                     required: true
@@ -893,12 +893,16 @@ paths:
             application/json: 
               schema: 
                 $ref: '#/components/schemas/ErrorAPISuccessResponse'
+ 
+ ## RESTful API Verification Service
+    Currently, a RESTful API client is required to provide an 'apiKey' query parameter with a pre-provisioned value to access API calls that are restricted. If the 'apiKey' parameter is not specified, the client IP address may be used as the backup authentication mechanism if pre-provisioned. 
+    
   /verify/identity:
     post:
       tags:
       - Verifies SIP Identity Headers
       description: | 
-        This API uses the following data elements in SIP INVITE messages for SIP Identity header verification, in addition to the required 'apiKey' URL parameter for uniquely identifying an API client.
+        This API uses the following data elements in SIP INVITE messages for SIP Identity header verification, in addition to the required 'apiKey' query parameter for uniquely identifying an API client.
         Three different API entry points are defined for SIP Identity header verification:
           * Accepts requests in JSON format and produces responses in JSON format (J-J)
           * Accepts SIP INVITE messages and produces responses in JSON format (S-J)
@@ -941,7 +945,7 @@ paths:
             type: boolean
         - name: ecnam
           in: query
-          description: Flag for performing ECNAM lookup
+          description: Flag for performing ECNAM (or RCD) lookup
           required: false
           style: form
           schema:
@@ -1879,7 +1883,7 @@ components:
           type: string
           example: ok
           description: |
-            The status of STIR authentication operation for SIP proxy. A successful response in JSON format includes the "status" attribute with a value of "ok". It also contains an optional "next_hop" attribute for indicating the next hop for routing the SIP messages, and an optional "policy" attribute with an opaque string to be consumed by the SIP proxy for manipulating SIP headers and mapping error conditions. Finally, it contains an optional "header" attribute, containing a list of SIP headers to be added to or removed from the SIP INVITE message.
+            The status of Verification Service operation for SIP proxy. A successful response in JSON format includes the "status" attribute with a value of "ok". It also contains an optional "next_hop" attribute for indicating the next hop for routing the SIP messages, and an optional "policy" attribute with an opaque string to be consumed by the SIP proxy for manipulating SIP headers and mapping error conditions. Finally, it contains an optional "header" attribute, containing a list of SIP headers to be added to or removed from the SIP INVITE message.
         next_hop:
           type: string
           example: 'udp:192.168.1.1:5060'
@@ -2158,10 +2162,10 @@ components:
           description: Date header value from SIP INVITE message. If specified, must be in RFC1123 format
         pai:
           type: array
-          description: A list of 'P-Asserted-Identity' header values from SIP INVITE message. If specified, must be one as specified in RFC3325 Section 9.1
+          description: A list of 'P-Asserted-Identity' header values from SIP INVITE message. If specified, must be one as specified in RFC 3325 Section 9.1
         finger_print:
           type: array
-          description: A list of SDP 'a=fingerprint' attribute values from SIP INVITE message. If specified, must be one as specified in RFC3325 Section 9.1
+          description: A list of SDP 'a=fingerprint' attribute values from SIP INVITE message. If specified, must be one as specified in RFC 3325 Section 9.1
           items:
             type: object
             properties: 
@@ -2292,14 +2296,12 @@ components:
 
               * **all** - This status value indicates that all SIP Identity headers specified in the request are required to be verified
 
-            Based on the verification status requirement specified in the request, the CCID VS will return a "status" attribute in the response with the following two possible values: 
+            Based on the verification status requirement specified in the request, the VS will return a "status" attribute in the response with the following two possible values: 
 
               * **ok** - This status value indicates that the verification result of SIP Identity headers has met the verification status requirement specified in the request
               * **error** - This status value indicates that the verification result of SIP Identity headers has not met the verification status requirement specified in the request
             
             If there are any errors encountered in the verification process, an "error" attribute in the response will list all of those errors.
-
-
 
             If the "robocall" attribute is specified as "true" in the request, a "call_insight" attribute will be returned, if any.
         request_id: 
@@ -2549,14 +2551,12 @@ components:
 
               * **all** - This status value indicates that all SIP Identity headers specified in the request are required to be verified
 
-            Based on the verification status requirement specified in the request, the CCID VS will return a "status" attribute in the response with the following two possible values: 
+            Based on the verification status requirement specified in the request, the VS will return a "status" attribute in the response with the following two possible values: 
 
               * **ok** - This status value indicates that the verification result of SIP Identity headers has met the verification status requirement specified in the request
               * **error** - This status value indicates that the verification result of SIP Identity headers has not met the verification status requirement specified in the request
             
             If there are any errors encountered in the verification process, an "error" attribute in the response will list all of those errors.
-
-
 
             If the "robocall" attribute is specified as "true" in the request, a "call_insight" attribute will be returned, if any.
         cnam: 

@@ -52,22 +52,22 @@ paths:
       summary: Identity
       operationId: authn/identity
       parameters:
-        - in: query
-          name: apiKey
+        - name: apiKey 
+          in: query
           required: true
           schema:
             type: string
           description: The API key uniquely identifying the API client. Cannot be null or empty
         - name: compact
           in: query
-          description: Flag for compact SIP Identity header, ignored for 'shaken' PASSporT type
+          description: Flag for compact SIP Identity header, ignored for 'shaken' PASSporT type. If specified, must be true or false
           required: false
           style: form
           schema:
             type: boolean
         - name: ppt
           in: query
-          description: PASSporT type value, must be "shaken" or "div" if specified
+          description: PASSporT type value. If specified, must be 'shaken', 'div', 'rcd' or 'rph'
           required: false
           style: form
           schema:
@@ -75,26 +75,26 @@ paths:
         - name: attest
           in: query
           required: false
-          description: attest value specified by ATIS SHAKEN extension
+          description: "'attest' value specified by ATIS SHAKEN extension.If specified, must be a valid country code"
           schema:
             type: string
         - name: origid
           in: query
-          description: origid value specified by ATIS SHAKEN extension
+          description: "'origid' value specified by ATIS SHAKEN extension. If specified, must be a valid country code"
           required: false
           style: form
           schema:
             type: string
         - name: origcc
           in: query
-          description: Default country code for the originator telephone number
+          description: Default country code for the originator telephone number. If specified, must be a valid country code
           required: false
           style: form
           schema:
             type: string
         - name: destcc
           in: query
-          description: Default country code for the destination telephone number
+          description: Default country code for the destination telephone number. If specified, must be a valid country code
           required: false
           style: form
           schema:
@@ -108,7 +108,7 @@ paths:
             type: string
         - name: identity
           in: query
-          description: Flag for including SIP Identity header when the "verstat" parameter is specified, with the default value as "true"
+          description: Flag for including SIP Identity header when the "verstat" parameter is specified, with the default value as "true". If specified, must be true or false
           required: false
           style: form
           schema:
@@ -120,86 +120,40 @@ paths:
             schema:
               $ref: '#/components/schemas/Identity'
           text/plain:
-            schema:
-              description: |
-                * With SIP INVITE Message & Response in JSON Format (S-J)
-                ```curl
-                curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
-                    -H 'Content-Type: text/plain' \
-                    -H 'Accept: application/json' \
-                    -d 'INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0
-                v: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK
-                Max-Forwards: 70
-                m: "Alice" <sip:5715550001@proxy.example.com:39089;transport=UDP>
-                t: "Bob" <sip:+17035550002@example.com>
-                f: "Alice" <sip:+15715550001@example.com>;tag=1f4e4f40
-                i: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
-                P-Asserted-Identity: Alice <sip:+15715550001@example.com>
-                CSeq: 2 INVITE
-                Allow: INVITE, ACK, CANCEL, BYE, NOTIFY, REFER, MESSAGE, OPTIONS, INFO, SUBSCRIBE
-                c: application/sdp
-                Date: Fri, 14 May 2021 16:57:04 GMT
-                k: replaces, norefersub, extended-refer, timer, X-cisco-serviceuri
-                User-Agent: Z 3.3.25608 r25552
-                Allow-Events: presence, kpml
-                l: 425
-                v=0
-                o=Z 0 0 IN IP4 10.31.32.251
-                s=Z
-                c=IN IP4 10.31.32.251
-                t=0 0
-                m=audio 8000 RTP/AVP 8 0 3 110 98 101
-                a=fingerprint:md5 14:75:8F:1A:FD:44:C0:9B:79:92:07:3C:CF:00:B4:3D
-                a=fingerprint:sha-256 AE:C0:70:64:5F:E5:3E:E3:B3:76:30:59:37:61:34:F0:58:CC:33:72:47:C9:78:AD:D1:78:B6:CC:DF:B0:01:9F
-                a=rtpmap:110 speex/8000
-                a=rtpmap:98 iLBC/8000
-                a=fmtp:98 mode=20
-                a=rtpmap:101 telephone-event/8000
-                a=fmtp:101 0-15
-                a=sendrecv
-                '
-                ```
+            examples: 
+              request: 
+                value: |
+                  INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0
+                  v: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK
+                  Max-Forwards: 70
+                  m: "Alice" <sip:5715550001@proxy.example.com:39089;transport=UDP>
+                  t: "Bob" <sip:+17035550002@example.com>
+                  f: "Alice" <sip:+15715550001@example.com>;tag=1f4e4f40
+                  i: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
+                  P-Asserted-Identity: Alice <sip:+15715550001@example.com>
+                  CSeq: 2 INVITE
+                  Allow: INVITE, ACK, CANCEL, BYE, NOTIFY, REFER, MESSAGE, OPTIONS, INFO, SUBSCRIBE
+                  c: application/sdp
+                  Date: Fri, 14 May 2021 16:57:04 GMT
+                  k: replaces, norefersub, extended-refer, timer, X-cisco-serviceuri
+                  User-Agent: Z 3.3.25608 r25552
+                  Allow-Events: presence, kpml
+                  l: 425
 
-                * With SIP INVITE Message & Response in SIP Format (S-S)
-                ```curl
-                curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC&verstat=TN-Validation-Passed&identity=true' -i -X POST \
-                    -H 'Content-Type: text/plain' \
-                    -H 'Accept: text/plain' \
-                    -d 'INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0
-                v: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK
-                Max-Forwards: 70
-                m: "Alice" <sip:5715550001@proxy.example.com:39089;transport=UDP>
-                t: "Bob" <sip:+17035550002@example.com>
-                f: "Alice" <sip:+15715550001@example.com>;tag=1f4e4f40
-                i: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
-                P-Asserted-Identity: Alice <sip:+15715550001@example.com>
-                CSeq: 2 INVITE
-                Allow: INVITE, ACK, CANCEL, BYE, NOTIFY, REFER, MESSAGE, OPTIONS, INFO, SUBSCRIBE
-                c: application/sdp
-                Date: Fri, 14 May 2021 16:57:02 GMT
-                k: replaces, norefersub, extended-refer, timer, X-cisco-serviceuri
-                User-Agent: Z 3.3.25608 r25552
-                Allow-Events: presence, kpml
-                l: 425
-                v=0
-                o=Z 0 0 IN IP4 10.31.32.251
-                s=Z
-                c=IN IP4 10.31.32.251
-                t=0 0
-                m=audio 8000 RTP/AVP 8 0 3 110 98 101
-                a=fingerprint:md5 14:75:8F:1A:FD:44:C0:9B:79:92:07:3C:CF:00:B4:3D
-                a=fingerprint:sha-256 AE:C0:70:64:5F:E5:3E:E3:B3:76:30:59:37:61:34:F0:58:CC:33:72:47:C9:78:AD:D1:78:B6:CC:DF:B0:01:9F
-                a=rtpmap:110 speex/8000
-                a=rtpmap:98 iLBC/8000
-                a=fmtp:98 mode=20
-                a=rtpmap:101 telephone-event/8000
-                a=fmtp:101 0-15
-                a=sendrecv
-                '
-                ```
-              type: string
-            required: true
-        required: true
+                  v=0
+                  o=Z 0 0 IN IP4 10.31.32.251
+                  s=Z
+                  c=IN IP4 10.31.32.251
+                  t=0 0
+                  m=audio 8000 RTP/AVP 8 0 3 110 98 101
+                  a=fingerprint:md5 14:75:8F:1A:FD:44:C0:9B:79:92:07:3C:CF:00:B4:3D
+                  a=fingerprint:sha-256 AE:C0:70:64:5F:E5:3E:E3:B3:76:30:59:37:61:34:F0:58:CC:33:72:47:C9:78:AD:D1:78:B6:CC:DF:B0:01:9F
+                  a=rtpmap:110 speex/8000
+                  a=rtpmap:98 iLBC/8000
+                  a=fmtp:98 mode=20
+                  a=rtpmap:101 telephone-event/8000
+                  a=fmtp:101 0-15
+                  a=sendrecv
       x-code-samples:
         - lang: Curl(J-J)
           source: |
@@ -379,87 +333,47 @@ paths:
               schema: 
                 $ref: '#/components/schemas/SuccessResponse'
             text/plain:
-              schema:
-                type: string
-                description: |
-                  * With SIP INVITE Message & Response in SIP Format (S-S)
-                  ```curl
-                  HTTP/1.1 200 OK
-                  Content-Type: text/plain;charset=UTF-8
-                  Content-Length: 1981
-                  INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0
-                  v: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK
-                  Max-Forwards: 70
-                  m: "Alice" <sip:5715550001@proxy.example.com:39089;transport=UDP>
-                  t: "Bob" <sip:+17035550002@example.com>
-                  f: "Alice" <sip:+15715550001;verstat=TN-Validation-Passed@example.com>;tag=1f4e4f40
-                  y: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJDIiwiZGVzdCI6eyJ0biI6WyIxNzAzNTU1MDAwMiJdfSwiaWF0IjoxNjIxMDExNDIyLCJta3kiOlt7ImFsZyI6Im1kNSIsImRpZyI6IjE0NzU4RjFBRkQ0NEMwOUI3OTkyMDczQ0NGMDBCNDNEIn0seyJhbGciOiJzaGEtMjU2IiwiZGlnIjoiQUVDMDcwNjQ1RkU1M0VFM0IzNzYzMDU5Mzc2MTM0RjA1OENDMzM3MjQ3Qzk3OEFERDE3OEI2Q0NERkIwMDE5RiJ9XSwib3JpZyI6eyJ0biI6IjE1NzE1NTUwMDAxIn0sIm9yaWdpZCI6ImZkYTYyM2EyLWE4OWQtMTFlOS1hZjgzLTAwNTA1NjlhYmIzNCJ9.pV58sy9KSKUCsM9VT_MzJ5srxib53d5xyoKcGBV9o-SJiAdaTB7t3vuxAh8WX8b6BMc_1P8mAk8WfKD3uSXGaA;info=<http://{hostname}:{port}/{optionalRoutingPath}/authn/v2/certs/20001.10001>;alg=ES256;ppt="shaken"
-                  P-Attestation-Indicator: A
-                  P-Origination-Id: AAA-BBB-CCCC
-                  i: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
-                  P-Asserted-Identity: Alice <sip:+15715550001;verstat=TN-Validation-Passed@example.com>
-                  CSeq: 2 INVITE
-                  Allow: INVITE, ACK, CANCEL, BYE, NOTIFY, REFER, MESSAGE, OPTIONS, INFO, SUBSCRIBE
-                  c: application/sdp
-                  Date: Fri, 14 May 2021 16:57:02 GMT
-                  k: replaces, norefersub, extended-refer, timer, X-cisco-serviceuri
-                  User-Agent: Z 3.3.25608 r25552
-                  Allow-Events: presence, kpml
-                  l: 425
-                  v=0
-                  o=Z 0 0 IN IP4 10.31.32.251
-                  s=Z
-                  c=IN IP4 10.31.32.251
-                  t=0 0
-                  m=audio 8000 RTP/AVP 8 0 3 110 98 101
-                  a=fingerprint:md5 14:75:8F:1A:FD:44:C0:9B:79:92:07:3C:CF:00:B4:3D
-                  a=fingerprint:sha-256 AE:C0:70:64:5F:E5:3E:E3:B3:76:30:59:37:61:34:F0:58:CC:33:72:47:C9:78:AD:D1:78:B6:CC:DF:B0:01:9F
-                  a=rtpmap:110 speex/8000
-                  a=rtpmap:98 iLBC/8000
-                  a=fmtp:98 mode=20
-                  a=rtpmap:101 telephone-event/8000
-                  a=fmtp:101 0-15
-                  a=sendrecv
-                  ```
-                example: |
-                          'HTTP/1.1 200 OK
-                          Content-Type: text/plain;charset=UTF-8
-                          Content-Length: 1981
+              examples: 
+                response: 
+                  value: |
+                    HTTP/1.1 200 OK
+                    Content-Type: text/plain;charset=UTF-8
+                    Content-Length: 1981
 
-                          INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0
-                          v: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK
-                          Max-Forwards: 70
-                          m: "Alice" <sip:5715550001@proxy.example.com:39089;transport=UDP>
-                          t: "Bob" <sip:+17035550002@example.com>
-                          f: "Alice" <sip:+15715550001;verstat=TN-Validation-Passed@example.com>;tag=1f4e4f40
-                          y: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJDIiwiZGVzdCI6eyJ0biI6WyIxNzAzNTU1MDAwMiJdfSwiaWF0IjoxNjIxMDExNDIyLCJta3kiOlt7ImFsZyI6Im1kNSIsImRpZyI6IjE0NzU4RjFBRkQ0NEMwOUI3OTkyMDczQ0NGMDBCNDNEIn0seyJhbGciOiJzaGEtMjU2IiwiZGlnIjoiQUVDMDcwNjQ1RkU1M0VFM0IzNzYzMDU5Mzc2MTM0RjA1OENDMzM3MjQ3Qzk3OEFERDE3OEI2Q0NERkIwMDE5RiJ9XSwib3JpZyI6eyJ0biI6IjE1NzE1NTUwMDAxIn0sIm9yaWdpZCI6ImZkYTYyM2EyLWE4OWQtMTFlOS1hZjgzLTAwNTA1NjlhYmIzNCJ9.pV58sy9KSKUCsM9VT_MzJ5srxib53d5xyoKcGBV9o-SJiAdaTB7t3vuxAh8WX8b6BMc_1P8mAk8WfKD3uSXGaA;info=<http://{hostname}:{port}/{optionalRoutingPath}/authn/certs/20001.10001>;alg=ES256;ppt="shaken"
-                          P-Attestation-Indicator: A
-                          P-Origination-Id: AAA-BBB-CCCC
-                          i: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
-                          P-Asserted-Identity: Alice <sip:+15715550001;verstat=TN-Validation-Passed@example.com>
-                          CSeq: 2 INVITE
-                          Allow: INVITE, ACK, CANCEL, BYE, NOTIFY, REFER, MESSAGE, OPTIONS, INFO, SUBSCRIBE
-                          c: application/sdp
-                          Date: Fri, 14 May 2021 16:57:02 GMT
-                          k: replaces, norefersub, extended-refer, timer, X-cisco-serviceuri
-                          User-Agent: Z 3.3.25608 r25552
-                          Allow-Events: presence, kpml
-                          l: 425
+                    INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0
+                    v: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK
+                    Max-Forwards: 70
+                    m: "Alice" <sip:5715550001@proxy.example.com:39089;transport=UDP>
+                    t: "Bob" <sip:+17035550002@example.com>
+                    f: "Alice" <sip:+15715550001;verstat=TN-Validation-Passed@example.com>;tag=1f4e4f40
+                    y: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJDIiwiZGVzdCI6eyJ0biI6WyIxNzAzNTU1MDAwMiJdfSwiaWF0IjoxNjIxMDExNDIyLCJta3kiOlt7ImFsZyI6Im1kNSIsImRpZyI6IjE0NzU4RjFBRkQ0NEMwOUI3OTkyMDczQ0NGMDBCNDNEIn0seyJhbGciOiJzaGEtMjU2IiwiZGlnIjoiQUVDMDcwNjQ1RkU1M0VFM0IzNzYzMDU5Mzc2MTM0RjA1OENDMzM3MjQ3Qzk3OEFERDE3OEI2Q0NERkIwMDE5RiJ9XSwib3JpZyI6eyJ0biI6IjE1NzE1NTUwMDAxIn0sIm9yaWdpZCI6ImZkYTYyM2EyLWE4OWQtMTFlOS1hZjgzLTAwNTA1NjlhYmIzNCJ9.pV58sy9KSKUCsM9VT_MzJ5srxib53d5xyoKcGBV9o-SJiAdaTB7t3vuxAh8WX8b6BMc_1P8mAk8WfKD3uSXGaA;info=<https://ca-authn.neustarlab.biz/ccid/authn/v2/certs/20001.10001>;alg=ES256;ppt="shaken"
+                    P-Attestation-Indicator: A
+                    P-Origination-Id: AAA-BBB-CCCC
+                    i: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
+                    P-Asserted-Identity: Alice <sip:+15715550001;verstat=TN-Validation-Passed@example.com>
+                    CSeq: 2 INVITE
+                    Allow: INVITE, ACK, CANCEL, BYE, NOTIFY, REFER, MESSAGE, OPTIONS, INFO, SUBSCRIBE
+                    c: application/sdp
+                    Date: Fri, 14 May 2021 16:57:02 GMT
+                    k: replaces, norefersub, extended-refer, timer, X-cisco-serviceuri
+                    User-Agent: Z 3.3.25608 r25552
+                    Allow-Events: presence, kpml
+                    l: 425
 
-                          v=0
-                          o=Z 0 0 IN IP4 10.31.32.251
-                          s=Z
-                          c=IN IP4 10.31.32.251
-                          t=0 0
-                          m=audio 8000 RTP/AVP 8 0 3 110 98 101
-                          a=fingerprint:md5 14:75:8F:1A:FD:44:C0:9B:79:92:07:3C:CF:00:B4:3D
-                          a=fingerprint:sha-256 AE:C0:70:64:5F:E5:3E:E3:B3:76:30:59:37:61:34:F0:58:CC:33:72:47:C9:78:AD:D1:78:B6:CC:DF:B0:01:9F
-                          a=rtpmap:110 speex/8000
-                          a=rtpmap:98 iLBC/8000
-                          a=fmtp:98 mode=20
-                          a=rtpmap:101 telephone-event/8000
-                          a=fmtp:101 0-15
-                          a=sendrecv'
+                    v=0
+                    o=Z 0 0 IN IP4 10.31.32.251
+                    s=Z
+                    c=IN IP4 10.31.32.251
+                    t=0 0
+                    m=audio 8000 RTP/AVP 8 0 3 110 98 101
+                    a=fingerprint:md5 14:75:8F:1A:FD:44:C0:9B:79:92:07:3C:CF:00:B4:3D
+                    a=fingerprint:sha-256 AE:C0:70:64:5F:E5:3E:E3:B3:76:30:59:37:61:34:F0:58:CC:33:72:47:C9:78:AD:D1:78:B6:CC:DF:B0:01:9F
+                    a=rtpmap:110 speex/8000
+                    a=rtpmap:98 iLBC/8000
+                    a=fmtp:98 mode=20
+                    a=rtpmap:101 telephone-event/8000
+                    a=fmtp:101 0-15
+                    a=sendrecv
         400:
           description: Error Response
           content: 
@@ -467,29 +381,18 @@ paths:
               schema: 
                 $ref: '#/components/schemas/ErrorResponse400'
             text/plain:
-              schema:
-                type: string
-                description: |
-                  * With SIP INVITE Message & Response in SIP Format (S-S)
-                  ```
-                  HTTP/1.1 400 Forbidden
-                  Content-Type: text/plain;charset=UTF-8
-                  Content-Length: 197
-                  SIP/2.0 437 Credential has expired
-                  From: "Alice" <sip:+15714345500@example.com>
-                  To: "Bob" <sip:+447035550000@example.com>
-                  Reason: SIP;cause=437;text="Credential has expired"
-                  Content-Length: 0
-                  ```
-                example: 'HTTP/1.1 403 Forbidden
-                          Content-Type: text/plain;charset=UTF-8
-                          Content-Length: 197
+              examples:
+                response: 
+                  value: |
+                    HTTP/1.1 400 Forbidden
+                    Content-Type: text/plain;charset=UTF-8
+                    Content-Length: 197
 
-                          SIP/2.0 437 Credential has expired
-                          From: "Alice" <sip:+15714345500@example.com>
-                          To: "Bob" <sip:+447035550000@example.com>
-                          Reason: SIP;cause=437;text="Credential has expired"
-                          Content-Length: 0'
+                    SIP/2.0 437 Credential has expired
+                    From: "Alice" <sip:+15714345500@example.com>
+                    To: "Bob" <sip:+447035550000@example.com>
+                    Reason: SIP;cause=437;text="Credential has expired"
+                    Content-Length: 0
         403:
           description: Error Response
           content: 
@@ -497,29 +400,18 @@ paths:
               schema: 
                 $ref: '#/components/schemas/ErrorResponse403'
             text/plain:
-              schema:
-                type: string
-                description: |
-                  * With SIP INVITE Message & Response in SIP Format (S-S)
-                  ```
-                  HTTP/1.1 403 Forbidden
-                  Content-Type: text/plain;charset=UTF-8
-                  Content-Length: 197
-                  SIP/2.0 437 Credential has expired
-                  From: "Alice" <sip:+15714345500@example.com>
-                  To: "Bob" <sip:+447035550000@example.com>
-                  Reason: SIP;cause=437;text="Credential has expired"
-                  Content-Length: 0
-                  ```
-                example: 'HTTP/1.1 403 Forbidden
-                          Content-Type: text/plain;charset=UTF-8
-                          Content-Length: 197
+              examples:
+                response: 
+                  value: | 
+                    HTTP/1.1 403 Forbidden
+                    Content-Type: text/plain;charset=UTF-8
+                    Content-Length: 197
 
-                          SIP/2.0 437 Credential has expired
-                          From: "Alice" <sip:+15714345500@example.com>
-                          To: "Bob" <sip:+447035550000@example.com>
-                          Reason: SIP;cause=437;text="Credential has expired"
-                          Content-Length: 0'
+                    SIP/2.0 437 Credential has expired
+                    From: "Alice" <sip:+15714345500@example.com>
+                    To: "Bob" <sip:+447035550000@example.com>
+                    Reason: SIP;cause=437;text="Credential has expired"
+                    Content-Length: 0'
   /authn/identity/proxy/{addr}/{port}:
     post:
       tags:
@@ -551,9 +443,40 @@ paths:
         description: ''
         content:
           text/plain:
-            schema:
-              type: string
-              example: 'SIP sip:17035550021@proxy.example.com;transport=UDP SIP/2.0 From: Alice <sip:+15714345500@example.com> To: Bob <sip:+447035550000@example.com>'
+            examples: 
+              request: 
+                value: |
+                  INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0
+                  Via: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK
+                  Max-Forwards: 70
+                  Contact: "Alice" <sip:5715550001@proxy.example.com:39089;transport=UDP>
+                  To: "Bob" <sip:+17035550002@example.com>
+                  From: "Alice" <sip:+15715550001@example.com>;tag=1f4e4f40
+                  Call-ID: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
+                  P-Asserted-Identity: Alice <sip:+15715550001@example.com>
+                  CSeq: 2 INVITE
+                  Allow: INVITE, ACK, CANCEL, BYE, NOTIFY, REFER, MESSAGE, OPTIONS, INFO, SUBSCRIBE
+                  Content-Type: application/sdp
+                  Date: Fri, 14 May 2021 16:57:02 GMT
+                  Supported: replaces, norefersub, extended-refer, timer, X-cisco-serviceuri
+                  User-Agent: Z 3.3.25608 r25552
+                  Allow-Events: presence, kpml
+                  Content-Length: 425
+
+                  v=0
+                  o=Z 0 0 IN IP4 10.31.32.251
+                  s=Z
+                  c=IN IP4 10.31.32.251
+                  t=0 0
+                  m=audio 8000 RTP/AVP 8 0 3 110 98 101
+                  a=fingerprint:md5 14:75:8F:1A:FD:44:C0:9B:79:92:07:3C:CF:00:B4:3D
+                  a=fingerprint:sha-256 AE:C0:70:64:5F:E5:3E:E3:B3:76:30:59:37:61:34:F0:58:CC:33:72:47:C9:78:AD:D1:78:B6:CC:DF:B0:01:9F
+                  a=rtpmap:110 speex/8000
+                  a=rtpmap:98 iLBC/8000
+                  a=fmtp:98 mode=20
+                  a=rtpmap:101 telephone-event/8000
+                  a=fmtp:101 0-15
+                  a=sendrecv
         required: true
       x-code-samples:
         - lang: Curl
@@ -639,10 +562,6 @@ paths:
             application/json: 
               schema: 
                 $ref: '#/components/schemas/SuccessResponseProxy'
-            text/plain:
-              schema:
-                type: string
-                example: 'INVITE sip:17035550021@proxy.example.com;transport=UDP SIP/2.0From: "Alice" <sip:+15714345500@example.com>Identity: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyI0NDcwMzU1NTAwMDAiXX0sImlhdCI6MTYyMTAxMTQyNSwib3JpZyI6eyJ0biI6IjE1NzE0MzQ1NTAwIn0sIm9yaWdpZCI6Ijc4MzZlYzFkMDYwNzRkNjg4YjYyYzFlYTVlYmQxOTM5In0.RIDQYZP0SNd7ejjJGlcYLQ-55XssLVG5hJ5001v-unKFbD349VVYLderLBt_4h-eCgAcWIsuAW6YSMUqfPk8PA;info=<http://{hostname}:{port}/{optionalRoutingPath}/authn/certs/20001.10001>;alg=ES256;ppt="shaken"Date: Fri, 14 May 2021 16:57:05 GMTTo: "Bob" <sip:+447035550000@example.com>'
         403:
           description: Error Response
           content: 
@@ -739,7 +658,7 @@ paths:
                   policy:
                     type: string
                     description: The policy for processing the SIP message
-                    example: '{\"stateful\":false,\"via\":false,\"max_forwards\":false,\"route\":false,\"record_route\":false,\"error_action\":[{\"error\":\"default\",\"action\":\"passthru\"},{\"error\":\"438\",\"action\":\"custom\",\"sip_code\":481}]}"'
+                    example: "{\"stateful\":false,\"via\":false,\"max_forwards\":false,\"route\":false,\"record_route\":false,\"error_action\":[{\"error\":\"default\",\"action\":\"passthru\"},{\"error\":\"438\",\"action\":\"custom\",\"sip_code\":481}]}"
                     required: false
         403:
           description: Error Response
@@ -807,31 +726,28 @@ paths:
           description: successful operation
           content:
             text/plain:
-              schema:
-                description: | 
-                  The successful response message is as below
-                  ```
-                  HTTP/1.1 200 OK
-                  Content-Type: application/json;charset=UTF-8
-                  Content-Length: 1066
-                  -----BEGIN CERTIFICATE-----
-                  MIIC3DCCAcSgAwIBAgIIBVau5WIgYr4wDQYJKoZIhvcNAQELBQAwPTEUMBIGA1UEAwwLQ2FsbEF1
-                  dGhuQ0ExGDAWBgNVBAoMD05ldXN0YXIgSU9UIExhYjELMAkGA1UEBhMCVVMwHhcNMjAwNzEwMTg0
-                  NTIyWhcNMjIwNzEwMTg0NTIyWjB4MRwwGgYDVQQDDBN0ZXN0Lm5ldXN0YXJsYWIuYml6MRQwEgYD
-                  VQQLDAtTbWFydElEIElPVDEVMBMGA1UECgwMTmV1U3RhciBJbmMuMREwDwYDVQQHDAhTdGVybGlu
-                  ZzELMAkGA1UECAwCVkExCzAJBgNVBAYTAlVTMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE+uA9
-                  IAiTmofZeO68tU5HcevE99nA/FNmBf5nJXFyotjje+2qj55yZTXw7n0hBbvFGNtuk08XyioVwwBh
-                  oIW4uKNwMG4wHQYDVR0OBBYEFN5vq8ArhfTLjiEqr9YFIXennAA/MAwGA1UdEwEB/wQCMAAwHwYD
-                  VR0jBBgwFoAUA5OlO5suixTWxM9Yz0bbgzFU0MgwDgYDVR0PAQH/BAQDAgeAMA4GCCsGAQUFBwEa
-                  BAIwADANBgkqhkiG9w0BAQsFAAOCAQEAeT9nsp/6EfpdG/Yv+pYu751IF5bGK9fP3XOi89QI4Ode
-                  zrExFkUDhYU8hRXg2EhPDKY1t+LwcEEluBba/osgNZpx9VwFAhctFXVr0m9k4fVSzGLbxvc3BpyH
-                  7WVkUmBfDSAVK5UtSafo9VgqTm5AAYTEUUnx6Pn+RWFAk7DhGAv/uP1BCAsZBE51dL4sK5IYIPYC
-                  PKkugQY+hPk+x+576TFUdjcmBJeq3O/YD98f59DTP2aRVfKdbbWI1DWG6wOwjIUYxzYaprd/U5IC
-                  f6O8TLlYMoUMmbBFHBYOSI4/kb4KmM3l8CCTrvvyVtcwF+EX/D3B/2ob87UmRkqduhZDJA==
-                  -----END CERTIFICATE-----
-                  ```
-                type: string
-                example: '-----BEGIN CERTIFICATE-----MII...-----END CERTIFICATE-----'
+              examples: 
+                response: 
+                  value: |
+                    HTTP/1.1 200 OK
+                    Content-Type: application/json;charset=UTF-8
+                    Content-Length: 1066
+
+                    -----BEGIN CERTIFICATE-----
+                    MIIC3DCCAcSgAwIBAgIIBVau5WIgYr4wDQYJKoZIhvcNAQELBQAwPTEUMBIGA1UEAwwLQ2FsbEF1
+                    dGhuQ0ExGDAWBgNVBAoMD05ldXN0YXIgSU9UIExhYjELMAkGA1UEBhMCVVMwHhcNMjAwNzEwMTg0
+                    NTIyWhcNMjIwNzEwMTg0NTIyWjB4MRwwGgYDVQQDDBN0ZXN0Lm5ldXN0YXJsYWIuYml6MRQwEgYD
+                    VQQLDAtTbWFydElEIElPVDEVMBMGA1UECgwMTmV1U3RhciBJbmMuMREwDwYDVQQHDAhTdGVybGlu
+                    ZzELMAkGA1UECAwCVkExCzAJBgNVBAYTAlVTMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE+uA9
+                    IAiTmofZeO68tU5HcevE99nA/FNmBf5nJXFyotjje+2qj55yZTXw7n0hBbvFGNtuk08XyioVwwBh
+                    oIW4uKNwMG4wHQYDVR0OBBYEFN5vq8ArhfTLjiEqr9YFIXennAA/MAwGA1UdEwEB/wQCMAAwHwYD
+                    VR0jBBgwFoAUA5OlO5suixTWxM9Yz0bbgzFU0MgwDgYDVR0PAQH/BAQDAgeAMA4GCCsGAQUFBwEa
+                    BAIwADANBgkqhkiG9w0BAQsFAAOCAQEAeT9nsp/6EfpdG/Yv+pYu751IF5bGK9fP3XOi89QI4Ode
+                    zrExFkUDhYU8hRXg2EhPDKY1t+LwcEEluBba/osgNZpx9VwFAhctFXVr0m9k4fVSzGLbxvc3BpyH
+                    7WVkUmBfDSAVK5UtSafo9VgqTm5AAYTEUUnx6Pn+RWFAk7DhGAv/uP1BCAsZBE51dL4sK5IYIPYC
+                    PKkugQY+hPk+x+576TFUdjcmBJeq3O/YD98f59DTP2aRVfKdbbWI1DWG6wOwjIUYxzYaprd/U5IC
+                    f6O8TLlYMoUMmbBFHBYOSI4/kb4KmM3l8CCTrvvyVtcwF+EX/D3B/2ob87UmRkqduhZDJA==
+                    -----END CERTIFICATE-----
         403:
           description: Error Response
           content: 
@@ -981,13 +897,41 @@ paths:
             schema:
               $ref: '#/components/schemas/VerifyIdentity'
           text/plain:
-            schema:
-              type: string
-              example: 'INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
-              From: "alice" <sip:+15715550000@example.com>;tag=1f4e4f40
-              To: "bob" <sip:+15715550001@example.com>
-              Date: Thu, 17 Aug 2017 15:09:27 GMT
-              Identity: ey.x.oQ;info=<http://www.example.com/cert/123>;alg=ES256'
+            examples: 
+              request: 
+                value: |
+                  INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
+                  v: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za
+                  Max-Forwards: 70
+                  m: "alice" <sip:alice@proxy.example.com:39089;transport=UDP>
+                  f: "alice" <sip:+15715550000@example.com>;tag=1f4e4f40
+                  t: "bob" <sip:+15715550001@example.com>
+                  Date: Fri, 16 Apr 2021 02:56:54 GMT
+                  i: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
+                  y: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMSJdfSwiaWF0IjoxNjE4NTQxODE0LCJta3kiOlt7ImFsZyI6IlNIQS0xIiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQiJ9LHsiYWxnIjoiU0hBLTI1NiIsImRpZyI6IjM2M0JBRTEyOTU5NUY1OTcyREY3RTA4NEZFQ0RGMUJDQUQ3QTcwNjRGN0U3NEY3RUE2MDIwNjBFMzc1NENGRjcifV0sIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJvcmlnaWQiOiIxMjM0NTYtQUJDRC05OTk5OTkifQ.yd8hFUIVEbXiZI4NTbLeepUkuEpkKAo_DQZmc2BivqJxGAnbZO2j4iljprTrka-3jLOj6ZSXo-y91879cUYZ-A;info=<http://ca.example.com/test.der>;alg=ES256;ppt="shaken"
+                  P-Asserted-Identity: "Alice" <tel:+17035550001>
+                  P-Asserted-Identity: "Alice" <sip:+17035550001@example.com>
+                  CSeq: 2 INVITE
+                  c: application/sdp
+                  User-Agent: Z 3.3.25608 r25552
+                  k: replaces, norefersub, extended-refer, timer
+                  Allow-Events: presence, kpml
+                  l: 439
+
+                  v=0
+                  o=Z 0 0 IN IP4 10.31.32.251
+                  s=Z
+                  c=IN IP4 10.31.32.251
+                  t=0 0
+                  m=audio 8000 RTP/AVP 8 0 3 110 98 101
+                  a=fingerprint:SHA-1 4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB
+                  a=fingerprint:SHA-256 36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7
+                  a=rtpmap:110 speex/8000
+                  a=rtpmap:98 iLBC/8000
+                  a=fmtp:98 mode=20
+                  a=rtpmap:101 telephone-event/8000
+                  a=fmtp:101 0-15
+                  a=sendrecv
             required: true
         required: true
       x-code-samples:
@@ -1124,13 +1068,46 @@ paths:
               schema: 
                 $ref: '#/components/schemas/VerifyResponse'
             text/plain:
-              schema:
-                type: string
-                example: 'SIP sip:17035550021@proxy.example.com;transport=UDP SIP/2.0
-                          From: "✔Alice" <sip:+15714345500@example.com>
-                          To: "Bob" <sip:+447035550000@example.com>
-                          Identity: ey.x.oQ;info=<http://www.example.com/cert/123>;alg=ES256
-                          Date: Fri, 11 Aug 2017 04:17:14 GMT'
+              examples: 
+                response: 
+                  value: | 
+                    HTTP/1.1 200 OK
+                    Content-Type: text/plain;charset=UTF-8
+                    Content-Length: 2582
+
+                    INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
+                    v: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za
+                    Max-Forwards: 70
+                    m: "alice" <sip:alice@proxy.example.com:39089;transport=UDP>
+                    f: "✔Alice In Wonderland" <sip:+15715550000;verstat=TN-Validation-Passed@example.com>;tag=1f4e4f40
+                    t: "bob" <sip:+15715550001@example.com>
+                    Date: Fri, 16 Apr 2021 02:56:52 GMT
+                    i: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
+                    P-Attestation-Indicator: A
+                    P-Origination-Id: 123456-ABCD-999999
+                    y: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMSJdfSwiaWF0IjoxNjE4NTQxODEyLCJta3kiOlt7ImFsZyI6IlNIQS0xIiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQiJ9LHsiYWxnIjoiU0hBLTI1NiIsImRpZyI6IjM2M0JBRTEyOTU5NUY1OTcyREY3RTA4NEZFQ0RGMUJDQUQ3QTcwNjRGN0U3NEY3RUE2MDIwNjBFMzc1NENGRjcifV0sIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJvcmlnaWQiOiIxMjM0NTYtQUJDRC05OTk5OTkifQ.HJzTVP6kSWIGrrAW23GJX920-WXqV7lSsLr4WzUlIJWdCVaLFNBVfze3PJ0Bq9qQnvhIZztjrdUR_hAUseaA8g;info=<http://ca.example.com/test.der>;alg=ES256;ppt="shaken"
+                    P-Asserted-Identity: "✔Alice In Wonderland,Walt Disney World Resort,Orlando,FL 32830" <sip:+15715550000@example.com;tmpl=none;bn=Disney%20World;dept=Theme%20Park;lt=Wireline;st=Business;bt=Entertainment;ba=Walt%20Disney%20World%20Resort;cs=Orlando, FL;city=Orlando;state=FL;ct=US;zip=32830;wb=http://movies.disney.com/alice-in-wonderland-1951;lg=https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png;tg=#AliceInWonderLand;sm=%7B%22Facebook%22%3A%22https%3A%2F%2Fwww.facebook.com%2FDisneyAliceInWonderland%22%2C%22Twitter%22%3A%22https%3A%2F%2Ftwitter.com%2FDisney%22%7D;nm=Alice;fn=Alice;ln=Liddell;jt=Adventurer;hs=https://encrypted-tbn0.gstatic.com/images?q%3dtbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I;cp=Customer Support;email=alice@disney.com;verstat=TN-Validation-Passed>
+                    CSeq: 2 INVITE
+                    c: application/sdp
+                    User-Agent: Z 3.3.25608 r25552
+                    k: replaces, norefersub, extended-refer, timer
+                    Allow-Events: presence, kpml
+                    l: 439
+
+                    v=0
+                    o=Z 0 0 IN IP4 10.31.32.251
+                    s=Z
+                    c=IN IP4 10.31.32.251
+                    t=0 0
+                    m=audio 8000 RTP/AVP 8 0 3 110 98 101
+                    a=fingerprint:SHA-1 4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB
+                    a=fingerprint:SHA-256 36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7
+                    a=rtpmap:110 speex/8000
+                    a=rtpmap:98 iLBC/8000
+                    a=fmtp:98 mode=20
+                    a=rtpmap:101 telephone-event/8000
+                    a=fmtp:101 0-15
+                    a=sendrecv
         400:
           description: Error Response
           content: 
@@ -1138,17 +1115,23 @@ paths:
               schema: 
                 $ref: '#/components/schemas/VerifyErrorResponse400'
             text/plain:
-              schema:
-                type: string
-                example: 'HTTP/1.1 403 Forbidden
-                          Content-Type: text/plain;charset=UTF-8
-                          Content-Length: 197
+              examples: 
+                response: 
+                  value: |
+                    HTTP/1.1 400 Bad Request
+                    Content-Type: text/plain;charset=UTF-8
+                    Content-Length: 505
 
-                          SIP/2.0 437 Credential has expired
-                          From: "Alice" <sip:+15714345500@example.com>
-                          To: "Bob" <sip:+447035550000@example.com>
-                          Reason: SIP;cause=437;text="Credential has expired"
-                          Content-Length: 0'
+                    SIP/2.0 438 Identity signature failed to be verified
+                    Via: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za
+                    Contact: "alice" <sip:alice@proxy.example.com:39089;transport=UDP>
+                    From: "alice" <sip:+15715550000@example.com>;tag=1f4e4f40
+                    To: "bob" <sip:+15715550001@example.com>
+                    Call-ID: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
+                    CSeq: 2 INVITE
+                    Supported: replaces, norefersub, extended-refer, timer
+                    Reason: SIP;cause=438;text="Identity signature failed to be verified"
+                    Content-Length: 0
   /verify/identity/proxy/{addr}/{port}:
     post:
       tags:
@@ -1180,12 +1163,37 @@ paths:
         description: ''
         content:
           text/plain:
-            schema:
-              type: string
-              example: 'SIP sip:17035550021@proxy.example.com;transport=UDP SIP/2.0
-                        From: Alice <sip:+15714345500@example.com>
-                        To: Bob <sip:+447035550000@example.com>
-                        Identity: ey.x.oQ;info=<http://.../cert/123>;alg=ES256'
+            examples: 
+              request: 
+                value: |
+                  INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
+                  Via: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za
+                  Max-Forwards: 70
+                  Contact: "alice" <sip:alice@proxy.example.com:39089;transport=UDP>
+                  From: "alice" <sip:+15715550000@example.com>;tag=1f4e4f40
+                  To: "bob" <sip:+15715550001@example.com>
+                  Date: Fri, 16 Apr 2021 02:56:56 GMT
+                  Call-ID: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
+                  Identity: eyJhbGciOiJFUzI1NiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTYsIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9fQ.l0M2I9W8agfAWSeYOXxLu5XAPYgUMPSH53daRzsABYeT9JcxPwIPSY2O1FFhqyUjBz_P1Lm6Bhe3I-ktbjI6Zg;info=<http://ca.example.com/test.der>;alg=ES256
+                  CSeq: 2 INVITE
+                  Content-Type: application/sdp
+                  User-Agent: Z 3.3.25608 r25552
+                  Supported: replaces, norefersub, extended-refer, timer
+                  Allow-Events: presence, kpml
+                  Content-Length: 239
+
+                  v=0
+                  o=Z 0 0 IN IP4 10.31.32.251
+                  s=Z
+                  c=IN IP4 10.31.32.251
+                  t=0 0
+                  m=audio 8000 RTP/AVP 8 0 3 110 98 101
+                  a=rtpmap:110 speex/8000
+                  a=rtpmap:98 iLBC/8000
+                  a=fmtp:98 mode=20
+                  a=rtpmap:101 telephone-event/8000
+                  a=fmtp:101 0-15
+                  a=sendrecv
         required: true
       x-code-samples:
         - lang: Curl
@@ -1269,10 +1277,6 @@ paths:
             application/json: 
               schema: 
                 $ref: '#/components/schemas/SuccessResponseProxy'
-            text/plain:
-              schema:
-                type: string
-                example: 'INVITE sip:17035550021@proxy.example.com;transport=UDP SIP/2.0From: "Alice" <sip:+15714345500@example.com>Identity: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyI0NDcwMzU1NTAwMDAiXX0sImlhdCI6MTYyMTAxMTQyNSwib3JpZyI6eyJ0biI6IjE1NzE0MzQ1NTAwIn0sIm9yaWdpZCI6Ijc4MzZlYzFkMDYwNzRkNjg4YjYyYzFlYTVlYmQxOTM5In0.RIDQYZP0SNd7ejjJGlcYLQ-55XssLVG5hJ5001v-unKFbD349VVYLderLBt_4h-eCgAcWIsuAW6YSMUqfPk8PA;info=<http://{hostname}:{port}/{optionalRoutingPath}/authn/certs/20001.10001>;alg=ES256;ppt="shaken"Date: Fri, 14 May 2021 16:57:05 GMTTo: "Bob" <sip:+447035550000@example.com>'
         403:
           description: Error Response
           content: 
@@ -1367,7 +1371,7 @@ paths:
                   policy:
                     type: string
                     description: The policy for processing the SIP message
-                    example: '{\"stateful\":false,\"via\":false,\"max_forwards\":false,\"route\":false,\"record_route\":false,\"error_action\":[{\"error\":\"default\",\"action\":\"passthru\"},{\"error\":\"438\",\"action\":\"custom\",\"sip_code\":481}]}"'
+                    example: "{\"stateful\":false,\"via\":false,\"max_forwards\":false,\"route\":false,\"record_route\":false,\"error_action\":[{\"error\":\"default\",\"action\":\"passthru\"},{\"error\":\"438\",\"action\":\"custom\",\"sip_code\":481}]}"
                     required: false
         403:
           description: Error Response
@@ -1795,7 +1799,7 @@ components:
         jcard: 
           type: string
           description: The JSON string representing a valid JCARD
-          example: ['vcard',[['version',{},'text','4.0'],['fn',{},'text','Alice Liddell'],[ 'email',{},'text','alice@example.com']]]
+          example: "[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Alice Liddell\"],[ \"email\",{},\"text\",\"alice@example.com\"]]]"
         jcard_uri:
           type: string
           example: cid:123456
@@ -1822,28 +1826,27 @@ components:
           type: array
           description: List of SDP 'a=fingerprint' attribute values from SIP INVITE message. If specified, must be one as specified in RFC3325 Section 9.1
           items: 
-            type: string
-            example: [ {
-              'algorithm' : 'SHA-1',
-              'digest' : '4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB'
-            }, {
-              'algorithm' : 'SHA-256',
-              'digest' : '36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7'
-            } ]
-        finger_print[].algorithm:
-          type: string
-          description: Algorithm name of a SDP 'a=fingerprint' attribute from SIP INVITE message. Cannot be null or empty
-        finger_print[].digest: 
-          description: Digest value of a SDP 'a=fingerprint' attribute from SIP INVITE message. Cannot be null or empty
-          type: string
+            type: object 
+            properties: 
+              algorithm:
+                type: string
+                description: Algorithm name of a SDP 'a=fingerprint' attribute from SIP INVITE message. Cannot be null or empty
+              digest: 
+                type: string
+                description: Digest value of a SDP 'a=fingerprint' attribute from SIP INVITE message. Cannot be null or empty
+          example:
+            - algorithm: SHA-1
+              digest: 4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB
+            - algorithm: SHA-256
+              digest: 36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7
         orig_cc:
           type: string
           description: Default country code for the origination telephone number. If specified, must be a valid country code
-          example: 1
+          example: "1"
         dest_cc:
           type: string
           description: Default country code for the destination telephone number. If specified, must be a valid country code
-          example: 1
+          example: "1"
         attest: 
           type: string
           description: attest value defined by ATIS SHAKEN extension. If specified, must not be empty or blank. 
@@ -1854,7 +1857,7 @@ components:
           example: 3F9C2836-7E40-11E7-BA58-7831C1B8DEBA
         request_id:
           type: string
-          description: ''
+          description: 'Client supplied request identifier for tracking purpose. If not null, it will be returned back in the response object'
           example: X-REQUEST-ID-12345
     SuccessResponse:
       required:
@@ -1886,7 +1889,7 @@ components:
           description: The URI of next hop
         policy: 
           type: string
-          example: {'stateful':false,'via':false,'max_forwards':false,'route':false,'record_route':false,'error_action':[{'error':'default','action':'passthru'}]}
+          example: "{\"stateful\":false,\"via\":false,\"max_forwards\":false,\"route\":false,\"record_route\":false,\"error_action\":[{\"error\":\"default\",\"action\":\"passthru\"}]}"
           description: The policy for processing the SIP message
         header: 
           type: array
@@ -1901,7 +1904,7 @@ components:
               name:
                 type: string
                 description: The name of the SIP header or RequestLine to be added or removed
-                example: y
+                example: Identity
               value:
                 type: string
                 description: The value of the SIP header or RequestLine to be added or removed
@@ -1925,7 +1928,7 @@ components:
           description: The HTTP response status code
         sip_code: 
           type: string
-          example: 416
+          example: "416"
           description: The SIP response code associated with the error
         reason:
           type: string
@@ -1940,13 +1943,13 @@ components:
           example: Supported URI schemes are tel, sip, and sips
           description: The additional developer message, if any
         attributes:
-          type: string
-          example: 
+          type: object
           description: The name/value pair attribute map associated with the error
-        attributes.uri:
-          type: string
-          example: Alice <mail:alice@example.com>
-          description: The attribute name of 'uri' in the name/value pair
+          properties: 
+            uri: 
+              type: string
+              description: The attribute name of 'uri' in the name/value pair
+              example: Alice <mail:alice@example.com>
     ErrorResponse403:
       required:
       - error_id
@@ -1966,7 +1969,7 @@ components:
           description: The HTTP response status code
         sip_code: 
           type: string
-          example: 437
+          example: "437"
           description: The SIP response code associated with the error
         reason:
           type: string
@@ -1981,13 +1984,13 @@ components:
           example: Certificate has expired at current date/time
           description: The additional developer message, if any
         attributes:
-          type: string
-          example: 
+          type: object
           description: The name/value pair attribute map associated with the error
-        attributes.alias:
-          type: string
-          example: test2
-          description: The attribute name of 'alias' in the name/value pair
+          properties: 
+            alias: 
+              type: string
+              description: "The attribute name of 'alias' in the name/value pair"
+              example: test2
     ErrorResponseProxy403:
       required:
       - error_id
@@ -2012,11 +2015,11 @@ components:
                 description: The unique error identifier
                 example: RequestStaleDate
               http_status_code:
-                type: integer
+                type: number
                 example: 403
                 description: The HTTP response status code
               sip_code: 
-                type: string
+                type: number
                 example: 403
                 description: The SIP response code associated with the error
               reason:
@@ -2028,26 +2031,24 @@ components:
                 example: Fri, 14 May 2021 16:57:02 GMT
                 description: The timestamp when the error is generated
               attributes: 
-                type: array
+                type: object
                 description: The name/value pair .attribute map associated with the error
-                items: 
-                  type: object
-                  properties: 
-                    allowed_clock_skew:
-                      type: string
-                      description: The attribute name of 'allowed_clock_skew' in the name/value pair
-                      example: '60'
-                    difference: 
-                      type: string
-                      description: The attribute name of 'difference' in the name/value pair
-                      example: '145685787'
+                properties: 
+                  allowed_clock_skew:
+                    type: number
+                    description: The attribute name of 'allowed_clock_skew' in the name/value pair
+                    example: 60
+                  difference: 
+                    type: number
+                    description: The attribute name of 'difference' in the name/value pair
+                    example: 145685787
         next_hop:
           type: string
           example: udp:192.168.1.1:5060
           description: The additional developer message, if any
         policy:
           type: string
-          example: {'stateful':false,'via':false,'max_forwards':false,'route':false,'record_route':false,'error_action':[{'error':'default','action':'passthru'}]}
+          example: "{\"stateful\":false,\"via\":false,\"max_forwards\":false,\"route\":false,\"record_route\":false,\"error_action\":[{\"error\":\"default\",\"action\":\"passthru\"}]}"
           description: The name/value pair attribute map associated with the error
     ErrorResponseCerts400:
       required:
@@ -2063,11 +2064,11 @@ components:
           example: CredentialKeyStoreError
           description: The unique error identifier
         http_status_code:
-          type: integer
+          type: number
           example: 403
           description: The HTTP response status code
         sip_code: 
-          type: string
+          type: number
           example: 437
           description: The SIP response code associated with the error
         reason:
@@ -2079,40 +2080,704 @@ components:
           example: Fri, 14 May 2021 16:57:02 GMT
           description: The timestamp when the error is generated
         attributes:
-          type: string
-          example: 
+          type: object
           description: The name/value pair attribute map associated with the error
-        attributes.error_text:
-          type: string
-          example: ./data/ccid-authn-data-not-exist.jks (No such file or directory)
-          description: The attribute name of 'error_text' in the name/value pair
-        attributes.url:
-          type: string
-          example: file:./data/ccid-authn-data-not-exist.jks
-          description: The attribute name of 'url' in the name/value pair
+          properties: 
+            error_text:
+              type: string
+              example: ./data/ccid-authn-data-not-exist.jks (No such file or directory)
+              description: The attribute name of 'error_text' in the name/value pair
+            url:
+              type: string
+              example: file:./data/ccid-authn-data-not-exist.jks
+              description: The attribute name of 'url' in the name/value pair
     ErrorAPISuccessResponse:
       type: array
       items:
         type: object
         required:
           - error_id
+          - http_status_code
+          - sip_code
+          - reason
         properties: 
           error_id:
             type: string
             description: The unique error identifier
-            example: InternalServerError
           http_status_code:
             type: integer
             description: The HTTP response status code
-            example: 500
           sip_code:
             type: integer
             description: The SIP response code associated with the error
-            example: 500
           reason:
             type: string
             description: The detailed error text
-            example: Internal server error
+        example: 
+          - error_id : Ok
+            http_status_code : 200
+            sip_code : 200
+            reason : Ok
+          - error_id: ApiKeyRequired
+            http_status_code: 400
+            sip_code: 400
+            reason: API key is required
+          - error_id: ApiKeyInvalid
+            http_status_code: 400
+            sip_code: 400
+            reason: API key is invalid
+          - error_id: CertificateIdRequired
+            http_status_code: 400
+            sip_code: 400
+            reason: Certificate id is required
+          - error_id: CertificateIdInvalid
+            http_status_code: 400
+            sip_code: 400
+            reason: Certificate is invalid
+          - error_id: DateParseException
+            http_status_code: 400
+            sip_code: 400
+            reason: Date is expected to be in RFC 1123 format
+          - error_id: MediaTypeException
+            http_status_code: 400
+            sip_code: 400
+            reason: Content-Type is invalid or not supported
+          - error_id: MediaTypeNotAcceptableException
+            http_status_code: 406
+            sip_code: 400
+            reason: Content-Type is not acceptable
+          - error_id: MediaTypeNotSupportedException
+            http_status_code: 415
+            sip_code: 400
+            reason: Content-Type is invalid or not supported
+          - error_id: MessageParseException
+            http_status_code: 400
+            sip_code: 400
+            reason: Error in parsing the request
+          - error_id: InvalidParameterException
+            http_status_code: 400
+            sip_code: 400
+            reason: Parameter is missing or invalid
+          - error_id: PptParameterValueNotSupported
+            http_status_code: 400
+            sip_code: 400
+            reason: ppt parameter value is not supported
+          - error_id: OrigidValueNotAuthorized
+            http_status_code: 400
+            sip_code: 400
+            reason: origid value is not authorized
+          - error_id: OrigNotAuthorized
+            http_status_code: 400
+            sip_code: 400
+            reason: orig telephone number is not authorized
+          - error_id: DestNotAuthorized
+            http_status_code: 400
+            sip_code: 400
+            reason: dest telephone number is not authorized
+          - error_id: OrigDestNotAuthorized
+            http_status_code: 400
+            sip_code: 400
+            reason: orig and dest combination is not authorized
+          - error_id: MethodNotSupportedException
+            http_status_code: 400
+            sip_code: 400
+            reason: Request method is not supported
+          - error_id: VerstatValueInvalid
+            http_status_code: 400
+            sip_code: 400
+            reason: Verstat value is invalid
+          - error_id: VerstatNotSupported
+            http_status_code: 400
+            sip_code: 400
+            reason: Verstat is not supported for the PASSporT type
+          - error_id: CustomerNotFound
+            http_status_code: 400
+            sip_code: 400
+            reason: Customer not found
+          - error_id: CustomerCredentialNotFound
+            http_status_code: 400
+            sip_code: 400
+            reason: Customer credential not found
+          - error_id: CustomerCertificateNotFound
+            http_status_code: 400
+            sip_code: 400
+            reason: Customer certificate not found
+          - error_id: SipInterfaceCidrInvalid
+            http_status_code: 500
+            sip_code: 500
+            reason: SIP interface cidr is invalid
+          - error_id: SipInterfaceIpAddressInvalid
+            http_status_code: 400
+            sip_code: 400
+            reason: SIP interface IP address is invalid
+          - error_id: SipInterfacePortInvalid
+            http_status_code: 400
+            sip_code: 400
+            reason: SIP interface port is invalid
+          - error_id: SipInterfaceNotAuthorized
+            http_status_code: 400
+            sip_code: 400
+            reason: SIP interface IP address/port not authorized
+          - error_id: AtisSigningRequestMissing
+            http_status_code: 400
+            sip_code: 400
+            reason: Missing mandatory parameters in the signing request
+          - error_id: AtisSigningRequestInvalid
+            http_status_code: 400
+            sip_code: 400
+            reason: Received invalid parameters
+          - error_id: ServiceNotAvailableForSipOptions
+            http_status_code: 503
+            sip_code: 503
+            reason: Service not available when processing a SIP OPTIONS message
+          - error_id: ServiceNotAvailableForSipInvite
+            http_status_code: 503
+            sip_code: 503
+            reason: Service not available when processing a SIP INVITE message
+          - error_id: InternalRetryTnOwnershipOverride
+            http_status_code: 500
+            sip_code: 500
+            reason: Internal retry due to TN ownership override
+          - error_id: UriUserPartRequired
+            http_status_code: 400
+            sip_code: 416
+            reason: URI user-part is required
+          - error_id: UriParseError
+            http_status_code: 400
+            sip_code: 416
+            reason: URI parsing failed
+          - error_id: UriSchemeInvalid
+            http_status_code: 400
+            sip_code: 416
+            reason: URI scheme is invalid
+          - error_id: UriEncodingInvalid
+            http_status_code: 400
+            sip_code: 416
+            reason: URI encoding is invalid
+          - error_id: CallInfoHeaderInvalid
+            http_status_code: 400
+            sip_code: 403
+            reason: Call-Info header is invalid
+          - error_id: ContentTypeHeaderInvalid
+            http_status_code: 400
+            sip_code: 403
+            reason: Content-Type header is invalid
+          - error_id: ContentNotFound
+            http_status_code: 400
+            sip_code: 403
+            reason: Content not found in SIP INVITE message
+          - error_id: SipInviteMessageInvalid
+            http_status_code: 400
+            sip_code: 403
+            reason: SIP INVITE message is invalid
+          - error_id: SipInviteDateInvalid
+            http_status_code: 400
+            sip_code: 403
+            reason: SIP INVITE Date header is invalid
+          - error_id: CredentialNotFound
+            http_status_code: 403
+            sip_code: 437
+            reason: Credential not found
+          - error_id: CredentialNotYetValid
+            http_status_code: 403
+            sip_code: 437
+            reason: Credential not yet valid
+          - error_id: CredentialExpired
+            http_status_code: 403
+            sip_code: 437
+            reason: Credential has expired
+          - error_id: CredentialNotSupported
+            http_status_code: 403
+            sip_code: 437
+            reason: Credential type is not supported
+          - error_id: CredentialPrivateKeyNotFound
+            http_status_code: 403
+            sip_code: 437
+            reason: Private key not found
+          - error_id: CredentialPrivateKeyNotValid
+            http_status_code: 403
+            sip_code: 437
+            reason: Private key not valid
+          - error_id: CredentialPrivateKeyNotSupported
+            http_status_code: 403
+            sip_code: 437
+            reason: Private key not supported
+          - error_id: CredentialCertificateNotFound
+            http_status_code: 403
+            sip_code: 437
+            reason: Certificate not found
+          - error_id: CredentialKeyStoreError
+            http_status_code: 403
+            sip_code: 437
+            reason: Error in accessing keystore
+          - error_id: CredentialCertificateUrlRequired
+            http_status_code: 403
+            sip_code: 437
+            reason: Certificate URL not found
+          - error_id: CertificateFetchError
+            http_status_code: 400
+            sip_code: 436
+            reason: Error in fetching the certificate
+          - error_id: CertificateConversionError
+            http_status_code: 400
+            sip_code: 436
+            reason: Error in converting the data to a certificate
+          - error_id: CertificateValidationError
+            http_status_code: 400
+            sip_code: 437
+            reason: Certificate validation failed
+          - error_id: CertificateNotFound
+            http_status_code: 403
+            sip_code: 438
+            reason: Certificate not found
+          - error_id: CertificateNotYetValid
+            http_status_code: 403
+            sip_code: 438
+            reason: Certificate not yet valid
+          - error_id: CertificateExpired
+            http_status_code: 403
+            sip_code: 437
+            reason: Certificate has expired
+          - error_id: CertificateNotSupported
+            http_status_code: 403
+            sip_code: 437
+            reason: Certificate type is not supported
+          - error_id: CertificateNotValidForOrig
+            http_status_code: 403
+            sip_code: 437
+            reason: Certificate is not valid for the originator
+          - error_id: CertificateNotValidForDiv
+            http_status_code: 403
+            sip_code: 437
+            reason: Certificate is not valid for the diverted call
+          - error_id: CertificateTnAuthnListFetchError
+            http_status_code: 400
+            sip_code: 436
+            reason: Error in fetching the TNAuthorizationList data
+          - error_id: TrustStoreFetchError
+            http_status_code: 403
+            sip_code: 403
+            reason: Error in fetching the trust store
+          - error_id: RequestObjectInvalid
+            http_status_code: 403
+            sip_code: 403
+            reason: Invalid request object supplied
+          - error_id: RequestOrigCountryCodeInvalid
+            http_status_code: 403
+            sip_code: 403
+            reason: Originator country code(s) invalid
+          - error_id: RequestDestCountryCodeInvalid
+            http_status_code: 403
+            sip_code: 403
+            reason: Destination country code invalid
+          - error_id: RequestFromHeaderRequired
+            http_status_code: 403
+            sip_code: 403
+            reason: From header value required
+          - error_id: RequestToHeaderRequired
+            http_status_code: 403
+            sip_code: 403
+            reason: To header value required
+          - error_id: RequestIdentityHeaderRequired
+            http_status_code: 403
+            sip_code: 428
+            reason: Identity header value required
+          - error_id: RequestIdentityHeaderInvalid
+            http_status_code: 403
+            sip_code: 403
+            reason: Identity header value invalid
+          - error_id: RequestStaleDate
+            http_status_code: 403
+            sip_code: 403
+            reason: Stale date value
+          - error_id: RequestInvalidDate
+            http_status_code: 403
+            sip_code: 403
+            reason: Invalid Date value; It is too far apart from the current time
+          - error_id: RequestFingerPrintAlgoInvalid
+            http_status_code: 403
+            sip_code: 403
+            reason: Invalid SDP fingerprint algorithm
+          - error_id: RequestFingerPrintDigestInvalid
+            http_status_code: 403
+            sip_code: 403
+            reason: Invalid DSP fingerprint digest
+          - error_id: RequestOrigTnRequired
+            http_status_code: 403
+            sip_code: 403
+            reason: Originator must be a telephone number
+          - error_id: RequestDestTnRequired
+            http_status_code: 403
+            sip_code: 403
+            reason: Destination must contain a telephone number
+          - error_id: RequestDivTnRequired
+            http_status_code: 403
+            sip_code: 403
+            reason: Diversion header must contain a telephone number
+          - error_id: RequestShakenAttestRequired
+            http_status_code: 403
+            sip_code: 403
+            reason: SHAKEN attest value required
+          - error_id: RequestShakenAttestInvalid
+            http_status_code: 403
+            sip_code: 403
+            reason: SHAKEN attest value invalid
+          - error_id: RequestShakenOrigidRequired
+            http_status_code: 403
+            sip_code: 403
+            reason: SHAKEN origid value required
+          - error_id: RequestDiversionHeaderRequired
+            http_status_code: 403
+            sip_code: 428
+            reason: Diversion header value required
+          - error_id: RequestDiversionHeaderInvalid
+            http_status_code: 403
+            sip_code: 403
+            reason: Diversion header value invalid
+          - error_id: RequestResourcePriorityRequired
+            http_status_code: 403
+            sip_code: 428
+            reason: Resource Priority header value required
+          - error_id: RequestResourcePriorityInvalid
+            http_status_code: 403
+            sip_code: 403
+            reason: Resource Priority header value invalid
+          - error_id: RequestRcdJcardInfoInvalid
+            http_status_code: 403
+            sip_code: 403
+            reason: RCD JCard information invalid
+          - error_id: RequestRcdJcardDataRequired
+            http_status_code: 403
+            sip_code: 403
+            reason: RCD JCard data required
+          - error_id: RequestRcdJcardDataInvalid
+            http_status_code: 403
+            sip_code: 403
+            reason: RCD JCard data invalid
+          - error_id: RequestRcdJcardDataUriInvalid
+            http_status_code: 403
+            sip_code: 403
+            reason: RCD JCard data URI invalid
+          - error_id: RequestRcdJcardPropertyUriInvalid
+            http_status_code: 403
+            sip_code: 403
+            reason: RCD JCard property URI invalid
+          - error_id: RequestRCdJcardDataFetchError
+            http_status_code: 403
+            sip_code: 403
+            reason: RCD JCard data failed to be fetched
+          - error_id: RequestRcdSignatureAlgoInvalid
+            http_status_code: 403
+            sip_code: 403
+            reason: RCD integrity signature algorithm invalid
+          - error_id: RequestRcdSignatureInvalid
+            http_status_code: 403
+            sip_code: 403
+            reason: RCD integrity signature invalid
+          - error_id: IdentitySignatureAlgoRequired
+            http_status_code: 400
+            sip_code: 438
+            reason: Identity signature algorithm not specified
+          - error_id: IdentitySignatureAlgoMismatch
+            http_status_code: 400
+            sip_code: 437
+            reason: Identity signature algorithm not matching signing private key type
+          - error_id: IdentitySignatureSigningError
+            http_status_code: 400
+            sip_code: 438
+            reason: Identity signature signing process failed
+          - error_id: IdentitySignatureEcdsaDerInvalid
+            http_status_code: 400
+            sip_code: 438
+            reason: Identity ECDSA signature failed to be converted from DER into JWS format
+          - error_id: IdentitySignatureEcdsaJwsInvalid
+            http_status_code: 400
+            sip_code: 438
+            reason: Identity ECDSA signature failed to be converted from JWS into DER format
+          - error_id: IdentitySignatureVerifyError
+            http_status_code: 400
+            sip_code: 438
+            reason: Identity signature verification process failed
+          - error_id: IdentitySignatureVerifyFailed
+            http_status_code: 400
+            sip_code: 438
+            reason: Identity signature failed to be verified
+          - error_id: IdentityCompactPptUnsupported
+            http_status_code: 400
+            sip_code: 438
+            reason: SIP Identity header in compact form with ppt parameter is not supported
+          - error_id: IdentityParameterAlgUnsupported
+            http_status_code: 400
+            sip_code: 436
+            reason: alg parameter value specified is not supported
+          - error_id: IdentityParameterPptRequired
+            http_status_code: 400
+            sip_code: 438
+            reason: ppt parameter value is required
+          - error_id: IdentityParameterPptUnsupported
+            http_status_code: 400
+            sip_code: 436
+            reason: ppt parameter value specified is not supported
+          - error_id: IdentityParameterInfoRequired
+            http_status_code: 400
+            sip_code: 438
+            reason: info parameter value is required
+          - error_id: IdentityParameterInfoInvalid
+            http_status_code: 400
+            sip_code: 438
+            reason: info parameter value is not a valid URL
+          - error_id: IdentityParameterInfoUnsupported
+            http_status_code: 400
+            sip_code: 438
+            reason: info parameter value is not a URL of supported protocol
+          - error_id: IdentityHeaderParseError
+            http_status_code: 400
+            sip_code: 438
+            reason: Error in parsing PASSporT header
+          - error_id: IdentityHeaderEncodingInvalid
+            http_status_code: 400
+            sip_code: 438
+            reason: PASSporT header Base64 encoding is not valid
+          - error_id: IdentityHeaderPayloadInvalid
+            http_status_code: 400
+            sip_code: 438
+            reason: PASSporT header payload is not valid
+          - error_id: IdentityHeaderPayloadMismatch
+            http_status_code: 400
+            sip_code: 438
+            reason: PASSporT header payload does not match the re-constructed one
+          - error_id: IdentityHeaderAlgRequired
+            http_status_code: 400
+            sip_code: 438
+            reason: alg value is required in PASSporT header
+          - error_id: IdentityHeaderAlgUnsupported
+            http_status_code: 400
+            sip_code: 436
+            reason: alg value specified in PASSporT header is not supported
+          - error_id: IdentityHeaderAlgMismatch
+            http_status_code: 400
+            sip_code: 438
+            reason: alg value specified in PASSporT header does not match the alg parameter
+          - error_id: IdentityHeaderPptRequired
+            http_status_code: 400
+            sip_code: 438
+            reason: ppt value is required in PASSporT header
+          - error_id: IdentityHeaderPptUnsupported
+            http_status_code: 400
+            sip_code: 438
+            reason: ppt value specified in PASSporT header is not supported
+          - error_id: IdentityHeaderPptMismatch
+            http_status_code: 400
+            sip_code: 438
+            reason: ppt value specified in PASSporT header does not match the ppt parameter
+          - error_id: IdentityHeaderTypRequired
+            http_status_code: 400
+            sip_code: 438
+            reason: typ value is required in PASSporT header
+          - error_id: IdentityHeaderTypUnsupported
+            http_status_code: 400
+            sip_code: 438
+            reason: typ value specified in PASSporT header is not supported
+          - error_id: IdentityHeaderX5uRequired
+            http_status_code: 400
+            sip_code: 438
+            reason: x5u value is required in PASSporT header
+          - error_id: IdentityHeaderX5uMismatch
+            http_status_code: 400
+            sip_code: 438
+            reason: x5u value specified in PASSporT header does not match the info parameter
+          - error_id: IdentityClaimParseError
+            http_status_code: 400
+            sip_code: 438
+            reason: Error in parsing PASSporT claim
+          - error_id: IdentityClaimEncodingInvalid
+            http_status_code: 400
+            sip_code: 438
+            reason: PASSporT claim Base64 encoding is not valid
+          - error_id: IdentityClaimPayloadInvalid
+            http_status_code: 400
+            sip_code: 438
+            reason: PASSporT claim payload is not valid
+          - error_id: IdentityClaimPayloadMismatch
+            http_status_code: 400
+            sip_code: 438
+            reason: PASSporT claim payload does mot match the re-constructed one
+          - error_id: IdentityClaimOrigRequired
+            http_status_code: 400
+            sip_code: 438
+            reason: orig value is required in PASSporT claim
+          - error_id: IdentityClaimOrigInvalid
+            http_status_code: 400
+            sip_code: 438
+            reason: orig value specified in PASSporT claim is not valid
+          - error_id: IdentityClaimOrigMismatch
+            http_status_code: 400
+            sip_code: 438
+            reason: orig value specified in PASSporT claim does not match SIP From/P-Asserted-Identity header values
+          - error_id: IdentityClaimDestRequired
+            http_status_code: 400
+            sip_code: 438
+            reason: dest value is required in PASSporT claim
+          - error_id: IdentityClaimDestInvalid
+            http_status_code: 400
+            sip_code: 438
+            reason: dest value specified in PASSporT claim is not valid
+          - error_id: IdentityClaimDestMismatch
+            http_status_code: 400
+            sip_code: 438
+            reason: dest value specified in PASSporT claim does not match SIP To header value
+          - error_id: IdentityClaimIatRequired
+            http_status_code: 400
+            sip_code: 438
+            reason: iat value is required in PASSporT claim
+          - error_id: IdentityClaimMkyInvalid
+            http_status_code: 400
+            sip_code: 438
+            reason: mky value specified in PASSporT claim is not valid
+          - error_id: IdentityClaimMkyMismatch
+            http_status_code: 400
+            sip_code: 438
+            reason: mky value specified in PASSporT claim does not match SDP a:fingerprint values
+          - error_id: IdentityClaimRequiredMissing
+            http_status_code: 400
+            sip_code: 438
+            reason: Required PASSporT claim field is missing
+          - error_id: IdentityClaimValueInvalid
+            http_status_code: 400
+            sip_code: 438
+            reason: PASSporT claim value is invalid
+          - error_id: IdentityClaimStaleDate
+            http_status_code: 403
+            sip_code: 403
+            reason: Stale date value in PASSporT claim
+          - error_id: IdentityClaimInvalidDate
+            http_status_code: 403
+            sip_code: 403
+            reason: Invalid Date value in PASSporT claim; It is too far apart from the current time
+          - error_id: IdentityClaimShakenAttestRequired
+            http_status_code: 400
+            sip_code: 438
+            reason: attest value is required in PASSporT claim
+          - error_id: IdentityClaimShakenAttestInvalid
+            http_status_code: 400
+            sip_code: 438
+            reason: attest value is invalid in PASSporT claim
+          - error_id: IdentityClaimShakenOrigidRequired
+            http_status_code: 400
+            sip_code: 438
+            reason: origid value is required in PASSporT claim
+          - error_id: IdentityClaimDivRequired
+            http_status_code: 400
+            sip_code: 438
+            reason: div value is required in PASSporT claim
+          - error_id: IdentityClaimDivInvalid
+            http_status_code: 400
+            sip_code: 438
+            reason: div value is invalid in PASSporT claim
+          - error_id: IdentityClaimDivOptInvalid
+            http_status_code: 400
+            sip_code: 438
+            reason: opt value is invalid in PASSporT claim
+          - error_id: IdentityClaimOrigTnRequired
+            http_status_code: 400
+            sip_code: 438
+            reason: orig value is required to be a telephone number in PASSporT claim
+          - error_id: IdentityClaimDestTnRequired
+            http_status_code: 400
+            sip_code: 438
+            reason: dest value is required to contain a telephone number in PASSporT claim
+          - error_id: IdentityClaimDivTnRequired
+            http_status_code: 400
+            sip_code: 438
+            reason: div value is required to be a telephone number in PASSporT claim
+          - error_id: IdentityClaimRphRequired
+            http_status_code: 400
+            sip_code: 438
+            reason: rph value is required in PASSporT claim
+          - error_id: IdentityClaimRphAuthRequired
+            http_status_code: 400
+            sip_code: 438
+            reason: auth value is required in PASSporT claim
+          - error_id: IdentityClaimRphAuthInvalid
+            http_status_code: 400
+            sip_code: 438
+            reason: auth value is invalid in PASSporT claim
+          - error_id: IdentityClaimRphAuthNotFound
+            http_status_code: 400
+            sip_code: 438
+            reason: auth value is not found in SIP Resource-Priority headers
+          - error_id: IdentityClaimRcdRequired
+            http_status_code: 400
+            sip_code: 438
+            reason: rcd value is required in RCD PASSport claim
+          - error_id: IdentityClaimRcdCrnMismatch
+            http_status_code: 400
+            sip_code: 438
+            reason: crn value does not match the re-constructed one
+          - error_id: IdentityClaimRcdNamRequired
+            http_status_code: 400
+            sip_code: 438
+            reason: nam value is required in RCD PASSport claim
+          - error_id: IdentityClaimRcdNamMismatch
+            http_status_code: 400
+            sip_code: 438
+            reason: nam value does not match the re-constructed one
+          - error_id: IdentityClaimRcdJcardInfoInvalid
+            http_status_code: 400
+            sip_code: 438
+            reason: jcd and jcl values is mutually exclusive in RCD PASSporT claim
+          - error_id: IdentityClaimRcdJclInvalid
+            http_status_code: 400
+            sip_code: 438
+            reason: jcl value is invalid in RCD PASSporT claim
+          - error_id: IdentityClaimRcdJclMismatch
+            http_status_code: 400
+            sip_code: 438
+            reason: jcl value does not match the re-constructed one
+          - error_id: IdentityClaimRcdSignAlgoInvalid
+            http_status_code: 400
+            sip_code: 438
+            reason: rcdi algorithm is invalid in RCD PASSporT claim
+          - error_id: IdentityClaimRcdSignatureInvalid
+            http_status_code: 400
+            sip_code: 438
+            reason: rcdi value is invalid in RCD PASSporT claim
+          - error_id: IdentityClaimRcdSignatureMismatch
+            http_status_code: 400
+            sip_code: 438
+            reason: rcdi value does not match the re-constructed one
+          - error_id: IdentitySignatureEncodingInvalid
+            http_status_code: 400
+            sip_code: 438
+            reason: Identity signature Base64 encoding is not valid
+          - error_id: IdentitySignaturePayloadInvalid
+            http_status_code: 400
+            sip_code: 438
+            reason: Identity signature payload is not valid
+          - error_id: IdentitySignaturePayloadMismatch
+            http_status_code: 400
+            sip_code: 438
+            reason: Identity signature payload does not match the re-constructed one
+          - error_id: IdentityClaimDivEndNotFound
+            http_status_code: 400
+            sip_code: 438
+            reason: Identity diversion claim chain does not end with SIP To Header
+          - error_id: IdentityClaimDivInfiniteLoop
+            http_status_code: 400
+            sip_code: 438
+            reason: Identity diversion claim chain contains infinite loops
+          - error_id: IdentityClaimDivStartInvalid
+            http_status_code: 400
+            sip_code: 438
+            reason: Identity diversion claim chain does start with a regular claim
+          - error_id: IdentityClaimDivNotUnique
+            http_status_code: 400
+            sip_code: 438
+            reason: Identity diversion claim chain is not unique
+          - error_id: InternalServerError
+            http_status_code: 500
+            sip_code: 500
+            reason: Internal server error
     VerifyIdentity:
       required:
       - from
@@ -2156,6 +2821,7 @@ components:
         date: 
           type: string
           description: Date header value from SIP INVITE message. If specified, must be in RFC1123 format
+          example: Fri, 16 Apr 2021 02:56:51 GMT
         pai:
           type: array
           description: A list of 'P-Asserted-Identity' header values from SIP INVITE message. If specified, must be one as specified in RFC3325 Section 9.1
@@ -2168,15 +2834,19 @@ components:
               algorithm: 
                 type: string
                 description: Algorithm name of a SDP 'a=fingerprint' attribute from SIP INVITE message. Cannot be null or empty
+                example: SHA-1
               digest: 
                 type: string
                 description: Digest value of a SDP 'a=fingerprint' attribute from SIP INVITE message. Cannot be null or empty
+                example: 36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7
         orig_cc: 
-          type: string
+          type: array
           description: Default country codes for the originator telephone number. If specified, must be a valid country code
+          example: [ "1", "44" ]
         dest_cc: 
           type: string
           description: Default country code for the destination telephone number. If specified, must be a valid country code
+          example: "1"
         cnam:
           type: boolean
           description: Flag for performing CNAM lookup. If specified, must be true or false

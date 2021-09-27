@@ -31,7 +31,7 @@ a decision about whether to accept or decline the proposal.
    should be addressed in a more detailed design.
 
 3. The proposal author writes a design doc to work out details of the proposed
-   design and address the concerns raised in the initial discussion.
+   design and addresses the concerns raised in the initial discussion.
 
 4. Once comments and revisions on the design doc wind down, there is a final
    discussion on the issue, to reach one of two outcomes:
@@ -53,7 +53,7 @@ implementation work proceeds in the same way as any other contribution.
 ### Definitions
 
 - A **proposal** is a suggestion filed as a GitHub issue, identified by having
-  the Proposal label.
+  the proposal label.
 - A **design doc** is the expanded form of a proposal, written when the
   proposal needs more careful explanation and consideration.
 

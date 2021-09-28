@@ -44,9 +44,9 @@ paths:
       description: |
         This API uses the following data elements in SIP INVITE messages for SIP Identity header creation, in addition to the required 'apiKey' query parameter for uniquely identifying an API client.
         Three different API entry points are defined for SIP Identity header creation:
-          * Accepts requests in JSON format and produces responses in JSON format (J-J)
-          * Accepts SIP INVITE messages and produces responses in JSON format (S-J)
-          * Accepts SIP INVITE messages and produces responses in SIP format (S-S)
+          * Accepts requests in JSON format and produces responses in JSON format
+          * Accepts SIP INVITE messages and produces responses in JSON format
+          * Accepts SIP INVITE messages and produces responses in SIP format
       summary: Identity
       operationId: authn/identity
       parameters:
@@ -507,9 +507,9 @@ paths:
         Currently, a RESTful API client is required to provide an 'apiKey' query parameter with a pre-provisioned value to access API calls that are restricted. If the 'apiKey' parameter is not specified, the client IP address may be used as the backup authentication mechanism if pre-provisioned.
 
         Three different API entry points are defined for SIP Identity header verification:
-          * Accepts requests in JSON format and produces responses in JSON format (J-J)
-          * Accepts SIP INVITE messages and produces responses in JSON format (S-J)
-          * Accepts SIP INVITE messages and produces responses in SIP format (S-S)
+          * Accepts requests in JSON format and produces responses in JSON format
+          * Accepts SIP INVITE messages and produces responses in JSON format
+          * Accepts SIP INVITE messages and produces responses in SIP format
       summary: Identity
       operationId: verify/identity
       parameters:

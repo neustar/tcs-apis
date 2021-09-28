@@ -483,7 +483,7 @@ paths:
     get:
       tags:
       - Error
-      summary: Retreive All Errors
+      summary: Retrieve All Errors
       operationId: authn/error
       description: |
         Returns the list of all potential errors that could be generated, so that an API consumer can process those errors accordingly.
@@ -934,7 +934,7 @@ paths:
     get:
       tags:
       - Potential Errors
-      summary: Retreive All Errors
+      summary: Retrieve All Errors
       operationId: verify/errors
       description: |
         This API entry point is to return the list of all potential errors that could be generated, so that an API consumer can process those errors accordingly.

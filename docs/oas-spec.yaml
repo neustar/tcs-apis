@@ -12,7 +12,7 @@ info:
   description: |
     # Overview
     The Authentication Service (AS) and Verification Service (VS) implement the IETF RFC 8224 specification, as well as the SHAKEN framework extensions (ATIS-1000074), for securely computing, transiting and verifying SIP Identity headers for caller identity authentication. 
-    Additionally, it provides supplemental features including telephone number ownership validation, subscriber-based policy processing, Caller Name (CNAM), Resource Priority?, Enhanced CNAM (ECNAM)/Rich Call Data? and/or robocall analytics.
+    Additionally, it provides supplemental features including telephone number ownership validation, subscriber-based policy processing, Caller Name (CNAM), Resource Priority? Rich Call Data? and/or robocall analytics.
   
     ## RESTful API Authentication Service
     Currently, a RESTful API client is required to provide an 'apiKey' query parameter with a pre-provisioned value to access API calls that are restricted. If the 'apiKey' parameter is not specified, the client IP address may be used as the backup authentication mechanism if pre-provisioned.
@@ -35,7 +35,6 @@ x-tagGroups:
     tags:
       - Verifies SIP Identity Headers
       - CNAM
-      - ECNAM
       - Potential Errors
 paths:
   /authn/identity:
@@ -688,7 +687,6 @@ paths:
               "orig_cc" : [ "1", "44" ],
               "status" : "all",
               "cnam" : true,
-              "ecnam" : true,
               "robocall" : true,
               "verstat" : true,
               "identity_info" : true,
@@ -696,7 +694,7 @@ paths:
             }'
         - lang: Curl - SIP Invite/JSON
           source: |
-            curl --location --request POST 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true' \
+            curl --location --request POST 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&robocall=true' \
             --header 'Content-Type: text/plain' \
             --header 'Accept: application/json' \
             --data-raw 'INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
@@ -734,7 +732,7 @@ paths:
             '
         - lang: Curl - SIP Invite/SIP
           source: |
-            curl --location --request POST 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true&cnamPrefix=%E2%9C%94,%E2%9C%98&verstat=TN-Validation-Passed&identity=true' \
+            curl --location --request POST 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&robocall=true&cnamPrefix=%E2%9C%94,%E2%9C%98&verstat=TN-Validation-Passed&identity=true' \
             --header 'Content-Type: text/plain' \
             --header 'Accept: text/plain' \
             --data-raw 'INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
@@ -2055,9 +2053,6 @@ components:
         cnam:
           type: boolean
           description: Flag for performing CNAM lookup. If specified, must be true or false
-        ecnam:
-          type: boolean
-          description: Flag for performing ECNAM lookup. If specified, must be true or false
         robocall:
           type: boolean
           description: Flag for returning Robocall Call Insight data. If specified, must be true or false
@@ -2280,118 +2275,6 @@ components:
           type: "string"
           example: "Alice In Wonderland"
           description: "CNAM data"
-        ecnam: 
-          description: "ECNAM data"
-          properties: 
-            display_template: 
-              type: "string"
-              example: "none"
-              description: "ECNAM data display template"
-            business_name: 
-              type: "string"
-              example: "Disney World"
-              description: "Full business name"
-            department: 
-              type: "string"
-              example: "Theme Park"
-              description: "Department name"
-            line_type: 
-              type: "string"
-              example: "Wireline"
-              description: "Line type, such as wireline, wireless, etc."
-            subscriber_type: 
-              type: "string"
-              example: "Business"
-              description: "Subscriber type, such as business, residential, etc."
-            business_type: 
-              type: "string"
-              example: "Entertainment"
-              description: "Business type"
-            business_address: 
-              type: "string"
-              example: "Walt Disney World Resort"
-              description: "Business address"
-            locality: 
-              type: "string"
-              example: "Orlando, FL"
-              description: Locality, such as 'Sterling, VA'
-            city: 
-              type: "string"
-              example: "Orlando"
-              description: "City, such as 'Sterling'"
-            state: 
-              type: "string"
-              example: "FL"
-              description: "State, such as 'VA'"
-            country: 
-              type: "string"
-              example: "US"
-              description: "Country code, such as US"
-            postal_code: 
-              type: "string"
-              example: "32830"
-              description: "Postal code, such as 20166-1234"
-            website_url: 
-              type: "string"
-              example: "http://movies.disney.com/alice-in-wonderland-1951"
-              description: "Website URL"
-            logo_url: 
-              type: "string"
-              example: "https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png"
-              description: "Logo URL"
-            tagline: 
-              type: "string"
-              example: "#AliceInWonderLand"
-              description: "Tagline"
-            employee_name: 
-              type: "string"
-              example: "Alice"
-              description: "Employee’s name, such as John Smith"
-            first_name: 
-              type: "string"
-              example: "Alice"
-              description: "Employee’s first name, such as John"
-            last_name: 
-              type: "string"
-              example: "Liddell"
-              description: "Employee’s last name, such as Smith"
-            job_title: 
-              type: "string"
-              example: "Adventurer"
-              description: "Job title"
-            headshot_url: 
-              type: "string"
-              example: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I"
-              description: "Headshot/avatar image URL"
-            email: 
-              type: "string"
-              example: "alice@disney.com"
-              description: "Email address"
-            cnam: 
-              type: "string"
-              example: "Alice In Wonderland"
-              description: "CNAM data"
-            call_purpose: 
-              type: "string"
-              example: "Customer Support"
-              description: "The purpose for calls originated from the telephone number"
-            social_media_info: 
-              description: "Social media info, as an object map of name/value pairs"
-              properties: 
-                Facebook: 
-                  type: "string"
-                  example: "https://www.facebook.com/DisneyAliceInWonderland"
-                  description: "Facebook URL"
-                Twitter: 
-                  type: "string"
-                  example: "https://twitter.com/Disney"
-                  description: "Twitter URL"
-              type: "object"
-            p_asserted_identity: 
-              type: "string"
-              example: "\"Alice In Wonderland\" <sip:alice@example.com;tmpl=none;bn=Disney%20World;dept=Theme%20Park;lt=Wireline;st=Business;bt=Entertainment;ba=Walt%20Disney%20World%20Resort;cs=Orlando, FL;city=Orlando;state=FL;ct=US;zip=32830;wb=http://movies.disney.com/alice-in-wonderland-1951;lg=https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png;tg=#AliceInWonderLand;sm=%7B%22Facebook%22%3A%22https%3A%2F%2Fwww.facebook.com%2FDisneyAliceInWonderland%22%2C%22Twitter%22%3A%22https%3A%2F%2Ftwitter.com%2FDisney%22%7D;nm=Alice;fn=Alice;ln=Liddell;jt=Adventurer;hs=https://encrypted-tbn0.gstatic.com/images?q%3dtbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I;cp=Customer Support;email=alice@disney.com>"
-              description: "Value as 'allow as SIP P-Asserted-Identity header"
-          type: "object"
         call_insight: 
           description: "Call insight details"
           properties: 
@@ -2434,118 +2317,6 @@ components:
           type: "string"
           example: "Alice In Wonderland"
           description: "CNAM data"
-        ecnam: 
-          description: "ECNAM data"
-          properties: 
-            display_template: 
-              type: "string"
-              example: "none"
-              description: "ECNAM data display template"
-            business_name: 
-              type: "string"
-              example: "Disney World"
-              description: "Full business name"
-            department: 
-              type: "string"
-              example: "Theme Park"
-              description: "Department name"
-            line_type: 
-              type: "string"
-              example: "Wireline"
-              description: "Line type, such as wireline, wireless, etc."
-            subscriber_type: 
-              type: "string"
-              example: "Business"
-              description: "Subscriber type, such as business, residential, etc."
-            business_type: 
-              type: "string"
-              example: "Entertainment"
-              description: "Business type"
-            business_address: 
-              type: "string"
-              example: "Walt Disney World Resort"
-              description: "Business address"
-            locality: 
-              type: "string"
-              example: "Orlando, FL"
-              description: Locality, such as 'Sterling, VA'
-            city: 
-              type: "string"
-              example: "Orlando"
-              description: "City, such as 'Sterling'"
-            state: 
-              type: "string"
-              example: "FL"
-              description: "State, such as 'VA'"
-            country: 
-              type: "string"
-              example: "US"
-              description: "Country code, such as US"
-            postal_code: 
-              type: "string"
-              example: "32830"
-              description: "Postal code, such as 20166-1234"
-            website_url: 
-              type: "string"
-              example: "http://movies.disney.com/alice-in-wonderland-1951"
-              description: "Website URL"
-            logo_url: 
-              type: "string"
-              example: "https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png"
-              description: "Logo URL"
-            tagline: 
-              type: "string"
-              example: "#AliceInWonderLand"
-              description: "Tagline"
-            employee_name: 
-              type: "string"
-              example: "Alice"
-              description: "Employee’s name, such as John Smith"
-            first_name: 
-              type: "string"
-              example: "Alice"
-              description: "Employee’s first name, such as John"
-            last_name: 
-              type: "string"
-              example: "Liddell"
-              description: "Employee’s last name, such as Smith"
-            job_title: 
-              type: "string"
-              example: "Adventurer"
-              description: "Job title"
-            headshot_url: 
-              type: "string"
-              example: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I"
-              description: "Headshot/avatar image URL"
-            email: 
-              type: "string"
-              example: "alice@disney.com"
-              description: "Email address"
-            cnam: 
-              type: "string"
-              example: "Alice In Wonderland"
-              description: "CNAM data"
-            call_purpose: 
-              type: "string"
-              example: "Customer Support"
-              description: "The purpose for calls originated from the telephone number"
-            social_media_info: 
-              description: "Social media info, as an object map of name/value pairs"
-              properties: 
-                Facebook: 
-                  type: "string"
-                  example: "https://www.facebook.com/DisneyAliceInWonderland"
-                  description: "Facebook URL"
-                Twitter: 
-                  type: "string"
-                  example: "https://twitter.com/Disney"
-                  description: "Twitter URL"
-              type: "object"
-            p_asserted_identity: 
-              type: "string"
-              example: "\"Alice In Wonderland\" <sip:alice@example.com;tmpl=none;bn=Disney%20World;dept=Theme%20Park;lt=Wireline;st=Business;bt=Entertainment;ba=Walt%20Disney%20World%20Resort;cs=Orlando, FL;city=Orlando;state=FL;ct=US;zip=32830;wb=http://movies.disney.com/alice-in-wonderland-1951;lg=https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png;tg=#AliceInWonderLand;sm=%7B%22Facebook%22%3A%22https%3A%2F%2Fwww.facebook.com%2FDisneyAliceInWonderland%22%2C%22Twitter%22%3A%22https%3A%2F%2Ftwitter.com%2FDisney%22%7D;nm=Alice;fn=Alice;ln=Liddell;jt=Adventurer;hs=https://encrypted-tbn0.gstatic.com/images?q%3dtbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I;cp=Customer Support;email=alice@disney.com>"
-              description: "Value as 'allow as SIP P-Asserted-Identity header"
-          type: "object"
         call_insight: 
           description: "Call insight details"
           properties: 
@@ -2628,118 +2399,6 @@ components:
     ECNAM-Response: 
       type: object
       properties: 
-        ecnam:
-          description: "ECNAM data"
-          properties: 
-            display_template: 
-              type: "string"
-              example: "none"
-              description: ECNAM data display template
-            business_name: 
-              type: "string"
-              example: "Disney World"
-              description: Full business name
-            department: 
-              type: "string"
-              example: "Theme Park"
-              description: Department name
-            line_type: 
-              type: "string"
-              example: "Wireline"
-              description: Line type, such as wireline, wireless, etc.
-            subscriber_type: 
-              type: "string"
-              example: "Business"
-              description: Subscriber type, such as business, residential, etc.
-            business_type: 
-              type: "string"
-              example: "Entertainment"
-              description: Business type
-            business_address: 
-              type: "string"
-              example: "Walt Disney World Resort"
-              description: Business address
-            locality: 
-              type: "string"
-              example: "Orlando, FL"
-              description: Locality, such as 'Sterling, VA'
-            city: 
-              type: "string"
-              example: "Orlando"
-              description: City, such as 'Sterling'
-            state: 
-              type: "string"
-              example: "FL"
-              description: State or province, such as 'VA'
-            country: 
-              type: "string"
-              example: "US"
-              description: Country code, such as US
-            postal_code: 
-              type: "string"
-              example: "32830"
-              description: Postal code, such as 20166-1234
-            website_url: 
-              type: "string"
-              example: "http://movies.disney.com/alice-in-wonderland-1951"
-              description: Website URL
-            logo_url: 
-              type: "string"
-              example: "https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png"
-              description: 	Logo URL
-            tagline: 
-              type: "string"
-              example: "#AliceInWonderLand"
-              description: Tagline
-            employee_name: 
-              type: "string"
-              example: "Alice"
-              description: Employee’s name, such as John Smith
-            first_name: 
-              type: "string"
-              example: "Alice"
-              description: Employee’s first name, such as John
-            last_name: 
-              type: "string"
-              example: "Liddell"
-              description: Employee’s last name, such as Smith
-            job_title: 
-              type: "string"
-              example: "Adventurer"
-              description: Job title
-            headshot_url: 
-              type: "string"
-              example: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I"
-              description: Headshot/avatar image URL
-            email: 
-              type: "string"
-              example: "alice@disney.com"
-              description: Email address
-            cnam: 
-              type: "string"
-              example: "Alice In Wonderland"
-              description: CNAM data
-            call_purpose: 
-              type: "string"
-              example: "Customer Support"
-              description: The purpose for calls originated from the telephone number
-            social_media_info: 
-              properties: 
-                Facebook: 
-                  type: "string"
-                  example: "https://www.facebook.com/DisneyAliceInWonderland"
-                  description: Facebook URL
-                Twitter: 
-                  type: "string"
-                  example: "https://twitter.com/Disney"
-                  description: Twitter URL
-              type: "object"
-              description: Social media info, as an object map of name/value pairs
-            p_asserted_identity: 
-              type: "string"
-              example: "\"Alice In Wonderland\" <sip:alice@example.com;tmpl=none;bn=Disney%20World;dept=Theme%20Park;lt=Wireline;st=Business;bt=Entertainment;ba=Walt%20Disney%20World%20Resort;cs=Orlando, FL;city=Orlando;state=FL;ct=US;zip=32830;wb=http://movies.disney.com/alice-in-wonderland-1951;lg=https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png;tg=#AliceInWonderLand;sm=%7B%22Facebook%22%3A%22https%3A%2F%2Fwww.facebook.com%2FDisneyAliceInWonderland%22%2C%22Twitter%22%3A%22https%3A%2F%2Ftwitter.com%2FDisney%22%7D;nm=Alice;fn=Alice;ln=Liddell;jt=Adventurer;hs=https://encrypted-tbn0.gstatic.com/images?q%3dtbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I;cp=Customer Support;email=alice@disney.com>"
-              description: Value as 'allow as SIP P-Asserted-Identity header
-          type: "object"
         call_insight: 
           description: Call insight info
           properties: 

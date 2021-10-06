@@ -19,10 +19,10 @@ info:
 tags:
 - name: Generate SIP Identity Headers
 - name: Certificate
-- name: Error
+- name: Auth Errors
 - name: Verifies SIP Identity Headers
 - name: CNAM
-- name: Potential Errors
+- name: Verify Errors
     
 
 x-tagGroups:
@@ -30,12 +30,12 @@ x-tagGroups:
     tags:
       - Generate SIP Identity Headers
       - Certificate
-      - Error
+      - Auth Errors
   - name: Verification Service
     tags:
       - Verifies SIP Identity Headers
       - CNAM
-      - Potential Errors
+      - Verify Errors
 paths:
   /authn/identity:
     post:
@@ -727,7 +727,7 @@ paths:
   /authn/error:
     get:
       tags:
-      - Error
+      - Auth Errors
       summary: Retrieve All Errors
       operationId: authn/error
       description: |
@@ -1561,7 +1561,7 @@ paths:
   /verify/error:
     get:
       tags:
-      - Potential Errors
+      - Verify Errors
       summary: Retrieve All Errors
       operationId: verify/errors
       description: |

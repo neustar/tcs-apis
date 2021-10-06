@@ -152,9 +152,13 @@ paths:
                   a=rtpmap:101 telephone-event/8000
                   a=fmtp:101 0-15
                   a=sendrecv
+      x-summary: 
       x-code-samples:
-        - lang: Curl - Min Req Data Element
+        - lang: STIR SHAKEN Extn
           source: |
+            -------
+            Request
+            -------
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey5%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -162,8 +166,24 @@ paths:
               "from" : "\"Alice\" <sip:alice@example.com>",
               "to" : "\"Bob\" <sip:5715550000@example.com>"
             }'
-        - lang: Curl - Compact
+
+            --------
+            Response
+            --------
+
+            HTTP/1.1 200 OK
+            Content-Type: application/json;charset=UTF-8
+            Content-Length: 600
+
+            {
+              "identity" : "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjIxMDExNDI1LCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiI3ODM2ZWMxZDA2MDc0ZDY4OGI2MmMxZWE1ZWJkMTkzOSJ9.RW-ahnRd1iJng8-rV7cOQbwLlb3CAvq5ulxWM5oFl-z34_yIdyKA-OcXcHiqIm-pWImXN8KmHngdSY4ktiyN9g;info=<https://ca-authn.neustarlab.biz/ccid/authn/v2/certs/20001.10001>;alg=ES256;ppt=\"shaken\"",
+              "date" : "Fri, 14 May 2021 16:57:05 GMT"
+            }
+        - lang: Compact
           source: |
+            -------
+            Request
+            -------
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey5%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -172,8 +192,25 @@ paths:
               "to" : "\"Bob\" <sip:5715550000@example.com>",
               "compact" : true
             }
-        - lang: Curl - Div Call Extn
+
+            --------
+            Response
+            --------
+
+            HTTP/1.1 200 OK
+            Content-Type: application/json;charset=UTF-8
+            Content-Length: 243
+
+            {
+              "identity" : "..Btujc-e-0zYmkhTVxR9nTN5OdlstC1F1iv-WDa1-h_xUbSIPVr2MaSVPfG-jZuEy7TDnPI7mEPGSh66dZsompg;info=<http://ca-cms.neustarlab.biz:8000/certs/d0cbc3f6bac0d0a1f79f786aa5543b01>;alg=ES256",
+              "date" : "Fri, 14 May 2021 16:57:04 GMT"
+            }
+
+        - lang: Div Call Extn
           source: |
+            -------
+            Request
+            -------
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey1%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -183,8 +220,24 @@ paths:
               "passport_type" : "div",
               "diversion" : "\"Bob\" <sip:7035550000@example.com>;reason=away"
             }'
-        - lang: Curl - Resource-Priority Auth Extn
+
+            --------
+            Response
+            --------
+
+            HTTP/1.1 200 OK
+            Content-Type: application/json;charset=UTF-8
+            Content-Length: 553
+
+            {
+              "identity" : "eyJhbGciOiJFUzI1NiIsInBwdCI6ImRpdiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAwIl19LCJkaXYiOnsidG4iOiIxNzAzNTU1MDAwMCJ9LCJpYXQiOjE2MjEwMTE0MjQsIm9yaWciOnsidXJpIjoic2lwOmFsaWNlQGV4YW1wbGUuY29tIn19.zpKLhMVKY3nAOcV0jDrEHpCF4NeoFuGtJRZACZWiRTR2b3NS7jt-o9RZ12sxQtg1OJUV-eHlz0EM22VBPR537Q;info=<https://ca-authn.neustarlab.biz/ccid/authn/v2/certs/20001.10001>;alg=ES256;ppt=\"div\"",
+              "date" : "Fri, 14 May 2021 16:57:04 GMT"
+            }
+        - lang: Resource-Priority Auth Extn
           source: |
+            -------
+            Request
+            -------
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey1%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -194,8 +247,24 @@ paths:
               "passport_type" : "rph",
               "resource_priority" : [ "ets.0, wps.1", "q735.1" ]
             }'
-        - lang: Curl - Rich Call Data Extn
+
+            --------
+            Response
+            --------
+
+            HTTP/1.1 200 OK
+            Content-Type: application/json;charset=UTF-8
+            Content-Length: 573
+
+            {
+              "identity" : "eyJhbGciOiJFUzI1NiIsInBwdCI6InJwaCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAwIl19LCJpYXQiOjE2MjEwMTE0MjQsIm9yaWciOnsidXJpIjoic2lwOmFsaWNlQGV4YW1wbGUuY29tIn0sInJwaCI6eyJhdXRoIjpbImV0cy4wIiwicTczNS4xIiwid3BzLjEiXX19.CYB3DWG1gndNIMvf7eTnEoZIfWwsO7gZSdbSqJKddaxBN7kOkg1SZ4jVQAsp7yy2sqZNxMqlXxuzOQAj7N-gtg;info=<https://ca-authn.neustarlab.biz/ccid/authn/v2/certs/20001.10001>;alg=ES256;ppt=\"rph\"",
+              "date" : "Fri, 14 May 2021 16:57:04 GMT"
+            }
+        - lang: RCD Extn
           source: |
+            -------
+            Request
+            -------
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey1%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -204,17 +273,24 @@ paths:
               "to" : "\"Bob\" <sip:5715550000@example.com>",
               "passport_type" : "rcd"
             }'
-        - lang: Curl - ATIS SHAKEN Extn
+
+            --------
+            Response
+            --------
+
+            HTTP/1.1 200 OK
+            Content-Type: application/json;charset=UTF-8
+            Content-Length: 643
+
+            {
+              "identity" : "eyJhbGciOiJFUzI1NiIsInBwdCI6InJjZCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJjcm4iOiJUcmF2ZWwiLCJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAwIl19LCJpYXQiOjE2MjEwMTE0MjMsIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJyY2QiOnsibmFtIjoiQWxpY2UgTGlkZGVsIn0sInJjZGkiOiJzaGEyNTYtNm9hT2JQMTFrN0Z4MWFkNlgzaVpFU2ZEdDRDMmpwRDlHMXBGVTJYWEhmMD0ifQ.e5F_0iS1DEspbbCpPp1ESgu29mJoAUzyTeS18havQU_4j5MuU_0O0TyGskOwYycsgCFtJzsZsU7qG4IwQfh4FQ;info=<https://ca-authn.neustarlab.biz/ccid/authn/v2/certs/20001.10001>;alg=ES256;ppt=\"rcd\"",
+              "date" : "Fri, 14 May 2021 16:57:03 GMT"
+            }
+        - lang: STIR SHAKEN Extn With All Data
           source: |
-            curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey1%3E' -i -X POST \
-                -H 'Content-Type: application/json' \
-                -H 'Accept: application/json' \
-                -d '{
-              "from" : "\"Alice\" <sip:alice@example.com>",
-              "to" : "\"Bob\" <sip:5715550000@example.com>"
-            }'
-        - lang: Curl - ATIS SHAKEN Extn With All Data
-          source: |
+            -------
+            Request
+            -------
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey1%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -238,8 +314,24 @@ paths:
               "origid" : "3F9C2836-7E40-11E7-BA58-7831C1B8DEBA",
               "request_id" : "X-REQUEST-ID-12345"
             }'
-        - lang: Curl - ATIS SHAKEN Extn & RCD
+
+            --------
+            Response
+            --------
+
+            HTTP/1.1 200 OK
+            Content-Type: application/json;charset=UTF-8
+            Content-Length: 805
+
+            {
+              "request_id" : "X-REQUEST-ID-12345",
+              "identity" : "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJCIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjIxMDExNDI1LCJta3kiOlt7ImFsZyI6IlNIQS0xIiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQiJ9LHsiYWxnIjoiU0hBLTI1NiIsImRpZyI6IjM2M0JBRTEyOTU5NUY1OTcyREY3RTA4NEZFQ0RGMUJDQUQ3QTcwNjRGN0U3NEY3RUE2MDIwNjBFMzc1NENGRjcifV0sIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJvcmlnaWQiOiIwNGRkYzExNi1hODllLTExZTktYjIxYi0wMDUwNTY5YTU1MzkifQ.7G77GRBaVdcWkkk0IqsQ65-Z4DkKeIZ818fEtpS2i-SytR9g3V6OXLVIRjyyewM_JfwM4M48VXo0FCxuF-jRAA;info=<https://ca-authn.neustarlab.biz/ccid/authn/v2/certs/20001.10001>;alg=ES256;ppt=\"shaken\""
+            }
+        - lang: STIR SHAKEN Extn & RCD
           source: |
+            -------
+            Request
+            -------
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey12%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -265,27 +357,72 @@ paths:
               "origid" : "3F9C2836-7E40-11E7-BA58-7831C1B8DEBA",
               "request_id" : "X-REQUEST-ID-12345"
             }'
-        - lang: Curl - SIP Invite/JSON
+
+            --------
+            Response
+            --------
+
+            HTTP/1.1 200 OK
+            Content-Type: application/json;charset=UTF-8
+            Content-Length: 991
+
+            {
+              "request_id" : "X-REQUEST-ID-12345",
+              "identity" : "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDEyLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiY3JuIjoiVHJhdmVsIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjIxMDExNDI1LCJta3kiOlt7ImFsZyI6IlNIQS0xIiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQiJ9LHsiYWxnIjoiU0hBLTI1NiIsImRpZyI6IjM2M0JBRTEyOTU5NUY1OTcyREY3RTA4NEZFQ0RGMUJDQUQ3QTcwNjRGN0U3NEY3RUE2MDIwNjBFMzc1NENGRjcifV0sIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJvcmlnaWQiOiIzRjlDMjgzNi03RTQwLTExRTctQkE1OC03ODMxQzFCOERFQkEiLCJyY2QiOnsiamNsIjoiY2lkOmV4YW1wbGUuY29tL2FsaWNlLmpzb24iLCJuYW0iOiJBbGljZSBMaWRkZWwifSwicmNkaSI6InNoYTI1Ni10dUI0WUgwVGkwWk1aRVBCZ2h2UzlnTW55Q3NXMG1NRWdrK2Z3Q0ZTVkRFPSJ9.HPO0ztWuWf39PPxuGBN_7cCbShu5nCOOJckJXPJLcI1m25bYwtwfQKia5T19awyvYM0biOYpW1aViveIXg2mRA;info=<https://ca-authn.neustarlab.biz/ccid/authn/v2/certs/20012.10001>;alg=ES256;ppt=\"shaken\""
+            }
+        - lang: SIP-Invite/JSON
           source: |
-            curl --location --request POST 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity-s_j?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' \
-            --header 'Content-Type: text/plain' \
-            --header 'Accept: application/json' \
-            --data-raw 'INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0
-            v: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK
+            -------
+            Request
+            -------
+            curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey1%3E' -i -X POST \
+                -H 'Content-Type: text/plain' \
+                -H 'Accept: application/json' \
+                -d 'INVITE sip:17035550021@proxy.example.com;transport=UDP SIP/2.0
+            From: "Alice" <sip:+15714345500@example.com>
+            To: "Bob" <sip:+447035550000@example.com>
+            '
+
+            --------
+            Response
+            --------
+
+            HTTP/1.1 200 OK
+            Content-Type: application/json;charset=UTF-8
+            Content-Length: 587
+
+            {
+              "identity" : "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyI0NDcwMzU1NTAwMDAiXX0sImlhdCI6MTYyMTAxMTQyNCwib3JpZyI6eyJ0biI6IjE1NzE0MzQ1NTAwIn0sIm9yaWdpZCI6Ijc4MzZlYzFkMDYwNzRkNjg4YjYyYzFlYTVlYmQxOTM5In0.KbRQA1Uz16qknPMda-mlVI7a64WYC4YGnZXdCvBtM2IpcN4kNWk-wpomgUn9Gwuyu1qdlGg7zIyB9t_UChRAtw;info=<https://ca-authn.neustarlab.biz/ccid/authn/v2/certs/20001.10001>;alg=ES256;ppt=\"shaken\"",
+              "date" : "Fri, 14 May 2021 16:57:04 GMT"
+            }
+        - lang: RCD SIP-Invite/JSON
+          source: |
+            -------
+            Request
+            -------
+            curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey1%3E&compact=false&ppt=rcd&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
+                -H 'Content-Type: text/plain' \
+                -H 'Accept: application/json' \
+                -d 'INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0
+            Via: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK
             Max-Forwards: 70
-            m: "Alice" <sip:5715550001@proxy.example.com:39089;transport=UDP>
-            t: "Bob" <sip:+17035550002@example.com>
-            f: "Alice" <sip:+15715550001@example.com>;tag=1f4e4f40
-            i: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
+            Contact: "Alice" <sip:5715550001@proxy.example.com:39089;transport=UDP>
+            To: "Bob" <sip:+17035550002@example.com>
+            From: "Alice" <sip:+15715550001@example.com>;tag=1f4e4f40
+            Call-ID: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
             P-Asserted-Identity: Alice <sip:+15715550001@example.com>
             CSeq: 2 INVITE
             Allow: INVITE, ACK, CANCEL, BYE, NOTIFY, REFER, MESSAGE, OPTIONS, INFO, SUBSCRIBE
-            c: application/sdp
-            Date: Fri, 14 May 2021 16:57:04 GMT
-            k: replaces, norefersub, extended-refer, timer, X-cisco-serviceuri
+            Call-Info: <cid:alice-jcard@example.com>;purpose=jcard;call-reason="Travel"
+            Content-Type: multipart/mixed;boundary=boundary-1234567890-abcdef
+            Date: Fri, 14 May 2021 16:57:06 GMT
+            Supported: replaces, norefersub, extended-refer, timer, X-cisco-serviceuri
             User-Agent: Z 3.3.25608 r25552
             Allow-Events: presence, kpml
-            l: 425
+            Content-Length: 714
+
+            --boundary-1234567890-abcdef
+            Content-Type: application/sdp
 
             v=0
             o=Z 0 0 IN IP4 10.31.32.251
@@ -301,13 +438,60 @@ paths:
             a=rtpmap:101 telephone-event/8000
             a=fmtp:101 0-15
             a=sendrecv
+
+            --boundary-1234567890-abcdef
+            Content-Type: application/jcard+json
+            Content-ID: <alice-jcard@example.com>
+
+            ["vcard",[["version",{},"text","4.0"],["fn",{},"text","Alice Liddell"],[ "email",{},"text","alice@example.com"]]]
             '
-        - lang: Curl - SIP Invite/SIP
+
+            --------
+            Response
+            --------
+
+            HTTP/1.1 200 OK
+            Content-Type: application/json;charset=UTF-8
+            Content-Length: 843
+
+            {
+              "identity" : "eyJhbGciOiJFUzI1NiIsInBwdCI6InJjZCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJjcm4iOiJUcmF2ZWwiLCJkZXN0Ijp7InRuIjpbIjE3MDM1NTUwMDAyIl19LCJpYXQiOjE2MjEwMTE0MjYsIm1reSI6W3siYWxnIjoibWQ1IiwiZGlnIjoiMTQ3NThGMUFGRDQ0QzA5Qjc5OTIwNzNDQ0YwMEI0M0QifSx7ImFsZyI6InNoYS0yNTYiLCJkaWciOiJBRUMwNzA2NDVGRTUzRUUzQjM3NjMwNTkzNzYxMzRGMDU4Q0MzMzcyNDdDOTc4QUREMTc4QjZDQ0RGQjAwMTlGIn1dLCJvcmlnIjp7InRuIjoiMTU3MTU1NTAwMDEifSwicmNkIjp7ImpjbCI6ImNpZDphbGljZS1qY2FyZEBleGFtcGxlLmNvbSIsIm5hbSI6IkFsaWNlIn0sInJjZGkiOiJzaGEyNTYtRUpUdHdWK0JVb04zQUdQclgrNXJ3WVp3RUVEYXdXdmE4T2hDYnFPZmtxbz0ifQ.eGeJJ15CiCgjYJkTSDZhcB4feM-YBcfgINcEpm-P4IoGTs7qoIC0NMljANIYZtsA5kdprFvrl_a9ZRZoNbWzSw;info=<https://ca-authn.neustarlab.biz/ccid/authn/v2/certs/20001.10001>;alg=ES256;ppt=\"rcd\""
+            }
+        - lang: SIP-Invite/SIP
           source: |
-            curl --location --request POST 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity-s_s?apiKey=%3CapiKey1%3E&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC&verstat=TN-Validation-Passed&identity=true' \
-            --header 'Content-Type: text/plain' \
-            --header 'Accept: text/plain' \
-            --data-raw 'INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0
+            -------
+            Request
+            -------
+            curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey1%3E' -i -X POST \
+                -H 'Content-Type: text/plain' \
+                -H 'Accept: text/plain' \
+                -d 'INVITE sip:17035550021@proxy.example.com;transport=UDP SIP/2.0
+            From: "Alice" <sip:+15714345500@example.com>
+            To: "Bob" <sip:+447035550000@example.com>
+            '
+
+            --------
+            Response
+            --------
+
+            HTTP/1.1 200 OK
+            Content-Type: text/plain;charset=UTF-8
+            Content-Length: 722
+
+            INVITE sip:17035550021@proxy.example.com;transport=UDP SIP/2.0
+            From: "Alice" <sip:+15714345500@example.com>
+            Identity: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyI0NDcwMzU1NTAwMDAiXX0sImlhdCI6MTYyMTAxMTQyNSwib3JpZyI6eyJ0biI6IjE1NzE0MzQ1NTAwIn0sIm9yaWdpZCI6Ijc4MzZlYzFkMDYwNzRkNjg4YjYyYzFlYTVlYmQxOTM5In0.RIDQYZP0SNd7ejjJGlcYLQ-55XssLVG5hJ5001v-unKFbD349VVYLderLBt_4h-eCgAcWIsuAW6YSMUqfPk8PA;info=<https://ca-authn.neustarlab.biz/ccid/authn/v2/certs/20001.10001>;alg=ES256;ppt="shaken"
+            Date: Fri, 14 May 2021 16:57:05 GMT
+            To: "Bob" <sip:+447035550000@example.com>
+        - lang: RCD SIP-Invite/SIP
+          source: |
+            -------
+            Request
+            -------
+            curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey1%3E&compact=false&ppt=rcd&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC&identity=true' -i -X POST \
+                -H 'Content-Type: text/plain' \
+                -H 'Accept: text/plain' \
+                -d 'INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0
             v: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK
             Max-Forwards: 70
             m: "Alice" <sip:5715550001@proxy.example.com:39089;transport=UDP>
@@ -317,12 +501,16 @@ paths:
             P-Asserted-Identity: Alice <sip:+15715550001@example.com>
             CSeq: 2 INVITE
             Allow: INVITE, ACK, CANCEL, BYE, NOTIFY, REFER, MESSAGE, OPTIONS, INFO, SUBSCRIBE
-            c: application/sdp
-            Date: Fri, 14 May 2021 16:57:02 GMT
+            Call-Info: <cid:alice-jcard@example.com>;purpose=jcard;call-reason="Travel"
+            c: multipart/mixed;boundary=boundary-1234567890-abcdef
+            Date: Fri, 14 May 2021 16:57:05 GMT
             k: replaces, norefersub, extended-refer, timer, X-cisco-serviceuri
             User-Agent: Z 3.3.25608 r25552
             Allow-Events: presence, kpml
-            l: 425
+            l: 692
+
+            --boundary-1234567890-abcdef
+            c: application/sdp
 
             v=0
             o=Z 0 0 IN IP4 10.31.32.251
@@ -338,7 +526,64 @@ paths:
             a=rtpmap:101 telephone-event/8000
             a=fmtp:101 0-15
             a=sendrecv
+
+            --boundary-1234567890-abcdef
+            c: application/jcard+json
+            Content-ID: <alice-jcard@example.com>
+
+            ["vcard",[["version",{},"text","4.0"],["fn",{},"text","Alice Liddell"],[ "email",{},"text","alice@example.com"]]]
             '
+
+            --------
+            Response
+            --------
+
+            HTTP/1.1 200 OK
+            Content-Type: text/plain;charset=UTF-8
+            Content-Length: 2334
+
+            INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0
+            v: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK
+            Max-Forwards: 70
+            m: "Alice" <sip:5715550001@proxy.example.com:39089;transport=UDP>
+            t: "Bob" <sip:+17035550002@example.com>
+            f: "Alice" <sip:+15715550001@example.com>;tag=1f4e4f40
+            y: eyJhbGciOiJFUzI1NiIsInBwdCI6InJjZCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJjcm4iOiJUcmF2ZWwiLCJkZXN0Ijp7InRuIjpbIjE3MDM1NTUwMDAyIl19LCJpYXQiOjE2MjEwMTE0MjUsIm1reSI6W3siYWxnIjoibWQ1IiwiZGlnIjoiMTQ3NThGMUFGRDQ0QzA5Qjc5OTIwNzNDQ0YwMEI0M0QifSx7ImFsZyI6InNoYS0yNTYiLCJkaWciOiJBRUMwNzA2NDVGRTUzRUUzQjM3NjMwNTkzNzYxMzRGMDU4Q0MzMzcyNDdDOTc4QUREMTc4QjZDQ0RGQjAwMTlGIn1dLCJvcmlnIjp7InRuIjoiMTU3MTU1NTAwMDEifSwicmNkIjp7ImpjbCI6ImNpZDphbGljZS1qY2FyZEBleGFtcGxlLmNvbSIsIm5hbSI6IkFsaWNlIn0sInJjZGkiOiJzaGEyNTYtRUpUdHdWK0JVb04zQUdQclgrNXJ3WVp3RUVEYXdXdmE4T2hDYnFPZmtxbz0ifQ.Olm6qNJerSTFq6DRVQg567q3v5vKwrf5rKt9S7HJeWy8mUnOEWZgm4lMYf3ckDuuUJzAVez4CiQb2gCZF1gGkg;info=<https://ca-authn.neustarlab.biz/ccid/authn/v2/certs/20001.10001>;alg=ES256;ppt="rcd"
+            i: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
+            P-Asserted-Identity: Alice <sip:+15715550001@example.com>
+            CSeq: 2 INVITE
+            Allow: INVITE, ACK, CANCEL, BYE, NOTIFY, REFER, MESSAGE, OPTIONS, INFO, SUBSCRIBE
+            Call-Info: <cid:alice-jcard@example.com>;purpose=jcard;call-reason="Travel"
+            c: multipart/mixed;boundary=boundary-1234567890-abcdef
+            Date: Fri, 14 May 2021 16:57:05 GMT
+            k: replaces, norefersub, extended-refer, timer, X-cisco-serviceuri
+            User-Agent: Z 3.3.25608 r25552
+            Allow-Events: presence, kpml
+            l: 692
+
+            --boundary-1234567890-abcdef
+            c: application/sdp
+
+            v=0
+            o=Z 0 0 IN IP4 10.31.32.251
+            s=Z
+            c=IN IP4 10.31.32.251
+            t=0 0
+            m=audio 8000 RTP/AVP 8 0 3 110 98 101
+            a=fingerprint:md5 14:75:8F:1A:FD:44:C0:9B:79:92:07:3C:CF:00:B4:3D
+            a=fingerprint:sha-256 AE:C0:70:64:5F:E5:3E:E3:B3:76:30:59:37:61:34:F0:58:CC:33:72:47:C9:78:AD:D1:78:B6:CC:DF:B0:01:9F
+            a=rtpmap:110 speex/8000
+            a=rtpmap:98 iLBC/8000
+            a=fmtp:98 mode=20
+            a=rtpmap:101 telephone-event/8000
+            a=fmtp:101 0-15
+            a=sendrecv
+
+            --boundary-1234567890-abcdef
+            c: application/jcard+json
+            Content-ID: <alice-jcard@example.com>
+
+            ["vcard",[["version",{},"text","4.0"],["fn",{},"text","Alice Liddell"],[ "email",{},"text","alice@example.com"]]]
       responses:
         200:
           description: successful operation
@@ -619,8 +864,11 @@ paths:
             required: true
         required: true
       x-code-samples:
-        - lang: Curl - Min Req Data Element
+        - lang: Min Req Data Element
           source: | 
+            -------
+            Request
+            -------
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -629,8 +877,23 @@ paths:
               "to" : "\"bob\" <sip:+15715550001@example.com>",
               "identity" : [ "eyJhbGciOiJFUzI1NiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTYsIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9fQ.amEa2CXEarp4H6S2EqUh-fj-8oCKQHpLXI6xL--KgvP_tI2bdfjXDWlABGpxLz2qwkCKBe0tCIFvMHLgeVsOTw;info=<http://ca.example.com/test.der>;alg=ES256" ]
             }'
-        - lang: Curl - Min Input Data Set for Div Call
+
+            --------
+            Response
+            --------
+
+            HTTP/1.1 200 OK
+            Content-Type: application/json;charset=UTF-8
+            Content-Length: 21
+
+            {
+              "status" : "ok"
+            }
+        - lang: Min Input Data Set for Div Call
           source: | 
+            -------
+            Request
+            -------
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -640,8 +903,23 @@ paths:
               "identity" : [ "..5w09tGHEUufQCE5Owdge96LC4WzB3Tzoa5nXMc1OT5-tKBImFMT2zg_sz_HuSFhA7ZoEnO-vO9Nx_nK6PJK7nA;info=<http://ca.example.com/test.der>;alg=ES256", "..E78w84XxXOZP6hmMbwf-LhvwX7W6rylaNA5KXm63NdlhQesWpI_d3SZAJ6S9jNv7orQcu1TLrjiaf25n-zz46g;info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"div\"" ],
               "diversion" : [ "\"bob\" <sip:+15715550001@example.com>;reason=away" ]
             }'
-        - lang: Curl - Min Input Data Set for Resource Priority Authn
+
+            --------
+            Response
+            --------
+
+            HTTP/1.1 200 OK
+            Content-Type: application/json;charset=UTF-8
+            Content-Length: 21
+
+            {
+              "status" : "ok"
+            }
+        - lang: Min Input Data Set for Resource Priority Authn
           source: | 
+            -------
+            Request
+            -------
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -651,8 +929,23 @@ paths:
               "identity" : [ "eyJhbGciOiJFUzI1NiIsInBwdCI6InJwaCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTgsIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9LCJycGgiOnsiYXV0aCI6WyJldHMuMCIsIndwcy4yIl19fQ.6OOULynEPYO_Hk8unNv_hiM1TRoJeQsMacskpoCpAMITqb6DWYkyv3wmtjmf0RFQvABmFKNpSJHDRu5rziI3yA;info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"rph\"" ],
               "resource_priority" : [ "ets.0, wps.2", "q735.1" ]
             }'
-        - lang: Curl - Request Id, Verstat and Identity Info
+
+            --------
+            Response
+            --------
+
+            HTTP/1.1 200 OK
+            Content-Type: application/json;charset=UTF-8
+            Content-Length: 21
+
+            {
+              "status" : "ok"
+            }
+        - lang: Request Id, Verstat and Identity Info
           source: | 
+            -------
+            Request
+            -------
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -665,8 +958,67 @@ paths:
               "identity_info" : true,
               "request_id" : "X-REQUEST-ID-12345"
             }'
-        - lang: Curl - Full Input Data Set
+
+            --------
+            Response
+            --------
+
+            HTTP/1.1 200 OK
+            Content-Type: application/json;charset=UTF-8
+            Content-Length: 1235
+
+            {
+              "status" : "ok",
+              "request_id" : "X-REQUEST-ID-12345",
+              "verstat" : "TN-Validation-Passed",
+              "identity_info" : [ {
+                "status" : "Ok",
+                "params" : "info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"shaken\"",
+                "header" : {
+                  "alg" : "ES256",
+                  "ppt" : "shaken",
+                  "typ" : "passport",
+                  "x5u" : "http://ca.example.com/test.der"
+                },
+                "claim" : {
+                  "attest" : "A",
+                  "dest" : {
+                    "tn" : [ "15715550001" ]
+                  },
+                  "iat" : 1618541815,
+                  "mky" : [ {
+                    "alg" : "SHA-1",
+                    "dig" : "4AADB9B13F82183B540212DF3E5D496B19E57CAB"
+                  }, {
+                    "alg" : "SHA-256",
+                    "dig" : "363BAE129595F5972DF7E084FECDF1BCAD7A7064F7E74F7EA602060E3754CFF7"
+                  } ],
+                  "orig" : {
+                    "tn" : "17035550001"
+                  },
+                  "origid" : "123456-ABCD-999999"
+                },
+                "certificate_info" : {
+                  "subject" : "C=US, ST=VA, L=Somewhere, O=\"AcmeTelecom, Inc.\", OU=VOIP, CN=TEST-EC-256-EXT-TN-JWT",
+                  "issuer" : "C=US, O=Neustar IOT Lab, CN=CallAuthnCA",
+                  "tn_auth_list" : [ {
+                    "spc" : "X001"
+                  }, {
+                    "range" : {
+                      "start" : "15714340000",
+                      "count" : 10000
+                    }
+                  }, {
+                    "one" : "17035550000"
+                  } ]
+                }
+              } ]
+            }
+        - lang: Full Input Data Set
           source: | 
+            -------
+            Request
+            -------
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -692,8 +1044,73 @@ paths:
               "identity_info" : true,
               "request_id" : "X-REQUEST-ID-12345"
             }'
-        - lang: Curl - SIP Invite/JSON
+
+            --------
+            Response
+            --------
+
+            HTTP/1.1 200 OK
+            Content-Type: application/json;charset=UTF-8
+            Content-Length: 3298
+
+            {
+              "status" : "ok",
+              "request_id" : "X-REQUEST-ID-12345",
+              "verstat" : "TN-Validation-Passed",
+              "identity_info" : [ {
+                "status" : "Ok",
+                "params" : "info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"shaken\"",
+                "header" : {
+                  "alg" : "ES256",
+                  "ppt" : "shaken",
+                  "typ" : "passport",
+                  "x5u" : "http://ca.example.com/test.der"
+                },
+                "claim" : {
+                  "attest" : "A",
+                  "dest" : {
+                    "tn" : [ "15715550001" ]
+                  },
+                  "iat" : 1618541811,
+                  "mky" : [ {
+                    "alg" : "SHA-1",
+                    "dig" : "4AADB9B13F82183B540212DF3E5D496B19E57CAB"
+                  }, {
+                    "alg" : "SHA-256",
+                    "dig" : "363BAE129595F5972DF7E084FECDF1BCAD7A7064F7E74F7EA602060E3754CFF7"
+                  } ],
+                  "orig" : {
+                    "tn" : "17035550001"
+                  },
+                  "origid" : "123456-ABCD-999999"
+                },
+                "certificate_info" : {
+                  "subject" : "C=US, ST=VA, L=Somewhere, O=\"AcmeTelecom, Inc.\", OU=VOIP, CN=TEST-EC-256-EXT-TN-JWT",
+                  "issuer" : "C=US, O=Neustar IOT Lab, CN=CallAuthnCA",
+                  "tn_auth_list" : [ {
+                    "spc" : "X001"
+                  }, {
+                    "range" : {
+                      "start" : "15714340000",
+                      "count" : 10000
+                    }
+                  }, {
+                    "one" : "17035550000"
+                  } ]
+                }
+              } ],
+              "cnam" : "Alice In Wonderland",
+              "call_insight" : {
+                "call_treatment" : "allow",
+                "fraud_score" : 0,
+                "original_calling_name" : "Alice"
+              }
+            }
+        - lang: SIP-Invite/JSON
           source: |
+            -------
+            Request
+            -------
             curl --location --request POST 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&robocall=true' \
             --header 'Content-Type: text/plain' \
             --header 'Accept: application/json' \
@@ -730,8 +1147,29 @@ paths:
             a=fmtp:101 0-15
             a=sendrecv
             '
-        - lang: Curl - SIP Invite/SIP
+
+            --------
+            Response
+            --------
+
+            HTTP/1.1 200 OK
+            Content-Type: application/json;charset=UTF-8
+            Content-Length: 2084
+
+            {
+              "status" : "ok",
+              "cnam" : "Alice In Wonderland",
+              "call_insight" : {
+                "call_treatment" : "allow",
+                "fraud_score" : 0,
+                "original_calling_name" : "Alice"
+              }
+            }
+        - lang: SIP-Invite/SIP
           source: |
+            -------
+            Request
+            -------
             curl --location --request POST 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&robocall=true&cnamPrefix=%E2%9C%94,%E2%9C%98&verstat=TN-Validation-Passed&identity=true' \
             --header 'Content-Type: text/plain' \
             --header 'Accept: text/plain' \
@@ -768,6 +1206,196 @@ paths:
             a=fmtp:101 0-15
             a=sendrecv
             '
+
+            --------
+            Response
+            --------
+
+            HTTP/1.1 200 OK
+            Content-Type: text/plain;charset=UTF-8
+            Content-Length: 2582
+
+            INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
+            v: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za
+            Max-Forwards: 70
+            m: "alice" <sip:alice@proxy.example.com:39089;transport=UDP>
+            f: "✔Alice In Wonderland" <sip:+15715550000;verstat=TN-Validation-Passed@example.com>;tag=1f4e4f40
+            t: "bob" <sip:+15715550001@example.com>
+            Date: Fri, 16 Apr 2021 02:56:52 GMT
+            i: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
+            P-Attestation-Indicator: A
+            P-Origination-Id: 123456-ABCD-999999
+            y: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMSJdfSwiaWF0IjoxNjE4NTQxODEyLCJta3kiOlt7ImFsZyI6IlNIQS0xIiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQiJ9LHsiYWxnIjoiU0hBLTI1NiIsImRpZyI6IjM2M0JBRTEyOTU5NUY1OTcyREY3RTA4NEZFQ0RGMUJDQUQ3QTcwNjRGN0U3NEY3RUE2MDIwNjBFMzc1NENGRjcifV0sIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJvcmlnaWQiOiIxMjM0NTYtQUJDRC05OTk5OTkifQ.HJzTVP6kSWIGrrAW23GJX920-WXqV7lSsLr4WzUlIJWdCVaLFNBVfze3PJ0Bq9qQnvhIZztjrdUR_hAUseaA8g;info=<http://ca.example.com/test.der>;alg=ES256;ppt="shaken"
+            P-Asserted-Identity: "✔Alice In Wonderland,Walt Disney World Resort,Orlando,FL 32830" <sip:+15715550000@example.com;tmpl=none;bn=Disney%20World;dept=Theme%20Park;lt=Wireline;st=Business;bt=Entertainment;ba=Walt%20Disney%20World%20Resort;cs=Orlando, FL;city=Orlando;state=FL;ct=US;zip=32830;wb=http://movies.disney.com/alice-in-wonderland-1951;lg=https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png;tg=#AliceInWonderLand;sm=%7B%22Facebook%22%3A%22https%3A%2F%2Fwww.facebook.com%2FDisneyAliceInWonderland%22%2C%22Twitter%22%3A%22https%3A%2F%2Ftwitter.com%2FDisney%22%7D;nm=Alice;fn=Alice;ln=Liddell;jt=Adventurer;hs=https://encrypted-tbn0.gstatic.com/images?q%3dtbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I;cp=Customer Support;email=alice@disney.com;verstat=TN-Validation-Passed>
+            CSeq: 2 INVITE
+            c: application/sdp
+            User-Agent: Z 3.3.25608 r25552
+            k: replaces, norefersub, extended-refer, timer
+            Allow-Events: presence, kpml
+            l: 439
+
+            v=0
+            o=Z 0 0 IN IP4 10.31.32.251
+            s=Z
+            c=IN IP4 10.31.32.251
+            t=0 0
+            m=audio 8000 RTP/AVP 8 0 3 110 98 101
+            a=fingerprint:SHA-1 4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB
+            a=fingerprint:SHA-256 36:3B:AE:12:95:95:F5:97:2D:F7:E0:84:FE:CD:F1:BC:AD:7A:70:64:F7:E7:4F:7E:A6:02:06:0E:37:54:CF:F7
+            a=rtpmap:110 speex/8000
+            a=rtpmap:98 iLBC/8000
+            a=fmtp:98 mode=20
+            a=rtpmap:101 telephone-event/8000
+            a=fmtp:101 0-15
+            a=sendrecv
+        - lang: CNAM Prefix SIP-Invite/SIP
+          source: |
+            -------
+            Request
+            -------
+            curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E&status=all&cnamPrefix=%E2%9C%94,%E2%9C%98' -i -X POST \
+                -H 'Content-Type: text/plain' \
+                -H 'Accept: text/plain' \
+                -d 'INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
+            Via: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za
+            Max-Forwards: 70
+            Contact: "alice" <sip:alice@proxy.example.com:39089;transport=UDP>
+            From: "alice" <sip:+15715550000@example.com>;tag=1f4e4f40
+            To: "bob" <sip:+15715550001@example.com>
+            Date: Fri, 16 Apr 2021 02:56:55 GMT
+            Call-ID: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
+            Identity: eyJhbGciOiJFUzI1NiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTUsIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9fQ.eWG8sy5i0ZLu3l8G_TtIA6NGwYYe6-WrVHVe3F9j5S7XV9FQlIh69RzQBCtPaXqxSDXTFhDiJl0DR_b3Nyjc_g;info=<http://ca.example.com/test.der>;alg=ES256
+            CSeq: 2 INVITE
+            Content-Type: application/sdp
+            User-Agent: Z 3.3.25608 r25552
+            Supported: replaces, norefersub, extended-refer, timer
+            Allow-Events: presence, kpml
+            Content-Length: 239
+
+            v=0
+            o=Z 0 0 IN IP4 10.31.32.251
+            s=Z
+            c=IN IP4 10.31.32.251
+            t=0 0
+            m=audio 8000 RTP/AVP 8 0 3 110 98 101
+            a=rtpmap:110 speex/8000
+            a=rtpmap:98 iLBC/8000
+            a=fmtp:98 mode=20
+            a=rtpmap:101 telephone-event/8000
+            a=fmtp:101 0-15
+            a=sendrecv
+            '
+
+            --------
+            Response
+            --------
+
+            HTTP/1.1 200 OK
+            Content-Type: text/plain;charset=UTF-8
+            Content-Length: 1184
+
+            INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
+            Via: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za
+            Max-Forwards: 70
+            Contact: "alice" <sip:alice@proxy.example.com:39089;transport=UDP>
+            From: "✔alice" <sip:+15715550000@example.com>;tag=1f4e4f40
+            To: "bob" <sip:+15715550001@example.com>
+            Date: Fri, 16 Apr 2021 02:56:55 GMT
+            Call-ID: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
+            Identity: eyJhbGciOiJFUzI1NiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTUsIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9fQ.eWG8sy5i0ZLu3l8G_TtIA6NGwYYe6-WrVHVe3F9j5S7XV9FQlIh69RzQBCtPaXqxSDXTFhDiJl0DR_b3Nyjc_g;info=<http://ca.example.com/test.der>;alg=ES256
+            CSeq: 2 INVITE
+            Content-Type: application/sdp
+            User-Agent: Z 3.3.25608 r25552
+            Supported: replaces, norefersub, extended-refer, timer
+            Allow-Events: presence, kpml
+            Content-Length: 239
+
+            v=0
+            o=Z 0 0 IN IP4 10.31.32.251
+            s=Z
+            c=IN IP4 10.31.32.251
+            t=0 0
+            m=audio 8000 RTP/AVP 8 0 3 110 98 101
+            a=rtpmap:110 speex/8000
+            a=rtpmap:98 iLBC/8000
+            a=fmtp:98 mode=20
+            a=rtpmap:101 telephone-event/8000
+            a=fmtp:101 0-15
+            a=sendrecv
+        - lang: CNAM Prefix Unverified SIP-Invite/SIP
+          source: |
+            -------
+            Request
+            -------
+            curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E&status=none&cnamPrefix=%E2%9C%94,%E2%9C%98' -i -X POST \
+                -H 'Content-Type: text/plain' \
+                -H 'Accept: text/plain' \
+                -d 'INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
+            Via: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za
+            Max-Forwards: 70
+            Contact: "alice" <sip:alice@proxy.example.com:39089;transport=UDP>
+            From: "alice" <sip:+15715550000@example.com>;tag=1f4e4f40
+            To: "bob" <sip:+15715550001@example.com>
+            Date: Fri, 16 Apr 2021 02:56:56 GMT
+            Call-ID: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
+            Identity: eyJhbGciOiJFUzI1NiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTYsIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9fQ.FSq73reJN636bsCQ-1NYbuTsrpdezlVk88mj0GdVrG8P8qkz_pepyfEKdLQer9rfaz8O0qTeIfm3_u2fYfiyLw;info=<http://ca.example.com/test.der>;alg=ES256
+            CSeq: 2 INVITE
+            Content-Type: application/sdp
+            User-Agent: Z 3.3.25608 r25552
+            Supported: replaces, norefersub, extended-refer, timer
+            Allow-Events: presence, kpml
+            Content-Length: 239
+
+            v=0
+            o=Z 0 0 IN IP4 10.31.32.251
+            s=Z
+            c=IN IP4 10.31.32.251
+            t=0 0
+            m=audio 8000 RTP/AVP 8 0 3 110 98 101
+            a=rtpmap:110 speex/8000
+            a=rtpmap:98 iLBC/8000
+            a=fmtp:98 mode=20
+            a=rtpmap:101 telephone-event/8000
+            a=fmtp:101 0-15
+            a=sendrecv
+            '
+
+            --------
+            Response
+            --------
+
+            HTTP/1.1 200 OK
+            Content-Type: text/plain;charset=UTF-8
+            Content-Length: 1184
+
+            INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
+            Via: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za
+            Max-Forwards: 70
+            Contact: "alice" <sip:alice@proxy.example.com:39089;transport=UDP>
+            From: "✘alice" <sip:+15715550000@example.com>;tag=1f4e4f40
+            To: "bob" <sip:+15715550001@example.com>
+            Date: Fri, 16 Apr 2021 02:56:56 GMT
+            Call-ID: YzRlZDFlYzYyM2IwOTdlMzk0MDA3MTRmZmY3OGIzODM.
+            Identity: eyJhbGciOiJFUzI1NiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTYsIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9fQ.FSq73reJN636bsCQ-1NYbuTsrpdezlVk88mj0GdVrG8P8qkz_pepyfEKdLQer9rfaz8O0qTeIfm3_u2fYfiyLw;info=<http://ca.example.com/test.der>;alg=ES256
+            CSeq: 2 INVITE
+            Content-Type: application/sdp
+            User-Agent: Z 3.3.25608 r25552
+            Supported: replaces, norefersub, extended-refer, timer
+            Allow-Events: presence, kpml
+            Content-Length: 239
+
+            v=0
+            o=Z 0 0 IN IP4 10.31.32.251
+            s=Z
+            c=IN IP4 10.31.32.251
+            t=0 0
+            m=audio 8000 RTP/AVP 8 0 3 110 98 101
+            a=rtpmap:110 speex/8000
+            a=rtpmap:98 iLBC/8000
+            a=fmtp:98 mode=20
+            a=rtpmap:101 telephone-event/8000
+            a=fmtp:101 0-15
+            a=sendrecv
       responses:
         200:
           description: |

@@ -2878,7 +2878,7 @@ paths:
           content: 
             application/json: 
               schema: 
-                $ref: '#/components/schemas/VerifyErrorResponse400'
+                $ref: '#/components/schemas/VerifyErrorResponse'
               examples: 
                 ApiKeyInvalid: 
                   value: 
@@ -4809,7 +4809,7 @@ paths:
           content: 
             application/json: 
               schema: 
-                $ref: '#/components/schemas/VerifyErrorResponse400'
+                $ref: '#/components/schemas/VerifyErrorResponse'
               examples:
                 SipInterfaceCidrInvalid:
                   value:
@@ -6074,7 +6074,14 @@ components:
         robocall:
           type: boolean
           description: Flag for returning Robocall Call Insight data. If specified, must be true or false
-    VerifyErrorResponse400:
+    VerifyErrorResponse:
+      required:
+        - error
+        - error_id
+        - http_status_code
+        - sip_code
+        - reason
+        - timestamp
       type: object
       properties:
         status:
@@ -6085,6 +6092,12 @@ components:
           type: array
           description: "Array of errors"
           items: 
+            required:
+              - error_id
+              - http_status_code
+              - sip_code
+              - reason
+              - timestamp
             type: object
             properties: 
               error_id: 
@@ -6109,6 +6122,8 @@ components:
                     type: string
                     description: any key value pair
     VerifyErrorResponse500:
+      required:
+        - error
       type: object
       properties:
         status:
@@ -6119,6 +6134,12 @@ components:
           type: array
           description: "Array of errors"
           items: 
+            required: 
+              - error_id
+              - http_status_code
+              - sip_code
+              - reason
+              - timestamp
             type: object
             properties: 
               error_id: 
@@ -6347,6 +6368,8 @@ components:
               description: "Original calling name value"
           type: "object"
     CNAM-Error:
+      required: 
+        - cnam_error
       type: object
       description: "The error encountered in CNAM lookup"
       properties: 
@@ -6374,6 +6397,12 @@ components:
               example: "Fri, 16 Apr 2021 02:56:55 GMT"
               description: "The timestamp when the error is generated"
           type: "object"
+          required: 
+            - error_id
+            - http_status_code
+            - sip_code
+            - reason
+            - timestamp
     ECNAM-Error:
       type: object
       description: "The error encountered in ECNAM lookup"

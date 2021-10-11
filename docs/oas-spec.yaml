@@ -12,7 +12,7 @@ info:
   description: |
     # Overview
     The Authentication Service (AS) and Verification Service (VS) implement the IETF RFC 8224 specification, as well as the SHAKEN framework extensions (ATIS-1000074), for securely computing, transiting and verifying SIP Identity headers for caller identity authentication. 
-    Additionally, it provides supplemental features including telephone number ownership validation, subscriber-based policy processing, Caller Name (CNAM), Resource Priority? Rich Call Data? and/or robocall analytics.
+    Additionally, it provides supplemental features including telephone number ownership validation, subscriber-based policy processing, Caller Name (CNAM), Resource Priority, Rich Call Data, and robocall analytics.
   
     ## RESTful API Authentication Service
     Currently, a RESTful API client is required to provide an 'apiKey' query parameter with a pre-provisioned value to access API calls that are restricted. If the 'apiKey' parameter is not specified, the client IP address may be used as the backup authentication mechanism if pre-provisioned.
@@ -38,11 +38,11 @@ paths:
       tags:
       - Generate SIP Identity Headers
       description: |
-        This API uses the following data elements in SIP INVITE messages for SIP Identity header creation, in addition to the required 'apiKey' query parameter for uniquely identifying an API client.
+        This API uses the following data elements in SIP INVITE messages for SIP Identity header creation in addition to the required 'apiKey' query parameter for uniquely identifying an API client.
         Three different API entry points are defined for SIP Identity header creation:
           * Accepts requests in JSON format and produces responses in JSON format
-          * Accepts SIP INVITE messages and produces responses in JSON format
-          * Accepts SIP INVITE messages and produces responses in SIP format
+          * Accepts SIP INVITE messages as text and produces responses in JSON format
+          * Accepts SIP INVITE messages as text and produces responses in SIP format as text
       summary: Identity
       operationId: authn/identity
       parameters:
@@ -51,10 +51,10 @@ paths:
           required: true
           schema:
             type: string
-          description: The API key uniquely identifying the API client. Cannot be null or empty
+          description: The API key uniquely identifying the API client. Cannot be null or empty.
         - name: compact
           in: query
-          description: Only applicable for SIP INVITE message. Flag for compact SIP Identity header, ignored for 'shaken' PASSporT type. If specified, must be true or false
+          description: Only applicable for SIP INVITE message. Flag for compact SIP Identity header but ignored for 'shaken' PASSporT type. If specified, must be true or false
           required: false
           style: form
           schema:
@@ -69,12 +69,12 @@ paths:
         - name: attest
           in: query
           required: false
-          description: Only applicable for SIP INVITE message. "'attest' value specified by ATIS SHAKEN extension.If specified, must be a valid country code"
+          description: Only applicable for SIP INVITE message. 'attest' value specified by ATIS SHAKEN extension.If specified, must be a valid country code
           schema:
             type: string
         - name: origid
           in: query
-          description: Only applicable for SIP INVITE message. "'origid' value specified by ATIS SHAKEN extension. If specified, must be a valid country code"
+          description: Only applicable for SIP INVITE message. 'origid' value specified by ATIS SHAKEN extension. If specified, must be a valid country code
           required: false
           style: form
           schema:
@@ -95,14 +95,14 @@ paths:
             type: string  
         - name: verstat
           in: query
-          description: Only applicable for SIP INVITE message. Verstat value as defined in ETSI TS 124 299, for performing tagging and the SIP Identity header optionally removed
+          description: Only applicable for SIP INVITE message. Verstat value as defined in ETSI TS 124 299 for performing tagging and optionally removing the SIP Identity header
           required: false
           style: form
           schema:
             type: string
         - name: identity
           in: query
-          description: Only applicable for SIP INVITE message. Flag for including SIP Identity header when the "verstat" parameter is specified, with the default value as "true". If specified, must be true or false
+          description: Only applicable for SIP INVITE message. Flag for including SIP Identity header when the "verstat" parameter is specified with the default value as "true". If specified, must be true or false
           required: false
           style: form
           schema:
@@ -153,7 +153,7 @@ paths:
         - lang: curl
           label: STIR SHAKEN Extn
           source: |
-            Following is an example of generating SIP Identity headers with minimum request data elements:
+            Following is an example of generating SIP Identity headers with minimum number of request data elements:
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey5%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -170,7 +170,7 @@ paths:
         - lang: curl
           label: Compact
           source: |
-            Following is an example of generating SIP Identity headers in compact form with minimum request data elements:
+            Following is an example of generating SIP Identity headers in compact form with minimum number of request data elements:
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey5%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -189,7 +189,7 @@ paths:
         - lang: curl
           label: Div Call Extn
           source: |
-            Following is an example of generating SIP Identity headers with Diverted Calls extension, by specifying minimum request data elements, and the 'PASSporT' type value as "div":
+            Following is an example of generating SIP Identity headers with Diverted Calls extension by specifying minimum number of request data elements and the 'PASSporT' type value as "div":
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey1%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -208,7 +208,7 @@ paths:
         - lang: curl
           label: Resource-Priority Auth Extn
           source: |
-            Following is an example of generating SIP Identity headers with Resource-Priority Authorization extension, by specifying minimum request data elements, and the 'PASSporT' type value as "rph":
+            Following is an example of generating SIP Identity headers with Resource-Priority Authorization extension by specifying minimum number of request data elements and the 'PASSporT' type value as "rph":
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey1%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -227,7 +227,7 @@ paths:
         - lang: curl
           label: RCD Extn
           source: |
-            Following is an example of generating SIP Identity headers with Rich Call Data extension, by specifying minimum request data elements, and the 'PASSporT' type value as "rcd", with call data fetched via an optional Rich Call Data provider:
+            Following is an example of generating SIP Identity headers with Rich Call Data extension, by specifying minimum set of request data elements and the 'PASSporT' type value as "rcd" with call data fetched via an optional Rich Call Data provider:
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey1%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -246,7 +246,7 @@ paths:
         - lang: curl
           label: STIR SHAKEN Extn With All Data
           source: |
-            Following is an example of generating SIP Identity headers with STIR SHAKEN extension, by specifying the full set of data elements in the request:
+            Following is an example of generating SIP Identity headers with STIR SHAKEN extension by specifying the full set of data elements in the request:
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey1%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -279,7 +279,7 @@ paths:
         - lang: curl
           label: STIR SHAKEN Extn & RCD
           source: |
-            Following is an example of generating SIP Identity headers with STIR SHAKEN extension and RCD data set, by specifying a SIP Call-Info header value containing a Content-ID URI for JCARD and the call reason value, and a JSON string of the JCARD extracted in a multipart SIP INVITE message:
+            Following is an example of generating SIP Identity headers with STIR SHAKEN extension and RCD data set by specifying a SIP Call-Info header value containing a Content-ID URI for JCARD, the call reason value, and a JSON string of the JCARD extracted in a multipart SIP INVITE message:
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey12%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -314,7 +314,7 @@ paths:
         - lang: curl
           label: SIP-Invite/JSON
           source: |
-            Following is an example of generating SIP Identity headers by submitting a SIP INVITE message as the request:
+            Following is an example of generating SIP Identity headers by submitting a SIP INVITE message as text in the request:
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey1%3E' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: application/json' \
@@ -331,7 +331,7 @@ paths:
         - lang: curl
           label: RCD SIP-Invite/JSON
           source: |
-            Following is an example of generating SIP Identity headers by submitting a multiple part SIP INVITE message as the request with a Call-Info header and JCARD content:
+            Following is an example of generating SIP Identity headers by submitting a multipart SIP INVITE message as text in the request with a Call-Info header and JCARD content:
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey1%3E&compact=false&ppt=rcd&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: application/json' \
@@ -385,7 +385,7 @@ paths:
         - lang: curl
           label: SIP-Invite/SIP
           source: |
-            Following is an example of submitting a SIP INVITE message as the request and producing a new SIP INVITE message with the generated SIP Identity header, and the SIP Date header: 
+            Following is an example of submitting a SIP INVITE message as text in the request and producing a new SIP INVITE message with the generated SIP Identity header and the SIP Date header: 
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey1%3E' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: text/plain' \
@@ -403,7 +403,7 @@ paths:
         - lang: curl
           label: RCD SIP-Invite/SIP
           source: |
-            Following is an example of generating SIP Identity headers by submitting a multiple part SIP INVITE message as the request with a Call-Info header and JCARD content:
+            Following is an example of generating SIP Identity headers by submitting a multipart SIP INVITE message as text in the request with a Call-Info header and JCARD content:
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=%3CapiKey1%3E&compact=false&ppt=rcd&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC&identity=true' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: text/plain' \
@@ -2090,7 +2090,7 @@ paths:
       tags:
       - Certificate
       description: |
-        This API entry point is to return the certificate of a customer that does not provide a public accessible URL for fetching its certificate, so that signatures embedded in the SIP Identity headers generated for the customer can be verified.
+        This API entry point is to return the certificate of a customer that does not provide a public accessible URL for fetching its certificate so that signatures embedded in the SIP Identity headers generated for the customer can be verified.
       summary: Retrieve Certificate
       operationId: authn/certs/{id}
       parameters:
@@ -2141,7 +2141,7 @@ paths:
   /verify/identity:
     post:
       tags:
-      - Verifies SIP Identity Headers
+      - Verifies SIP Identity headers
       description: | 
         Currently, a RESTful API client is required to provide an 'apiKey' query parameter with a pre-provisioned value to access API calls that are restricted. If the 'apiKey' parameter is not specified, the client IP address may be used as the backup authentication mechanism if pre-provisioned.
 
@@ -2187,28 +2187,28 @@ paths:
             type: boolean
         - name: robocall
           in: query
-          description: Only applicable for SIP INVITE message. Flag for returning Robocall Call Insight data
+          description: Only applicable for SIP INVITE message. Flag for returning Robocall data
           required: false
           style: form
           schema:
             type: boolean
         - name: cnamPrefix
           in: query
-          description: Only applicable for SIP INVITE message. Prefix applied to to CNAM data field, indicating if SIP Identity header is verified or not
+          description: Only applicable for SIP INVITE message. Prefix applied to CNAM data field, indicating if SIP Identity header is verified or not
           required: false
           style: form
           schema:
             type: string
         - name: verstat
           in: query
-          description: Only applicable for SIP INVITE message. Verstat value as defined in ETSI TS 124 299, for performing tagging and SIP Identity headers optionally removed
+          description: Only applicable for SIP INVITE message. Verstat value as defined in ETSI TS 124 299 for performing tagging and optionally removing SIP Identity headers
           required: false
           style: form
           schema:
             type: string
         - name: identity
           in: query
-          description: Only applicable for SIP INVITE message. Boolean flag for including SIP Identity header when the "verstat" parameter is specified, with the default value as "true"
+          description: Only applicable for SIP INVITE message. Boolean flag for including SIP Identity header when the "verstat" parameter is specified with the default value as "true"
           required: false
           style: form
           schema:
@@ -2261,7 +2261,7 @@ paths:
         - lang: curl
           label: Min Req Data Element
           source: | 
-            Following is an example of verifying SIP Identity headers with minimum request data elements:
+            Following is an example of verifying SIP Identity headers with minimum number of request data elements:
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -2278,7 +2278,7 @@ paths:
         - lang: curl
           label: Min Input Data Set for Div Call
           source: | 
-            Following is an example of verifying SIP Identity headers with minimum request data elements with PASSporT extension for a call diverted from sip:+15715550001@example.com to sip:bob@example.com: 
+            Following is an example of verifying SIP Identity headers with minimum number of request data elements with PASSporT extension for a call diverted from sip:+15715550001@example.com to sip:bob@example.com: 
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -2296,7 +2296,7 @@ paths:
         - lang: curl
           label: Min Input Data Set for Resource Priority Authn
           source: | 
-            Following is an example of verifying SIP Identity headers with minimum request data elements with PASSporT extension for Resource Priority Authorization with authorization values as "ets.1" and "wps.2":
+            Following is an example of verifying SIP Identity headers with minimum number of request data elements with PASSporT extension for Resource Priority Authorization with authorization values as "ets.1" and "wps.2":
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -2314,7 +2314,7 @@ paths:
         - lang: curl
           label: Request Id, Verstat and Identity Info
           source: | 
-            Following is an example of verifying SIP Identity headers with PASSporT as "shaken", and optional request_id, verstat and identity_info values in the request: 
+            Following is an example of verifying SIP Identity headers with PASSporT as "shaken" and optional request_id, verstat and identity_info values in the request: 
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -2379,7 +2379,7 @@ paths:
         - lang: curl
           label: Full Input Data Set
           source: | 
-            Following is an example of verifying SIP Identity headers with ATIS SHAKEN extension, by specifying the full set of data elements in the request, including CNAM and Robocall lookup, request identifier, verstat value and decoded identity information:
+            Following is an example of verifying SIP Identity headers with ATIS SHAKEN extension by specifying the full set of data elements in the request, including CNAM and Robocall lookup, request identifier, verstat value and decoded identity information:
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
@@ -2463,7 +2463,7 @@ paths:
         - lang: curl
           label: SIP-Invite/JSON
           source: |
-            Following is an example of verifying SIP Identity headers by submitting a SIP INVITE message as the request:
+            Following is an example of verifying SIP Identity headers by submitting a SIP INVITE message as text in the request:
             curl --location --request POST 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: application/json' \
@@ -2504,7 +2504,7 @@ paths:
         - lang: curl
           label: SIP-Invite/JSON All Field
           source: | 
-            Following is an example of verifying SIP Identity headers by submitting a SIP INVITE message as the request with all available URL parameters:
+            Following is an example of verifying SIP Identity headers by submitting a SIP INVITE message as text in the request with all available parameters:
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: application/json' \
@@ -2555,7 +2555,7 @@ paths:
         - lang: curl
           label: SIP-Invite/SIP
           source: |
-            Following is an example of submitting a SIP INVITE message with a SIP Identity header as the request and returning the original SIP INVITE message after the SIP Identity header is successfully verified:
+            Following is an example of submitting a SIP INVITE message with a SIP Identity header as text in the request and returning the original SIP INVITE message after the SIP Identity header is successfully verified:
             curl --location --request POST 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: text/plain' \
@@ -2752,7 +2752,7 @@ paths:
         - lang: curl
           label: SIP-Invite/SIP All Field
           source: | 
-            Following is an example of submitting a SIP INVITE message with a SIP Identity header and full set of available URL parameters as the request and producing a new SIP INVITE message with modified CNAM field and a new SIP P-Asserted-Identity header, including "verstat" tagging on SIP From/P-Asserted-Identity headers and added SIP P-Attestation-Indicator/P-Origination-Id headers:
+            Following is an example of submitting a SIP INVITE message with a SIP Identity header and full set of available parameters as the request and producing a new SIP INVITE message with modified CNAM field and a new SIP P-Asserted-Identity header, including "verstat" tagging on SIP From/P-Asserted-Identity headers and added SIP P-Attestation-Indicator/P-Origination-Id headers:
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true&cnamPrefix=%E2%9C%94,%E2%9C%98&verstat=TN-Validation-Passed&identity=true' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: text/plain' \
@@ -6017,7 +6017,7 @@ components:
         identity:
           type: array
           example: Bob <sip:5715550000@example.com>
-          description: A list of SIP Identity values to be verified
+          description: A list of SIP Identity header values to be verified
         diversion: 
           type: array
           description: A list of 'Diversion' header values from SIP INVITE message. If specified, must be one as specified in RFC5806 Section 4
@@ -6073,7 +6073,7 @@ components:
           description: Flag for performing CNAM lookup. If specified, must be true or false
         robocall:
           type: boolean
-          description: Flag for returning Robocall Call Insight data. If specified, must be true or false
+          description: Flag for returning Robocall data. If specified, must be true or false
     VerifyErrorResponse:
       required:
         - error

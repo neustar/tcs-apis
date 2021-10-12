@@ -52,13 +52,6 @@ paths:
           schema:
             type: string
           description: The API key uniquely identifying the API client. Cannot be null or empty
-        - name: compact
-          in: query
-          description: Only applicable when SIP INVITE message is included in the request body. Flag for compact SIP Identity header, ignored for 'shaken' PASSporT type. If specified, must be true or false
-          required: false
-          style: form
-          schema:
-            type: boolean
         - name: ppt
           in: query
           description: Only applicable when SIP INVITE message is included in the request body. PASSporT type value. If specified, must be 'shaken', 'div', 'rcd' or 'rph'. If not specified, default ppt=shaken by authentication server
@@ -79,6 +72,13 @@ paths:
           style: form
           schema:
             type: string
+        - name: compact
+          in: query
+          description: Only applicable when SIP INVITE message is included in the request body. Flag for compact SIP Identity header, ignored for 'shaken' PASSporT type. If specified, must be true or false
+          required: false
+          style: form
+          schema:
+            type: boolean
         - name: origcc
           in: query
           description: Only applicable when SIP INVITE message is included in the request body. Default country code for the originator telephone number. If specified, must be a valid country code
@@ -194,10 +194,10 @@ paths:
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
                 -d '{
-              "from" : "\"Alice\" <sip:alice@example.com>",
-              "to" : "\"Bob\" <sip:5715550000@example.com>",
-              "compact" : true
-            }
+                    "from" : "\"Alice\" <sip:+17035550001@example.com>",
+                    "to" : "\"Bob\" <sip:5715550000@example.com>",
+                    "compact" : true
+                    }
 
             Successful response message is as below:
             {
@@ -4977,10 +4977,10 @@ components:
         diversion: 
           type: string
           example: Bob <sip:7035550000@example.com>;reason=away
-          description: First 'Diversion' header value from SIP INVITE message. If specified, must not be empty or blank
+          description: First 'Diversion' header value from SIP INVITE message. If ppt=div, diversion attribute is REQUIRED.
         resource_priority: 
           type: array
-          description: List of 'Resource-Priority' header values from SIP INVITE message. If specified, must be one as specified in RFC4412 Section 3.1
+          description: List of 'Resource-Priority' header values from SIP INVITE message. If ppt=rph, resource_priority attribute is REQUIRED.
           items: 
             type: string
             example: [ "ets.0, wps.1", "q735.1" ]

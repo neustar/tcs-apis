@@ -302,6 +302,7 @@ paths:
             '
 
             Successful response message is as below:
+
             INVITE sip:17035550021@proxy.example.com;transport=UDP SIP/2.0
             From: "Alice" <sip:+15714345500@example.com>
             Identity: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyI0NDcwMzU1NTAwMDAiXX0sImlhdCI6MTYyMTAxMTQyNSwib3JpZyI6eyJ0biI6IjE1NzE0MzQ1NTAwIn0sIm9yaWdpZCI6Ijc4MzZlYzFkMDYwNzRkNjg4YjYyYzFlYTVlYmQxOTM5In0.RIDQYZP0SNd7ejjJGlcYLQ-55XssLVG5hJ5001v-unKFbD349VVYLderLBt_4h-eCgAcWIsuAW6YSMUqfPk8PA;info=<https://ca-authn.neustarlab.biz/ccid/authn/v2/certs/20001.10001>;alg=ES256;ppt="shaken"
@@ -461,6 +462,7 @@ paths:
             '
 
             Successful response message is as below:
+
             INVITE sip:7035550021@proxy.example.com;transport=UDP SIP/2.0
             v: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK
             Max-Forwards: 70
@@ -2265,7 +2267,7 @@ paths:
         required: true
       x-code-samples:
         - lang: curl
-          label: Min Req Data Element
+          label: STIR
           source: | 
             Following is an example of verifying SIP Identity headers with minimum request data elements:
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E' -i -X POST \
@@ -2282,108 +2284,7 @@ paths:
               "status" : "ok"
             }
         - lang: curl
-          label: Min Input Data Set for Div Call
-          source: | 
-            Following is an example of verifying SIP Identity headers with minimum request data elements with PASSporT extension for a call diverted from sip:+15715550001@example.com to sip:bob@example.com: 
-            curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E' -i -X POST \
-                -H 'Content-Type: application/json' \
-                -H 'Accept: application/json' \
-                -d '{
-              "from" : "\"alice\" <sip:+15715550000@example.com>",
-              "to" : "\"bob\" <sip:bob@example.com>",
-              "identity" : [ "..5w09tGHEUufQCE5Owdge96LC4WzB3Tzoa5nXMc1OT5-tKBImFMT2zg_sz_HuSFhA7ZoEnO-vO9Nx_nK6PJK7nA;info=<http://ca.example.com/test.der>;alg=ES256", "..E78w84XxXOZP6hmMbwf-LhvwX7W6rylaNA5KXm63NdlhQesWpI_d3SZAJ6S9jNv7orQcu1TLrjiaf25n-zz46g;info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"div\"" ],
-              "diversion" : [ "\"bob\" <sip:+15715550001@example.com>;reason=away" ]
-            }'
-
-            Successful response message is as below:
-            {
-              "status" : "ok"
-            }
-        - lang: curl
-          label: Min Input Data Set for Resource Priority Authn
-          source: | 
-            Following is an example of verifying SIP Identity headers with minimum request data elements with PASSporT extension for Resource Priority Authorization with authorization values as "ets.1" and "wps.2":
-            curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E' -i -X POST \
-                -H 'Content-Type: application/json' \
-                -H 'Accept: application/json' \
-                -d '{
-              "from" : "\"alice\" <sip:+15715550000@example.com>",
-              "to" : "\"bob\" <sip:+15715550001@example.com>",
-              "identity" : [ "eyJhbGciOiJFUzI1NiIsInBwdCI6InJwaCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTgsIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9LCJycGgiOnsiYXV0aCI6WyJldHMuMCIsIndwcy4yIl19fQ.6OOULynEPYO_Hk8unNv_hiM1TRoJeQsMacskpoCpAMITqb6DWYkyv3wmtjmf0RFQvABmFKNpSJHDRu5rziI3yA;info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"rph\"" ],
-              "resource_priority" : [ "ets.0, wps.2", "q735.1" ]
-            }'
-
-            Successful response message is as below:
-            {
-              "status" : "ok"
-            }
-        - lang: curl
-          label: Request Id, Verstat and Identity Info
-          source: | 
-            Following is an example of verifying SIP Identity headers with PASSporT as "shaken", and optional request_id, verstat and identity_info values in the request: 
-            curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E' -i -X POST \
-                -H 'Content-Type: application/json' \
-                -H 'Accept: application/json' \
-                -d '{
-              "from" : "\"alice\" <sip:+17035550001@example.com>",
-              "to" : "\"bob\" <sip:+15715550001@example.com>",
-              "identity" : [ "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMSJdfSwiaWF0IjoxNjE4NTQxODE1LCJta3kiOlt7ImFsZyI6IlNIQS0xIiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQiJ9LHsiYWxnIjoiU0hBLTI1NiIsImRpZyI6IjM2M0JBRTEyOTU5NUY1OTcyREY3RTA4NEZFQ0RGMUJDQUQ3QTcwNjRGN0U3NEY3RUE2MDIwNjBFMzc1NENGRjcifV0sIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJvcmlnaWQiOiIxMjM0NTYtQUJDRC05OTk5OTkifQ.-KSrycbqfsY41itu_ReMqmgGmJm0Q7Wa_EWOQDpAWWRrRiAPnwNsTltrHV7YQhxwTcVe1PxMs7Swdx01wO_HJQ;info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"shaken\"" ],
-              "status" : "all",
-              "verstat" : true,
-              "identity_info" : true,
-              "request_id" : "X-REQUEST-ID-12345"
-            }'
-
-            Successful response message is as below:
-            {
-              "status" : "ok",
-              "request_id" : "X-REQUEST-ID-12345",
-              "verstat" : "TN-Validation-Passed",
-              "identity_info" : [ {
-                "status" : "Ok",
-                "params" : "info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"shaken\"",
-                "header" : {
-                  "alg" : "ES256",
-                  "ppt" : "shaken",
-                  "typ" : "passport",
-                  "x5u" : "http://ca.example.com/test.der"
-                },
-                "claim" : {
-                  "attest" : "A",
-                  "dest" : {
-                    "tn" : [ "15715550001" ]
-                  },
-                  "iat" : 1618541815,
-                  "mky" : [ {
-                    "alg" : "SHA-1",
-                    "dig" : "4AADB9B13F82183B540212DF3E5D496B19E57CAB"
-                  }, {
-                    "alg" : "SHA-256",
-                    "dig" : "363BAE129595F5972DF7E084FECDF1BCAD7A7064F7E74F7EA602060E3754CFF7"
-                  } ],
-                  "orig" : {
-                    "tn" : "17035550001"
-                  },
-                  "origid" : "123456-ABCD-999999"
-                },
-                "certificate_info" : {
-                  "subject" : "C=US, ST=VA, L=Somewhere, O=\"AcmeTelecom, Inc.\", OU=VOIP, CN=TEST-EC-256-EXT-TN-JWT",
-                  "issuer" : "C=US, O=Neustar IOT Lab, CN=CallAuthnCA",
-                  "tn_auth_list" : [ {
-                    "spc" : "X001"
-                  }, {
-                    "range" : {
-                      "start" : "15714340000",
-                      "count" : 10000
-                    }
-                  }, {
-                    "one" : "17035550000"
-                  } ]
-                }
-              } ]
-            }
-        - lang: curl
-          label: Full Input Data Set
+          label: SHAKEN (Full)
           source: | 
             Following is an example of verifying SIP Identity headers with ATIS SHAKEN extension, by specifying the full set of data elements in the request, including CNAM and Robocall lookup, request identifier, verstat value and decoded identity information:
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E' -i -X POST \
@@ -2467,7 +2368,7 @@ paths:
               }
             }
         - lang: curl
-          label: SIP-Invite/JSON
+          label: SHAKEN(SIP-Invite,JSON)
           source: |
             Following is an example of verifying SIP Identity headers by submitting a SIP INVITE message as the request:
             curl --location --request POST 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E' -i -X POST \
@@ -2508,10 +2409,10 @@ paths:
               "status" : "ok"
             }
         - lang: curl
-          label: SIP-Invite/JSON All Field
+          label: SHAKEN(SIP-Invite,JSON) all data
           source: | 
             Following is an example of verifying SIP Identity headers by submitting a SIP INVITE message as the request with all available URL parameters:
-            curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true' -i -X POST \
+            curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&robocall=true' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: application/json' \
                 -d 'INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
@@ -2559,7 +2460,7 @@ paths:
               }
             }
         - lang: curl
-          label: SIP-Invite/SIP
+          label: SHAKEN(SIP-Invite,text)
           source: |
             Following is an example of submitting a SIP INVITE message with a SIP Identity header as the request and returning the original SIP INVITE message after the SIP Identity header is successfully verified:
             curl --location --request POST 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E' -i -X POST \
@@ -2596,6 +2497,7 @@ paths:
             '
 
             Successful response message is as below, same as the original SIP INVITE message:
+
             INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
             v: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za
             Max-Forwards: 70
@@ -2625,7 +2527,7 @@ paths:
             a=fmtp:101 0-15
             a=sendrecv
         - lang: curl
-          label: CNAM Prefix SIP-Invite/SIP
+          label: SHAKEN(SIP-Invite,text) CNAM Prefix
           source: |
             Following is an example of submitting a SIP INVITE message with a SIP Identity header and the "cnamPrefix" parameter in the request, and producing a new SIP INVITE message with the CNAM field modified for indicating verified SIP Identity header:
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E&status=all&cnamPrefix=%E2%9C%94,%E2%9C%98' -i -X POST \
@@ -2662,6 +2564,7 @@ paths:
             '
 
             Successful response message is as below, with CNAM field modified:
+
             INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
             Via: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za
             Max-Forwards: 70
@@ -2690,7 +2593,7 @@ paths:
             a=rtpmap:101 telephone-event/8000
             a=fmtp:101 0-15
             a=sendrecv
-        - lang: CNAM Prefix Unverified SIP-Invite/SIP
+        - lang: SHAKEN(SIP-Invite,text) CNAM Prefix Unverified
           source: |
             Following is an example of submitting a SIP INVITE message with a SIP Identity header and the "cnamPrefix" parameter in the request, and producing a new SIP INVITE message with the CNAM field modified for indicating unverified SIP Identity header:
             curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E&status=none&cnamPrefix=%E2%9C%94,%E2%9C%98' -i -X POST \
@@ -2727,6 +2630,7 @@ paths:
             '
 
             Successful response message is as below, with CNAM field modified:
+            
             INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
             Via: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za
             Max-Forwards: 70
@@ -2756,10 +2660,10 @@ paths:
             a=fmtp:101 0-15
             a=sendrecv
         - lang: curl
-          label: SIP-Invite/SIP All Field
+          label: SHAKEN(SIP-Invite,text) all data elements
           source: | 
             Following is an example of submitting a SIP INVITE message with a SIP Identity header and full set of available URL parameters as the request and producing a new SIP INVITE message with modified CNAM field and a new SIP P-Asserted-Identity header, including "verstat" tagging on SIP From/P-Asserted-Identity headers and added SIP P-Attestation-Indicator/P-Origination-Id headers:
-            curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&ecnam=true&robocall=true&cnamPrefix=%E2%9C%94,%E2%9C%98&verstat=TN-Validation-Passed&identity=true' -i -X POST \
+            curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E&status=all&origcc=1,44&destcc=1&cnam=true&robocall=true&cnamPrefix=%E2%9C%94,%E2%9C%98&verstat=TN-Validation-Passed&identity=true' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: text/plain' \
                 -d 'INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
@@ -2797,6 +2701,7 @@ paths:
             '
 
             Successful response message is as below:
+
             INVITE sip:+15715550001@proxy.example.com;transport=UDP SIP/2.0
             v: SIP/2.0/UDP proxy.example.com:39089;branch=z9hG4bK-d8754za
             Max-Forwards: 70
@@ -2830,6 +2735,107 @@ paths:
             a=rtpmap:101 telephone-event/8000
             a=fmtp:101 0-15
             a=sendrecv
+        - lang: curl
+          label: Diversion
+          source: | 
+            Following is an example of verifying SIP Identity headers with minimum request data elements with PASSporT extension for a call diverted from sip:+15715550001@example.com to sip:bob@example.com: 
+            curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E' -i -X POST \
+                -H 'Content-Type: application/json' \
+                -H 'Accept: application/json' \
+                -d '{
+              "from" : "\"alice\" <sip:+15715550000@example.com>",
+              "to" : "\"bob\" <sip:bob@example.com>",
+              "identity" : [ "..5w09tGHEUufQCE5Owdge96LC4WzB3Tzoa5nXMc1OT5-tKBImFMT2zg_sz_HuSFhA7ZoEnO-vO9Nx_nK6PJK7nA;info=<http://ca.example.com/test.der>;alg=ES256", "..E78w84XxXOZP6hmMbwf-LhvwX7W6rylaNA5KXm63NdlhQesWpI_d3SZAJ6S9jNv7orQcu1TLrjiaf25n-zz46g;info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"div\"" ],
+              "diversion" : [ "\"bob\" <sip:+15715550001@example.com>;reason=away" ]
+            }'
+
+            Successful response message is as below:
+            {
+              "status" : "ok"
+            }
+        - lang: curl
+          label: Resource-Priority(RPH)
+          source: | 
+            Following is an example of verifying SIP Identity headers with minimum request data elements with PASSporT extension for Resource Priority Authorization with authorization values as "ets.1" and "wps.2":
+            curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E' -i -X POST \
+                -H 'Content-Type: application/json' \
+                -H 'Accept: application/json' \
+                -d '{
+              "from" : "\"alice\" <sip:+15715550000@example.com>",
+              "to" : "\"bob\" <sip:+15715550001@example.com>",
+              "identity" : [ "eyJhbGciOiJFUzI1NiIsInBwdCI6InJwaCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAxIl19LCJpYXQiOjE2MTg1NDE4MTgsIm9yaWciOnsidG4iOiIxNTcxNTU1MDAwMCJ9LCJycGgiOnsiYXV0aCI6WyJldHMuMCIsIndwcy4yIl19fQ.6OOULynEPYO_Hk8unNv_hiM1TRoJeQsMacskpoCpAMITqb6DWYkyv3wmtjmf0RFQvABmFKNpSJHDRu5rziI3yA;info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"rph\"" ],
+              "resource_priority" : [ "ets.0, wps.2", "q735.1" ]
+            }'
+
+            Successful response message is as below:
+            {
+              "status" : "ok"
+            }
+        - lang: curl
+          label: Request Id, Verstat and Identity Info
+          source: | 
+            Following is an example of verifying SIP Identity headers with PASSporT as "shaken", and optional request_id, verstat and identity_info values in the request: 
+            curl 'http://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=%3CapiKey1%3E' -i -X POST \
+                -H 'Content-Type: application/json' \
+                -H 'Accept: application/json' \
+                -d '{
+              "from" : "\"alice\" <sip:+17035550001@example.com>",
+              "to" : "\"bob\" <sip:+15715550001@example.com>",
+              "identity" : [ "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMSJdfSwiaWF0IjoxNjE4NTQxODE1LCJta3kiOlt7ImFsZyI6IlNIQS0xIiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQiJ9LHsiYWxnIjoiU0hBLTI1NiIsImRpZyI6IjM2M0JBRTEyOTU5NUY1OTcyREY3RTA4NEZFQ0RGMUJDQUQ3QTcwNjRGN0U3NEY3RUE2MDIwNjBFMzc1NENGRjcifV0sIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJvcmlnaWQiOiIxMjM0NTYtQUJDRC05OTk5OTkifQ.-KSrycbqfsY41itu_ReMqmgGmJm0Q7Wa_EWOQDpAWWRrRiAPnwNsTltrHV7YQhxwTcVe1PxMs7Swdx01wO_HJQ;info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"shaken\"" ],
+              "status" : "all",
+              "verstat" : true,
+              "identity_info" : true,
+              "request_id" : "X-REQUEST-ID-12345"
+            }'
+
+            Successful response message is as below:
+            {
+              "status" : "ok",
+              "request_id" : "X-REQUEST-ID-12345",
+              "verstat" : "TN-Validation-Passed",
+              "identity_info" : [ {
+                "status" : "Ok",
+                "params" : "info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"shaken\"",
+                "header" : {
+                  "alg" : "ES256",
+                  "ppt" : "shaken",
+                  "typ" : "passport",
+                  "x5u" : "http://ca.example.com/test.der"
+                },
+                "claim" : {
+                  "attest" : "A",
+                  "dest" : {
+                    "tn" : [ "15715550001" ]
+                  },
+                  "iat" : 1618541815,
+                  "mky" : [ {
+                    "alg" : "SHA-1",
+                    "dig" : "4AADB9B13F82183B540212DF3E5D496B19E57CAB"
+                  }, {
+                    "alg" : "SHA-256",
+                    "dig" : "363BAE129595F5972DF7E084FECDF1BCAD7A7064F7E74F7EA602060E3754CFF7"
+                  } ],
+                  "orig" : {
+                    "tn" : "17035550001"
+                  },
+                  "origid" : "123456-ABCD-999999"
+                },
+                "certificate_info" : {
+                  "subject" : "C=US, ST=VA, L=Somewhere, O=\"AcmeTelecom, Inc.\", OU=VOIP, CN=TEST-EC-256-EXT-TN-JWT",
+                  "issuer" : "C=US, O=Neustar IOT Lab, CN=CallAuthnCA",
+                  "tn_auth_list" : [ {
+                    "spc" : "X001"
+                  }, {
+                    "range" : {
+                      "start" : "15714340000",
+                      "count" : 10000
+                    }
+                  }, {
+                    "one" : "17035550000"
+                  } ]
+                }
+              } ]
+            }
       responses:
         200:
           description: |

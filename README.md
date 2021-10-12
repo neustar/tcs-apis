@@ -34,7 +34,7 @@ a decision about whether to accept or decline the proposal.
    design and addresses the concerns raised in the initial discussion.
 
 4. Once comments and revisions on the design doc wind down, there is a final
-   discussion on the issue, to reach one of two outcomes:
+   discussion on the issue to reach one of two outcomes:
     - Accept proposal or
     - decline proposal.
 
@@ -60,10 +60,10 @@ implementation work proceeds in the same way as any other contribution.
 ### Scope
 
 The proposal process should be used for any notable change or addition to the
-language, libraries and tools.
+language, libraries and/or tools.
 Since proposals begin (and will often end) with the filing of an issue, even
 small changes can go through the proposal process if appropriate.
-Deciding what is appropriate is a matter of judgment which we will refine through
+Deciding what is appropriate is a matter of judgment and will be refined through
 experience.
 If in doubt, file a proposal.
 
@@ -86,10 +86,10 @@ approximately weekly to review pending proposals.
 
 The principal goal of the review meeting is to make sure that proposals
 are receiving attention from the right people
-by cc'ing relevant developers, raising important questions,
+by including relevant developers, raising important questions,
 pinging lapsed discussions, and generally trying to guide discussion
-toward agreement about the outcome.
-The discussion itself is expected to happen on the issue tracker,
+towards agreement about the outcome.
+The discussion itself is expected to happen on the issue tracker
 so that anyone can take part.
 
 The proposal review meetings also identify issues where

@@ -101,3 +101,22 @@ or declined, or by asking for a design doc).
 
 Enhancements to the SHAKEN AS & VS API project itself are ongoing and
 can also be submitted through the proposal process.
+
+## Running tcs-apis locally
+
+   1. We can run the tcs-apis package locally using [npm](https://redoc.ly/docs/redoc/quickstart/cli/) package manager
+   2. Clone this repository
+      ```
+      git clone git@github.com:neustar/tcs-apis.git
+      ```
+   2. ```
+      cd tcs-apis
+      ```
+   3. ```
+      npm install
+      ```
+    
+   4. ```
+      npm start
+      ```
+   5. The preview starts on port 9090, and can be accessed at http://localhost:9090. To exit the preview, use ```control+C```

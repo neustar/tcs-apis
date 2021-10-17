@@ -12,13 +12,13 @@ Serve remote spec by URL:
 Serve local file:
 
     docker run -it --rm -p 80:80 \
-      -v $(pwd)/demo/swagger.yaml:/usr/share/nginx/html/swagger.yaml \
+      -v $(pwd)/docs/swagger.yaml:/usr/share/nginx/html/swagger.yaml \
       -e SPEC_URL=swagger.yaml redocly/redoc
 
 Serve local file and watch for updates:
 
     docker run -it --rm -p 80:80 \
-      -v $(pwd)/demo/:/usr/share/nginx/html/swagger/ \
+      -v $(pwd)/docs/:/usr/share/nginx/html/swagger/ \
       -e SPEC_URL=swagger/swagger.yaml redocly/redoc
 
 ### OpenShift

@@ -1,6 +1,6 @@
 {
   "name": "redoc",
-  "version": "2.0.0-rc.56",
+  "version": "2.0.0-rc.57",
   "description": "ReDoc",
   "repository": {
     "type": "git",
@@ -29,9 +29,10 @@
   "main": "bundles/redoc.lib.js",
   "types": "typings/index.d.ts",
   "scripts": {
-    "start": "webpack serve --mode=development --env playground --hot --config demo/webpack.config.ts",
-    "start:prod": "webpack serve --env playground --mode=production --config demo/webpack.config.ts",
-    "start:benchmark": "webpack serve --mode=production --env.bench --config demo/webpack.config.ts",
+    "start": "webpack serve --mode=development --env playground --hot --config docs/webpack.config.ts",
+    "build": "webpack --mode=production --env playground --config docs/webpack.config.ts",
+    "start:prod": "webpack serve --env playground --mode=production --config docs/webpack.config.ts",
+    "start:benchmark": "webpack serve --mode=production --env.bench --config docs/webpack.config.ts",
     "test": "npm run lint && npm run unit && npm run license-check",
     "unit": "jest --coverage",
     "e2e": "cypress run",
@@ -49,10 +50,9 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 1",
     "lint": "eslint 'src/**/*.{js,ts,tsx}'",
     "benchmark": "node ./benchmark/benchmark.js",
-    "start:demo": "webpack serve --hot --config demo/webpack.config.ts --mode=development",
+    "start:docs": "webpack serve --hot --config docs/webpack.config.ts --mode=development",
     "compile:cli": "tsc custom.d.ts cli/index.ts --target es6 --module commonjs --types yargs",
-    "build:demo": "webpack --mode=production --config demo/webpack.config.ts",
-    "deploy:demo": "aws s3 sync demo/dist s3://production-redoc-demo --acl=public-read",
+    "deploy:docs": "aws s3 sync docs/dist s3://production-redoc-docs --acl=public-read",
     "license-check": "license-checker --production --onlyAllow 'MIT;ISC;Apache-2.0;BSD;BSD-2-Clause;BSD-3-Clause' --summary",
     "docker:build": "docker build -f config/docker/Dockerfile -t redoc ."
   },
@@ -81,6 +81,7 @@
     "@types/lunr": "^2.3.3",
     "@types/mark.js": "^8.11.5",
     "@types/marked": "^1.1.0",
+    "@types/node": "^15.6.1",
     "@types/prismjs": "^1.16.5",
     "@types/prop-types": "^15.7.3",
     "@types/react": "^17.0.8",
@@ -146,9 +147,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.14.0",
-    "@redocly/openapi-core": "^1.0.0-beta.50",
+    "@redocly/openapi-core": "^1.0.0-beta.54",
     "@redocly/react-dropdown-aria": "^2.0.11",
-    "@types/node": "^15.6.1",
     "classnames": "^2.3.1",
     "decko": "^1.2.0",
     "dompurify": "^2.2.8",

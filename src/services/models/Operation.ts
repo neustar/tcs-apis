@@ -192,21 +192,21 @@ export class OperationModel implements IMenuItem {
       console.warn('"x-code-samples" is deprecated. Use "x-codeSamples" instead');
     }
 
-    const requestBodyContent = this.requestBody && this.requestBody.content;
-    if (requestBodyContent && requestBodyContent.hasSample) {
-      const insertInx = Math.min(samples.length, this.options.payloadSampleIdx);
+    // const requestBodyContent = this.requestBody && this.requestBody.content;
+    // if (requestBodyContent && requestBodyContent.hasSample) {
+    //   const insertInx = Math.min(samples.length, this.options.payloadSampleIdx);
 
-      samples = [
-        ...samples.slice(0, insertInx),
-        {
-          lang: 'payload',
-          label: 'Payload',
-          source: '',
-          requestBodyContent,
-        },
-        ...samples.slice(insertInx),
-      ];
-    }
+    //   samples = [
+    //     ...samples.slice(0, insertInx),
+    //     {
+    //       lang: 'payload',
+    //       label: 'Payload',
+    //       source: '',
+    //       requestBodyContent,
+    //     },
+    //     ...samples.slice(insertInx),
+    //   ];
+    // }
 
     return samples;
   }

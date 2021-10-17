@@ -18,7 +18,7 @@ export class ResponseSamples extends React.Component<ResponseSamplesProps> {
   render() {
     const { operation } = this.props;
     const responses = operation.responses.filter(response => {
-      return response.content && response.content.hasSample;
+      return response.content && response.content.hasSample && response.code != "200";
     });
 
     return (

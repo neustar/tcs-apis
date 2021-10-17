@@ -33,7 +33,7 @@ ENV REDOC_OPTIONS=
 # copy files to the nginx folder
 COPY --from=0 build/bundles /usr/share/nginx/html
 COPY config/docker/index.tpl.html /usr/share/nginx/html/index.html
-COPY demo/favicon.png /usr/share/nginx/html/
+COPY docs/favicon.png /usr/share/nginx/html/
 COPY config/docker/nginx.conf /etc/nginx/
 COPY config/docker/docker-run.sh /usr/local/bin
 

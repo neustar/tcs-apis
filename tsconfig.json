@@ -37,9 +37,9 @@
   "include": [
     "cli/index.ts",
     "./custom.d.ts",
-    "./demo/playground/hmr-playground.tsx",
+    "./docs/playground/hmr-playground.tsx",
     "./src/**/*.ts?",
-    "demo/*.tsx",
+    "docs/*.tsx",
     "src/empty.js"
   ]
 }

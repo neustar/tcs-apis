@@ -1,10 +1,11 @@
 {
-  "name": "redoc",
+  "name": "tcs-apis",
   "version": "2.0.0-rc.57",
-  "description": "ReDoc",
+  "description": "tcs-apis",
+  "homepage": "https://neustar.github.io/tcs-apis/",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Redocly/redoc"
+    "url": "git://github.com/neustar/tcs-apis"
   },
   "browserslist": [
     "defaults",
@@ -54,7 +55,9 @@
     "compile:cli": "tsc custom.d.ts cli/index.ts --target es6 --module commonjs --types yargs",
     "deploy:docs": "aws s3 sync docs/dist s3://production-redoc-docs --acl=public-read",
     "license-check": "license-checker --production --onlyAllow 'MIT;ISC;Apache-2.0;BSD;BSD-2-Clause;BSD-3-Clause' --summary",
-    "docker:build": "docker build -f config/docker/Dockerfile -t redoc ."
+    "docker:build": "docker build -f config/docker/Dockerfile -t redoc .",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
@@ -153,6 +156,7 @@
     "decko": "^1.2.0",
     "dompurify": "^2.2.8",
     "eventemitter3": "^4.0.7",
+    "gh-pages": "^3.2.3",
     "json-pointer": "^0.6.1",
     "lunr": "^2.3.9",
     "mark.js": "^8.11.1",

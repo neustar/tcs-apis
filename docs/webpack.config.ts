@@ -28,7 +28,7 @@ export default (env: { playground?: boolean; bench?: boolean } = {}, { mode }) =
   target: 'web',
   output: {
     filename: 'redoc-demo.bundle.js',
-    path: root('dist'),
+    path: root('../build'),
     globalObject: 'this',
   },
 

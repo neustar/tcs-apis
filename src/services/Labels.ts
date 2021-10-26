@@ -38,8 +38,8 @@ const labels: LabelsConfig = {
   downloadSpecification: 'Download OpenAPI specification',
   responses: 'Responses',
   callbackResponses: 'Callback responses',
-  requestSamples: 'Example',
-  responseSamples: 'Error Response',
+  requestSamples: 'Request/Response Examples',
+  responseSamples: 'Error Response Examples',
 };
 
 export function setRedocLabels(_labels?: LabelsConfigRaw) {

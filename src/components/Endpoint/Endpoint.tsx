@@ -53,7 +53,7 @@ export class Endpoint extends React.Component<EndpointProps, EndpointState> {
               <HttpVerb type={operation.httpVerb} compact={this.props.compact}>
                 {operation.httpVerb}
               </HttpVerb>
-              <ServerRelativeURL>{operation.path}</ServerRelativeURL>
+              <ServerRelativeURL>{operation.path.includes('/authn/identity')?'/authn/identity':operation.path.includes('/verify/identity')?'/verify/identity':operation.path}</ServerRelativeURL>
               <ShelfIcon
                 float={'right'}
                 color={inverted ? 'black' : 'white'}

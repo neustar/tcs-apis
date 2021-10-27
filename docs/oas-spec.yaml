@@ -139,7 +139,7 @@ paths:
       x-summary: 
       x-code-samples:
         - lang: curl
-          label: STIR PASSporT (json,json)
+          label: STIR (JSON, JSON)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
@@ -156,7 +156,7 @@ paths:
               "date" : "Thu, 14 Oct 2021 20:06:57 GMT"
             }
         - lang: curl
-          label: SHAKEN PASSporT (json,json)
+          label: SHAKEN (JSON, JSON)
           source: | 
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
@@ -176,7 +176,7 @@ paths:
               "identity" : "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jci11YXQuY2NpZC5uZXVzdGFyLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExNDc1LjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjM0MjQyMTk4LCJvcmlnIjp7InRuIjoiMTcwMzU1NTAwMDEifSwib3JpZ2lkIjoiM0Y5QzI4MzYtN0U0MC0xMUU3LUJBNTgtNzgzMUMxQjhERUJBIn0.j3N_z0Eu7I_dcNQ9BTdoZ7AoBFRCetBX4RzOfj2vNSENJ4EdKUpehijGa8xy-5kZgV3I_alJsKxI8XoV2aTm5w;info=<https://cr-uat.ccid.neustar.biz/ccid/authn/v2/certs/11475.10001>;alg=ES256;ppt=\"shaken\""
             }
         - lang: curl
-          label: STIR Compact PASSporT (json,json)
+          label: STIR Compact (JSON, JSON) 
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
@@ -194,7 +194,7 @@ paths:
               "date" : "Thu, 14 Oct 2021 22:00:10 GMT"
             }
         - lang: curl
-          label: SHAKEN PASSporT - Full Data Elements (json,json)
+          label: SHAKEN Full (JSON, JSON)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
@@ -227,7 +227,7 @@ paths:
               "identity" : "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jci11YXQuY2NpZC5uZXVzdGFyLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExNDc1LjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjM0MjQ5NDY4LCJta3kiOlt7ImFsZyI6IlNIQS0xIiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQiJ9LHsiYWxnIjoiU0hBLTI1NiIsImRpZyI6IjM2M0JBRTEyOTU5NUY1OTcyREY3RTA4NEZFQ0RGMUJDQUQ3QTcwNjRGN0U3NEY3RUE2MDIwNjBFMzc1NENGRjcifV0sIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJvcmlnaWQiOiIzRjlDMjgzNi03RTQwLTExRTctQkE1OC03ODMxQzFCOERFQkEifQ.XQ28K2sQr9v4MKZLY-s4zwNr1sFwWGNdrBY4f2xudrgMo1uRHklZXyzTfNvIDV23ZVkmCcxJE_SbaHX0Dl-eQA;info=<https://cr-uat.ccid.neustar.biz/ccid/authn/v2/certs/11475.10001>;alg=ES256;ppt=\"shaken\""
             }
         - lang: curl
-          label: SHAKEN PASSporT with RCD claims (json,json)
+          label: SHAKEN w/RCD (JSON, JSON)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
@@ -262,7 +262,7 @@ paths:
               "identity" : "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jci11YXQuY2NpZC5uZXVzdGFyLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExNDc1LjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjM0MjQ5Njg4LCJta3kiOlt7ImFsZyI6IlNIQS0xIiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQiJ9LHsiYWxnIjoiU0hBLTI1NiIsImRpZyI6IjM2M0JBRTEyOTU5NUY1OTcyREY3RTA4NEZFQ0RGMUJDQUQ3QTcwNjRGN0U3NEY3RUE2MDIwNjBFMzc1NENGRjcifV0sIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJvcmlnaWQiOiIzRjlDMjgzNi03RTQwLTExRTctQkE1OC03ODMxQzFCOERFQkEifQ.Oyz1HateQwUcuFGHoTI1iHiUsQ-b60AoH6BjsSSb__b4Dzw0sNf7yhdl_iE5nHqPPJOY2zShHYfw0XWERIj6SA;info=<https://cr-uat.ccid.neustar.biz/ccid/authn/v2/certs/11475.10001>;alg=ES256;ppt=\"shaken\""
             }
         - lang: curl
-          label: STIR with Partial SIP INVITE Message (text,json)
+          label: STIR w/SIP INVITE (TEXT, JSON)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
@@ -278,7 +278,7 @@ paths:
               "date" : "Fri, 15 Oct 2021 16:54:18 GMT"
             }
         - lang: curl
-          label: SHAKEN with Partial SIP INVITE Message (text, json)
+          label: SHAKEN w/SIP INVITE (TEXT, JSON)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953&ppt=shaken' -i -X POST \
@@ -294,7 +294,7 @@ paths:
               "date" : "Fri, 15 Oct 2021 16:59:23 GMT"
             }
         - lang: curl
-          label: STIR with Partial SIP INVITE Message (text,text)
+          label: STIR w/SIP INVITE (TEXT, TEXT)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
@@ -312,7 +312,7 @@ paths:
             Date: Fri, 15 Oct 2021 17:02:32 GMT
             To: "Bob" <sip:+15715550000@example.com>
         - lang: curl
-          label: SHAKEN with Partial SIP INVITE Message (text,text)
+          label: SHAKEN w/SIP INVITE (TEXT, TEXT)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953&ppt=shaken' -i -X POST \
@@ -331,7 +331,7 @@ paths:
             Date: Fri, 15 Oct 2021 17:04:38 GMT
             To: "Bob" <sip:+15715550000@example.com>
         - lang: curl
-          label: SHAKEN with Full SIP INVITE Message - Full Parameter Set (text,json)
+          label: SHAKEN w/Full SIP INVITE (TEXT, JSON)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
@@ -373,7 +373,7 @@ paths:
               "identity" : "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jci11YXQuY2NpZC5uZXVzdGFyLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExNDc1LjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjM0MzE3OTI4LCJta3kiOlt7ImFsZyI6Im1kNSIsImRpZyI6IjE0NzU4RjFBRkQ0NEMwOUI3OTkyMDczQ0NGMDBCNDNEIn0seyJhbGciOiJzaGEtMjU2IiwiZGlnIjoiQUVDMDcwNjQ1RkU1M0VFM0IzNzYzMDU5Mzc2MTM0RjA1OENDMzM3MjQ3Qzk3OEFERDE3OEI2Q0NERkIwMDE5RiJ9XSwib3JpZyI6eyJ0biI6IjE1NzE1NTUwMDAxIn0sIm9yaWdpZCI6IkFBQS1CQkItQ0NDQyJ9.b0OkI-bEPvcjH-qlg2jtvn3ciofa23Aj0KS_dFguShani09WOa9SuN0n458iIXkVl0UvPNaTtKL5rud9W4QlSA;info=<https://cr-uat.ccid.neustar.biz/ccid/authn/v2/certs/11475.10001>;alg=ES256;ppt=\"shaken\""
             }
         - lang: curl
-          label: SHAKEN with Full SIP INVITE Message - Full Parameter Set(text,text)
+          label: SHAKEN w/Full SIP INVITE (TEXT, TEXT)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
@@ -448,7 +448,7 @@ paths:
             a=fmtp:101 0-15
             a=sendrecv
         - lang: curl
-          label: RCD PASSporT with Multipart SIP INVITE Message and RCD(text/json,json)
+          label: RCD w/Multipart SIP INVITE (TEXT/JSON, JSON) 
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953&compact=false&ppt=rcd&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
@@ -501,7 +501,7 @@ paths:
               "identity" : "eyJhbGciOiJFUzI1NiIsInBwdCI6InJjZCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jci11YXQuY2NpZC5uZXVzdGFyLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExNDc1LjEwMDAxIn0.eyJjcm4iOiJUcmF2ZWwiLCJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAwIl19LCJpYXQiOjE2MzQzMjAwNjIsIm1reSI6W3siYWxnIjoibWQ1IiwiZGlnIjoiMTQ3NThGMUFGRDQ0QzA5Qjc5OTIwNzNDQ0YwMEI0M0QifSx7ImFsZyI6InNoYS0yNTYiLCJkaWciOiJBRUMwNzA2NDVGRTUzRUUzQjM3NjMwNTkzNzYxMzRGMDU4Q0MzMzcyNDdDOTc4QUREMTc4QjZDQ0RGQjAwMTlGIn1dLCJvcmlnIjp7InRuIjoiMTcwMzU1NTAwMDEifSwicmNkIjp7ImpjbCI6ImNpZDphbGljZS1qY2FyZEBleGFtcGxlLmNvbSIsIm5hbSI6IkFsaWNlIn19.Ogdn4vekZ9VFsI04qiIG9ZPKPn7A-_tCCxhSY7kq9sUGAZLQmJ5Jp6I2Lj485ErmSfDpz_4nYo-vnQdLuybc8Q;info=<https://cr-uat.ccid.neustar.biz/ccid/authn/v2/certs/11475.10001>;alg=ES256;ppt=\"rcd\""
             }
         - lang: curl
-          label: RCD PASSporT with Multipart SIP INVITE Message and RCD(text/json,text)
+          label: RCD w/Multipart SIP INVITE (TEXT/JSON, TEXT) 
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953&compact=false&ppt=rcd&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
@@ -597,7 +597,7 @@ paths:
             ["vcard",[["version",{},"text","4.0"],["fn",{},"text","Alice Liddell"],[ "email",{},"text","alice@example.com"]]]
 
         - lang: curl
-          label: DIV PASSporT (json,json)
+          label: DIV (JSON, JSON)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
@@ -616,7 +616,7 @@ paths:
               "date" : "Fri, 15 Oct 2021 23:13:39 GMT"
             }
         - lang: curl
-          label: RPH PASSporT (json,json)
+          label: RPH (JSON, JSON)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
@@ -635,7 +635,7 @@ paths:
               "date" : "Fri, 15 Oct 2021 23:22:12 GMT"
             }
         - lang: curl
-          label: RCD PASSporT (json,json)
+          label: RCD (JSON, JSON)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \

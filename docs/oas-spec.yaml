@@ -17,26 +17,14 @@ info:
     ## RESTful API Authentication Service
     Currently, a RESTful API client is required to provide an 'apiKey' query parameter with a pre-provisioned value to access API calls that are restricted. If the 'apiKey' parameter is not specified, the client IP address may be used as the backup authentication mechanism if pre-provisioned.
 tags:
-- name: Generate SIP Identity Header
-- name: Certificate
-- name: Verifies SIP Identity Header
-- name: CNAM
-    
+- name: Authentication Service
+- name: Verification Service
 
-x-tagGroups:
-  - name: Authentication Service
-    tags:
-      - Generate SIP Identity Header
-      - Certificate
-  - name: Verification Service
-    tags:
-      - Verifies SIP Identity Header
-      - CNAM
 paths:
   /authn/identity:
     post:
       tags:
-      - Generate SIP Identity Header
+      - Authentication Service
       description: |
         This API endpoint uses the following data elements ('required' elements identified) in the REQUEST to create a SIP Identity header. Based on the HTTP header of 'Content-Type' (e.g. json, text/plain), the request body (data) can include various data elements. Please refer to the examples for more details.
         Three different API entry points are defined for SIP Identity header creation:
@@ -151,7 +139,7 @@ paths:
       x-summary: 
       x-code-samples:
         - lang: curl
-          label: STIR PASSporT (json,json)
+          label: STIR (JSON, JSON)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
@@ -168,7 +156,7 @@ paths:
               "date" : "Thu, 14 Oct 2021 20:06:57 GMT"
             }
         - lang: curl
-          label: SHAKEN PASSporT (json,json)
+          label: SHAKEN (JSON, JSON)
           source: | 
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
@@ -188,7 +176,7 @@ paths:
               "identity" : "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jci11YXQuY2NpZC5uZXVzdGFyLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExNDc1LjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjM0MjQyMTk4LCJvcmlnIjp7InRuIjoiMTcwMzU1NTAwMDEifSwib3JpZ2lkIjoiM0Y5QzI4MzYtN0U0MC0xMUU3LUJBNTgtNzgzMUMxQjhERUJBIn0.j3N_z0Eu7I_dcNQ9BTdoZ7AoBFRCetBX4RzOfj2vNSENJ4EdKUpehijGa8xy-5kZgV3I_alJsKxI8XoV2aTm5w;info=<https://cr-uat.ccid.neustar.biz/ccid/authn/v2/certs/11475.10001>;alg=ES256;ppt=\"shaken\""
             }
         - lang: curl
-          label: STIR Compact PASSporT (json,json)
+          label: STIR Compact (JSON, JSON) 
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
@@ -206,7 +194,7 @@ paths:
               "date" : "Thu, 14 Oct 2021 22:00:10 GMT"
             }
         - lang: curl
-          label: SHAKEN PASSporT - Full Data Elements (json,json)
+          label: SHAKEN Full (JSON, JSON)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
@@ -239,7 +227,7 @@ paths:
               "identity" : "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jci11YXQuY2NpZC5uZXVzdGFyLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExNDc1LjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjM0MjQ5NDY4LCJta3kiOlt7ImFsZyI6IlNIQS0xIiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQiJ9LHsiYWxnIjoiU0hBLTI1NiIsImRpZyI6IjM2M0JBRTEyOTU5NUY1OTcyREY3RTA4NEZFQ0RGMUJDQUQ3QTcwNjRGN0U3NEY3RUE2MDIwNjBFMzc1NENGRjcifV0sIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJvcmlnaWQiOiIzRjlDMjgzNi03RTQwLTExRTctQkE1OC03ODMxQzFCOERFQkEifQ.XQ28K2sQr9v4MKZLY-s4zwNr1sFwWGNdrBY4f2xudrgMo1uRHklZXyzTfNvIDV23ZVkmCcxJE_SbaHX0Dl-eQA;info=<https://cr-uat.ccid.neustar.biz/ccid/authn/v2/certs/11475.10001>;alg=ES256;ppt=\"shaken\""
             }
         - lang: curl
-          label: SHAKEN PASSporT with RCD claims (json,json)
+          label: SHAKEN w/RCD (JSON, JSON)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
@@ -274,7 +262,7 @@ paths:
               "identity" : "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jci11YXQuY2NpZC5uZXVzdGFyLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExNDc1LjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjM0MjQ5Njg4LCJta3kiOlt7ImFsZyI6IlNIQS0xIiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQiJ9LHsiYWxnIjoiU0hBLTI1NiIsImRpZyI6IjM2M0JBRTEyOTU5NUY1OTcyREY3RTA4NEZFQ0RGMUJDQUQ3QTcwNjRGN0U3NEY3RUE2MDIwNjBFMzc1NENGRjcifV0sIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJvcmlnaWQiOiIzRjlDMjgzNi03RTQwLTExRTctQkE1OC03ODMxQzFCOERFQkEifQ.Oyz1HateQwUcuFGHoTI1iHiUsQ-b60AoH6BjsSSb__b4Dzw0sNf7yhdl_iE5nHqPPJOY2zShHYfw0XWERIj6SA;info=<https://cr-uat.ccid.neustar.biz/ccid/authn/v2/certs/11475.10001>;alg=ES256;ppt=\"shaken\""
             }
         - lang: curl
-          label: STIR with Partial SIP INVITE Message (text,json)
+          label: STIR w/SIP INVITE (TEXT, JSON)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
@@ -290,7 +278,7 @@ paths:
               "date" : "Fri, 15 Oct 2021 16:54:18 GMT"
             }
         - lang: curl
-          label: SHAKEN with Partial SIP INVITE Message (text, json)
+          label: SHAKEN w/SIP INVITE (TEXT, JSON)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953&ppt=shaken' -i -X POST \
@@ -306,7 +294,7 @@ paths:
               "date" : "Fri, 15 Oct 2021 16:59:23 GMT"
             }
         - lang: curl
-          label: STIR with Partial SIP INVITE Message (text,text)
+          label: STIR w/SIP INVITE (TEXT, TEXT)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
@@ -324,7 +312,7 @@ paths:
             Date: Fri, 15 Oct 2021 17:02:32 GMT
             To: "Bob" <sip:+15715550000@example.com>
         - lang: curl
-          label: SHAKEN with Partial SIP INVITE Message (text,text)
+          label: SHAKEN w/SIP INVITE (TEXT, TEXT)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953&ppt=shaken' -i -X POST \
@@ -343,7 +331,7 @@ paths:
             Date: Fri, 15 Oct 2021 17:04:38 GMT
             To: "Bob" <sip:+15715550000@example.com>
         - lang: curl
-          label: SHAKEN with Full SIP INVITE Message - Full Parameter Set (text,json)
+          label: SHAKEN w/Full SIP INVITE (TEXT, JSON)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
@@ -385,7 +373,7 @@ paths:
               "identity" : "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jci11YXQuY2NpZC5uZXVzdGFyLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExNDc1LjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjM0MzE3OTI4LCJta3kiOlt7ImFsZyI6Im1kNSIsImRpZyI6IjE0NzU4RjFBRkQ0NEMwOUI3OTkyMDczQ0NGMDBCNDNEIn0seyJhbGciOiJzaGEtMjU2IiwiZGlnIjoiQUVDMDcwNjQ1RkU1M0VFM0IzNzYzMDU5Mzc2MTM0RjA1OENDMzM3MjQ3Qzk3OEFERDE3OEI2Q0NERkIwMDE5RiJ9XSwib3JpZyI6eyJ0biI6IjE1NzE1NTUwMDAxIn0sIm9yaWdpZCI6IkFBQS1CQkItQ0NDQyJ9.b0OkI-bEPvcjH-qlg2jtvn3ciofa23Aj0KS_dFguShani09WOa9SuN0n458iIXkVl0UvPNaTtKL5rud9W4QlSA;info=<https://cr-uat.ccid.neustar.biz/ccid/authn/v2/certs/11475.10001>;alg=ES256;ppt=\"shaken\""
             }
         - lang: curl
-          label: SHAKEN with Full SIP INVITE Message - Full Parameter Set(text,text)
+          label: SHAKEN w/Full SIP INVITE (TEXT, TEXT)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
@@ -460,7 +448,7 @@ paths:
             a=fmtp:101 0-15
             a=sendrecv
         - lang: curl
-          label: RCD PASSporT with Multipart SIP INVITE Message and RCD(text/json,json)
+          label: RCD w/Multipart SIP INVITE (TEXT/JSON, JSON) 
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953&compact=false&ppt=rcd&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
@@ -513,7 +501,7 @@ paths:
               "identity" : "eyJhbGciOiJFUzI1NiIsInBwdCI6InJjZCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jci11YXQuY2NpZC5uZXVzdGFyLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExNDc1LjEwMDAxIn0.eyJjcm4iOiJUcmF2ZWwiLCJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAwIl19LCJpYXQiOjE2MzQzMjAwNjIsIm1reSI6W3siYWxnIjoibWQ1IiwiZGlnIjoiMTQ3NThGMUFGRDQ0QzA5Qjc5OTIwNzNDQ0YwMEI0M0QifSx7ImFsZyI6InNoYS0yNTYiLCJkaWciOiJBRUMwNzA2NDVGRTUzRUUzQjM3NjMwNTkzNzYxMzRGMDU4Q0MzMzcyNDdDOTc4QUREMTc4QjZDQ0RGQjAwMTlGIn1dLCJvcmlnIjp7InRuIjoiMTcwMzU1NTAwMDEifSwicmNkIjp7ImpjbCI6ImNpZDphbGljZS1qY2FyZEBleGFtcGxlLmNvbSIsIm5hbSI6IkFsaWNlIn19.Ogdn4vekZ9VFsI04qiIG9ZPKPn7A-_tCCxhSY7kq9sUGAZLQmJ5Jp6I2Lj485ErmSfDpz_4nYo-vnQdLuybc8Q;info=<https://cr-uat.ccid.neustar.biz/ccid/authn/v2/certs/11475.10001>;alg=ES256;ppt=\"rcd\""
             }
         - lang: curl
-          label: RCD PASSporT with Multipart SIP INVITE Message and RCD(text/json,text)
+          label: RCD w/Multipart SIP INVITE (TEXT/JSON, TEXT) 
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953&compact=false&ppt=rcd&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
@@ -609,7 +597,7 @@ paths:
             ["vcard",[["version",{},"text","4.0"],["fn",{},"text","Alice Liddell"],[ "email",{},"text","alice@example.com"]]]
 
         - lang: curl
-          label: DIV PASSporT (json,json)
+          label: DIV (JSON, JSON)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
@@ -628,7 +616,7 @@ paths:
               "date" : "Fri, 15 Oct 2021 23:13:39 GMT"
             }
         - lang: curl
-          label: RPH PASSporT (json,json)
+          label: RPH (JSON, JSON)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
@@ -647,7 +635,7 @@ paths:
               "date" : "Fri, 15 Oct 2021 23:22:12 GMT"
             }
         - lang: curl
-          label: RCD PASSporT (json,json)
+          label: RCD (JSON, JSON)
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
@@ -2279,63 +2267,10 @@ paths:
                     developer_message: Internal server error
                     attributes: 
                       key: value
-  /authn/certs/{id}:
-    get:
-      tags:
-      - Certificate
-      description: |
-        This API entry point is to return the certificate of a customer that does not provide a public accessible URL for fetching its certificate, so that signatures embedded in the SIP Identity headers generated for the customer can be verified.
-      summary: Retrieve Certificate
-      operationId: authn/certs/{id}
-      parameters:
-        - name: id
-          in: path
-          description: The unique identifier of the certificate to be retrieved
-          required: true
-          schema:
-            type: string
-      x-code-samples:
-        - lang: Curl
-          source: |
-            curl --location --request GET 'https://{hostname}:{port}/{optionalRoutingPath}/authn/certs/20001' \
-            --header 'Accept: application/json'     
-      responses:
-        200:
-          description: successful operation
-          content:
-            text/plain:
-              examples: 
-                response: 
-                  value: |
-                    HTTP/1.1 200 OK
-                    Content-Type: application/json;charset=UTF-8
-                    Content-Length: 1066
-
-                    -----BEGIN CERTIFICATE-----
-                    MIIC3DCCAcSgAwIBAgIIBVau5WIgYr4wDQYJKoZIhvcNAQELBQAwPTEUMBIGA1UEAwwLQ2FsbEF1
-                    dGhuQ0ExGDAWBgNVBAoMD05ldXN0YXIgSU9UIExhYjELMAkGA1UEBhMCVVMwHhcNMjAwNzEwMTg0
-                    NTIyWhcNMjIwNzEwMTg0NTIyWjB4MRwwGgYDVQQDDBN0ZXN0Lm5ldXN0YXJsYWIuYml6MRQwEgYD
-                    VQQLDAtTbWFydElEIElPVDEVMBMGA1UECgwMTmV1U3RhciBJbmMuMREwDwYDVQQHDAhTdGVybGlu
-                    ZzELMAkGA1UECAwCVkExCzAJBgNVBAYTAlVTMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE+uA9
-                    IAiTmofZeO68tU5HcevE99nA/FNmBf5nJXFyotjje+2qj55yZTXw7n0hBbvFGNtuk08XyioVwwBh
-                    oIW4uKNwMG4wHQYDVR0OBBYEFN5vq8ArhfTLjiEqr9YFIXennAA/MAwGA1UdEwEB/wQCMAAwHwYD
-                    VR0jBBgwFoAUA5OlO5suixTWxM9Yz0bbgzFU0MgwDgYDVR0PAQH/BAQDAgeAMA4GCCsGAQUFBwEa
-                    BAIwADANBgkqhkiG9w0BAQsFAAOCAQEAeT9nsp/6EfpdG/Yv+pYu751IF5bGK9fP3XOi89QI4Ode
-                    zrExFkUDhYU8hRXg2EhPDKY1t+LwcEEluBba/osgNZpx9VwFAhctFXVr0m9k4fVSzGLbxvc3BpyH
-                    7WVkUmBfDSAVK5UtSafo9VgqTm5AAYTEUUnx6Pn+RWFAk7DhGAv/uP1BCAsZBE51dL4sK5IYIPYC
-                    PKkugQY+hPk+x+576TFUdjcmBJeq3O/YD98f59DTP2aRVfKdbbWI1DWG6wOwjIUYxzYaprd/U5IC
-                    f6O8TLlYMoUMmbBFHBYOSI4/kb4KmM3l8CCTrvvyVtcwF+EX/D3B/2ob87UmRkqduhZDJA==
-                    -----END CERTIFICATE-----
-        403:
-          description: Error Response
-          content: 
-            application/json: 
-              schema: 
-                $ref: '#/components/schemas/ErrorResponseCerts400'
   /verify/identity:
     post:
       tags:
-      - Verifies SIP Identity Header
+      - Verification Service
       description: | 
         Currently, a RESTful API client is required to provide an 'apiKey' query parameter with a pre-provisioned value to access API calls that are restricted. If the 'apiKey' parameter is not specified, the client IP address may be used as the backup authentication mechanism if pre-provisioned.
 
@@ -4773,95 +4708,6 @@ paths:
                       http_status_code: 500
                       sip_code: 500
                       reason: Internal server error
-  /verify/cnam/tn/{digits}:
-    get:
-      tags:
-      - CNAM
-      summary: Perform CNAM queries
-      operationId: verify/cnam/tn/{digits}
-      description: |
-        For a successful CNAM lookup, a response in JSON format will be returned with the "cnam" attribute; otherwise, the "cnam_error" attribute will be returned if there are any errors encountered in the CNAM lookup.
-      parameters:
-        - in: query
-          name: apiKey
-          required: true
-          schema:
-            type: string
-          description: The API key uniquely identifying the API client. Cannot be null or empty
-        - name: digits
-          in: path
-          description: The numeric telephone number
-          required: true
-          schema:
-            type: string
-      x-code-samples:
-        - lang: Curl
-          source: |
-            curl --location --request GET 'https://{hostname}:{port}/{optionalRoutingPath}/verify/cnam/tn/15715550000?apiKey=%3CapiKey1%3E' \
-            --header 'Accept: application/json'
-      responses:
-        200:
-          description: successful operation
-          content:
-            application/json: 
-              schema: 
-                type: object
-                properties:
-                  cnam:
-                    type: string
-                    description: CNAM data
-                    example: Alice In Wonderland
-        403:
-          description: Error Response
-          content: 
-            application/json: 
-              schema: 
-                $ref: '#/components/schemas/CNAM-Error'
-  /verify/cnam:
-    post:
-      tags:
-      - CNAM
-      summary: Perform CNAM queries
-      operationId: verify/cnam
-      description: |
-        For a successful CNAM lookup, a response in JSON format will be returned with the "cnam" attribute; otherwise, the "cnam_error" attribute will be returned if there are any errors encountered in the CNAM lookup.
-      parameters:
-        - in: query
-          name: apiKey
-          required: true
-          schema:
-            type: string
-          description: The API key uniquely identifying the API client. Cannot be null or empty
-      requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CNAM-Input'
-        required: true
-      x-code-samples:
-        - lang: Curl
-          source: |
-            curl --location --request GET 'https://{hostname}:{port}/{optionalRoutingPath}/verify/cnam/tn/15715550000?apiKey=%3CapiKey1%3E' \
-            --header 'Accept: application/json'
-      responses:
-        200:
-          description: successful operation
-          content:
-            application/json: 
-              schema: 
-                type: object
-                properties:
-                  cnam:
-                    type: string
-                    description: CNAM data
-                    example: Alice In Wonderland
-        403:
-          description: Error Response
-          content: 
-            application/json: 
-              schema: 
-                $ref: '#/components/schemas/CNAM-Error'
 components:
   schemas:
     Identity:
@@ -4987,43 +4833,6 @@ components:
           type: string
           example: Fri, 14 May 2021 16:57:06 GMT
           description: The 'Date' value used for SIP Identity header creation, if not specified in the request
-    SuccessResponseProxy:
-      required:
-      - status
-      - header
-      type: object
-      properties:
-        status:
-          type: string
-          example: ok
-          description: |
-            The status of Verification Service operation for SIP proxy. A successful response in JSON format includes the "status" attribute with a value of "ok". It also contains an optional "next_hop" attribute for indicating the next hop for routing the SIP messages, and an optional "policy" attribute with an opaque string to be consumed by the SIP proxy for manipulating SIP headers and mapping error conditions. Finally, it contains an optional "header" attribute, containing a list of SIP headers to be added to or removed from the SIP INVITE message.
-        next_hop:
-          type: string
-          example: 'udp:192.168.1.1:5060'
-          description: The URI of next hop
-        policy: 
-          type: string
-          example: "{\"stateful\":false,\"via\":false,\"max_forwards\":false,\"route\":false,\"record_route\":false,\"error_action\":[{\"error\":\"default\",\"action\":\"passthru\"}]}"
-          description: The policy for processing the SIP message
-        header: 
-          type: array
-          description: A list of SIP headers or RequestLine to be added into or removed from SIP INVITE message
-          items:
-            type: object
-            properties:
-              operation:
-                type: string
-                description: Either 'add' or 'remove'
-                example: add
-              name:
-                type: string
-                description: The name of the SIP header or RequestLine to be added or removed
-                example: Identity
-              value:
-                type: string
-                description: The value of the SIP header or RequestLine to be added or removed
-                example: 'eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1hdXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJDIiwiZGVzdCI6eyJ0biI6WyIxNzAzNTU1MDAwMiJdfSwiaWF0IjoxNjIxMDExNDI1LCJta3kiOlt7ImFsZyI6Im1kNSIsImRpZyI6IjE0NzU4RjFBRkQ0NEMwOUI3OTkyMDczQ0NGMDBCNDNEIn0seyJhbGciOiJzaGEtMjU2IiwiZGlnIjoiQUVDMDcwNjQ1RkU1M0VFM0IzNzYzMDU5Mzc2MTM0RjA1OENDMzM3MjQ3Qzk3OEFERDE3OEI2Q0NERkIwMDE5RiJ9XSwib3JpZyI6eyJ0biI6IjE1NzE1NTUwMDAxIn0sIm9yaWdpZCI6ImZkYTYyM2EyLWE4OWQtMTFlOS1hZjgzLTAwNTA1NjlhYmIzNCJ9.ulLtqgsrg4GQiDC6kcNA94rRI_oXhBbClLYMkejJlPKUK2N0WW5Jkawbo88nyprUVStu1WWQQGR8Ha6Qnm41pg;info=<https://{hostname}:{port}/{optionalRoutingPath}/authn/certs/20001.10001>;alg=ES256;ppt=\"shaken\""'
     ErrorResponse400:
       required:
       - error_id
@@ -5092,106 +4901,6 @@ components:
             key: 
               type: string
               description: The attribute name of 'uri' in the name/value pair
-    ErrorResponse403:
-      required:
-      - error_id
-      - http_status_code
-      - sip_code
-      - reason
-      - timestamp
-      type: object
-      properties:
-        error_id:
-          type: string
-          example: CredentialExpired
-          description: The unique error identifier
-        http_status_code:
-          type: integer
-          example: 403
-          description: The HTTP response status code
-        sip_code: 
-          type: string
-          example: "437"
-          description: The SIP response code associated with the error
-        reason:
-          type: string
-          example: Credential has expired
-          description: The detailed error text
-        timestamp:
-          type: string
-          example: Fri, 14 May 2021 16:57:02 GMT
-          description: The timestamp when the error is generated
-        developer_message:
-          type: string
-          example: Certificate has expired at current date/time
-          description: The additional developer message, if any
-        attributes:
-          type: object
-          description: The name/value pair attribute map associated with the error
-          properties: 
-            alias: 
-              type: string
-              description: "The attribute name of 'alias' in the name/value pair"
-              example: test2
-    ErrorResponseProxy403:
-      required:
-      - error_id
-      - http_status_code
-      - sip_code
-      - reason
-      - timestamp
-      type: object
-      properties:
-        status:
-          type: string
-          example: error
-          description: A failure response in JSON format includes the "status" attribute with a value of "error", and an "error" attribute, containing a list of error conditions that result in the failure.
-        error: 
-          description: A list of errors encountered in STIR authentication operation for SIP proxy
-          type: array
-          items:
-            type: object
-            properties: 
-              error_id:
-                type: string
-                description: The unique error identifier
-                example: RequestStaleDate
-              http_status_code:
-                type: number
-                example: 403
-                description: The HTTP response status code
-              sip_code: 
-                type: number
-                example: 403
-                description: The SIP response code associated with the error
-              reason:
-                type: string
-                example: Stale date value
-                description: The detailed error text
-              timestamp:
-                type: string
-                example: Fri, 14 May 2021 16:57:02 GMT
-                description: The timestamp when the error is generated
-              attributes: 
-                type: object
-                description: The name/value pair .attribute map associated with the error
-                properties: 
-                  allowed_clock_skew:
-                    type: number
-                    description: The attribute name of 'allowed_clock_skew' in the name/value pair
-                    example: 60
-                  difference: 
-                    type: number
-                    description: The attribute name of 'difference' in the name/value pair
-                    example: 145685787
-        next_hop:
-          type: string
-          example: udp:192.168.1.1:5060
-          description: The additional developer message, if any
-        policy:
-          type: string
-          example: "{\"stateful\":false,\"via\":false,\"max_forwards\":false,\"route\":false,\"record_route\":false,\"error_action\":[{\"error\":\"default\",\"action\":\"passthru\"}]}"
-          description: The name/value pair attribute map associated with the error
     ErrorResponseCerts400:
       required:
       - error_id
@@ -5233,693 +4942,6 @@ components:
               type: string
               example: file:./data/ccid-authn-data-not-exist.jks
               description: The attribute name of 'url' in the name/value pair
-    ErrorAPISuccessResponse:
-      type: array
-      items:
-        type: object
-        required:
-          - error_id
-          - http_status_code
-          - sip_code
-          - reason
-        properties: 
-          error_id:
-            type: string
-            description: The unique error identifier
-          http_status_code:
-            type: integer
-            description: The HTTP response status code
-          sip_code:
-            type: integer
-            description: The SIP response code associated with the error
-          reason:
-            type: string
-            description: The detailed error text
-        example: 
-          - error_id : Ok
-            http_status_code : 200
-            sip_code : 200
-            reason : Ok
-          - error_id: ApiKeyRequired
-            http_status_code: 400
-            sip_code: 400
-            reason: API key is required
-          - error_id: ApiKeyInvalid
-            http_status_code: 400
-            sip_code: 400
-            reason: API key is invalid
-          - error_id: CertificateIdRequired
-            http_status_code: 400
-            sip_code: 400
-            reason: Certificate id is required
-          - error_id: CertificateIdInvalid
-            http_status_code: 400
-            sip_code: 400
-            reason: Certificate is invalid
-          - error_id: DateParseException
-            http_status_code: 400
-            sip_code: 400
-            reason: Date is expected to be in RFC 1123 format
-          - error_id: MediaTypeException
-            http_status_code: 400
-            sip_code: 400
-            reason: Content-Type is invalid or not supported
-          - error_id: MediaTypeNotAcceptableException
-            http_status_code: 406
-            sip_code: 400
-            reason: Content-Type is not acceptable
-          - error_id: MediaTypeNotSupportedException
-            http_status_code: 415
-            sip_code: 400
-            reason: Content-Type is invalid or not supported
-          - error_id: MessageParseException
-            http_status_code: 400
-            sip_code: 400
-            reason: Error in parsing the request
-          - error_id: InvalidParameterException
-            http_status_code: 400
-            sip_code: 400
-            reason: Parameter is missing or invalid
-          - error_id: PptParameterValueNotSupported
-            http_status_code: 400
-            sip_code: 400
-            reason: ppt parameter value is not supported
-          - error_id: OrigidValueNotAuthorized
-            http_status_code: 400
-            sip_code: 400
-            reason: origid value is not authorized
-          - error_id: OrigNotAuthorized
-            http_status_code: 400
-            sip_code: 400
-            reason: orig telephone number is not authorized
-          - error_id: DestNotAuthorized
-            http_status_code: 400
-            sip_code: 400
-            reason: dest telephone number is not authorized
-          - error_id: OrigDestNotAuthorized
-            http_status_code: 400
-            sip_code: 400
-            reason: orig and dest combination is not authorized
-          - error_id: MethodNotSupportedException
-            http_status_code: 400
-            sip_code: 400
-            reason: Request method is not supported
-          - error_id: VerstatValueInvalid
-            http_status_code: 400
-            sip_code: 400
-            reason: Verstat value is invalid
-          - error_id: VerstatNotSupported
-            http_status_code: 400
-            sip_code: 400
-            reason: Verstat is not supported for the PASSporT type
-          - error_id: CustomerNotFound
-            http_status_code: 400
-            sip_code: 400
-            reason: Customer not found
-          - error_id: CustomerCredentialNotFound
-            http_status_code: 400
-            sip_code: 400
-            reason: Customer credential not found
-          - error_id: CustomerCertificateNotFound
-            http_status_code: 400
-            sip_code: 400
-            reason: Customer certificate not found
-          - error_id: SipInterfaceCidrInvalid
-            http_status_code: 500
-            sip_code: 500
-            reason: SIP interface cidr is invalid
-          - error_id: SipInterfaceIpAddressInvalid
-            http_status_code: 400
-            sip_code: 400
-            reason: SIP interface IP address is invalid
-          - error_id: SipInterfacePortInvalid
-            http_status_code: 400
-            sip_code: 400
-            reason: SIP interface port is invalid
-          - error_id: SipInterfaceNotAuthorized
-            http_status_code: 400
-            sip_code: 400
-            reason: SIP interface IP address/port not authorized
-          - error_id: AtisSigningRequestMissing
-            http_status_code: 400
-            sip_code: 400
-            reason: Missing mandatory parameters in the signing request
-          - error_id: AtisSigningRequestInvalid
-            http_status_code: 400
-            sip_code: 400
-            reason: Received invalid parameters
-          - error_id: ServiceNotAvailableForSipOptions
-            http_status_code: 503
-            sip_code: 503
-            reason: Service not available when processing a SIP OPTIONS message
-          - error_id: ServiceNotAvailableForSipInvite
-            http_status_code: 503
-            sip_code: 503
-            reason: Service not available when processing a SIP INVITE message
-          - error_id: InternalRetryTnOwnershipOverride
-            http_status_code: 500
-            sip_code: 500
-            reason: Internal retry due to TN ownership override
-          - error_id: UriUserPartRequired
-            http_status_code: 400
-            sip_code: 416
-            reason: URI user-part is required
-          - error_id: UriParseError
-            http_status_code: 400
-            sip_code: 416
-            reason: URI parsing failed
-          - error_id: UriSchemeInvalid
-            http_status_code: 400
-            sip_code: 416
-            reason: URI scheme is invalid
-          - error_id: UriEncodingInvalid
-            http_status_code: 400
-            sip_code: 416
-            reason: URI encoding is invalid
-          - error_id: CallInfoHeaderInvalid
-            http_status_code: 400
-            sip_code: 403
-            reason: Call-Info header is invalid
-          - error_id: ContentTypeHeaderInvalid
-            http_status_code: 400
-            sip_code: 403
-            reason: Content-Type header is invalid
-          - error_id: ContentNotFound
-            http_status_code: 400
-            sip_code: 403
-            reason: Content not found in SIP INVITE message
-          - error_id: SipInviteMessageInvalid
-            http_status_code: 400
-            sip_code: 403
-            reason: SIP INVITE message is invalid
-          - error_id: SipInviteDateInvalid
-            http_status_code: 400
-            sip_code: 403
-            reason: SIP INVITE Date header is invalid
-          - error_id: CredentialNotFound
-            http_status_code: 403
-            sip_code: 437
-            reason: Credential not found
-          - error_id: CredentialNotYetValid
-            http_status_code: 403
-            sip_code: 437
-            reason: Credential not yet valid
-          - error_id: CredentialExpired
-            http_status_code: 403
-            sip_code: 437
-            reason: Credential has expired
-          - error_id: CredentialNotSupported
-            http_status_code: 403
-            sip_code: 437
-            reason: Credential type is not supported
-          - error_id: CredentialPrivateKeyNotFound
-            http_status_code: 403
-            sip_code: 437
-            reason: Private key not found
-          - error_id: CredentialPrivateKeyNotValid
-            http_status_code: 403
-            sip_code: 437
-            reason: Private key not valid
-          - error_id: CredentialPrivateKeyNotSupported
-            http_status_code: 403
-            sip_code: 437
-            reason: Private key not supported
-          - error_id: CredentialCertificateNotFound
-            http_status_code: 403
-            sip_code: 437
-            reason: Certificate not found
-          - error_id: CredentialKeyStoreError
-            http_status_code: 403
-            sip_code: 437
-            reason: Error in accessing keystore
-          - error_id: CredentialCertificateUrlRequired
-            http_status_code: 403
-            sip_code: 437
-            reason: Certificate URL not found
-          - error_id: CertificateFetchError
-            http_status_code: 400
-            sip_code: 436
-            reason: Error in fetching the certificate
-          - error_id: CertificateConversionError
-            http_status_code: 400
-            sip_code: 436
-            reason: Error in converting the data to a certificate
-          - error_id: CertificateValidationError
-            http_status_code: 400
-            sip_code: 437
-            reason: Certificate validation failed
-          - error_id: CertificateNotFound
-            http_status_code: 403
-            sip_code: 438
-            reason: Certificate not found
-          - error_id: CertificateNotYetValid
-            http_status_code: 403
-            sip_code: 438
-            reason: Certificate not yet valid
-          - error_id: CertificateExpired
-            http_status_code: 403
-            sip_code: 437
-            reason: Certificate has expired
-          - error_id: CertificateNotSupported
-            http_status_code: 403
-            sip_code: 437
-            reason: Certificate type is not supported
-          - error_id: CertificateNotValidForOrig
-            http_status_code: 403
-            sip_code: 437
-            reason: Certificate is not valid for the originator
-          - error_id: CertificateNotValidForDiv
-            http_status_code: 403
-            sip_code: 437
-            reason: Certificate is not valid for the diverted call
-          - error_id: CertificateTnAuthnListFetchError
-            http_status_code: 400
-            sip_code: 436
-            reason: Error in fetching the TNAuthorizationList data
-          - error_id: TrustStoreFetchError
-            http_status_code: 403
-            sip_code: 403
-            reason: Error in fetching the trust store
-          - error_id: RequestObjectInvalid
-            http_status_code: 403
-            sip_code: 403
-            reason: Invalid request object supplied
-          - error_id: RequestOrigCountryCodeInvalid
-            http_status_code: 403
-            sip_code: 403
-            reason: Originator country code(s) invalid
-          - error_id: RequestDestCountryCodeInvalid
-            http_status_code: 403
-            sip_code: 403
-            reason: Destination country code invalid
-          - error_id: RequestFromHeaderRequired
-            http_status_code: 403
-            sip_code: 403
-            reason: From header value required
-          - error_id: RequestToHeaderRequired
-            http_status_code: 403
-            sip_code: 403
-            reason: To header value required
-          - error_id: RequestIdentityHeaderRequired
-            http_status_code: 403
-            sip_code: 428
-            reason: Identity header value required
-          - error_id: RequestIdentityHeaderInvalid
-            http_status_code: 403
-            sip_code: 403
-            reason: Identity header value invalid
-          - error_id: RequestStaleDate
-            http_status_code: 403
-            sip_code: 403
-            reason: Stale date value
-          - error_id: RequestInvalidDate
-            http_status_code: 403
-            sip_code: 403
-            reason: Invalid Date value; It is too far apart from the current time
-          - error_id: RequestFingerPrintAlgoInvalid
-            http_status_code: 403
-            sip_code: 403
-            reason: Invalid SDP fingerprint algorithm
-          - error_id: RequestFingerPrintDigestInvalid
-            http_status_code: 403
-            sip_code: 403
-            reason: Invalid DSP fingerprint digest
-          - error_id: RequestOrigTnRequired
-            http_status_code: 403
-            sip_code: 403
-            reason: Originator must be a telephone number
-          - error_id: RequestDestTnRequired
-            http_status_code: 403
-            sip_code: 403
-            reason: Destination must contain a telephone number
-          - error_id: RequestDivTnRequired
-            http_status_code: 403
-            sip_code: 403
-            reason: Diversion header must contain a telephone number
-          - error_id: RequestShakenAttestRequired
-            http_status_code: 403
-            sip_code: 403
-            reason: SHAKEN attest value required
-          - error_id: RequestShakenAttestInvalid
-            http_status_code: 403
-            sip_code: 403
-            reason: SHAKEN attest value invalid
-          - error_id: RequestShakenOrigidRequired
-            http_status_code: 403
-            sip_code: 403
-            reason: SHAKEN origid value required
-          - error_id: RequestDiversionHeaderRequired
-            http_status_code: 403
-            sip_code: 428
-            reason: Diversion header value required
-          - error_id: RequestDiversionHeaderInvalid
-            http_status_code: 403
-            sip_code: 403
-            reason: Diversion header value invalid
-          - error_id: RequestResourcePriorityRequired
-            http_status_code: 403
-            sip_code: 428
-            reason: Resource Priority header value required
-          - error_id: RequestResourcePriorityInvalid
-            http_status_code: 403
-            sip_code: 403
-            reason: Resource Priority header value invalid
-          - error_id: RequestRcdJcardInfoInvalid
-            http_status_code: 403
-            sip_code: 403
-            reason: RCD JCard information invalid
-          - error_id: RequestRcdJcardDataRequired
-            http_status_code: 403
-            sip_code: 403
-            reason: RCD JCard data required
-          - error_id: RequestRcdJcardDataInvalid
-            http_status_code: 403
-            sip_code: 403
-            reason: RCD JCard data invalid
-          - error_id: RequestRcdJcardDataUriInvalid
-            http_status_code: 403
-            sip_code: 403
-            reason: RCD JCard data URI invalid
-          - error_id: RequestRcdJcardPropertyUriInvalid
-            http_status_code: 403
-            sip_code: 403
-            reason: RCD JCard property URI invalid
-          - error_id: RequestRCdJcardDataFetchError
-            http_status_code: 403
-            sip_code: 403
-            reason: RCD JCard data failed to be fetched
-          - error_id: RequestRcdSignatureAlgoInvalid
-            http_status_code: 403
-            sip_code: 403
-            reason: RCD integrity signature algorithm invalid
-          - error_id: RequestRcdSignatureInvalid
-            http_status_code: 403
-            sip_code: 403
-            reason: RCD integrity signature invalid
-          - error_id: IdentitySignatureAlgoRequired
-            http_status_code: 400
-            sip_code: 438
-            reason: Identity signature algorithm not specified
-          - error_id: IdentitySignatureAlgoMismatch
-            http_status_code: 400
-            sip_code: 437
-            reason: Identity signature algorithm not matching signing private key type
-          - error_id: IdentitySignatureSigningError
-            http_status_code: 400
-            sip_code: 438
-            reason: Identity signature signing process failed
-          - error_id: IdentitySignatureEcdsaDerInvalid
-            http_status_code: 400
-            sip_code: 438
-            reason: Identity ECDSA signature failed to be converted from DER into JWS format
-          - error_id: IdentitySignatureEcdsaJwsInvalid
-            http_status_code: 400
-            sip_code: 438
-            reason: Identity ECDSA signature failed to be converted from JWS into DER format
-          - error_id: IdentitySignatureVerifyError
-            http_status_code: 400
-            sip_code: 438
-            reason: Identity signature verification process failed
-          - error_id: IdentitySignatureVerifyFailed
-            http_status_code: 400
-            sip_code: 438
-            reason: Identity signature failed to be verified
-          - error_id: IdentityCompactPptUnsupported
-            http_status_code: 400
-            sip_code: 438
-            reason: SIP Identity header in compact form with ppt parameter is not supported
-          - error_id: IdentityParameterAlgUnsupported
-            http_status_code: 400
-            sip_code: 436
-            reason: alg parameter value specified is not supported
-          - error_id: IdentityParameterPptRequired
-            http_status_code: 400
-            sip_code: 438
-            reason: ppt parameter value is required
-          - error_id: IdentityParameterPptUnsupported
-            http_status_code: 400
-            sip_code: 436
-            reason: ppt parameter value specified is not supported
-          - error_id: IdentityParameterInfoRequired
-            http_status_code: 400
-            sip_code: 438
-            reason: info parameter value is required
-          - error_id: IdentityParameterInfoInvalid
-            http_status_code: 400
-            sip_code: 438
-            reason: info parameter value is not a valid URL
-          - error_id: IdentityParameterInfoUnsupported
-            http_status_code: 400
-            sip_code: 438
-            reason: info parameter value is not a URL of supported protocol
-          - error_id: IdentityHeaderParseError
-            http_status_code: 400
-            sip_code: 438
-            reason: Error in parsing PASSporT header
-          - error_id: IdentityHeaderEncodingInvalid
-            http_status_code: 400
-            sip_code: 438
-            reason: PASSporT header Base64 encoding is not valid
-          - error_id: IdentityHeaderPayloadInvalid
-            http_status_code: 400
-            sip_code: 438
-            reason: PASSporT header payload is not valid
-          - error_id: IdentityHeaderPayloadMismatch
-            http_status_code: 400
-            sip_code: 438
-            reason: PASSporT header payload does not match the re-constructed one
-          - error_id: IdentityHeaderAlgRequired
-            http_status_code: 400
-            sip_code: 438
-            reason: alg value is required in PASSporT header
-          - error_id: IdentityHeaderAlgUnsupported
-            http_status_code: 400
-            sip_code: 436
-            reason: alg value specified in PASSporT header is not supported
-          - error_id: IdentityHeaderAlgMismatch
-            http_status_code: 400
-            sip_code: 438
-            reason: alg value specified in PASSporT header does not match the alg parameter
-          - error_id: IdentityHeaderPptRequired
-            http_status_code: 400
-            sip_code: 438
-            reason: ppt value is required in PASSporT header
-          - error_id: IdentityHeaderPptUnsupported
-            http_status_code: 400
-            sip_code: 438
-            reason: ppt value specified in PASSporT header is not supported
-          - error_id: IdentityHeaderPptMismatch
-            http_status_code: 400
-            sip_code: 438
-            reason: ppt value specified in PASSporT header does not match the ppt parameter
-          - error_id: IdentityHeaderTypRequired
-            http_status_code: 400
-            sip_code: 438
-            reason: typ value is required in PASSporT header
-          - error_id: IdentityHeaderTypUnsupported
-            http_status_code: 400
-            sip_code: 438
-            reason: typ value specified in PASSporT header is not supported
-          - error_id: IdentityHeaderX5uRequired
-            http_status_code: 400
-            sip_code: 438
-            reason: x5u value is required in PASSporT header
-          - error_id: IdentityHeaderX5uMismatch
-            http_status_code: 400
-            sip_code: 438
-            reason: x5u value specified in PASSporT header does not match the info parameter
-          - error_id: IdentityClaimParseError
-            http_status_code: 400
-            sip_code: 438
-            reason: Error in parsing PASSporT claim
-          - error_id: IdentityClaimEncodingInvalid
-            http_status_code: 400
-            sip_code: 438
-            reason: PASSporT claim Base64 encoding is not valid
-          - error_id: IdentityClaimPayloadInvalid
-            http_status_code: 400
-            sip_code: 438
-            reason: PASSporT claim payload is not valid
-          - error_id: IdentityClaimPayloadMismatch
-            http_status_code: 400
-            sip_code: 438
-            reason: PASSporT claim payload does mot match the re-constructed one
-          - error_id: IdentityClaimOrigRequired
-            http_status_code: 400
-            sip_code: 438
-            reason: orig value is required in PASSporT claim
-          - error_id: IdentityClaimOrigInvalid
-            http_status_code: 400
-            sip_code: 438
-            reason: orig value specified in PASSporT claim is not valid
-          - error_id: IdentityClaimOrigMismatch
-            http_status_code: 400
-            sip_code: 438
-            reason: orig value specified in PASSporT claim does not match SIP From/P-Asserted-Identity header values
-          - error_id: IdentityClaimDestRequired
-            http_status_code: 400
-            sip_code: 438
-            reason: dest value is required in PASSporT claim
-          - error_id: IdentityClaimDestInvalid
-            http_status_code: 400
-            sip_code: 438
-            reason: dest value specified in PASSporT claim is not valid
-          - error_id: IdentityClaimDestMismatch
-            http_status_code: 400
-            sip_code: 438
-            reason: dest value specified in PASSporT claim does not match SIP To header value
-          - error_id: IdentityClaimIatRequired
-            http_status_code: 400
-            sip_code: 438
-            reason: iat value is required in PASSporT claim
-          - error_id: IdentityClaimMkyInvalid
-            http_status_code: 400
-            sip_code: 438
-            reason: mky value specified in PASSporT claim is not valid
-          - error_id: IdentityClaimMkyMismatch
-            http_status_code: 400
-            sip_code: 438
-            reason: mky value specified in PASSporT claim does not match SDP a:fingerprint values
-          - error_id: IdentityClaimRequiredMissing
-            http_status_code: 400
-            sip_code: 438
-            reason: Required PASSporT claim field is missing
-          - error_id: IdentityClaimValueInvalid
-            http_status_code: 400
-            sip_code: 438
-            reason: PASSporT claim value is invalid
-          - error_id: IdentityClaimStaleDate
-            http_status_code: 403
-            sip_code: 403
-            reason: Stale date value in PASSporT claim
-          - error_id: IdentityClaimInvalidDate
-            http_status_code: 403
-            sip_code: 403
-            reason: Invalid Date value in PASSporT claim; It is too far apart from the current time
-          - error_id: IdentityClaimShakenAttestRequired
-            http_status_code: 400
-            sip_code: 438
-            reason: attest value is required in PASSporT claim
-          - error_id: IdentityClaimShakenAttestInvalid
-            http_status_code: 400
-            sip_code: 438
-            reason: attest value is invalid in PASSporT claim
-          - error_id: IdentityClaimShakenOrigidRequired
-            http_status_code: 400
-            sip_code: 438
-            reason: origid value is required in PASSporT claim
-          - error_id: IdentityClaimDivRequired
-            http_status_code: 400
-            sip_code: 438
-            reason: div value is required in PASSporT claim
-          - error_id: IdentityClaimDivInvalid
-            http_status_code: 400
-            sip_code: 438
-            reason: div value is invalid in PASSporT claim
-          - error_id: IdentityClaimDivOptInvalid
-            http_status_code: 400
-            sip_code: 438
-            reason: opt value is invalid in PASSporT claim
-          - error_id: IdentityClaimOrigTnRequired
-            http_status_code: 400
-            sip_code: 438
-            reason: orig value is required to be a telephone number in PASSporT claim
-          - error_id: IdentityClaimDestTnRequired
-            http_status_code: 400
-            sip_code: 438
-            reason: dest value is required to contain a telephone number in PASSporT claim
-          - error_id: IdentityClaimDivTnRequired
-            http_status_code: 400
-            sip_code: 438
-            reason: div value is required to be a telephone number in PASSporT claim
-          - error_id: IdentityClaimRphRequired
-            http_status_code: 400
-            sip_code: 438
-            reason: rph value is required in PASSporT claim
-          - error_id: IdentityClaimRphAuthRequired
-            http_status_code: 400
-            sip_code: 438
-            reason: auth value is required in PASSporT claim
-          - error_id: IdentityClaimRphAuthInvalid
-            http_status_code: 400
-            sip_code: 438
-            reason: auth value is invalid in PASSporT claim
-          - error_id: IdentityClaimRphAuthNotFound
-            http_status_code: 400
-            sip_code: 438
-            reason: auth value is not found in SIP Resource-Priority headers
-          - error_id: IdentityClaimRcdRequired
-            http_status_code: 400
-            sip_code: 438
-            reason: rcd value is required in RCD PASSport claim
-          - error_id: IdentityClaimRcdCrnMismatch
-            http_status_code: 400
-            sip_code: 438
-            reason: crn value does not match the re-constructed one
-          - error_id: IdentityClaimRcdNamRequired
-            http_status_code: 400
-            sip_code: 438
-            reason: nam value is required in RCD PASSport claim
-          - error_id: IdentityClaimRcdNamMismatch
-            http_status_code: 400
-            sip_code: 438
-            reason: nam value does not match the re-constructed one
-          - error_id: IdentityClaimRcdJcardInfoInvalid
-            http_status_code: 400
-            sip_code: 438
-            reason: jcd and jcl values is mutually exclusive in RCD PASSporT claim
-          - error_id: IdentityClaimRcdJclInvalid
-            http_status_code: 400
-            sip_code: 438
-            reason: jcl value is invalid in RCD PASSporT claim
-          - error_id: IdentityClaimRcdJclMismatch
-            http_status_code: 400
-            sip_code: 438
-            reason: jcl value does not match the re-constructed one
-          - error_id: IdentityClaimRcdSignAlgoInvalid
-            http_status_code: 400
-            sip_code: 438
-            reason: rcdi algorithm is invalid in RCD PASSporT claim
-          - error_id: IdentityClaimRcdSignatureInvalid
-            http_status_code: 400
-            sip_code: 438
-            reason: rcdi value is invalid in RCD PASSporT claim
-          - error_id: IdentityClaimRcdSignatureMismatch
-            http_status_code: 400
-            sip_code: 438
-            reason: rcdi value does not match the re-constructed one
-          - error_id: IdentitySignatureEncodingInvalid
-            http_status_code: 400
-            sip_code: 438
-            reason: Identity signature Base64 encoding is not valid
-          - error_id: IdentitySignaturePayloadInvalid
-            http_status_code: 400
-            sip_code: 438
-            reason: Identity signature payload is not valid
-          - error_id: IdentitySignaturePayloadMismatch
-            http_status_code: 400
-            sip_code: 438
-            reason: Identity signature payload does not match the re-constructed one
-          - error_id: IdentityClaimDivEndNotFound
-            http_status_code: 400
-            sip_code: 438
-            reason: Identity diversion claim chain does not end with SIP To Header
-          - error_id: IdentityClaimDivInfiniteLoop
-            http_status_code: 400
-            sip_code: 438
-            reason: Identity diversion claim chain contains infinite loops
-          - error_id: IdentityClaimDivStartInvalid
-            http_status_code: 400
-            sip_code: 438
-            reason: Identity diversion claim chain does start with a regular claim
-          - error_id: IdentityClaimDivNotUnique
-            http_status_code: 400
-            sip_code: 438
-            reason: Identity diversion claim chain is not unique
-          - error_id: InternalServerError
-            http_status_code: 500
-            sip_code: 500
-            reason: Internal server error
     VerifyIdentity:
       required:
       - from
@@ -6042,67 +5064,6 @@ components:
                   key: 
                     type: string
                     description: any key value pair
-    VerifyErrorResponse500:
-      required:
-        - error
-      type: object
-      properties:
-        status:
-          type: string
-          example: error
-          description: Verification status
-        error: 
-          type: array
-          description: "Array of errors"
-          items: 
-            required: 
-              - error_id
-              - http_status_code
-              - sip_code
-              - reason
-              - timestamp
-            type: object
-            properties: 
-              error_id: 
-                type: string
-                description: The unique error identifier
-              http_status_code: 
-                type: integer
-                description: The HTTP response status code
-              sip_code: 
-                type: integer
-                description: The SIP response code associated with the error
-              reason: 
-                type: string
-                description: The detailed error text
-              timestamp: 
-                type: string
-                description: The timestamp when the error is generated
-              attributes: 
-                type: object
-                properties: 
-                  key: 
-                    type: string
-                    description: any key value pair
-        cnam_error: 
-          type: object
-          description: "CNAM Error"
-          properties: 
-            error_id:
-              type: string
-              description: The unique error identifier
-            http_status_code: 
-              type: integer
-              description: The HTTP response status code
-            sip_code: 
-              type: integer
-              description: The SIP response code associated with the error
-            reason: 
-              type: string
-              description: The detailed error text
-            timestamp: 
-              type: string
-              description: The timestamp when the error is generated
     VerifyResponse:
       type: object
       properties: 
@@ -6245,136 +5206,4 @@ components:
               type: "string"
               example: "Alice"
               description: "Original calling name value"
-          type: "object"
-    VerifyResponse-SJ:
-      type: object
-      properties: 
-        status: 
-          type: "string"
-          example: "ok"
-          description: | 
-            Its value is "ok" after the SIP Identity headers are validated with the required verification status. There are three possible "status" values specified in the request
-              * **none** - This status value indicates that the SIP Identity headers specified in the request are not required to be verified
-
-              * **partial** - This status value indicates that one or more SIP Identity headers specified in the request are required to be verified
-
-              * **all** - This status value indicates that all SIP Identity headers specified in the request are required to be verified
-
-            Based on the verification status requirement specified in the request, the VS will return a "status" attribute in the response with the following two possible values: 
-
-              * **ok** - This status value indicates that the verification result of SIP Identity headers has met the verification status requirement specified in the request
-              * **error** - This status value indicates that the verification result of SIP Identity headers has not met the verification status requirement specified in the request
-            
-            If there are any errors encountered in the verification process, an "error" attribute in the response will list all of those errors.
-
-            If the "robocall" attribute is specified as "true" in the request, a "call_insight" attribute will be returned, if any.
-        cnam: 
-          type: "string"
-          example: "Alice In Wonderland"
-          description: "CNAM data"
-        call_insight: 
-          description: "Call insight details"
-          properties: 
-            call_treatment: 
-              type: "string"
-              example: "allow"
-              description: "Call treatment method, such as 'allow', 'deny', 'send_to_vm' or 'none'"
-            fraud_score: 
-              type: "number"
-              example: 0
-              description: "Numeric fraud score between 0 and 100"
-            original_calling_name: 
-              type: "string"
-              example: "Alice"
-              description: "Original calling name value"
-          type: "object"
-    CNAM-Error:
-      required: 
-        - cnam_error
-      type: object
-      description: "The error encountered in CNAM lookup"
-      properties: 
-        cnam_error: 
-          description: "The error encountered in CNAM lookup"
-          properties: 
-            error_id: 
-              type: "string"
-              example: "CnamNotAuthorized"
-              description: "The unique error identifier"
-            http_status_code: 
-              type: "number"
-              example: 400
-              description: "The HTTP response status code"
-            sip_code: 
-              type: "number"
-              example: 400
-              description: "The SIP response code associated with the error"
-            reason: 
-              type: "string"
-              example: "CNAM service not authorized"
-              description: "The detailed error text"
-            timestamp: 
-              type: "string"
-              example: "Fri, 16 Apr 2021 02:56:55 GMT"
-              description: "The timestamp when the error is generated"
-          type: "object"
-          required: 
-            - error_id
-            - http_status_code
-            - sip_code
-            - reason
-            - timestamp
-    ECNAM-Error:
-      type: object
-      description: "The error encountered in ECNAM lookup"
-      properties: 
-        ecnam_error: 
-          description: "The error encountered in ECNAM lookup"
-          properties: 
-            error_id: 
-              type: "string"
-              example: "CnamNotAuthorized"
-              description: "The unique error identifier"
-            http_status_code: 
-              type: "number"
-              example: 400
-              description: "The HTTP response status code"
-            sip_code: 
-              type: "number"
-              example: 400
-              description: "The SIP response code associated with the error"
-            reason: 
-              type: "string"
-              example: "CNAM service not authorized"
-              description: "The detailed error text"
-            timestamp: 
-              type: "string"
-              example: "Fri, 16 Apr 2021 02:56:55 GMT"
-              description: "The timestamp when the error is generated"
-          type: "object"
-    CNAM-Input:
-      type: object
-      properties: 
-        from: 
-          type: "string"
-          example: "Alice <sip:+15715550000@example.com>"
-          description: "'From' header value from SIP INVITE message"
-    ECNAM-Response: 
-      type: object
-      properties: 
-        call_insight: 
-          description: Call insight info
-          properties: 
-            call_treatment: 
-              type: "string"
-              example: "allow"
-              description: Call treatment method, such as 'allow', 'deny', 'send_to_vm' or 'none'
-            fraud_score: 
-              type: "number"
-              example: 0
-              description: Numeric fraud score between 0 and 100
-            original_calling_name: 
-              type: "string"
-              example: "Alice"
-              description: Original calling name value
           type: "object"

@@ -14,7 +14,7 @@ info:
     The Authentication Service (AS) and Verification Service (VS) implement the IETF RFC 8224 specification, as well as the SHAKEN framework (based on ATIS-1000074.v002), for securely computing, transiting and verifying SIP Identity headers for caller identity authentication.
     Additionally, these services support supplemental features including telephone number ownership validation, subscriber-based policy processing, Caller Name (CNAM), Resource Priority, Rich Call Data and/or robocall analytics.
   
-    ## RESTful API Authentication Service
+    ## Authentication
     Currently, a RESTful API client is required to provide an 'apiKey' query parameter with a pre-provisioned value to access API calls that are restricted. If the 'apiKey' parameter is not specified, the client IP address may be used as the backup authentication mechanism if pre-provisioned.
 tags:
 - name: Authentication Service

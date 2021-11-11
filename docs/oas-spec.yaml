@@ -15,7 +15,9 @@ info:
     Additionally, these services support supplemental features including telephone number ownership validation, subscriber-based policy processing, Caller Name (CNAM), Resource Priority, Rich Call Data and/or robocall analytics.
   
     ## Authentication
-    Currently, a RESTful API client is required to provide an 'apiKey' query parameter with a pre-provisioned value to access API calls that are restricted. If the 'apiKey' parameter is not specified, the client IP address may be used as the backup authentication mechanism if pre-provisioned.
+    There are 2 ways to authenticate a RESTful API client - 'apiKey' or 'coming from a whitelisted client IP'. If RESTful API client chooses to use 'apiKey' for authentication, an 'apiKey' query parameter with a pre-provisioned value to access API calls that are restricted. If the 'apiKey' parameter is not specified, the client IP address may be used as the backup authentication mechanism if pre-provisioned.
+
+    Server first checks for availability of 'apiKey' in query parameter and if it doesn't find one, it tries to authenticate via client IP address. 
 tags:
 - name: Authentication Service
   description: |
@@ -47,10 +49,9 @@ paths:
       parameters:
         - name: apiKey 
           in: query 
-          required: true
           schema:
             type: string
-          description: The API key uniquely identifying the API client. Cannot be null or empty
+          description: Required, if client chooses to authenticate via apiKey. Not required, if client chooses to authenticate via pre-provisioned client IP
         - name: ppt
           in: query
           description: Only applicable when SIP INVITE message is included in the request body. PASSporT type value. If specified, must be 'shaken', 'div', 'rcd' or 'rph'. If not specified, default ppt=shaken by authentication server
@@ -1955,10 +1956,9 @@ paths:
       parameters:
         - name: apiKey 
           in: query 
-          required: true
           schema:
             type: string
-          description: The API key uniquely identifying the API client. Cannot be null or empty
+          description: Required, if client chooses to authenticate via apiKey. Not required, if client chooses to authenticate via pre-provisioned client IP
         - name: ppt
           in: query
           description: Only applicable when SIP INVITE message is included in the request body. PASSporT type value. If specified, must be 'shaken', 'div', 'rcd' or 'rph'. If not specified, default ppt=shaken by authentication server
@@ -3737,10 +3737,9 @@ paths:
       parameters:
         - name: apiKey 
           in: query 
-          required: true
           schema:
             type: string
-          description: The API key uniquely identifying the API client. Cannot be null or empty
+          description: Required, if client chooses to authenticate via apiKey. Not required, if client chooses to authenticate via pre-provisioned client IP
         - name: ppt
           in: query
           description: Only applicable when SIP INVITE message is included in the request body. PASSporT type value. If specified, must be 'shaken', 'div', 'rcd' or 'rph'. If not specified, default ppt=shaken by authentication server
@@ -5554,10 +5553,9 @@ paths:
       parameters:
         - name: apiKey 
           in: query 
-          required: true
           schema:
             type: string
-          description: The API key uniquely identifying the API client. Cannot be null or empty
+          description: Required, if client chooses to authenticate via apiKey. Not required, if client chooses to authenticate via pre-provisioned client IP
         - name: ppt
           in: query
           description: Only applicable when SIP INVITE message is included in the request body. PASSporT type value. If specified, must be 'shaken', 'div', 'rcd' or 'rph'. If not specified, default ppt=shaken by authentication server
@@ -7354,10 +7352,9 @@ paths:
       parameters:
         - name: apiKey 
           in: query 
-          required: true
           schema:
             type: string
-          description: The API key uniquely identifying the API client. Cannot be null or empty
+          description: Required, if client chooses to authenticate via apiKey. Not required, if client chooses to authenticate via pre-provisioned client IP
         - name: ppt
           in: query
           description: Only applicable when SIP INVITE message is included in the request body. PASSporT type value. If specified, must be 'shaken', 'div', 'rcd' or 'rph'. If not specified, default ppt=shaken by authentication server
@@ -9112,10 +9109,9 @@ paths:
       parameters:
         - in: query
           name: apiKey
-          required: true
           schema:
             type: string
-          description: The API key uniquely identifying the API client. Cannot be null or empty
+          description: Required, if client chooses to authenticate via apiKey. Not required, if client chooses to authenticate via pre-provisioned client IP
         - name: status
           in: query
           description: Only applicable for SIP INVITE message. The verification status requirement
@@ -11438,10 +11434,9 @@ paths:
       parameters:
         - in: query
           name: apiKey
-          required: true
           schema:
             type: string
-          description: The API key uniquely identifying the API client. Cannot be null or empty
+          description: Required, if client chooses to authenticate via apiKey. Not required, if client chooses to authenticate via pre-provisioned client IP
         - name: status
           in: query
           description: Only applicable for SIP INVITE message. The verification status requirement
@@ -13824,10 +13819,9 @@ paths:
       parameters:
         - in: query
           name: apiKey
-          required: true
           schema:
             type: string
-          description: The API key uniquely identifying the API client. Cannot be null or empty
+          description: Required, if client chooses to authenticate via apiKey. Not required, if client chooses to authenticate via pre-provisioned client IP
         - name: status
           in: query
           description: Only applicable for SIP INVITE message. The verification status requirement
@@ -16257,10 +16251,9 @@ paths:
       parameters:
         - in: query
           name: apiKey
-          required: true
           schema:
             type: string
-          description: The API key uniquely identifying the API client. Cannot be null or empty
+          description: Required, if client chooses to authenticate via apiKey. Not required, if client chooses to authenticate via pre-provisioned client IP
         - name: status
           in: query
           description: Only applicable for SIP INVITE message. The verification status requirement

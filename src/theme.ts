@@ -112,7 +112,7 @@ const defaultTheme: ThemeInterface = {
     optimizeSpeed: true,
     headings: {
       fontFamily: 'Montserrat, sans-serif',
-      fontWeight: '400',
+      fontWeight: '450',
       lineHeight: '1.6em',
     },
     code: {

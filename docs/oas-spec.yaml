@@ -205,7 +205,7 @@ paths:
               "date" : "Thu, 14 Oct 2021 22:00:10 GMT"
             }
         - lang: curl
-          label: SHAKEN Entire 
+          label: SHAKEN All Data 
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
@@ -9326,7 +9326,7 @@ paths:
               } ]
             }
         - lang: curl
-          label: SHAKEN Entire
+          label: SHAKEN All Data
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
@@ -16463,12 +16463,13 @@ paths:
                       "from" : "\"Alice\" <sip:+15714345400@example.com>",
                       "to" : "\"Bob\" <sip:+15715550000@example.com>",
                       "identity" : [ "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jci11YXQuY2NpZC5uZXVzdGFyLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMzMzLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjM1MTkzMjA4LCJvcmlnIjp7InRuIjoiMTU3MTQzNDU0MDAifSwib3JpZ2lkIjoiNzIxYjBkMzMtMWIyZC00NTgxLWIwYjctN2JjMjgwOWQ5YmU2In0.0cPHrSXYgp-oknY1G0iyylrjTuRM4sLH7ck-XxJucLyp7pMMWotgD8McB53dFJAPNtcuGxYyD51iHVtwFnNvxg;info=<https://cr-uat.ccid.neustar.biz/ccid/authn/v2/certs/11333.10001>;alg=ES256;ppt=\"shaken\"" ],
-                      "cname" : true
+                      "cnam" : true
                     }'
 
             Response: 
             {
-              "status" : "ok"
+              "status" : "ok",
+              "cnam" : "HERNDON VA"
             }
         - lang: curl
           label: SHAKEN w/Low Robocall Score

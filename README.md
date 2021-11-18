@@ -2,7 +2,7 @@
 
 ## Introduction
 
-A call Authentication Service (AS) and Verification Service (VS) are defined in IETF RFC 8224 specification and embodied in the ATIS SHAKEN framework (ATIS-1000074).  This specification and framework is used to securely compute, transit and verify SIP Identity headers as part of caller identity authentication. 
+A call Authentication Service (AS) and Verification Service (VS) are defined in IETF RFC 8224 specification and embodied in the ATIS SHAKEN framework (ATIS-1000074).  This specification and framework is used to securely compute, transit and verify SIP Identity headers as part of caller identity authentication. Since its introduction and initial regulatory mandate, the SHAKEN framework continues to be extended in many ways. 
 
 This document contains the APIs that are available for AS and VS in OpenAPI Specification (OAS) format.
 
@@ -104,7 +104,7 @@ can also be submitted through the proposal process.
 
 ## Running tcs-apis locally
 
-   1. We can run the tcs-apis package locally using [npm](https://redoc.ly/docs/redoc/quickstart/cli/) package manager
+   1. You can run the tcs-apis package locally using [npm](https://redoc.ly/docs/redoc/quickstart/cli/) package manager
    2. Clone this repository
       ```
       git clone git@github.com:neustar/tcs-apis.git

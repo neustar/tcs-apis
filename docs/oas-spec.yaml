@@ -313,7 +313,7 @@ paths:
               "date" : "Fri, 15 Oct 2021 23:22:12 GMT"
             }
         - lang: curl
-          label: RCD 
+          label: RCD w/nam 
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
@@ -9392,7 +9392,7 @@ paths:
               } ]
             }
         - lang: curl
-          label: Verify and Re-Sign
+          label: Integrated STIR Verify and SHAKEN Signing
           source: |
             Request: 
             <<<<<<<<<<<< VS Profile needs to be configured for Re-Signing >>>>>>>>>>>>>
@@ -11750,7 +11750,7 @@ paths:
                 }
               }
         - lang: curl
-          label: Verify and Re-Sign
+          label: Integrated STIR Verify and SHAKEN Signing
           source: |
             Request: 
             <<<<<<<<<<<< VS Profile needs to be configured for Re-Signing >>>>>>>>>>>>>
@@ -14157,7 +14157,7 @@ paths:
             a=fmtp:101 0-15
             a=sendrecv
         - lang: curl
-          label: SHAKEN w/CNAM prefix Entire SIP INVITE Message
+          label: SHAKEN w/SIP INVITE & CNAM Prefix
           source: | 
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4&status=all&origcc=1,44&destcc=1&cnam=true&robocall=true&cnamPrefix=%5BV%5D,%5BX%5D&verstat=TN-Validation-Passed&identity=true' -i -X POST \
@@ -14231,7 +14231,7 @@ paths:
             a=fmtp:101 0-15
             a=sendrecv
         - lang: curl
-          label: Verify and Re-Sign
+          label: Integrated STIR Verify and SHAKEN Signing
           source: |
             Request: 
             <<<<<<<<<<<< VS Profile needs to be configured for Re-Signing >>>>>>>>>>>>>

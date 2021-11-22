@@ -11,12 +11,27 @@ info:
   summary: 
   description: |
     # Overview
-    The Authentication Service (AS) and Verification Service (VS) implement the IETF RFC 8224 specification, as well as the SHAKEN framework (based on ATIS-1000074.v002), for securely computing, transiting and verifying SIP Identity headers for caller identity authentication.
-    Additionally, these services support supplemental features including telephone number ownership validation, subscriber-based policy processing, Caller Name (CNAM), Resource Priority, Rich Call Data and/or robocall analytics.
-  
-    There are 2 ways to authenticate a RESTful API client - 'apiKey' or 'coming from a whitelisted client IP'. If RESTful API client chooses to use 'apiKey' for authentication, an 'apiKey' query parameter with a pre-provisioned value to access API calls that are restricted. If the 'apiKey' parameter is not specified, the client IP address may be used as the backup authentication mechanism if pre-provisioned.
+      Secure Telephone Identity Revisited (STIR) and the Signature-based Handling of Asserted information using toKENs (SHAKEN) framework have already become regulatory mandates in both the United States and Canada for caller identity authentication.  These IETF and ATIS standards define how to securely compute, transit and verify SIP Identity headers through an Authentication Service (AS) and Verification Service (VS).
 
-    Server first checks for availability of 'apiKey' in query parameter and if it doesn't find one, it tries to authenticate via client IP address. 
+      Since their initial implementation, STIR and SHAKEN standards have been (and continue to be) extended in multiple ways.  Additionally, the AS and VS can support supplemental features including, but not limited to telephone number ownership validation, subscriber-based policy management and robocall analytics.
+      
+      The AS and VS implement call authentication and related functions ideally through flexible, extensible, robust and standardized Application Program Interfaces (APIs).  Many initial implementations of the SHAKEN framework employ RESTful API clients, but these are constrained to only supporting base functionality.  The STIR/SHAKEN API project promotes collaboration to expand functionality, while hopefully also achieving industry alignment amongst various RESTful API implementations and/or applicable standards, where possible.
+
+      There are generally two ways to authenticate a RESTful API client - 'apiKey' or 'coming from a whitelisted client IP'.  Both are initially supported in the STIR/SHAKEN API project.  If a RESTful API client chooses to use 'apiKey' for authentication, an 'apiKey' query parameter, with a pre-provisioned value, is validated to access API calls that are restricted. If the 'apiKey' parameter is not specified, a pre-provisioned client IP address may be used as the backup authentication mechanism.  The server first checks for availability of an 'apiKey' in the query parameter and if it doesn't find one, it tries to authenticate via the client IP address.
+
+      The primary objective of the STIR/SHAKEN API project is to foster broad and open industry collaboration amongst developers and implementers of (or those desiring to implement) RESTful APIs for timely and extensible support of evolving caller identity authentication standards, including supplemental feature support as required.  The core set of ATIS SHAKEN standards supported in this project, including their underlying and/or referenced IETF and 3GPP standards, are:
+      * ATIS-1000074, “SHAKEN”
+      * ATIS-1000078, “National Security / Emergency Preparedness Priority Service SIP RPH Signing and Verification using PASSporTs”
+      * ATIS-1000080, “SHAKEN: Governance Model and Certificate Management”
+      * ATIS-1000084, “Operational and Management Considerations for SHAKEN STI Certification Authorities and Policy Administrators”
+      * ATIS-1000085, “SHAKEN: SHAKEN Support of “div” PASSporT”
+      * ATIS-1000092, “SHAKEN: Delegate Certificates
+      * ATIS-1000093, “Toll-Free Numbers in the SHAKEN Framework”
+      * ATIS-1000094, “SHAKEN: Calling Name and Rich Call Data Handling Procedures”
+      * ATIS-1000098, “SIP Resource-Priority Header and Priority Header Signing in Support of Emergency Calling”
+
+    Looking forward to your support, feedback and contributions.
+
 tags:
 - name: Authentication Service
   description: |

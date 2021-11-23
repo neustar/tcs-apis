@@ -14172,7 +14172,7 @@ paths:
             a=fmtp:101 0-15
             a=sendrecv
         - lang: curl
-          label: SHAKEN w/SIP INVITE & CNAM Prefix
+          label: SHAKEN w/SIP INVITE & CNAM Prefix w/tagging
           source: | 
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4&status=all&origcc=1,44&destcc=1&cnam=true&robocall=true&cnamPrefix=%5BV%5D,%5BX%5D&verstat=TN-Validation-Passed&identity=true' -i -X POST \

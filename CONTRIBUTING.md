@@ -36,4 +36,3 @@ The contributor (**“You”**) agrees to this Contribution License Agreement (*
 
 9. **Entire Agreement/Assignment.** This Agreement is the entire agreement between the parties, and supersedes any and all prior agreements, understandings or communications, written or oral, between the parties relating to the subject matter hereof. This Agreement may be assigned by Neustar.
 
-[*Remainder of page intentionally left blank*]

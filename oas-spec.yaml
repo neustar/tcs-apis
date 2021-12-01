@@ -4,7 +4,7 @@ servers:
     description: https
 info:
   x-logo:
-    url: 'https://raw.githubusercontent.com/neustar/tcs-apis/main/docs/neustar-logo.png'
+    url: 'https://raw.githubusercontent.com/neustar/tcs-apis/main/docs/newNeustarLogo.jpeg'
     altText: STIR/SHAKEN Authentication & Verification Service APIs
   version: 1.0.0
   title: STIR/SHAKEN Authentication & Verification Service APIs

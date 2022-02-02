@@ -345,6 +345,47 @@ paths:
               "identity" : "eyJhbGciOiJFUzI1NiIsInBwdCI6InJjZCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jci11YXQuY2NpZC5uZXVzdGFyLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExNDc1LjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAwIl19LCJpYXQiOjE2MzQzNDAyNDcsIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJyY2QiOnsibmFtIjoiQWxpY2UifX0.j22TEsFNP0uNtS4Yfyoi8oy1pfOa3QKGUDu8jMs21FbglrVaJcuRWYr4CT220uDdSTYL985TjGtygZZWs-MRUg;info=<https://cr-uat.ccid.neustar.biz/ccid/authn/v2/certs/11475.10001>;alg=ES256;ppt=\"rcd\"",
               "date" : "Fri, 15 Oct 2021 23:24:07 GMT"
             }
+        - lang: curl
+          label: RPA Ext
+          source: |
+            Request: 
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/identity?apiKey=a8b931787fe04e62af92dcf1' -i -X POST \
+                -H 'Content-Type: application/json' \
+                -H 'Accept: application/json' \
+                -d '{
+                    "from": "\"Alice\" <sip:alice@example.com>",
+                    "to": "\"Bob\" <sip:5715550000@example.com>",
+                    "passport_type": "rph",
+                    "resource_priority": [
+                        "ets.0, wps.1, esnet.1",
+                        "q735.1"
+                    ],
+                    "priority": "psap-callback"
+                }'
+
+            Response: 
+            {
+                "identity": "eyJhbGciOiJFUzI1NiIsInBwdCI6InJwaCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovLzEwLjc1LjMyLjE2OTo4MDgxL2NjaWQvYXV0aG4vdjIvY2VydHMvMTAxODgyLjEwMDQyNiJ9.eyJkZXN0Ijp7InRuIjpbIjU3MTU1NTAwMDAiXX0sImlhdCI6MTY0MzM5NDkxMiwib3JpZyI6eyJ1cmkiOiJzaXA6YWxpY2VAZXhhbXBsZS5jb20ifSwicnBoIjp7ImF1dGgiOlsiZXNuZXQuMSIsImV0cy4wIiwicTczNS4xIiwid3BzLjEiXX0sInNwaCI6InBzYXAtY2FsbGJhY2sifQ.wnFWAAHhBc9ON99oA8MHs9j-E_xoGmuxl4eCCBosHCpr3No3ysUEEj1oEqjB4xiW4Kb3PgbsDIcTPRikQuUKcA;info=<https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/certs/101882.100426>;alg=ES256;ppt=\"rph\"",
+                "date": "Fri, 28 Jan 2022 18:35:12 GMT"
+            }
+        - lang: curl
+          label: RCD Ext
+          source: |
+            Request: 
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/identity?apiKey=a8b931787fe04e62af92dcf1' -i -X POST \
+                -H 'Content-Type: application/json' \
+                -H 'Accept: application/json' \
+                -d '{
+                  "from" : "\"Alice\" <sip:+17035550001@example.com>",
+                  "to" : "\"Bob\" <sip:5715550000@example.com>",
+                  "passport_type" : "rcd"
+                }'
+
+            Response: 
+            {
+                "identity": "eyJhbGciOiJFUzI1NiIsInBwdCI6InJjZCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovLzEwLjc1LjMyLjE2OTo4MDgxL2NjaWQvYXV0aG4vdjIvY2VydHMvMTAxODgyLjEwMDQyNiJ9.eyJkZXN0Ijp7InRuIjpbIjU3MTU1NTAwMDAiXX0sImlhdCI6MTY0MzM5NTc0Miwib3JpZyI6eyJ0biI6IjE3MDM1NTUwMDAxIn0sInJjZCI6eyJuYW0iOiJBbGljZSJ9LCJyY2RpIjp7Ii9uYW0iOiJzaGEyNTYtTzhVUVlwYzhSWTFhYnkyTlpLQWpKR05Vclg0R1N4NU9BSjdJb0dtYU1FTT0ifX0.gQYsCNnHw2YpNnY716VLNWXHDX6p5C5RDCvceVnmQKDCpcdDvNi5YuMpAyuZ-IcmpTkyc6d1VAjF27kc7ysxwg;info=<https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/certs/101882.100426>;alg=ES256;ppt=\"rcd\"",
+                "date": "Fri, 28 Jan 2022 18:49:02 GMT"
+            }
       responses:
         200:
           description: successful operation
@@ -9283,10 +9324,12 @@ paths:
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
                 -d '{
-                      "from" : "\"Alice\" <sip:+17035550001@example.com>",
-                      "to" :  "<sip:+15715550000@example.com>",
-                      "identity" : [ "eyJhbGciOiJFUzI1NiIsInBwdCI6InJwaCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jci11YXQuY2NpZC5uZXVzdGFyLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExNDc1LjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAwIl19LCJpYXQiOjE2MzQzNDAxMzIsIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJycGgiOnsiYXV0aCI6WyJldHMuMCIsInE3MzUuMSIsIndwcy4xIl19fQ.WKLGgISGUxxxWAXZqlcodjTINjr4mZhuk5dFk8lL1voIV0Aycg5GbJFVnstbA4wMzlR_q2rbj3O9Oo4wUDrsgg;info=<https://cr-uat.ccid.neustar.biz/ccid/authn/v2/certs/11475.10001>;alg=ES256;ppt=\"rph\"" ],
-                      "resource_priority" : [ "ets.0, wps.1", "q735.1" ]
+                      "from" : "\"Alice\" <sip:alice@example.com>",
+                      "to" : "\"Bob\" <sip:5715550000@example.com>",
+                      "passport_type" : "rph",
+                      "resource_priority" : [ "ets.0, wps.1, esnet.1", "q735.1" ],
+                      "priority" : "psap-callback",
+                      "identity" : [ "eyJhbGciOiJFUzI1NiIsInBwdCI6InJwaCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovLzEwLjc1LjMyLjE2OTo4MDgxL2NjaWQvYXV0aG4vdjIvY2VydHMvMTAxODgyLjEwMDQyNiJ9.eyJkZXN0Ijp7InRuIjpbIjU3MTU1NTAwMDAiXX0sImlhdCI6MTY0MzM5NzA5Nywib3JpZyI6eyJ1cmkiOiJzaXA6YWxpY2VAZXhhbXBsZS5jb20ifSwicnBoIjp7ImF1dGgiOlsiZXNuZXQuMSIsImV0cy4wIiwicTczNS4xIiwid3BzLjEiXX0sInNwaCI6InBzYXAtY2FsbGJhY2sifQ.B3bAZvTbTJ-4ggkt_FhB3F7q7RL021_bJ0hevyJ5Gkf3Vn-Ci-kA1estfMvFMGiKw9ODZqVUWUcmz3TayAyoXg;info=<http://10.75.32.169:8081/ccid/authn/v2/certs/101882.100426>;alg=ES256;ppt=\"rph\"" ]
                     }'
 
             Response: 
@@ -9423,6 +9466,156 @@ paths:
             {
               "status" : "ok",
               "resigned_identity" : "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jci11YXQuY2NpZC5uZXVzdGFyLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExNDc5LjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjM3MDc5MjYwLCJvcmlnIjp7InRuIjoiMTcwMzU1NTAwMDEifSwib3JpZ2lkIjoiNzUyM2Y1YWMtY2JkMS00YThhLTg3NGMtNWMxNGUzY2MxNzAxIn0.KJZ-kmSJdv9laJYoqOP937tvGNcFA9TG0Nec5LcH0oEUAHxT8qit2TsvWIh3iha11dPtyvLJ3vrV9fZNm_ADlg;info=https://cr-uat.ccid.neustar.biz/ccid/authn/v2/certs/11479.10001;alg=ES256;ppt=\"shaken\""
+            }
+        - lang: curl
+          label: RCD
+          source: |
+            Request: 
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=6bea63cb232d4a4a8dea656e' -i -X POST \
+                -H 'Content-Type: application/json' \
+                -H 'Accept: application/json' \
+                -d '{
+                      "from" : "\"Alice\" <sip:+17035550001@example.com>",
+                      "to" : "\"John\" <sip:+15715550002@example.com>",
+                      "identity" : [ "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovLzEwLjc1LjMyLjE2OTo4MDgxL2NjaWQvYXV0aG4vdjIvY2VydHMvMTAxODgyLjEwMDQyNiJ9.eyJhdHRlc3QiOiJBIiwiY3JuIjoiQWR2ZW50dXJlIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMiJdfSwiaWF0IjoxNjQzMzk4OTIxLCJpc3MiOiJEaXNuZXksIEluYy4iLCJta3kiOlt7ImFsZyI6IlNIQS0xIiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQiJ9LHsiYWxnIjoiU0hBLTI1NiIsImRpZyI6IjM2M0JBRTEyOTU5NUY1OTcyREY3RTA4NEZFQ0RGMUJDQUQ3QTcwNjRGN0U3NEY3RUE2MDIwNjBFMzc1NENGRjcifV0sIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJvcmlnaWQiOiIzRjlDMjgzNi03RTQwLTExRTctQkE1OC03ODMxQzFCOERFQkEiLCJyY2QiOnsiYXBuIjoiMTgwMDU1NTAwMDAiLCJqY2wiOiJjaWQ6ZXhhbXBsZS5jb20vYWxpY2UuanNvbiIsIm5hbSI6IkFsaWNlIn0sInJjZGkiOnsiL2FwbiI6InNoYTI1Ni12SENSRzEyakM2WE05Uk9PMXdzREZPcGplQUQ0STJjNzROVVFrbHpuNHpZPSIsIi9qY2wiOiJzaGEyNTYtSFp4L04vMXhPQnBFb2ZzaGJaMlhqalEzMU9EdXZwZUZadGtsbnEyelpHOD0iLCIvbmFtIjoic2hhMjU2LU84VVFZcGM4UlkxYWJ5Mk5aS0FqSkdOVXJYNEdTeDVPQUo3SW9HbWFNRU09In19.dU3_zojzEaM04C-xOn-rqJAGQfg4wTHf0_CLJc0GpHQA-WjcYHKMeD4-7uz4WHwGN0ALoSntJexxDTOtb20uhw;info=<http://10.75.32.169:8081/ccid/authn/v2/certs/101882.100426>;alg=ES256;ppt=\"shaken\"" ],
+                      "call_info" : "<cid:example.com/alice.json>;purpose=jcard;call-reason=Adventure",
+                      "alt_present_number" : "sip:+18005550000@example.com",
+                      "jcard" : "[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Alice Liddell\"],[ \"email\",{},\"text\",\"alice@example.com\"]]]",
+                      "rcd_issuer" : "Disney, Inc.",
+                      "rcd_issuer" : "Disney, Inc.",
+                      "rcd_integrity" : true,
+                      "status" : "all",
+                      "verstat" : true,
+                      "identity_info" : true,
+                      "request_id" : "X-REQUEST-ID-12345"
+                    }'
+            Response: 
+            {
+              "status" : "ok",
+              "request_id" : "X-REQUEST-ID-12345",
+              "verstat" : "TN-Validation-Passed",
+              "identity_info" : [ {
+                "status" : "Ok",
+                "params" : "info=<http://10.75.32.169:8081/ccid/authn/v2/certs/101882.100426>;alg=ES256;ppt=\"shaken\"",
+                "header" : {
+                  "alg" : "ES256",
+                  "ppt" : "shaken",
+                  "typ" : "passport",
+                  "x5u" : "http://10.75.32.169:8081/ccid/authn/v2/certs/101882.100426"
+                },
+                "claim" : {
+                  "attest" : "A",
+                  "crn" : "Adventure",
+                  "dest" : {
+                    "tn" : [ "15715550002" ]
+                  },
+                  "iat" : 1643398921,
+                  "iss" : "Disney, Inc.",
+                  "mky" : [ {
+                    "alg" : "SHA-1",
+                    "dig" : "4AADB9B13F82183B540212DF3E5D496B19E57CAB"
+                  }, {
+                    "alg" : "SHA-256",
+                    "dig" : "363BAE129595F5972DF7E084FECDF1BCAD7A7064F7E74F7EA602060E3754CFF7"
+                  } ],
+                  "orig" : {
+                    "tn" : "17035550001"
+                  },
+                  "origid" : "3F9C2836-7E40-11E7-BA58-7831C1B8DEBA",
+                  "rcd" : {
+                    "apn" : "18005550000",
+                    "jcl" : "cid:example.com/alice.json",
+                    "nam" : "Alice"
+                  },
+                  "rcdi" : {
+                    "/apn" : "sha256-vHCRG12jC6XM9ROO1wsDFOpjeAD4I2c74NUQklzn4zY=",
+                    "/jcl" : "sha256-HZx/N/1xOBpEofshbZ2XjjQ31ODuvpeFZtklnq2zZG8=",
+                    "/nam" : "sha256-O8UQYpc8RY1aby2NZKAjJGNUrX4GSx5OAJ7IoGmaMEM="
+                  }
+                },
+                "certificate_info" : {
+                  "subject" : "C=CA, ST=VA, L=Somewhere, O=\"AcmeTelecom, Inc.\", OU=VOIP, CN=SHAKEN 6660",
+                  "issuer" : "C=US, O=Neustar Information Services Inc, OU=www.ccid.neustar, CN=Neustar Certified Caller ID CA-1",
+                  "tn_auth_list" : [ {
+                    "spc" : "6660"
+                  } ]
+                }
+              } ]
+            }
+        - lang: curl
+          label: SHAKEN RCD
+          source: |
+            Request:
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=%3CapiKey1%3E' -i -X POST \
+                -H 'Content-Type: application/json' \
+                -H 'Accept: application/json' \
+                -d '{
+                      "from" : "\"alice\" <sip:+17035550001@example.com>",
+                      "to" : "\"bob\" <sip:+15715550001@example.com>",
+                      "identity" : [ "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLmV4YW1wbGUuY29tL3Rlc3QuZGVyIn0.eyJhdHRlc3QiOiJBIiwiY3JuIjoiVHJhdmVsIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMSJdfSwiaWF0IjoxNjM5NDU1NzUxLCJpc3MiOiJEaXNuZXksIEluYy4iLCJvcmlnIjp7InRuIjoiMTcwMzU1NTAwMDEifSwib3JpZ2lkIjoiMTIzNDU2LUFCQ0QtOTk5OTk5IiwicmNkIjp7ImFwbiI6IjE4MDA1NTUwMDAwIiwiamNkIjpbInZjYXJkIixbWyJ2ZXJzaW9uIix7fSwidGV4dCIsIjQuMCJdLFsiZm4iLHt9LCJ0ZXh0IiwiQWxpY2UgTGlkZGVsbCJdLFsiZW1haWwiLHt9LCJ0ZXh0IiwiYWxpY2VAZXhhbXBsZS5jb20iXV1dLCJuYW0iOiJBbGljZSJ9LCJyY2RpIjp7Ii9hcG4iOiJzaGEyNTYtdkhDUkcxMmpDNlhNOVJPTzF3c0RGT3BqZUFENEkyYzc0TlVRa2x6bjR6WT0iLCIvamNkIjoic2hhMjU2LUhaeC9OLzF4T0JwRW9mc2hiWjJYampRMzFPRHV2cGVGWnRrbG5xMnpaRzg9IiwiL25hbSI6InNoYTI1Ni1POFVRWXBjOFJZMWFieTJOWktBakpHTlVyWDRHU3g1T0FKN0lvR21hTUVNPSJ9fQ.ur9sW1E2Wc5FgREsbhM17kQrmfKCbcUtq8ZDAVL_YiUDe9T9s69YoeaCElWcvhLikqqDVBgS3E78g9ZHn2GcjA;info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"shaken\"" ],
+                      "call_info" : "<cid:example.com/alice.json>;purpose=jcard;call-reason=Travel",
+                      "caller_name" : "Alice",
+                      "alt_present_number" : "<sip:+18005550000@example.com>",
+                      "jcard" : "[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Alice Liddell\"],[ \"email\",{},\"text\",\"alice@example.com\"]]]",
+                      "rcd_issuer" : "Disney, Inc.",
+                      "rcd_integrity" : true,
+                      "status" : "all",
+                      "verstat" : true,
+                      "identity_info" : true,
+                      "request_id" : "X-REQUEST-ID-12345"
+                    }'
+            Response: 
+            {
+              "status" : "ok",
+              "request_id" : "X-REQUEST-ID-12345",
+              "verstat" : "TN-Validation-Passed",
+              "identity_info" : [ {
+                "status" : "Ok",
+                "params" : "info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"shaken\"",
+                "header" : {
+                  "alg" : "ES256",
+                  "ppt" : "shaken",
+                  "typ" : "passport",
+                  "x5u" : "http://ca.example.com/test.der"
+                },
+                "claim" : {
+                  "attest" : "A",
+                  "crn" : "Travel",
+                  "dest" : {
+                    "tn" : [ "15715550001" ]
+                  },
+                  "iat" : 1639455751,
+                  "iss" : "Disney, Inc.",
+                  "orig" : {
+                    "tn" : "17035550001"
+                  },
+                  "origid" : "123456-ABCD-999999",
+                  "rcd" : {
+                    "apn" : "18005550000",
+                    "jcd" : [ "vcard", [ [ "version", { }, "text", "4.0" ], [ "fn", { }, "text", "Alice Liddell" ], [ "email", { }, "text", "alice@example.com" ] ] ],
+                    "nam" : "Alice"
+                  },
+                  "rcdi" : {
+                    "/apn" : "sha256-vHCRG12jC6XM9ROO1wsDFOpjeAD4I2c74NUQklzn4zY=",
+                    "/jcd" : "sha256-HZx/N/1xOBpEofshbZ2XjjQ31ODuvpeFZtklnq2zZG8=",
+                    "/nam" : "sha256-O8UQYpc8RY1aby2NZKAjJGNUrX4GSx5OAJ7IoGmaMEM="
+                  }
+                },
+                "certificate_info" : {
+                  "subject" : "C=US, ST=VA, L=Somewhere, O=\"AcmeTelecom, Inc.\", OU=VOIP, CN=TEST-EC-256-EXT-TN-JWT",
+                  "issuer" : "C=US, O=Neustar IOT Lab, CN=CallAuthnCA",
+                  "tn_auth_list" : [ {
+                    "spc" : "X001"
+                  }, {
+                    "range" : {
+                      "start" : "15714340000",
+                      "count" : 10000
+                    }
+                  }, {
+                    "one" : "17035550000"
+                  } ]
+                }
+              } ]
             }
       responses:
         200:

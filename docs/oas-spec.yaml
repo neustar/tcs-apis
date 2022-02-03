@@ -368,24 +368,6 @@ paths:
                 "identity": "eyJhbGciOiJFUzI1NiIsInBwdCI6InJwaCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovLzEwLjc1LjMyLjE2OTo4MDgxL2NjaWQvYXV0aG4vdjIvY2VydHMvMTAxODgyLjEwMDQyNiJ9.eyJkZXN0Ijp7InRuIjpbIjU3MTU1NTAwMDAiXX0sImlhdCI6MTY0MzM5NDkxMiwib3JpZyI6eyJ1cmkiOiJzaXA6YWxpY2VAZXhhbXBsZS5jb20ifSwicnBoIjp7ImF1dGgiOlsiZXNuZXQuMSIsImV0cy4wIiwicTczNS4xIiwid3BzLjEiXX0sInNwaCI6InBzYXAtY2FsbGJhY2sifQ.wnFWAAHhBc9ON99oA8MHs9j-E_xoGmuxl4eCCBosHCpr3No3ysUEEj1oEqjB4xiW4Kb3PgbsDIcTPRikQuUKcA;info=<https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/certs/101882.100426>;alg=ES256;ppt=\"rph\"",
                 "date": "Fri, 28 Jan 2022 18:35:12 GMT"
             }
-        - lang: curl
-          label: RCD Ext
-          source: |
-            Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/identity?apiKey=a8b931787fe04e62af92dcf1' -i -X POST \
-                -H 'Content-Type: application/json' \
-                -H 'Accept: application/json' \
-                -d '{
-                  "from" : "\"Alice\" <sip:+17035550001@example.com>",
-                  "to" : "\"Bob\" <sip:5715550000@example.com>",
-                  "passport_type" : "rcd"
-                }'
-
-            Response: 
-            {
-                "identity": "eyJhbGciOiJFUzI1NiIsInBwdCI6InJjZCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovLzEwLjc1LjMyLjE2OTo4MDgxL2NjaWQvYXV0aG4vdjIvY2VydHMvMTAxODgyLjEwMDQyNiJ9.eyJkZXN0Ijp7InRuIjpbIjU3MTU1NTAwMDAiXX0sImlhdCI6MTY0MzM5NTc0Miwib3JpZyI6eyJ0biI6IjE3MDM1NTUwMDAxIn0sInJjZCI6eyJuYW0iOiJBbGljZSJ9LCJyY2RpIjp7Ii9uYW0iOiJzaGEyNTYtTzhVUVlwYzhSWTFhYnkyTlpLQWpKR05Vclg0R1N4NU9BSjdJb0dtYU1FTT0ifX0.gQYsCNnHw2YpNnY716VLNWXHDX6p5C5RDCvceVnmQKDCpcdDvNi5YuMpAyuZ-IcmpTkyc6d1VAjF27kc7ysxwg;info=<https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/certs/101882.100426>;alg=ES256;ppt=\"rcd\"",
-                "date": "Fri, 28 Jan 2022 18:49:02 GMT"
-            }
       responses:
         200:
           description: successful operation
@@ -18911,6 +18893,10 @@ components:
           type: string
           description: 'Client supplied request identifier for tracking purpose. If not null, it will be returned back in the response object'
           example: X-REQUEST-ID-12345
+        priority:
+          type: string
+          description: The SIP 'Priority' header value from SIP INVITE message'. If specified, must be psap-callback
+          example: psap-callback
     SuccessResponse:
       required:
       - identity

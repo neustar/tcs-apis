@@ -18895,7 +18895,7 @@ components:
           example: X-REQUEST-ID-12345
         priority:
           type: string
-          description: The SIP 'Priority' header value from SIP INVITE message'. If specified, must be psap-callback
+          description: The SIP 'Priority' header value from SIP INVITE message. If specified, must be psap-callback
           example: psap-callback
     SuccessResponse:
       required:

@@ -346,7 +346,33 @@ paths:
               "date" : "Fri, 15 Oct 2021 23:24:07 GMT"
             }
         - lang: curl
-          label: RPA Ext
+          label: RCD All Data 
+          source: |
+            Request: 
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/identity?apiKey=a8b931787fe04e62af92dcf1' -i -X POST \
+                -H 'Content-Type: application/json' \
+                -H 'Accept: application/json' \
+                -d '{
+                      "from" : "\"Alice\" <sip:+17035550001@example.com>",
+                      "to" : "\"John\" <sip:+15715550002@example.com>",
+                      "passport_type" : "rcd",
+                      "call_reason" : "Travel",
+                      "caller_name" : "Alice Liddell",
+                      "alt_present_number" : "<sip:+18005550000@example.com>",
+                      "jcard" : "[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Alice Liddell\"],[ \"email\",{},\"text\",\"alice@example.com\"]]]",
+                      "jcard_uri" : "cid:123456",
+                      "rcd_issuer" : "Disney, Inc.",
+                      "rcd_integrity" : true,
+                      "rcd_hash_algorithm" : "sha384"
+                    }'
+
+            Response: 
+            {
+              "identity" : "eyJhbGciOiJFUzI1NiIsInBwdCI6InJjZCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovLzEwLjc1LjMyLjE2OTo4MDgxL2NjaWQvYXV0aG4vdjIvY2VydHMvMTAxODgyLjEwMDQyNiJ9.eyJjcm4iOiJUcmF2ZWwiLCJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAyIl19LCJpYXQiOjE2NDQ1MjcwMDcsImlzcyI6IkRpc25leSwgSW5jLiIsIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJyY2QiOnsiYXBuIjoiMTgwMDU1NTAwMDAiLCJqY2wiOiJjaWQ6MTIzNDU2IiwibmFtIjoiQWxpY2UgTGlkZGVsbCJ9LCJyY2RpIjp7Ii9hcG4iOiJzaGEzODQtRjQyd2htbEhLZnNtNmNzRUU4aXdBZzlsejkxL1JiUnQxUGJTQzFHSXJZMG4va1UzZHlOSFJ6WDdxV2s5R0l0WSIsIi9qY2wiOiJzaGEzODQtcVA1NEo0aUM2Y1B0L0ZmdXNLcEMwVlhoNjVvaFRZY2NQekRJUFdXZzRZc3F0ZFU3a2xiOVlIWFA2elp5dWlzayIsIi9uYW0iOiJzaGEzODQtbWtFV3lVdTA1b1UyMGYxNFVwN2xibnk3WDhDSndzT09zeVlQUllCWmYydExvQ2JoaEpLMkd4aGsyWFF5NUIzZyJ9fQ.VaFqs3J98BCW55dKljNHkeN6F7M0KW10dH0IhbdQfXHDUHDCbfNALIIwqKFhUXTJ55lX-y4u5_lZ-VSlXMLyHw;info=<http://10.75.32.169:8081/ccid/authn/v2/certs/101882.100426>;alg=ES256;ppt=\"rcd\"",
+              "date" : "Thu, 10 Feb 2022 21:03:27 GMT"
+            }
+        - lang: curl
+          label: RPH w/SPH
           source: |
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/identity?apiKey=a8b931787fe04e62af92dcf1' -i -X POST \
@@ -9311,7 +9337,7 @@ paths:
                       "passport_type" : "rph",
                       "resource_priority" : [ "ets.0, wps.1, esnet.1", "q735.1" ],
                       "priority" : "psap-callback",
-                      "identity" : [ "eyJhbGciOiJFUzI1NiIsInBwdCI6InJwaCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovLzEwLjc1LjMyLjE2OTo4MDgxL2NjaWQvYXV0aG4vdjIvY2VydHMvMTAxODgyLjEwMDQyNiJ9.eyJkZXN0Ijp7InRuIjpbIjU3MTU1NTAwMDAiXX0sImlhdCI6MTY0MzM5NzA5Nywib3JpZyI6eyJ1cmkiOiJzaXA6YWxpY2VAZXhhbXBsZS5jb20ifSwicnBoIjp7ImF1dGgiOlsiZXNuZXQuMSIsImV0cy4wIiwicTczNS4xIiwid3BzLjEiXX0sInNwaCI6InBzYXAtY2FsbGJhY2sifQ.B3bAZvTbTJ-4ggkt_FhB3F7q7RL021_bJ0hevyJ5Gkf3Vn-Ci-kA1estfMvFMGiKw9ODZqVUWUcmz3TayAyoXg;info=<http://10.75.32.169:8081/ccid/authn/v2/certs/101882.100426>;alg=ES256;ppt=\"rph\"" ]
+                      "identity" : [ "eyJhbGciOiJFUzI1NiIsInBwdCI6InJwaCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovLzEwLjc1LjMyLjE2OTo4MDgxL2NjaWQvYXV0aG4vdjIvY2VydHMvMTAxODgyLjEwMDQyNiJ9.eyJkZXN0Ijp7InRuIjpbIjU3MTU1NTAwMDAiXX0sImlhdCI6MTY0MzM5NzA5Nywib3JpZyI6eyJ1cmkiOiJzaXA6YWxpY2VAZXhhbXBsZS5jb20ifSwicnBoIjp7ImF1dGgiOlsiZXNuZXQuMSIsImV0cy4wIiwicTczNS4xIiwid3BzLjEiXX0sInNwaCI6InBzYXAtY2FsbGJhY2sifQ.B3bAZvTbTJ-4ggkt_FhB3F7q7RL021_bJ0hevyJ5Gkf3Vn-Ci-kA1estfMvFMGiKw9ODZqVUWUcmz3TayAyoXg;info=<https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/certs/101882.100426>;alg=ES256;ppt=\"rph\"" ]
                     }'
 
             Response: 
@@ -9459,60 +9485,46 @@ paths:
                 -d '{
                       "from" : "\"Alice\" <sip:+17035550001@example.com>",
                       "to" : "\"John\" <sip:+15715550002@example.com>",
-                      "identity" : [ "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovLzEwLjc1LjMyLjE2OTo4MDgxL2NjaWQvYXV0aG4vdjIvY2VydHMvMTAxODgyLjEwMDQyNiJ9.eyJhdHRlc3QiOiJBIiwiY3JuIjoiQWR2ZW50dXJlIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMiJdfSwiaWF0IjoxNjQzMzk4OTIxLCJpc3MiOiJEaXNuZXksIEluYy4iLCJta3kiOlt7ImFsZyI6IlNIQS0xIiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQiJ9LHsiYWxnIjoiU0hBLTI1NiIsImRpZyI6IjM2M0JBRTEyOTU5NUY1OTcyREY3RTA4NEZFQ0RGMUJDQUQ3QTcwNjRGN0U3NEY3RUE2MDIwNjBFMzc1NENGRjcifV0sIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJvcmlnaWQiOiIzRjlDMjgzNi03RTQwLTExRTctQkE1OC03ODMxQzFCOERFQkEiLCJyY2QiOnsiYXBuIjoiMTgwMDU1NTAwMDAiLCJqY2wiOiJjaWQ6ZXhhbXBsZS5jb20vYWxpY2UuanNvbiIsIm5hbSI6IkFsaWNlIn0sInJjZGkiOnsiL2FwbiI6InNoYTI1Ni12SENSRzEyakM2WE05Uk9PMXdzREZPcGplQUQ0STJjNzROVVFrbHpuNHpZPSIsIi9qY2wiOiJzaGEyNTYtSFp4L04vMXhPQnBFb2ZzaGJaMlhqalEzMU9EdXZwZUZadGtsbnEyelpHOD0iLCIvbmFtIjoic2hhMjU2LU84VVFZcGM4UlkxYWJ5Mk5aS0FqSkdOVXJYNEdTeDVPQUo3SW9HbWFNRU09In19.dU3_zojzEaM04C-xOn-rqJAGQfg4wTHf0_CLJc0GpHQA-WjcYHKMeD4-7uz4WHwGN0ALoSntJexxDTOtb20uhw;info=<http://10.75.32.169:8081/ccid/authn/v2/certs/101882.100426>;alg=ES256;ppt=\"shaken\"" ],
-                      "call_info" : "<cid:example.com/alice.json>;purpose=jcard;call-reason=Adventure",
-                      "alt_present_number" : "sip:+18005550000@example.com",
+                      "call_reason" : "Travel",
+                      "caller_name" : "Alice Liddell",
+                      "alt_present_number" : "<sip:+18005550000@example.com>",
                       "jcard" : "[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Alice Liddell\"],[ \"email\",{},\"text\",\"alice@example.com\"]]]",
                       "rcd_issuer" : "Disney, Inc.",
-                      "rcd_issuer" : "Disney, Inc.",
                       "rcd_integrity" : true,
-                      "status" : "all",
-                      "verstat" : true,
                       "identity_info" : true,
-                      "request_id" : "X-REQUEST-ID-12345"
+                      "identity" : "eyJhbGciOiJFUzI1NiIsInBwdCI6InJjZCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovLzEwLjc1LjMyLjE2OTo4MDgxL2NjaWQvYXV0aG4vdjIvY2VydHMvMTAxODgyLjEwMDQyNiJ9.eyJjcm4iOiJUcmF2ZWwiLCJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAyIl19LCJpYXQiOjE2NDQ1MjcwMDcsImlzcyI6IkRpc25leSwgSW5jLiIsIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJyY2QiOnsiYXBuIjoiMTgwMDU1NTAwMDAiLCJqY2wiOiJjaWQ6MTIzNDU2IiwibmFtIjoiQWxpY2UgTGlkZGVsbCJ9LCJyY2RpIjp7Ii9hcG4iOiJzaGEzODQtRjQyd2htbEhLZnNtNmNzRUU4aXdBZzlsejkxL1JiUnQxUGJTQzFHSXJZMG4va1UzZHlOSFJ6WDdxV2s5R0l0WSIsIi9qY2wiOiJzaGEzODQtcVA1NEo0aUM2Y1B0L0ZmdXNLcEMwVlhoNjVvaFRZY2NQekRJUFdXZzRZc3F0ZFU3a2xiOVlIWFA2elp5dWlzayIsIi9uYW0iOiJzaGEzODQtbWtFV3lVdTA1b1UyMGYxNFVwN2xibnk3WDhDSndzT09zeVlQUllCWmYydExvQ2JoaEpLMkd4aGsyWFF5NUIzZyJ9fQ.VaFqs3J98BCW55dKljNHkeN6F7M0KW10dH0IhbdQfXHDUHDCbfNALIIwqKFhUXTJ55lX-y4u5_lZ-VSlXMLyHw;info=<https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/certs/101882.100426>;alg=ES256;ppt=\"rcd\""
                     }'
             Response: 
             {
               "status" : "ok",
-              "request_id" : "X-REQUEST-ID-12345",
-              "verstat" : "TN-Validation-Passed",
               "identity_info" : [ {
                 "status" : "Ok",
-                "params" : "info=<http://10.75.32.169:8081/ccid/authn/v2/certs/101882.100426>;alg=ES256;ppt=\"shaken\"",
+                "params" : "info=<https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/certs/101882.100426>;alg=ES256;ppt=\"rcd\"",
                 "header" : {
                   "alg" : "ES256",
-                  "ppt" : "shaken",
+                  "ppt" : "rcd",
                   "typ" : "passport",
-                  "x5u" : "http://10.75.32.169:8081/ccid/authn/v2/certs/101882.100426"
+                  "x5u" : "https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/certs/101882.100426"
                 },
                 "claim" : {
-                  "attest" : "A",
-                  "crn" : "Adventure",
+                  "crn" : "Travel",
                   "dest" : {
                     "tn" : [ "15715550002" ]
                   },
-                  "iat" : 1643398921,
+                  "iat" : 1644527007,
                   "iss" : "Disney, Inc.",
-                  "mky" : [ {
-                    "alg" : "SHA-1",
-                    "dig" : "4AADB9B13F82183B540212DF3E5D496B19E57CAB"
-                  }, {
-                    "alg" : "SHA-256",
-                    "dig" : "363BAE129595F5972DF7E084FECDF1BCAD7A7064F7E74F7EA602060E3754CFF7"
-                  } ],
                   "orig" : {
                     "tn" : "17035550001"
                   },
-                  "origid" : "3F9C2836-7E40-11E7-BA58-7831C1B8DEBA",
                   "rcd" : {
                     "apn" : "18005550000",
-                    "jcl" : "cid:example.com/alice.json",
-                    "nam" : "Alice"
+                    "jcl" : "cid:123456",
+                    "nam" : "Alice Liddell"
                   },
                   "rcdi" : {
-                    "/apn" : "sha256-vHCRG12jC6XM9ROO1wsDFOpjeAD4I2c74NUQklzn4zY=",
-                    "/jcl" : "sha256-HZx/N/1xOBpEofshbZ2XjjQ31ODuvpeFZtklnq2zZG8=",
-                    "/nam" : "sha256-O8UQYpc8RY1aby2NZKAjJGNUrX4GSx5OAJ7IoGmaMEM="
+                    "/apn" : "sha384-F42whmlHKfsm6csEE8iwAg9lz91/RbRt1PbSC1GIrY0n/kU3dyNHRzX7qWk9GItY",
+                    "/jcl" : "sha384-qP54J4iC6cPt/FfusKpC0VXh65ohTYccPzDIPWWg4YsqtdU7klb9YHXP6zZyuisk",
+                    "/nam" : "sha384-mkEWyUu05oU20f14Up7lbny7X8CJwsOOsyYPRYBZf2tLoCbhhJK2Gxhk2XQy5B3g"
                   }
                 },
                 "certificate_info" : {
@@ -9525,7 +9537,7 @@ paths:
               } ]
             }
         - lang: curl
-          label: SHAKEN RCD
+          label: SHAKEN w/RCD
           source: |
             Request:
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=%3CapiKey1%3E' -i -X POST \

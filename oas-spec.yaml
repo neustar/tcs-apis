@@ -9325,7 +9325,7 @@ paths:
               "status" : "ok"
             }
         - lang: curl
-          label: RPH
+          label: RPH w/SPH
           source: | 
             Request: 
             curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \

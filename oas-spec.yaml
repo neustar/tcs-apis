@@ -16671,7 +16671,7 @@ paths:
             Response: 
             {
               "status" : "ok",
-              "cnam" : "HERNDON VA"
+              "cnam" : "Alice"
             }
         - lang: curl
           label: SHAKEN w/Low Robocall Score
@@ -16694,12 +16694,13 @@ paths:
               "call_insight" : {
                 "call_treatment" : "ALLOW",
                 "fraud_score" : 0,
-                "original_calling_name" : "HERNDON      VA",
+                "original_calling_name" : "Alice",
                 "cv_data" : {
                   "verstat" : "TN-Validation-Passed",
                   "ppt" : "shaken",
                   "attest" : "A",
-                  "origid" : "721b0d33-1b2d-4581-b0b7-7bc2809d9be6"
+                  "origid" : "721b0d33-1b2d-4581-b0b7-7bc2809d9be6",
+                  "alternate_calling_name" : "Alice"
                 }
               }
             }
@@ -16722,14 +16723,15 @@ paths:
             {
               "status" : "ok",
               "call_insight" : {
-                "call_treatment" : "DENY",
+                "call_treatment" : "ALLOW",
                 "fraud_score" : 100,
-                "original_calling_name" : "Name Unavailabl",
+                "original_calling_name" : "Alice",
                 "cv_data" : {
                   "verstat" : "TN-Validation-Passed",
                   "ppt" : "shaken",
-                  "attest" : "C",
-                  "origid" : "721b0d33-1b2d-4581-b0b7-7bc2809d9be6"
+                  "attest" : “C”,
+                  "origid" : "721b0d33-1b2d-4581-b0b7-7bc2809d9be6",
+                  "alternate_calling_name" : "Alice"
                 }
               }
             }
@@ -16752,16 +16754,17 @@ paths:
             Response: 
             {
               "status" : "ok",
-              "cnam" : "Fraudulent Call",
+              "cnam" : "Alice",
               "call_insight" : {
-                "call_treatment" : "DENY",
-                "fraud_score" : 100,
-                "original_calling_name" : "Name Unavailabl",
+                "call_treatment" : "ALLOW",
+                "fraud_score" : 0,
+                "original_calling_name" : "Alice",
                 "cv_data" : {
                   "verstat" : "TN-Validation-Passed",
                   "ppt" : "shaken",
-                  "attest" : "C",
-                  "origid" : "721b0d33-1b2d-4581-b0b7-7bc2809d9be6"
+                  "attest" : "A",
+                  "origid" : "721b0d33-1b2d-4581-b0b7-7bc2809d9be6",
+                  "alternate_calling_name" : "Alice"
                 }
               }
             }

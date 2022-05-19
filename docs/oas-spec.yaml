@@ -16671,7 +16671,7 @@ paths:
             Response: 
             {
               "status" : "ok",
-              "cnam" : "Alice"
+              "cnam" : "Alice N Wonder"
             }
         - lang: curl
           label: SHAKEN w/Low Robocall Score
@@ -16693,7 +16693,7 @@ paths:
               "status" : "ok",
               "call_insight" : {
                 "call_treatment" : "ALLOW",
-                "fraud_score" : 0,
+                "fraud_score" : 1,
                 "original_calling_name" : "Alice",
                 "cv_data" : {
                   "verstat" : "TN-Validation-Passed",
@@ -16754,10 +16754,10 @@ paths:
             Response: 
             {
               "status" : "ok",
-              "cnam" : "Alice",
+              "cnam" : "Alice N Wonder",
               "call_insight" : {
                 "call_treatment" : "ALLOW",
-                "fraud_score" : 0,
+                "fraud_score" : 99,
                 "original_calling_name" : "Alice",
                 "cv_data" : {
                   "verstat" : "TN-Validation-Passed",

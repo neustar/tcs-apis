@@ -16723,7 +16723,7 @@ paths:
             {
               "status" : "ok",
               "call_insight" : {
-                "call_treatment" : "ALLOW",
+                "call_treatment" : "DENY",
                 "fraud_score" : 100,
                 "original_calling_name" : "Alice",
                 "cv_data" : {
@@ -16756,7 +16756,7 @@ paths:
               "status" : "ok",
               "cnam" : "[Alice N Wonder]Alice",
               "call_insight" : {
-                "call_treatment" : "ALLOW",
+                "call_treatment" : "DENY",
                 "fraud_score" : 99,
                 "original_calling_name" : "Alice",
                 "cv_data" : {

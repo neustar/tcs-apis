@@ -28,9 +28,15 @@ jobs:
         run: |
           npm install --force
           npm run build
+          
+      - name: 3GPP Specs Deploy
+        run: |
+          npm install -g redoc-cli
+          redoc-cli bundle -o 3gpp.md 3GPP_OpenAPISpec.yaml
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
           branch: gh-pages
           folder: build
+          file: 3gpp.md

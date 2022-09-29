@@ -29,7 +29,7 @@ jobs:
           npm install --force
           npm run build
           
-      - name: 3GPP Specs Deploy
+      - name: 3GPP Specs Compile
         run: |
           npm install -g redoc-cli
           redoc-cli bundle -o 3gpp.md 3GPP_OpenAPISpec.yaml
@@ -39,4 +39,11 @@ jobs:
         with:
           branch: gh-pages
           folder: build
-          file: 3gpp.md
+      
+      - name: Copy 3gpp
+        uses: andstor/copycat-action@v3
+        with:
+          src_path: 3gpp.md
+          dst_branch: gh-pages
+          dst_owner: action
+          dst_repo_name: tcs-apis

@@ -36,8 +36,10 @@ jobs:
           folder: build
       
       - name: Deploying 3gpp
-        uses: planetoftheweb/copy-to-branches@v1
+        uses: dmnemec/copy_file_to_another_repo_action@main
         env:
-          key: main
-          branches: gh-pages
-          files: 3gpp.md
+          API_TOKEN_GITHUB: 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
+        with:
+          source_file: '3gpp.md'
+          destination_repo: 'gh-pages'
+          commit_message: '3gpp file'

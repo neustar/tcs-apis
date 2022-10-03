@@ -6,7 +6,7 @@ info:
   version: '1.0'
 servers:
   - url: http://localhost:8080/stir/v1
-    description: 3GPP Endpoint
+    description: 3GPP Endpoint 
 tags:
   - name: signing
     description: AS Endpoint

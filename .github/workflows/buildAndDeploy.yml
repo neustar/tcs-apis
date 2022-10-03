@@ -38,7 +38,7 @@ jobs:
       - name: Deploying 3gpp
         uses: dmnemec/copy_file_to_another_repo_action@main
         env:
-          API_TOKEN_GITHUB: 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
+          API_TOKEN_GITHUB: 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
         with:
           source_file: '3gpp.md'
           destination_repo: 'neustar/tcs-apis'

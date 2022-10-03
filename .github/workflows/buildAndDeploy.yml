@@ -44,3 +44,5 @@ jobs:
           destination_repo: 'neustar/tcs-apis'
           destination_branch: 'gh-pages'
           commit_message: '3gpp file'
+          user_email: 'rishabh.srivastava@team.neustar'
+          user_name: 'rishagit'  

@@ -42,5 +42,5 @@ jobs:
         with:
           source_file: '3gpp.md'
           destination_repo: 'neustar/tcs-apis'
-          OUTPUT_BRANCH: 'gh-pages'
+          destination_branch: 'gh-pages'
           commit_message: '3gpp file'

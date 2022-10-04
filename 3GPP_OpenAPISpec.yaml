@@ -772,12 +772,15 @@ components:
         hi: 
           type: string
           description: The "index" header field parameter is included in the entry identifying the diverting user in the History-Info header field
+          example: "1.2.1"
         tn: 
           type: string
-          description: allowed characters as for local-number-digits and global-number-digits defined in RFC 3966 [22]. The number needs to be in canonical form according to RFC 8224 [252]
+          description: allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
+          example: "12155551212"
         uri: 
           type: string
-          description: A SIP URI as specified in RFC 3261 [26] following the generic guidelines in RFC. Used if the "orig" or "dest" is given in a SIP URI
+          description: A SIP URI following the generic guidelines in RFC. Used if the "orig" or "dest" is given in a SIP URI
+          example: sip:alice@example.com
     rphSigningRequest:
       title: signingRequest
       type: object
@@ -826,12 +829,15 @@ components:
         hi: 
           type: string
           description: The "index" header field parameter is included in the entry identifying the diverting user in the History-Info header field
+          example: "1.2.1"
         tn: 
           type: string
-          description: allowed characters as for local-number-digits and global-number-digits defined in RFC 3966 [22]. The number needs to be in canonical form according to RFC 8224 [252]
+          description: allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
+          example: "12155551212"
         uri: 
           type: string
-          description: A SIP URI as specified in RFC 3261 [26] following the generic guidelines in RFC. Used if the "orig" or "dest" is given in a SIP URI
+          description: A SIP URI following the generic guidelines in RFC. Used if the "orig" or "dest" is given in a SIP URI
+          example: sip:alice@example.com
     divSigningRequest:
       title: signingRequest
       type: object
@@ -880,12 +886,15 @@ components:
         hi: 
           type: string
           description: The "index" header field parameter is included in the entry identifying the diverting user in the History-Info header field
+          example: "1.2.1"
         tn: 
           type: string
-          description: allowed characters as for local-number-digits and global-number-digits defined in RFC 3966 [22]. The number needs to be in canonical form according to RFC 8224 [252]
+          description: allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
+          example: "12155551212"
         uri: 
           type: string
-          description: A SIP URI as specified in RFC 3261 [26] following the generic guidelines in RFC. Used if the "orig" or "dest" is given in a SIP URI
+          description: A SIP URI following the generic guidelines in RFC. Used if the "orig" or "dest" is given in a SIP URI
+          example: sip:alice@example.com
     signingResponse:
       title: signingResponse
       type: object
@@ -976,6 +985,7 @@ components:
           items:
             type: string
           description: Contains the SIP header field(s) protected by claims in the PASSporT(s) of the identityHeaders array
+          example: ["History-Info","Resource-Priority"] 
     verificationResponse:
       title: verificationResponse
       type: object
@@ -985,12 +995,14 @@ components:
           items:
             type: string
           description: Parameter informing of the result of the verification of diverting identities. For each verified identity the verstat parameter is added to the verified identity
+          example: ["12155551215", "TN-Validation-Passed"]
         verstatValue: 
           type: string
           description: Parameter informing of the result of the verification of originating identity. To be used in the verstat parameter added to the verified identity. The parameter is mandatory if the request contained a PASSporT SHAKEN JSON Web Token
         verstatPriority: 
           type: string
           description: Parameter informing of the result of the verification of the Resource-Priority header field and optionally the header field value "psap-callback" of the Priority header field
+          example: RPH-Validation-Passed
         verifyResults:
           description: Each array entry contains the verification results of a PASSporT contained in the request
           type: array
@@ -1014,6 +1026,7 @@ components:
                     reasonCode: 
                       type: integer
                       description: Identifies the 4xx failure reason code of the failing PASSporT. Optional since they are included only when the verifyResult "status" parameter has a value of "fail"
+                      example: 
                     reasonText: 
                       type: string
                       description: Identifies the failure text associated with the 4xx failure reason code. Optional since they are included only when the verifyResult "status" parameter has a value of "fail"

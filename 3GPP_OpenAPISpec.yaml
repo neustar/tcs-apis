@@ -1,23 +1,23 @@
 openapi: 3.0.3
 info:
-  title: 3GPP APIs
-  description: HTTP messages and data types sent over 3GPP AS an VS APIs
+  title: 3GPP-based Call Authentication APIs
+  description: Definition of the Application Server HTTP messages and data types for signing and verification using the Ms reference point. These APIs are designed to be compliant with the referenced 3GPP specification, while also including several optional enhancements.  Such enhancements may or may not be brought back into the 3GPP CT1 working group for consideration.
   contact: {}
-  version: '1.0'
+  version: '1.0, TS 24.229, Release 17.8.1'
 servers:
   - url: http://localhost:8080/stir/v1
-    description: 3GPP Endpoint 
+    description: signing resource URI 
 tags:
   - name: signing
-    description: AS Endpoint
+    description: Used to construct a PASSporT "shaken" JSON Web Token, a PASSporT "div" JSON Web Token or a PASSporT "rph" JSON Web Token.  Also, referred to as the Secure Telephone Identity Authentication Service (STI-AS).
   - name: verification
-    description: VS Endpoint
+    description: Used to verify one or more PASSporT JSON Web Tokens (or Identity headers).  Also, referred to as the STI Verification Service (STI-VS).
 paths:
   /signing:
     post:
       tags:
         - signing
-      summary: AS Request
+      summary: Signing (STI-AS) Request
       operationId: signingPOST
       requestBody:
         content:
@@ -32,14 +32,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/signingResponse'
         '400':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               examples:
                 missingRequestBody:
                   summary: Missing Request Body
                   value:
-                    error: Missing request body
+                    error: Missing Request body
                 missingMandatoryParameter:
                   summary: Missing Mandatory Parameter
                   value:
@@ -49,11 +49,11 @@ paths:
                   value:
                     error: Invalid Parameter Value
                 failedToParseMessageBody:
-                  summary: failedToParseMessageBody
+                  summary: Failed To Parse Message Body
                   value:
                     error: Failed To Parse Message Body
         '406':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -64,9 +64,9 @@ paths:
                   error: 
                     type: string
                     example: Requested response body type is not supported
-                    description: The request could not be processed due to a not supported message body format.
+                    description: The request could not be processed due to a not supported message body format
         '404':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -77,9 +77,9 @@ paths:
                   error: 
                     type: string
                     example: Requested resource not found
-                    description: The request could not be processed due to no resource available related to the Request-URI.
+                    description: The request could not be processed due to no resource available related to the Request-URI
         '415':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -90,9 +90,9 @@ paths:
                   error: 
                     type: string
                     example: Unsupported request body type
-                    description: The request could not be processed due to not supported message body.
+                    description: The request could not be processed due to not supported message body
         '411':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -103,9 +103,9 @@ paths:
                   error: 
                     type: string
                     example: Missing mandatory Content-Length headers
-                    description: The request could not be processed due to a missing Content-Length header.
+                    description: The request could not be processed due to a missing Content-Length header
         '405':
-          description: Error in processing request 
+          description: Policy error in processing request 
           content:
             application/json:
               schema: 
@@ -116,9 +116,9 @@ paths:
                   error: 
                     type: string
                     example: Method not allowed
-                    description: The resource was invoked with unsupported operation.
+                    description: The resource was invoked with unsupported operation
         '500':
-          description: Error in processing request 
+          description: Policy error in processing request 
           content:
             application/json:
               schema: 
@@ -129,12 +129,12 @@ paths:
                   error: 
                     type: string
                     example: Internal server error
-                    description: The request failed due to internal error.
+                    description: The request failed due to internal error
   /divSigning:
     post:
       tags:
         - signing
-      summary: Diversion AS Request
+      summary: Diversion (or Call Forwarding) Signing (STI-AS) Request
       operationId: divSigningPOST
       requestBody:
         content:
@@ -149,7 +149,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/signingResponse'
         '400':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               examples:
@@ -166,11 +166,11 @@ paths:
                   value:
                     error: Invalid Parameter Value
                 failedToParseMessageBody:
-                  summary: failedToParseMessageBody
+                  summary: Failed To Parse Message Body
                   value:
                     error: Failed To Parse Message Body
         '406':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -181,9 +181,9 @@ paths:
                   error: 
                     type: string
                     example: Requested response body type is not supported
-                    description: The request could not be processed due to a not supported message body format.
+                    description: The request could not be processed due to a not supported message body format
         '404':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -194,9 +194,9 @@ paths:
                   error: 
                     type: string
                     example: Requested resource not found
-                    description: The request could not be processed due to no resource available related to the Request-URI.
+                    description: The request could not be processed due to no resource available related to the Request-URI
         '415':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -207,9 +207,9 @@ paths:
                   error: 
                     type: string
                     example: Unsupported request body type
-                    description: The request could not be processed due to not supported message body.
+                    description: The request could not be processed due to not supported message body
         '411':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -220,9 +220,9 @@ paths:
                   error: 
                     type: string
                     example: Missing mandatory Content-Length headers
-                    description: The request could not be processed due to a missing Content-Length header.
+                    description: The request could not be processed due to a missing Content-Length header
         '405':
-          description: Error in processing request 
+          description: Policy error in processing request 
           content:
             application/json:
               schema: 
@@ -233,9 +233,9 @@ paths:
                   error: 
                     type: string
                     example: Method not allowed
-                    description: The resource was invoked with unsupported operation.
+                    description: The resource was invoked with unsupported operation
         '500':
-          description: Error in processing request 
+          description: Policy error in processing request 
           content:
             application/json:
               schema: 
@@ -246,13 +246,13 @@ paths:
                   error: 
                     type: string
                     example: Internal server error
-                    description: The request failed due to internal error.
+                    description: The request failed due to internal error
   /rphSigning:
     post:
       tags:
         - signing
-      summary: RPH AS Request
-      operationId: rphsigningPOST
+      summary: Resource Priority Header (RPH) Signing (STI-AS) Request
+      operationId: rphSigningPOST
       requestBody:
         content:
           application/json:
@@ -266,7 +266,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/signingResponse'
         '400':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               examples:
@@ -283,11 +283,11 @@ paths:
                   value:
                     error: Invalid Parameter Value
                 failedToParseMessageBody:
-                  summary: failedToParseMessageBody
+                  summary: Failed To Parse Message Body
                   value:
                     error: Failed To Parse Message Body
         '406':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -298,9 +298,9 @@ paths:
                   error: 
                     type: string
                     example: Requested response body type is not supported
-                    description: The request could not be processed due to a not supported message body format.
+                    description: The request could not be processed due to a not supported message body format
         '404':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -311,9 +311,9 @@ paths:
                   error: 
                     type: string
                     example: Requested resource not found
-                    description: The request could not be processed due to no resource available related to the Request-URI.
+                    description: The request could not be processed due to no resource available related to the Request-URI
         '415':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -324,9 +324,9 @@ paths:
                   error: 
                     type: string
                     example: Unsupported request body type
-                    description: The request could not be processed due to not supported message body.
+                    description: The request could not be processed due to not supported message body
         '411':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -337,9 +337,9 @@ paths:
                   error: 
                     type: string
                     example: Missing mandatory Content-Length headers
-                    description: The request could not be processed due to a missing Content-Length header.
+                    description: The request could not be processed due to a missing Content-Length header
         '405':
-          description: Error in processing request 
+          description: Policy error in processing request 
           content:
             application/json:
               schema: 
@@ -350,9 +350,9 @@ paths:
                   error: 
                     type: string
                     example: Method not allowed
-                    description: The resource was invoked with unsupported operation.
+                    description: The resource was invoked with unsupported operation
         '500':
-          description: Error in processing request 
+          description: Policy error in processing request 
           content:
             application/json:
               schema: 
@@ -363,12 +363,12 @@ paths:
                   error: 
                     type: string
                     example: Internal server error
-                    description: The request failed due to internal error.
+                    description: The request failed due to internal error
   /verification:
     post:
       tags:
         - verification
-      summary: VS Request
+      summary: Verification (STI-VS) Request
       operationId: verificationPost
       requestBody:
         content:
@@ -383,7 +383,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/verificationResponse'
         '400':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               examples:
@@ -400,11 +400,11 @@ paths:
                   value:
                     error: Invalid Parameter Value
                 failedToParseMessageBody:
-                  summary: failedToParseMessageBody
+                  summary: Failed To Parse Message Body
                   value:
                     error: Failed To Parse Message Body
         '406':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -415,9 +415,9 @@ paths:
                   error: 
                     type: string
                     example: Requested response body type is not supported
-                    description: The request could not be processed due to a not supported message body format.
+                    description: The request could not be processed due to a not supported message body format
         '404':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -428,9 +428,9 @@ paths:
                   error: 
                     type: string
                     example: Requested resource not found
-                    description: The request could not be processed due to no resource available related to the Request-URI.
+                    description: The request could not be processed due to no resource available related to the Request-URI
         '415':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -441,9 +441,9 @@ paths:
                   error: 
                     type: string
                     example: Unsupported request body type
-                    description: The request could not be processed due to not supported message body.
+                    description: The request could not be processed due to not supported message body
         '411':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -454,9 +454,9 @@ paths:
                   error: 
                     type: string
                     example: Missing mandatory Content-Length headers
-                    description: The request could not be processed due to a missing Content-Length header.
+                    description: The request could not be processed due to a missing Content-Length header
         '405':
-          description: Error in processing request 
+          description: Policy error in processing request 
           content:
             application/json:
               schema: 
@@ -467,9 +467,9 @@ paths:
                   error: 
                     type: string
                     example: Method not allowed
-                    description: The resource was invoked with unsupported operation.
+                    description: The resource was invoked with unsupported operation
         '500':
-          description: Error in processing request 
+          description: Policy error in processing request 
           content:
             application/json:
               schema: 
@@ -480,12 +480,12 @@ paths:
                   error: 
                     type: string
                     example: Internal server error
-                    description: The request failed due to internal error.
+                    description: The request failed due to internal error
   /divVerification:
     post:
       tags:
         - verification
-      summary: Diversion VS Request
+      summary: Diversion (or Call Forwarding) Verification (STI-VS) Request
       operationId: divVerificationPost
       requestBody:
         content:
@@ -500,7 +500,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/verificationResponse'
         '400':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               examples:
@@ -517,11 +517,11 @@ paths:
                   value:
                     error: Invalid Parameter Value
                 failedToParseMessageBody:
-                  summary: failedToParseMessageBody
+                  summary: Failed To Parse Message Body
                   value:
                     error: Failed To Parse Message Body
         '406':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -532,9 +532,9 @@ paths:
                   error: 
                     type: string
                     example: Requested response body type is not supported
-                    description: The request could not be processed due to a not supported message body format.
+                    description: The request could not be processed due to a not supported message body format
         '404':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -545,9 +545,9 @@ paths:
                   error: 
                     type: string
                     example: Requested resource not found
-                    description: The request could not be processed due to no resource available related to the Request-URI.
+                    description: The request could not be processed due to no resource available related to the Request-URI
         '415':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -558,9 +558,9 @@ paths:
                   error: 
                     type: string
                     example: Unsupported request body type
-                    description: The request could not be processed due to not supported message body.
+                    description: The request could not be processed due to not supported message body
         '411':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -571,9 +571,9 @@ paths:
                   error: 
                     type: string
                     example: Missing mandatory Content-Length headers
-                    description: The request could not be processed due to a missing Content-Length header.
+                    description: The request could not be processed due to a missing Content-Length header
         '405':
-          description: Error in processing request 
+          description: Policy error in processing request 
           content:
             application/json:
               schema: 
@@ -584,9 +584,9 @@ paths:
                   error: 
                     type: string
                     example: Method not allowed
-                    description: The resource was invoked with unsupported operation.
+                    description: The resource was invoked with unsupported operation
         '500':
-          description: Error in processing request 
+          description: Policy error in processing request 
           content:
             application/json:
               schema: 
@@ -597,12 +597,12 @@ paths:
                   error: 
                     type: string
                     example: Internal server error
-                    description: The request failed due to internal error.
+                    description: The request failed due to internal error
   /rphVerification:
     post:
       tags:
         - verification
-      summary: RPH VS Request
+      summary: RPH Verification (STI-VS) Request
       operationId: rphVerificationPost
       requestBody:
         content:
@@ -617,7 +617,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/verificationResponse'
         '400':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               examples:
@@ -634,11 +634,11 @@ paths:
                   value:
                     error: Invalid Parameter Value
                 failedToParseMessageBody:
-                  summary: failedToParseMessageBody
+                  summary: Failed To Parse Message Body
                   value:
                     error: Failed To Parse Message Body
         '406':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -649,9 +649,9 @@ paths:
                   error: 
                     type: string
                     example: Requested response body type is not supported
-                    description: The request could not be processed due to a not supported message body format.
+                    description: The request could not be processed due to a not supported message body format
         '404':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -662,9 +662,9 @@ paths:
                   error: 
                     type: string
                     example: Requested resource not found
-                    description: The request could not be processed due to no resource available related to the Request-URI.
+                    description: The request could not be processed due to no resource available related to the Request-URI
         '415':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -675,9 +675,9 @@ paths:
                   error: 
                     type: string
                     example: Unsupported request body type
-                    description: The request could not be processed due to not supported message body.
+                    description: The request could not be processed due to not supported message body
         '411':
-          description: Error in processing request 
+          description: Service error in processing request 
           content:
             application/json:
               schema: 
@@ -688,9 +688,9 @@ paths:
                   error: 
                     type: string
                     example: Missing mandatory Content-Length headers
-                    description: The request could not be processed due to a missing Content-Length header.
+                    description: The request could not be processed due to a missing Content-Length header
         '405':
-          description: Error in processing request 
+          description: Policy error in processing request 
           content:
             application/json:
               schema: 
@@ -701,9 +701,9 @@ paths:
                   error: 
                     type: string
                     example: Method not allowed
-                    description: The resource was invoked with unsupported operation.
+                    description: The resource was invoked with unsupported operation
         '500':
-          description: Error in processing request 
+          description: Policy error in processing request 
           content:
             application/json:
               schema: 
@@ -714,7 +714,7 @@ paths:
                   error: 
                     type: string
                     example: Internal server error
-                    description: The request failed due to internal error.
+                    description: The request failed due to internal error
 components:
   schemas:
     shakenSigningRequest:

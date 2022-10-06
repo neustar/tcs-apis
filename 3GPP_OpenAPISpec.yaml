@@ -726,8 +726,6 @@ components:
         - iat
         - orig
         - origid
-        - rph
-        - sph
       properties:
         ppt:
           type: string
@@ -743,10 +741,6 @@ components:
             type: string
           description: Identifying the called user taken from the To header field for a shaken or rph PASSporT, and from the Request-URI after retargeting for a div PASSporT
           example: [{"uri":["sip:alice@example.com"]},{"tn":["12155551213"]}]
-        div: 
-          type: string
-          description: Identifying the diverting user; i.e., the user identified in the Request-URI before retargeting, taken from the History-Info header field
-          example: {"tn":"121555551213"}
         iat: 
           type: integer
           description: Time since 1 January 1970 in Numeric Date format
@@ -759,6 +753,42 @@ components:
           type: string
           description: The value of "origid" claim is a Universally Unique Identifier (UUID)
           example: 123e4567-e89b-12d3-a456-426655440000
+        hi: 
+          type: string
+          description: The "index" header field parameter is included in the entry identifying the diverting user in the History-Info header field
+          example: "1.2.1"
+        tn: 
+          type: string
+          description: allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
+          example: "12155551212"
+        uri: 
+          type: string
+          description: A SIP URI following the generic guidelines in RFC. Used if the "orig" or "dest" is given in a SIP URI
+          example: sip:alice@example.com
+    rphSigningRequest:
+      title: signingRequest
+      type: object
+      required: 
+        - dest
+        - iat
+        - orig
+        - origid
+        - rph
+      properties:
+        dest:
+          type: array
+          items:
+            type: string
+          description: Identifying the called user taken from the To header field for a shaken or rph PASSporT, and from the Request-URI after retargeting for a div PASSporT
+          example: [{"uri":["sip:alice@example.com"]},{"tn":["12155551213"]}]
+        iat: 
+          type: integer
+          description: Time since 1 January 1970 in Numeric Date format
+          example: 1664199282
+        orig: 
+          type: string
+          description: Identifying the calling user
+          example: {"tn":"12155551212"}
         rph: 
           type: array
           items:
@@ -772,13 +802,16 @@ components:
         hi: 
           type: string
           description: The "index" header field parameter is included in the entry identifying the diverting user in the History-Info header field
+          example: "1.2.1"
         tn: 
           type: string
-          description: allowed characters as for local-number-digits and global-number-digits defined in RFC 3966 [22]. The number needs to be in canonical form according to RFC 8224 [252]
+          description: allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
+          example: "12155551212"
         uri: 
           type: string
-          description: A SIP URI as specified in RFC 3261 [26] following the generic guidelines in RFC. Used if the "orig" or "dest" is given in a SIP URI
-    rphSigningRequest:
+          description: A SIP URI following the generic guidelines in RFC. Used if the "orig" or "dest" is given in a SIP URI
+          example: sip:alice@example.com
+    divSigningRequest:
       title: signingRequest
       type: object
       required: 
@@ -787,10 +820,6 @@ components:
         - iat
         - orig
       properties:
-        attest: 
-          type: string
-          example: A , B or C
-          description: Identifying the relation between the service provider attesting the identity and the subscriber
         dest:
           type: array
           items:
@@ -809,83 +838,18 @@ components:
           type: string
           description: Identifying the calling user
           example: {"tn":"12155551212"}
-        origid: 
-          type: string
-          description: The value of "origid" claim is a Universally Unique Identifier (UUID)
-          example: 123e4567-e89b-12d3-a456-426655440000
-        rph: 
-          type: array
-          items:
-            type: string
-          description: Array of strings that correspond to the r-values indicated in the SIP Resource-Priority header field. Contains assertion of the priority level of the user to be used for a given communication session
-          example: [{"auth":["ets.0", "wps.0"]}]
-        sph: 
-          type: string
-          description: Contains header field value "psap-callback" of the SIP Priority header field
-          example: psap-callback
         hi: 
           type: string
           description: The "index" header field parameter is included in the entry identifying the diverting user in the History-Info header field
+          example: "1.2.1"
         tn: 
           type: string
-          description: allowed characters as for local-number-digits and global-number-digits defined in RFC 3966 [22]. The number needs to be in canonical form according to RFC 8224 [252]
+          description: allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
+          example: "12155551212"
         uri: 
           type: string
-          description: A SIP URI as specified in RFC 3261 [26] following the generic guidelines in RFC. Used if the "orig" or "dest" is given in a SIP URI
-    divSigningRequest:
-      title: signingRequest
-      type: object
-      required: 
-        - dest
-        - iat
-        - orig
-        - rph
-      properties:
-        attest: 
-          type: string
-          example: A , B or C
-          description: Identifying the relation between the service provider attesting the identity and the subscriber
-        dest:
-          type: array
-          items:
-            type: string
-          description: Identifying the called user taken from the To header field for a shaken or rph PASSporT, and from the Request-URI after retargeting for a div PASSporT
-          example: [{"uri":["sip:alice@example.com"]},{"tn":["12155551213"]}]
-        div: 
-          type: string
-          description: Identifying the diverting user; i.e., the user identified in the Request-URI before retargeting, taken from the History-Info header field
-          example: {"tn":"121555551213"}
-        iat: 
-          type: integer
-          description: Time since 1 January 1970 in Numeric Date format
-          example: 1664199282
-        orig: 
-          type: string
-          description: Identifying the calling user
-          example: {"tn":"12155551212"}
-        origid: 
-          type: string
-          description: The value of "origid" claim is a Universally Unique Identifier (UUID)
-          example: 123e4567-e89b-12d3-a456-426655440000
-        rph: 
-          type: array
-          items:
-            type: string
-          description: Array of strings that correspond to the r-values indicated in the SIP Resource-Priority header field. Contains assertion of the priority level of the user to be used for a given communication session
-          example: [{"auth":["ets.0", "wps.0"]}]
-        sph: 
-          type: string
-          description: Contains header field value "psap-callback" of the SIP Priority header field
-          example: psap-callback
-        hi: 
-          type: string
-          description: The "index" header field parameter is included in the entry identifying the diverting user in the History-Info header field
-        tn: 
-          type: string
-          description: allowed characters as for local-number-digits and global-number-digits defined in RFC 3966 [22]. The number needs to be in canonical form according to RFC 8224 [252]
-        uri: 
-          type: string
-          description: A SIP URI as specified in RFC 3261 [26] following the generic guidelines in RFC. Used if the "orig" or "dest" is given in a SIP URI
+          description: A SIP URI following the generic guidelines in RFC. Used if the "orig" or "dest" is given in a SIP URI
+          example: sip:alice@example.com
     signingResponse:
       title: signingResponse
       type: object
@@ -976,6 +940,7 @@ components:
           items:
             type: string
           description: Contains the SIP header field(s) protected by claims in the PASSporT(s) of the identityHeaders array
+          example: ["History-Info","Resource-Priority"] 
     verificationResponse:
       title: verificationResponse
       type: object
@@ -985,12 +950,14 @@ components:
           items:
             type: string
           description: Parameter informing of the result of the verification of diverting identities. For each verified identity the verstat parameter is added to the verified identity
+          example: ["12155551215", "TN-Validation-Passed"]
         verstatValue: 
           type: string
           description: Parameter informing of the result of the verification of originating identity. To be used in the verstat parameter added to the verified identity. The parameter is mandatory if the request contained a PASSporT SHAKEN JSON Web Token
         verstatPriority: 
           type: string
           description: Parameter informing of the result of the verification of the Resource-Priority header field and optionally the header field value "psap-callback" of the Priority header field
+          example: RPH-Validation-Passed
         verifyResults:
           description: Each array entry contains the verification results of a PASSporT contained in the request
           type: array
@@ -1014,6 +981,7 @@ components:
                     reasonCode: 
                       type: integer
                       description: Identifies the 4xx failure reason code of the failing PASSporT. Optional since they are included only when the verifyResult "status" parameter has a value of "fail"
+                      example: 
                     reasonText: 
                       type: string
                       description: Identifies the failure text associated with the 4xx failure reason code. Optional since they are included only when the verifyResult "status" parameter has a value of "fail"

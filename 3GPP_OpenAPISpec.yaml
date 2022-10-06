@@ -726,8 +726,6 @@ components:
         - iat
         - orig
         - origid
-        - rph
-        - sph
       properties:
         ppt:
           type: string
@@ -743,10 +741,6 @@ components:
             type: string
           description: Identifying the called user taken from the To header field for a shaken or rph PASSporT, and from the Request-URI after retargeting for a div PASSporT
           example: [{"uri":["sip:alice@example.com"]},{"tn":["12155551213"]}]
-        div: 
-          type: string
-          description: Identifying the diverting user; i.e., the user identified in the Request-URI before retargeting, taken from the History-Info header field
-          example: {"tn":"121555551213"}
         iat: 
           type: integer
           description: Time since 1 January 1970 in Numeric Date format
@@ -759,16 +753,6 @@ components:
           type: string
           description: The value of "origid" claim is a Universally Unique Identifier (UUID)
           example: 123e4567-e89b-12d3-a456-426655440000
-        rph: 
-          type: array
-          items:
-            type: string
-          description: Array of strings that correspond to the r-values indicated in the SIP Resource-Priority header field. Contains assertion of the priority level of the user to be used for a given communication session
-          example: [{"auth":["ets.0", "wps.0"]}]
-        sph: 
-          type: string
-          description: Contains header field value "psap-callback" of the SIP Priority header field
-          example: psap-callback
         hi: 
           type: string
           description: The "index" header field parameter is included in the entry identifying the diverting user in the History-Info header field
@@ -786,24 +770,17 @@ components:
       type: object
       required: 
         - dest
-        - div
         - iat
         - orig
+        - origid
+        - rph
       properties:
-        attest: 
-          type: string
-          example: A , B or C
-          description: Identifying the relation between the service provider attesting the identity and the subscriber
         dest:
           type: array
           items:
             type: string
           description: Identifying the called user taken from the To header field for a shaken or rph PASSporT, and from the Request-URI after retargeting for a div PASSporT
           example: [{"uri":["sip:alice@example.com"]},{"tn":["12155551213"]}]
-        div: 
-          type: string
-          description: Identifying the diverting user; i.e., the user identified in the Request-URI before retargeting, taken from the History-Info header field
-          example: {"tn":"121555551213"}
         iat: 
           type: integer
           description: Time since 1 January 1970 in Numeric Date format
@@ -812,10 +789,6 @@ components:
           type: string
           description: Identifying the calling user
           example: {"tn":"12155551212"}
-        origid: 
-          type: string
-          description: The value of "origid" claim is a Universally Unique Identifier (UUID)
-          example: 123e4567-e89b-12d3-a456-426655440000
         rph: 
           type: array
           items:
@@ -843,14 +816,10 @@ components:
       type: object
       required: 
         - dest
+        - div
         - iat
         - orig
-        - rph
       properties:
-        attest: 
-          type: string
-          example: A , B or C
-          description: Identifying the relation between the service provider attesting the identity and the subscriber
         dest:
           type: array
           items:
@@ -869,20 +838,6 @@ components:
           type: string
           description: Identifying the calling user
           example: {"tn":"12155551212"}
-        origid: 
-          type: string
-          description: The value of "origid" claim is a Universally Unique Identifier (UUID)
-          example: 123e4567-e89b-12d3-a456-426655440000
-        rph: 
-          type: array
-          items:
-            type: string
-          description: Array of strings that correspond to the r-values indicated in the SIP Resource-Priority header field. Contains assertion of the priority level of the user to be used for a given communication session
-          example: [{"auth":["ets.0", "wps.0"]}]
-        sph: 
-          type: string
-          description: Contains header field value "psap-callback" of the SIP Priority header field
-          example: psap-callback
         hi: 
           type: string
           description: The "index" header field parameter is included in the entry identifying the diverting user in the History-Info header field

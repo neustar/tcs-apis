@@ -24,10 +24,10 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v2.3.1
 
-      #- name: Install and Build 🔧
-       # run: |
-        #  npm install --force
-         # npm run build
+      - name: Install and Build 🔧
+        run: |
+          npm install --force
+          npm run build
           
       - name: Build 3GPP HTML
         run: |

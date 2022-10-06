@@ -24,14 +24,13 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v2.3.1
 
-      - name: Install and Build 🔧
-        run: |
-          npm install --force
-          npm run build
+      #- name: Install and Build 🔧
+       # run: |
+        #  npm install --force
+         # npm run build
           
       - name: Build 3GPP HTML
         run: |
-          npm install redoc-cli
           redoc-cli bundle -o build/3gpp.html 3GPP_OpenAPISpec.yaml
           
       - name: Deploy 🚀

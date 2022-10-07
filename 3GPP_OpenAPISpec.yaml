@@ -730,7 +730,7 @@ components:
         ppt:
           type: string
           example: shaken, div or rph
-          description: Optional field. If it's empty request is considered as "shaken" request. If "div", request is considered as "divSigning" request and if "rph", request is considered as "rphSigning" request
+          description: Optional field. If it's empty, then request is considered as "shaken" request. If "div", then request is considered as "divSigning" request and if "rph", then request is considered as "rphSigning" request
         attest: 
           type: string
           example: A , B or C
@@ -739,7 +739,7 @@ components:
           type: array
           items:
             type: string
-          description: Identifying the called user taken from the To header field for a shaken or rph PASSporT, and from the Request-URI after retargeting for a div PASSporT
+          description: Identifying the called user taken from the To header field for a "shaken" or "rph" PASSporT, and from the Request-URI after retargeting for a "div" PASSporT
           example: [{"uri":["sip:alice@example.com"]},{"tn":["12155551213"]}]
         iat: 
           type: integer
@@ -751,7 +751,7 @@ components:
           example: {"tn":"12155551212"}
         origid: 
           type: string
-          description: The value of "origid" claim is a Universally Unique Identifier (UUID)
+          description: An opaque origination identifier in the recommended format of a Universally Unique Identifier (UUID)
           example: 123e4567-e89b-12d3-a456-426655440000
         hi: 
           type: string
@@ -779,7 +779,7 @@ components:
           type: array
           items:
             type: string
-          description: Identifying the called user taken from the To header field for a shaken or rph PASSporT, and from the Request-URI after retargeting for a div PASSporT
+          description: Identifying the called user taken from the To header field for a "shaken" or "rph" PASSporT, and from the Request-URI after retargeting for a "div" PASSporT
           example: [{"uri":["sip:alice@example.com"]},{"tn":["12155551213"]}]
         iat: 
           type: integer
@@ -824,11 +824,11 @@ components:
           type: array
           items:
             type: string
-          description: Identifying the called user taken from the To header field for a shaken or rph PASSporT, and from the Request-URI after retargeting for a div PASSporT
+          description: Identifying the called user taken from the To header field for a "shaken" or "rph" PASSporT, and from the Request-URI after retargeting for a "div" PASSporT
           example: [{"uri":["sip:alice@example.com"]},{"tn":["12155551213"]}]
         div: 
           type: string
-          description: Identifying the diverting user; i.e., the user identified in the Request-URI before retargeting, taken from the History-Info header field
+          description: Identifying the diverting user; i.e., the user identified in the Request-URI before retargeting
           example: {"tn":"121555551213"}
         iat: 
           type: integer
@@ -858,7 +858,7 @@ components:
       properties:
         identityHeader:
           type: string
-          description: Identity header field value as specified in RFC 8224 [252]. This string cannot be NULL
+          description: Identity header field value according to RFC 8224. This string cannot be NULL
           example: "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
     errorResponse400a:
       title: errorResponseMissingRequestBody

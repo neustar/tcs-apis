@@ -726,6 +726,8 @@ components:
         - iat
         - orig
         - origid
+        - rph
+        - sph
       properties:
         ppt:
           type: string
@@ -735,91 +737,6 @@ components:
           type: string
           example: A , B or C
           description: Identifying the relation between the service provider attesting the identity and the subscriber
-        dest:
-          type: array
-          items:
-            type: string
-          description: Identifying the called user taken from the To header field for a "shaken" or "rph" PASSporT, and from the Request-URI after retargeting for a "div" PASSporT
-          example: [{"uri":["sip:alice@example.com"]},{"tn":["12155551213"]}]
-        iat: 
-          type: integer
-          description: Time since 1 January 1970 in Numeric Date format
-          example: 1664199282
-        orig: 
-          type: string
-          description: Identifying the calling user
-          example: {"tn":"12155551212"}
-        origid: 
-          type: string
-          description: An opaque origination identifier in the recommended format of a Universally Unique Identifier (UUID)
-          example: 123e4567-e89b-12d3-a456-426655440000
-        hi: 
-          type: string
-          description: The "index" header field parameter is included in the entry identifying the diverting user in the History-Info header field
-          example: "1.2.1"
-        tn: 
-          type: string
-          description: allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
-          example: "12155551212"
-        uri: 
-          type: string
-          description: A SIP URI following the generic guidelines in RFC. Used if the "orig" or "dest" is given in a SIP URI
-          example: sip:alice@example.com
-    rphSigningRequest:
-      title: signingRequest
-      type: object
-      required: 
-        - dest
-        - iat
-        - orig
-        - origid
-        - rph
-      properties:
-        dest:
-          type: array
-          items:
-            type: string
-          description: Identifying the called user taken from the To header field for a "shaken" or "rph" PASSporT, and from the Request-URI after retargeting for a "div" PASSporT
-          example: [{"uri":["sip:alice@example.com"]},{"tn":["12155551213"]}]
-        iat: 
-          type: integer
-          description: Time since 1 January 1970 in Numeric Date format
-          example: 1664199282
-        orig: 
-          type: string
-          description: Identifying the calling user
-          example: {"tn":"12155551212"}
-        rph: 
-          type: array
-          items:
-            type: string
-          description: Array of strings that correspond to the r-values indicated in the SIP Resource-Priority header field. Contains assertion of the priority level of the user to be used for a given communication session
-          example: [{"auth":["ets.0", "wps.0"]}]
-        sph: 
-          type: string
-          description: Contains header field value "psap-callback" of the SIP Priority header field
-          example: psap-callback
-        hi: 
-          type: string
-          description: The "index" header field parameter is included in the entry identifying the diverting user in the History-Info header field
-          example: "1.2.1"
-        tn: 
-          type: string
-          description: allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
-          example: "12155551212"
-        uri: 
-          type: string
-          description: A SIP URI following the generic guidelines in RFC. Used if the "orig" or "dest" is given in a SIP URI
-          example: sip:alice@example.com
-    divSigningRequest:
-      title: signingRequest
-      type: object
-      required: 
-        - dest
-        - div
-        - iat
-        - orig
-      properties:
         dest:
           type: array
           items:
@@ -838,18 +755,137 @@ components:
           type: string
           description: Identifying the calling user
           example: {"tn":"12155551212"}
+        origid: 
+          type: string
+          description: An opaque origination identifier in the recommended format of a Universally Unique Identifier (UUID)
+          example: 123e4567-e89b-12d3-a456-426655440000
+        rph: 
+          type: array
+          items:
+            type: string
+          description: Array of strings that correspond to the r-values indicated in the SIP Resource-Priority header field. Contains assertion of the priority level of the user to be used for a given communication session
+          example: [{"auth":["ets.0", "wps.0"]}]
+        sph: 
+          type: string
+          description: Contains header field value "psap-callback" of the SIP Priority header field
+          example: psap-callback
         hi: 
           type: string
-          description: The "index" header field parameter is included in the entry identifying the diverting user in the History-Info header field
-          example: "1.2.1"
+          description: The "index" header field parameter identifying the diverting user in the History-Info header field
         tn: 
           type: string
-          description: allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
-          example: "12155551212"
+          description: A globally routable number in canonical form according to RFC 8224
         uri: 
           type: string
-          description: A SIP URI following the generic guidelines in RFC. Used if the "orig" or "dest" is given in a SIP URI
-          example: sip:alice@example.com
+          description: A SIP URI according to RFC 3261. Used if the "orig" or "dest" is given as a SIP URI
+    rphSigningRequest:
+      title: signingRequest
+      type: object
+      required: 
+        - dest
+        - div
+        - iat
+        - orig
+      properties:
+        attest: 
+          type: string
+          example: A , B or C
+          description: Identifying the relation between the service provider attesting the identity and the subscriber
+        dest:
+          type: array
+          items:
+            type: string
+          description: Identifying the called user taken from the To header field for a "shaken" or "rph" PASSporT, and from the Request-URI after retargeting for a "div" PASSporT
+          example: [{"uri":["sip:alice@example.com"]},{"tn":["12155551213"]}]
+        div: 
+          type: string
+          description: Identifying the diverting user; i.e., the user identified in the Request-URI before retargeting
+          example: {"tn":"121555551213"}
+        iat: 
+          type: integer
+          description: Time since 1 January 1970 in Numeric Date format
+          example: 1664199282
+        orig: 
+          type: string
+          description: Identifying the calling user
+          example: {"tn":"12155551212"}
+        origid: 
+          type: string
+          description: An opaque origination identifier in the recommended format of a Universally Unique Identifier (UUID)
+          example: 123e4567-e89b-12d3-a456-426655440000
+        rph: 
+          type: array
+          items:
+            type: string
+          description: Array of strings that correspond to the r-values indicated in the SIP Resource-Priority header field. Contains assertion of the priority level of the user to be used for a given communication session
+          example: [{"auth":["ets.0", "wps.0"]}]
+        sph: 
+          type: string
+          description: Contains header field value "psap-callback" of the SIP Priority header field
+          example: psap-callback
+        hi: 
+          type: string
+          description: The "index" header field parameter in the History-Info header field
+        tn: 
+          type: string
+          description: A globally routable number in canonical form according to RFC 8224
+        uri: 
+          type: string
+          description: A SIP URI according to RFC 3261. Used if the "orig" or "dest" is given as a SIP URI
+    divSigningRequest:
+      title: signingRequest
+      type: object
+      required: 
+        - dest
+        - iat
+        - orig
+        - rph
+      properties:
+        attest: 
+          type: string
+          example: A , B or C
+          description: Identifying the relation between the service provider attesting the identity and the subscriber
+        dest:
+          type: array
+          items:
+            type: string
+          description: Identifying the called user taken from the To header field for a "shaken" or "rph" PASSporT, and from the Request-URI after retargeting for a "div" PASSporT
+          example: [{"uri":["sip:alice@example.com"]},{"tn":["12155551213"]}]
+        div: 
+          type: string
+          description: Identifying the diverting user; i.e., the user identified in the Request-URI before retargeting
+          example: {"tn":"121555551213"}
+        iat: 
+          type: integer
+          description: Time since 1 January 1970 in Numeric Date format
+          example: 1664199282
+        orig: 
+          type: string
+          description: Identifying the calling user
+          example: {"tn":"12155551212"}
+        origid: 
+          type: string
+          description: An opaque origination identifier in the recommended format of a Universally Unique Identifier (UUID)
+          example: 123e4567-e89b-12d3-a456-426655440000
+        rph: 
+          type: array
+          items:
+            type: string
+          description: Array of strings that correspond to the r-values indicated in the SIP Resource-Priority header field. Contains assertion of the priority level of the user to be used for a given communication session
+          example: [{"auth":["ets.0", "wps.0"]}]
+        sph: 
+          type: string
+          description: Contains header field value "psap-callback" of the SIP Priority header field
+          example: psap-callback
+        hi: 
+          type: string
+          description: The "index" header field parameter identifying the diverting user in the History-Info header field
+        tn: 
+          type: string
+          description: A globally routable number in canonical form according to RFC 8224
+        uri: 
+          type: string
+          description: A SIP URI according to RFC 3261. Used if the "orig" or "dest" is given as a SIP URI
     signingResponse:
       title: signingResponse
       type: object
@@ -911,17 +947,17 @@ components:
       properties:
         identityHeader:
           type: string
-          description: This parameter contains the "shaken" Identity header field value to be verified
+          description: This parameter contains a "shaken" Identity header field value to be verified
           example: "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
         identityHeaders:
           type: array
           items:
             type: string
-          description: This array contains the "div" and "rph" Identity header field values to be verified
+          description: This parameter contains one or more "div" and/or "rph" Identity header field values to be verified 
           example: [eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\",eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\"]
         to: 
           type: string
-          description: The destination identity taken from the To header field. Used when no div claim is included
+          description: The destination identity taken from the To header field. Used when no "div" claim is included
           example: "sip:alice@example.com or 12155551213"
         dest: 
           type: string
@@ -939,8 +975,7 @@ components:
           type: array
           items:
             type: string
-          description: Contains the SIP header field(s) protected by claims in the PASSporT(s) of the identityHeaders array
-          example: ["History-Info","Resource-Priority"] 
+          description: Contains the SIP header field(s) protected by claims in the PASSporT(s) of the identityHeaders array (i.e., "rph" and/or "div")
     verificationResponse:
       title: verificationResponse
       type: object
@@ -949,15 +984,13 @@ components:
           type: array
           items:
             type: string
-          description: Parameter informing of the result of the verification of diverting identities. For each verified identity the verstat parameter is added to the verified identity
-          example: ["12155551215", "TN-Validation-Passed"]
+          description: Parameter informing of the result of the verification of diverting identities. For each verified identity, the "verstat" parameter is added to the verified identity
         verstatValue: 
           type: string
-          description: Parameter informing of the result of the verification of originating identity. To be used in the verstat parameter added to the verified identity. The parameter is mandatory if the request contained a PASSporT SHAKEN JSON Web Token
+          description: Parameter informing of the result of the verification of originating identity. To be used in the "verstat" parameter added to the verified identity. The parameter is mandatory if the request contains a PASSporT "shaken" JSON Web Token
         verstatPriority: 
           type: string
           description: Parameter informing of the result of the verification of the Resource-Priority header field and optionally the header field value "psap-callback" of the Priority header field
-          example: RPH-Validation-Passed
         verifyResults:
           description: Each array entry contains the verification results of a PASSporT contained in the request
           type: array
@@ -969,7 +1002,7 @@ components:
               - status
             properties:
               verifyResult: 
-                description: Contains the verification results of a single Identity header field contained in the identityHeader parameter or an entry of the identityHeaders array of the verification request.The ppt and status parameters are always present. The inclusion of the other parameters in the tuple depends on the value of the status parameter
+                description: Contains the verification results of a single Identity header field contained in the identityHeader parameter or an entry in the identityHeaders array of the verification request. The "ppt" and "status" parameters are always present. The inclusion of the other parameters depends on the value of the "status" parameter
                 type: array
                 items:
                   type: object
@@ -980,23 +1013,22 @@ components:
                   properties:
                     reasonCode: 
                       type: integer
-                      description: Identifies the 4xx failure reason code of the failing PASSporT. Optional since they are included only when the verifyResult "status" parameter has a value of "fail"
-                      example: 
+                      description: Identifies the failure reason code of the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
                     reasonText: 
                       type: string
-                      description: Identifies the failure text associated with the 4xx failure reason code. Optional since they are included only when the verifyResult "status" parameter has a value of "fail"
+                      description: Identifies the failure text associated with the failure reason code. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
                     passport: 
                       type: string
-                      description: Contains the failing PASSporT. Optional since they are included only when the verifyResult "status" parameter has a value of "fail"
+                      description: Contains the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
                     validClaims: 
                       type: string
-                      description: The validClaims parameter contains the payload of the verified PASSporT. Optional since they are included only when the verifyResult "status" parameter has a value of "pass"
+                      description: This parameter contains the payload of the verified PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "pass"
               ppt: 
                 type: string
-                description: Identifies the type of PASSporT associated with this array entry
+                description: Identifies the type of PASSporT associated with this verifyResult entry
               status: 
                 type: string
-                description: Identifies the verification result of the PASSporT associated with this array entry
+                description: Identifies the verification result of the PASSporT associated with this verifyResult entry
     divVerificationRequest:
       title: divVerificationRequest
       type: object
@@ -1015,11 +1047,11 @@ components:
           type: array
           items:
             type: string
-          description: This array contains the "div" and "rph" Identity header field values to be verified
+          description: This parameter contains one or more "div" and/or "rph" Identity header field values to be verified
           example: [eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\",eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\"]
         to: 
           type: string
-          description: The destination identity taken from the To header field. Used when no div claim is included
+          description: The destination identity taken from the To header field. Used when no "div" claim is included
           example: "sip:alice@example.com or 12155551213"
         dest: 
           type: string
@@ -1037,7 +1069,7 @@ components:
           type: array
           items:
             type: string
-          description: Contains the SIP header field(s) protected by claims in the PASSporT(s) of the identityHeaders array
+          description: Contains the SIP header field(s) protected by claims in the PASSporT(s) of the identityHeaders array (i.e., "rph" and/or "div")
     rphVerificationRequest:
       title: rphVerificationRequest
       type: object
@@ -1056,11 +1088,11 @@ components:
           type: array
           items:
             type: string
-          description: This array contains the "div" and "rph" Identity header field values to be verified
+          description: This parameter contains one or more "div" and/or "rph" Identity header field values to be verified
           example: [eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\",eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\"]
         to: 
           type: string
-          description: The destination identity taken from the To header field. Used when no div claim is included
+          description: The destination identity taken from the To header field. Used when no "div" claim is included
           example: "sip:alice@example.com or 12155551213"
         dest: 
           type: string
@@ -1078,4 +1110,4 @@ components:
           type: array
           items:
             type: string
-          description: Contains the SIP header field(s) protected by claims in the PASSporT(s) of the identityHeaders array
+          description: Contains the SIP header field(s) protected by claims in the PASSporT(s) of the identityHeaders array (i.e., "rph" and/or "div")

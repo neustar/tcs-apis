@@ -24,123 +24,34 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/signingRequest'
-      responses:
-        '200':
-          description: OK
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/signingResponse'
-        '400':
-          description: Service error in processing request 
-          content:
-            application/json:
-              examples:
-                missingRequestBody:
-                  summary: Missing Request Body
-                  value:
-                    error: Missing Request body
-                missingMandatoryParameter:
-                  summary: Missing Mandatory Parameter
-                  value:
-                    error: Missing Mandatory Parameter
-                invalidParameterValue:
-                  summary: Invalid Parameter Value
-                  value:
-                    error: Invalid Parameter Value
-                failedToParseMessageBody:
-                  summary: Failed To Parse Message Body
-                  value:
-                    error: Failed To Parse Message Body
-        '406':
-          description: Service error in processing request 
-          content:
-            application/json:
-              schema: 
-                required: 
-                  - error
-                type: object
-                properties: 
-                  error: 
-                    type: string
-                    example: Requested response body type is not supported
-                    description: The request could not be processed due to a not supported message body format
-        '404':
-          description: Service error in processing request 
-          content:
-            application/json:
-              schema: 
-                required: 
-                  - error
-                type: object
-                properties: 
-                  error: 
-                    type: string
-                    example: Requested resource not found
-                    description: The request could not be processed due to no resource available related to the Request-URI
-        '415':
-          description: Service error in processing request 
-          content:
-            application/json:
-              schema: 
-                required: 
-                  - error
-                type: object
-                properties: 
-                  error: 
-                    type: string
-                    example: Unsupported request body type
-                    description: The request could not be processed due to not supported message body
-        '411':
-          description: Service error in processing request 
-          content:
-            application/json:
-              schema: 
-                required: 
-                  - error
-                type: object
-                properties: 
-                  error: 
-                    type: string
-                    example: Missing mandatory Content-Length headers
-                    description: The request could not be processed due to a missing Content-Length header
-        '405':
-          description: Policy error in processing request 
-          content:
-            application/json:
-              schema: 
-                required: 
-                  - error
-                type: object
-                properties: 
-                  error: 
-                    type: string
-                    example: Method not allowed
-                    description: The resource was invoked with unsupported operation
-        '500':
-          description: Policy error in processing request 
-          content:
-            application/json:
-              schema: 
-                required: 
-                  - error
-                type: object
-                properties: 
-                  error: 
-                    type: string
-                    example: Internal server error
-                    description: The request failed due to internal error
-  /shakenSigning:
-    post:
-      tags:
-        - signing
-      summary: Shaken Signing (STI-AS) Request
-      operationId: shakenSigningPOST
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/shakenSigningRequest'
+      x-code-samples:
+        - lang: curl
+          label: SHAKEN
+          source: |
+            Request: 
+            {
+              "attest": "A , B or C",
+              "dest": [
+                {
+                  "uri": [
+                    "sip:alice@example.com"
+                  ]
+                },
+                {
+                  "tn": [
+                    "12155551213"
+                  ]
+                }
+              ],
+              "iat": 1664199282,
+              "orig": {
+                "tn": "12155551212"
+              },
+              "origid": "123e4567-e89b-12d3-a456-426655440000",
+              "hi": "string",
+              "tn": "string",
+              "uri": "string"
+            }
       responses:
         '200':
           description: OK
@@ -526,123 +437,21 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/verificationRequest'
-      responses:
-        '200':
-          description: OK
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/verificationResponse'
-        '400':
-          description: Service error in processing request 
-          content:
-            application/json:
-              examples:
-                missingRequestBody:
-                  summary: Missing Request Body
-                  value:
-                    error: Missing request body
-                missingMandatoryParameter:
-                  summary: Missing Mandatory Parameter
-                  value:
-                    error: Missing Mandatory Parameter
-                invalidParameterValue:
-                  summary: Invalid Parameter Value
-                  value:
-                    error: Invalid Parameter Value
-                failedToParseMessageBody:
-                  summary: Failed To Parse Message Body
-                  value:
-                    error: Failed To Parse Message Body
-        '406':
-          description: Service error in processing request 
-          content:
-            application/json:
-              schema: 
-                required: 
-                  - error
-                type: object
-                properties: 
-                  error: 
-                    type: string
-                    example: Requested response body type is not supported
-                    description: The request could not be processed due to a not supported message body format
-        '404':
-          description: Service error in processing request 
-          content:
-            application/json:
-              schema: 
-                required: 
-                  - error
-                type: object
-                properties: 
-                  error: 
-                    type: string
-                    example: Requested resource not found
-                    description: The request could not be processed due to no resource available related to the Request-URI
-        '415':
-          description: Service error in processing request 
-          content:
-            application/json:
-              schema: 
-                required: 
-                  - error
-                type: object
-                properties: 
-                  error: 
-                    type: string
-                    example: Unsupported request body type
-                    description: The request could not be processed due to not supported message body
-        '411':
-          description: Service error in processing request 
-          content:
-            application/json:
-              schema: 
-                required: 
-                  - error
-                type: object
-                properties: 
-                  error: 
-                    type: string
-                    example: Missing mandatory Content-Length headers
-                    description: The request could not be processed due to a missing Content-Length header
-        '405':
-          description: Policy error in processing request 
-          content:
-            application/json:
-              schema: 
-                required: 
-                  - error
-                type: object
-                properties: 
-                  error: 
-                    type: string
-                    example: Method not allowed
-                    description: The resource was invoked with unsupported operation
-        '500':
-          description: Policy error in processing request 
-          content:
-            application/json:
-              schema: 
-                required: 
-                  - error
-                type: object
-                properties: 
-                  error: 
-                    type: string
-                    example: Internal server error
-                    description: The request failed due to internal error
-  /shakenVerification:
-    post:
-      tags:
-        - verification
-      summary: Shaken Verification (STI-VS) Request
-      operationId: shakenVerificationPost
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/shakenVerificationRequest'
+      x-code-samples:
+        - lang: curl
+          label: SHAKEN
+          source: |
+            Request: 
+            {
+              "identityHeader": "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\"",
+              "to": "sip:alice@example.com or 12155551213",
+              "dest": "sip:alice@example.com or 12155551213",
+              "time": 1664216863,
+              "from": "sip:alice@example.com or 12155551213",
+              "protectedHeaders": [
+                "string"
+              ]
+            }
       responses:
         '200':
           description: OK

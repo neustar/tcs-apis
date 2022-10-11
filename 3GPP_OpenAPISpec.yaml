@@ -569,13 +569,112 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/divVerificationRequest'
+      x-code-samples:
+        - lang: curl
+          label: 1 Forwarding
+          source: |
+            Request: 
+            {
+              "identityHeader": "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjM4MzkzNjE0LCJvcmlnIjp7InRuIjoiMTcwMzU1NTAwMDEifSwib3JpZ2lkIjoiZTUxNzM3MDMtYWNjZS00MzM4LTg3ODYtZDEzNDg2Y2I0MjM2IiwicmNkIjp7Im5hbSI6IkFsaWNlIn0sInJjZGkiOnsiL25hbSI6InNoYTI1Ni1POFVRWXBjOFJZMWFieTJOWktBakpHTlVyWDRHU3g1T0FKN0lvR21hTUVNPSJ9fQ.8h3_745L_J8VyJyp3TL5woU6HsJLruc_7yT9FreBHXF6YfS4ZUGeKIK4HuFAWzKEakoEWvM5nZgvcwAmqxbn4w;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"shaken\"",
+              "identityHeaders": [
+                "eyJhbGciOiJFUzI1NiIsInBwdCI6ImRpdiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAyIl19LCJkaXYiOnsidG4iOiIxNTcxNTU1MDAwMCJ9LCJpYXQiOjE2MzgzOTM4NjksIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9fQ.Hc73JFhnXgocq9q0nldHR5SdMHNBftGfQouslhDT0BPhGmcCnOGiN9L-J3CQsbd2z7wA6hqVSC2gAfPc7lSYiQ;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"div\"",
+              ],
+              "from" : "\"Alice\" <sip:+17035550001@example.com>",
+              "to" : "\"John\" <sip:+15715550002@example.com>",
+              "dest": "\"Bob\" <sip:+15715550000@example.com>",
+              "time": 1664216863,
+              "protectedHeaders": [
+                "string"
+              ]
+            }
+            Response: 
+            {
+              "divResult": [
+                {
+                  "15715550000,TN-Validation-Passed",
+                }
+              ],
+              "verifyResults": [
+                {
+                  "verifyResult": [
+                    {
+                      "reasonCode": 200,
+                      "reasonText": "Passed",
+                      "passport": "\"Identity\":\"eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjM4MzkzNjE0LCJvcmlnIjp7InRuIjoiMTcwMzU1NTAwMDEifSwib3JpZ2lkIjoiZTUxNzM3MDMtYWNjZS00MzM4LTg3ODYtZDEzNDg2Y2I0MjM2IiwicmNkIjp7Im5hbSI6IkFsaWNlIn0sInJjZGkiOnsiL25hbSI6InNoYTI1Ni1POFVRWXBjOFJZMWFieTJOWktBakpHTlVyWDRHU3g1T0FKN0lvR21hTUVNPSJ9fQ.8h3_745L_J8VyJyp3TL5woU6HsJLruc_7yT9FreBHXF6YfS4ZUGeKIK4HuFAWzKEakoEWvM5nZgvcwAmqxbn4w;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"shaken\"",
+                      "validClaims": "\"Identity\":\"eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjM4MzkzNjE0LCJvcmlnIjp7InRuIjoiMTcwMzU1NTAwMDEifSwib3JpZ2lkIjoiZTUxNzM3MDMtYWNjZS00MzM4LTg3ODYtZDEzNDg2Y2I0MjM2IiwicmNkIjp7Im5hbSI6IkFsaWNlIn0sInJjZGkiOnsiL25hbSI6InNoYTI1Ni1POFVRWXBjOFJZMWFieTJOWktBakpHTlVyWDRHU3g1T0FKN0lvR21hTUVNPSJ9fQ.8h3_745L_J8VyJyp3TL5woU6HsJLruc_7yT9FreBHXF6YfS4ZUGeKIK4HuFAWzKEakoEWvM5nZgvcwAmqxbn4w;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"shaken\""
+                    },
+                    {
+                      "reasonCode": 200,
+                      "reasonText": "Passed",
+                      "passport": "\"Identity\":\"eyJhbGciOiJFUzI1NiIsInBwdCI6ImRpdiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAyIl19LCJkaXYiOnsidG4iOiIxNTcxNTU1MDAwMCJ9LCJpYXQiOjE2MzgzOTM4NjksIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9fQ.Hc73JFhnXgocq9q0nldHR5SdMHNBftGfQouslhDT0BPhGmcCnOGiN9L-J3CQsbd2z7wA6hqVSC2gAfPc7lSYiQ;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"div\"",
+                      "validClaims": "\"Identity\":\"eyJhbGciOiJFUzI1NiIsInBwdCI6ImRpdiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAyIl19LCJkaXYiOnsidG4iOiIxNTcxNTU1MDAwMCJ9LCJpYXQiOjE2MzgzOTM4NjksIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9fQ.Hc73JFhnXgocq9q0nldHR5SdMHNBftGfQouslhDT0BPhGmcCnOGiN9L-J3CQsbd2z7wA6hqVSC2gAfPc7lSYiQ;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"div\""
+                    }
+                  ],
+                  "ppt": "div",
+                  "status": "pass"
+                }
+              ]
+            }
+        - lang: curl
+          label: 2 Forwarding
+          source: |
+            Request: 
+            {
+              "identityHeader": "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjM4MzkzNjE0LCJvcmlnIjp7InRuIjoiMTcwMzU1NTAwMDEifSwib3JpZ2lkIjoiZTUxNzM3MDMtYWNjZS00MzM4LTg3ODYtZDEzNDg2Y2I0MjM2IiwicmNkIjp7Im5hbSI6IkFsaWNlIn0sInJjZGkiOnsiL25hbSI6InNoYTI1Ni1POFVRWXBjOFJZMWFieTJOWktBakpHTlVyWDRHU3g1T0FKN0lvR21hTUVNPSJ9fQ.8h3_745L_J8VyJyp3TL5woU6HsJLruc_7yT9FreBHXF6YfS4ZUGeKIK4HuFAWzKEakoEWvM5nZgvcwAmqxbn4w;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"shaken\"",
+              "identityHeaders": [
+                "eyJhbGciOiJFUzI1NiIsInBwdCI6ImRpdiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAyIl19LCJkaXYiOnsidG4iOiIxNTcxNTU1MDAwMCJ9LCJpYXQiOjE2MzgzOTM4NjksIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9fQ.Hc73JFhnXgocq9q0nldHR5SdMHNBftGfQouslhDT0BPhGmcCnOGiN9L-J3CQsbd2z7wA6hqVSC2gAfPc7lSYiQ;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"div\"",
+                "eyJhbGciOiJFUzI1NiIsInBwdCI6ImRpdiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAzIl19LCJkaXYiOnsidG4iOiIxNTcxNTU1MDAwMiJ9LCJpYXQiOjE2MzgzOTQxODgsIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9fQ.Y9BbjcndUXyMZl6j1GsQpYgGE7VpPobLmwIqcYNELu3Cx0phwVEHre0TQHZiQB5N-Vbl-GveTphJDkfbfStBkA;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"div\""
+              ],
+              "from" : "\"Alice\" <sip:+17035550001@example.com>",
+              "to" : "\"Rob\" <sip:+15715550003@example.com>",
+              "dest": "\"Bob\" <sip:+15715550000@example.com>",
+              "time": 1664216863,
+              "protectedHeaders": [
+                "string"
+              ]
+            }
+            Response: 
+            {
+              "divResult": [
+                {
+                  "15715550000,TN-Validation-Passed",
+                  "15715550002,TN-Validation-Passed"
+                }
+              ],
+              "verifyResults": [
+                {
+                  "verifyResult": [
+                    {
+                      "reasonCode": 200,
+                      "reasonText": "Passed",
+                      "passport": "\"Identity\":\"eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjM4MzkzNjE0LCJvcmlnIjp7InRuIjoiMTcwMzU1NTAwMDEifSwib3JpZ2lkIjoiZTUxNzM3MDMtYWNjZS00MzM4LTg3ODYtZDEzNDg2Y2I0MjM2IiwicmNkIjp7Im5hbSI6IkFsaWNlIn0sInJjZGkiOnsiL25hbSI6InNoYTI1Ni1POFVRWXBjOFJZMWFieTJOWktBakpHTlVyWDRHU3g1T0FKN0lvR21hTUVNPSJ9fQ.8h3_745L_J8VyJyp3TL5woU6HsJLruc_7yT9FreBHXF6YfS4ZUGeKIK4HuFAWzKEakoEWvM5nZgvcwAmqxbn4w;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"shaken\"",
+                      "validClaims": "\"Identity\":\"eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjM4MzkzNjE0LCJvcmlnIjp7InRuIjoiMTcwMzU1NTAwMDEifSwib3JpZ2lkIjoiZTUxNzM3MDMtYWNjZS00MzM4LTg3ODYtZDEzNDg2Y2I0MjM2IiwicmNkIjp7Im5hbSI6IkFsaWNlIn0sInJjZGkiOnsiL25hbSI6InNoYTI1Ni1POFVRWXBjOFJZMWFieTJOWktBakpHTlVyWDRHU3g1T0FKN0lvR21hTUVNPSJ9fQ.8h3_745L_J8VyJyp3TL5woU6HsJLruc_7yT9FreBHXF6YfS4ZUGeKIK4HuFAWzKEakoEWvM5nZgvcwAmqxbn4w;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"shaken\""
+                    },
+                    {
+                      "reasonCode": 200,
+                      "reasonText": "Passed",
+                      "passport": "\"Identity\":\"eyJhbGciOiJFUzI1NiIsInBwdCI6ImRpdiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAyIl19LCJkaXYiOnsidG4iOiIxNTcxNTU1MDAwMCJ9LCJpYXQiOjE2MzgzOTM4NjksIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9fQ.Hc73JFhnXgocq9q0nldHR5SdMHNBftGfQouslhDT0BPhGmcCnOGiN9L-J3CQsbd2z7wA6hqVSC2gAfPc7lSYiQ;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"div\"",
+                      "validClaims": "\"Identity\":\"eyJhbGciOiJFUzI1NiIsInBwdCI6ImRpdiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAyIl19LCJkaXYiOnsidG4iOiIxNTcxNTU1MDAwMCJ9LCJpYXQiOjE2MzgzOTM4NjksIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9fQ.Hc73JFhnXgocq9q0nldHR5SdMHNBftGfQouslhDT0BPhGmcCnOGiN9L-J3CQsbd2z7wA6hqVSC2gAfPc7lSYiQ;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"div\""
+                    },
+                    {
+                      "reasonCode": 200,
+                      "reasonText": "Passed",
+                      "passport": "\"Identity\":\"eyJhbGciOiJFUzI1NiIsInBwdCI6ImRpdiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAzIl19LCJkaXYiOnsidG4iOiIxNTcxNTU1MDAwMiJ9LCJpYXQiOjE2MzgzOTQxODgsIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9fQ.Y9BbjcndUXyMZl6j1GsQpYgGE7VpPobLmwIqcYNELu3Cx0phwVEHre0TQHZiQB5N-Vbl-GveTphJDkfbfStBkA;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"div\"",
+                      "validClaims": "\"Identity\":\"eyJhbGciOiJFUzI1NiIsInBwdCI6ImRpdiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAzIl19LCJkaXYiOnsidG4iOiIxNTcxNTU1MDAwMiJ9LCJpYXQiOjE2MzgzOTQxODgsIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9fQ.Y9BbjcndUXyMZl6j1GsQpYgGE7VpPobLmwIqcYNELu3Cx0phwVEHre0TQHZiQB5N-Vbl-GveTphJDkfbfStBkA;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"div\""
+                    }
+                  ],
+                  "ppt": "div",
+                  "status": "pass"
+                }
+              ]
+            }
       responses:
         '200':
           description: OK
           content:
             'application/json':
               schema:
-                $ref: '#/components/schemas/verificationResponse'
+                $ref: '#/components/schemas/divVerificationResponse'
         '400':
           description: Service error in processing request 
           content:
@@ -692,7 +791,7 @@ paths:
           content:
             'application/json':
               schema:
-                $ref: '#/components/schemas/verificationResponse'
+                $ref: '#/components/schemas/rphVerificationResponse'
         '400':
           description: Service error in processing request 
           content:
@@ -1020,13 +1119,13 @@ components:
         identityHeader:
           type: string
           description: This parameter contains a "shaken" Identity header field value to be verified
-          example: "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
+          example: "kjhytrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
         identityHeaders:
           type: array
           items:
             type: string
           description: This parameter contains one or more "div" and/or "rph" Identity header field values to be verified 
-          example: [eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\",eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\"]
+          example: ["mjhtrrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\"","eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""]
         to: 
           type: string
           description: The destination identity taken from the To header field. Used when no "div" claim is included
@@ -1131,11 +1230,156 @@ components:
                     passport: 
                       type: string
                       description: Contains the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
-                      example: "\"Identity\":\"kijybGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9vjfhdXRdedeuZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBiwiZGVzdCI6eyJ0biI6WyIxMjM1NTU1MTIxMyJdfSwiaWF0IjoxNjExOTYyMTA5LCJta3kiOlt7ImFsZyI6InNoY0yNTYiLCJkaWciOiIwMjFBQ0M1NDI3QUJFQjlDNTMzRjNFNEI2NTJFN0Q0NjNGNTQ0MkNENTRGMTdBMDNBMjdERjlCMDdGNDYxOUIyIn0seyJhbGciOiJzaGEtMjU2IiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQjNFNEI2NTJFN0Q0NjNGNTQ0MkNENTRGMSJ9XSwib3JpZyI6eyJ0biI6IjEyMzU1NTUxMjEyIn0sIm9yaWdpZCI6IjhhOGVjNjE4LWM2YjktMzBhZS1iNDI3LWFmNDEwNGIxYzAyYyJ9.sxY3n5VcdUVOdrzOGEkix3f46t35wt9t5miTOva1moUwEyhMv28tJjpBBh6VyUZ1OLCrq3q7ikGgbnCDYXyzRg;info<https://caauthn.neustarlab.biz/ccid/authn/v2/certs/20001.10001>;alg=ES256;ppt=\"shaken\""
+                      example: "\"Identity\":\"kjhytrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
                     validClaims: 
                       type: string
                       description: This parameter contains the payload of the verified PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "pass"
                       example: "\"Identity\":\"eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1dXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBiwiZGVzdCI6eyJ0biI6WyIxMjM1NTU1MTIxMyJdfSwiaWF0IjoxNjExOTYyMTA5LCJta3kiOlt7ImFsZyI6InNoY0yNTYiLCJkaWciOiIwMjFBQ0M1NDI3QUJFQjlDNTMzRjNFNEI2NTJFN0Q0NjNGNTQ0MkNENTRGMTdBMDNBMjdERjlCMDdGNDYxOUIyIn0seyJhbGciOiJzaGEtMjU2IiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQjNFNEI2NTJFN0Q0NjNGNTQ0MkNENTRGMSJ9XSwib3JpZyI6eyJ0biI6IjEyMzU1NTUxMjEyIn0sIm9yaWdpZCI6IjhhOGVjNjE4LWM2YjktMzBhZS1iNDI3LWFmNDEwNGIxYzAyYyJ9.sxY3n5VcdUVOdrzOGEkix3f46t35wt9t5miTOva1moUwEyhMv28tJjpBBh6VyUZ1OLCrq3q7ikGgbnCDYXyzRg;info<https://caauthn.neustarlab.biz/ccid/authn/v2/certs/20001.10001>;alg=ES256;ppt=\"shaken\""
+                example:
+                  - reasonCode: 200
+                    reasonText: Passed
+                    passport: "\"Identity\":\"kjhytrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
+                    validClaims: "\"Identity\":\"kjhytrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
+                  - reasonCode: 200
+                    reasonText: Passed
+                    passport: "\"Identity\":\"mjhtrrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
+                    validClaims: "\"Identity\":\"mjhtrGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
+                  - reasonCode: 200
+                    reasonText: Passed
+                    passport: "\"Identity\":\"eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
+                    validClaims: "\"Identity\":\"eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
+              ppt: 
+                type: string
+                description: Identifies the type of PASSporT associated with this verifyResult entry
+                example: shaken
+              status: 
+                type: string
+                description: Identifies the verification result of the PASSporT associated with this verifyResult entry
+                example: pass
+    divVerificationResponse:
+      title: verificationResponse
+      type: object
+      properties:
+        divResult:
+          type: array
+          description: Parameter informing of the result of the verification of diverting identities. For each verified identity, the "verstat" parameter is added to the verified identity. It includes array of one or more [div, verstatValue] tuples
+          items:
+            type: string
+            example: {["12155551215", "TN-Validation-Passed"],["12155551212", "TN-Validation-Failed"]}
+        verifyResults:
+          description: Each array entry contains the verification results of a PASSporT contained in the request
+          type: array
+          items:
+            type: object
+            required: 
+              - verifyResult
+              - ppt
+              - status
+            properties:
+              verifyResult: 
+                description: Contains the verification results of a single Identity header field contained in the identityHeader parameter or an entry in the identityHeaders array of the verification request. The "ppt" and "status" parameters are always present. The inclusion of the other parameters depends on the value of the "status" parameter
+                type: array
+                items:
+                  type: object
+                  required: 
+                    - verifyResult
+                    - ppt
+                    - status
+                  properties:
+                    reasonCode: 
+                      type: integer
+                      description: Identifies the failure reason code of the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
+                      example: 200
+                    reasonText: 
+                      type: string
+                      description: Identifies the failure text associated with the failure reason code. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
+                      example: Some reason text
+                    passport: 
+                      type: string
+                      description: Contains the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
+                      example: "\"Identity\":\"kjhytrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
+                    validClaims: 
+                      type: string
+                      description: This parameter contains the payload of the verified PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "pass"
+                      example: "\"Identity\":\"eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1dXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBiwiZGVzdCI6eyJ0biI6WyIxMjM1NTU1MTIxMyJdfSwiaWF0IjoxNjExOTYyMTA5LCJta3kiOlt7ImFsZyI6InNoY0yNTYiLCJkaWciOiIwMjFBQ0M1NDI3QUJFQjlDNTMzRjNFNEI2NTJFN0Q0NjNGNTQ0MkNENTRGMTdBMDNBMjdERjlCMDdGNDYxOUIyIn0seyJhbGciOiJzaGEtMjU2IiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQjNFNEI2NTJFN0Q0NjNGNTQ0MkNENTRGMSJ9XSwib3JpZyI6eyJ0biI6IjEyMzU1NTUxMjEyIn0sIm9yaWdpZCI6IjhhOGVjNjE4LWM2YjktMzBhZS1iNDI3LWFmNDEwNGIxYzAyYyJ9.sxY3n5VcdUVOdrzOGEkix3f46t35wt9t5miTOva1moUwEyhMv28tJjpBBh6VyUZ1OLCrq3q7ikGgbnCDYXyzRg;info<https://caauthn.neustarlab.biz/ccid/authn/v2/certs/20001.10001>;alg=ES256;ppt=\"shaken\""
+                example:
+                  - reasonCode: 200
+                    reasonText: Passed
+                    passport: "\"Identity\":\"kjhytrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
+                    validClaims: "\"Identity\":\"kjhytrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
+                  - reasonCode: 200
+                    reasonText: Passed
+                    passport: "\"Identity\":\"mjhtrrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
+                    validClaims: "\"Identity\":\"mjhtrGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
+                  - reasonCode: 200
+                    reasonText: Passed
+                    passport: "\"Identity\":\"eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
+                    validClaims: "\"Identity\":\"eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
+              ppt: 
+                type: string
+                description: Identifies the type of PASSporT associated with this verifyResult entry
+                example: shaken
+              status: 
+                type: string
+                description: Identifies the verification result of the PASSporT associated with this verifyResult entry
+                example: pass
+    rphVerificationResponse:
+      title: verificationResponse
+      type: object
+      properties:
+        verstatPriority: 
+          type: string
+          description: Parameter informing of the result of the verification of the Resource-Priority header field and optionally the header field value "psap-callback" of the Priority header field
+          example: RPH-Validation-Passed
+        verifyResults:
+          description: Each array entry contains the verification results of a PASSporT contained in the request
+          type: array
+          items:
+            type: object
+            required: 
+              - verifyResult
+              - ppt
+              - status
+            properties:
+              verifyResult: 
+                description: Contains the verification results of a single Identity header field contained in the identityHeader parameter or an entry in the identityHeaders array of the verification request. The "ppt" and "status" parameters are always present. The inclusion of the other parameters depends on the value of the "status" parameter
+                type: array
+                items:
+                  type: object
+                  required: 
+                    - verifyResult
+                    - ppt
+                    - status
+                  properties:
+                    reasonCode: 
+                      type: integer
+                      description: Identifies the failure reason code of the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
+                      example: 200
+                    reasonText: 
+                      type: string
+                      description: Identifies the failure text associated with the failure reason code. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
+                      example: Some reason text
+                    passport: 
+                      type: string
+                      description: Contains the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
+                      example: "\"Identity\":\"kjhytrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
+                    validClaims: 
+                      type: string
+                      description: This parameter contains the payload of the verified PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "pass"
+                      example: "\"Identity\":\"eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1dXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBiwiZGVzdCI6eyJ0biI6WyIxMjM1NTU1MTIxMyJdfSwiaWF0IjoxNjExOTYyMTA5LCJta3kiOlt7ImFsZyI6InNoY0yNTYiLCJkaWciOiIwMjFBQ0M1NDI3QUJFQjlDNTMzRjNFNEI2NTJFN0Q0NjNGNTQ0MkNENTRGMTdBMDNBMjdERjlCMDdGNDYxOUIyIn0seyJhbGciOiJzaGEtMjU2IiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQjNFNEI2NTJFN0Q0NjNGNTQ0MkNENTRGMSJ9XSwib3JpZyI6eyJ0biI6IjEyMzU1NTUxMjEyIn0sIm9yaWdpZCI6IjhhOGVjNjE4LWM2YjktMzBhZS1iNDI3LWFmNDEwNGIxYzAyYyJ9.sxY3n5VcdUVOdrzOGEkix3f46t35wt9t5miTOva1moUwEyhMv28tJjpBBh6VyUZ1OLCrq3q7ikGgbnCDYXyzRg;info<https://caauthn.neustarlab.biz/ccid/authn/v2/certs/20001.10001>;alg=ES256;ppt=\"shaken\""
+                example:
+                  - reasonCode: 200
+                    reasonText: Passed
+                    passport: "\"Identity\":\"kjhytrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
+                    validClaims: "\"Identity\":\"kjhytrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
+                  - reasonCode: 200
+                    reasonText: Passed
+                    passport: "\"Identity\":\"mjhtrrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
+                    validClaims: "\"Identity\":\"mjhtrGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
+                  - reasonCode: 200
+                    reasonText: Passed
+                    passport: "\"Identity\":\"eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
+                    validClaims: "\"Identity\":\"eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
               ppt: 
                 type: string
                 description: Identifies the type of PASSporT associated with this verifyResult entry

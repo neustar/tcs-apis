@@ -36,11 +36,6 @@ paths:
               "attest": "A , B or C",
               "dest": [
                 {
-                  "uri": [
-                    "sip:bob@example.com"
-                  ]
-                },
-                {
                   "tn": [
                     "12155551212"
                   ]

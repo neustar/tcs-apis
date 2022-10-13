@@ -176,11 +176,6 @@ paths:
                     "sip:voice_mail@example.com"
                   ]
                 },
-                {
-                  "tn": [
-                    "12155551213"
-                  ]
-                }
               ],
               "div": {
                 "tn": "121555551212",

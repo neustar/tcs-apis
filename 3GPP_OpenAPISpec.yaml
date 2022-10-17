@@ -33,7 +33,31 @@ paths:
           source: |
             Request: 
             {
-              "attest": "A , B or C",
+              "attest": "A",
+              "dest": [
+                {
+                  "tn": [
+                    "12155551212"
+                  ]
+                }
+              ],
+              "iat": 1664199282,
+              "orig": {
+                "tn": "12155551211"
+              },
+              "origid": "123e4567-e89b-12d3-a456-426655440000",
+            }
+            Response: 
+            {
+              identityHeader: "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
+            }
+        - lang: curl
+          label: SHAKEN w/PPT
+          source: |
+            Request: 
+            {
+              "ppt": "shaken"
+              "attest": "A",
               "dest": [
                 {
                   "tn": [

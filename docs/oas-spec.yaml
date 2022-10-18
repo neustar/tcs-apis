@@ -276,7 +276,9 @@ paths:
                       "orig_cc" : "1",
                       "compact" : false,
                       "passport_type" : "shaken",
-                      "call_info" : "<cid:example.com/alice.json>;purpose=jcard;call-reason=Adventure",
+                      "call_info" : "<cid:example.com/alice.json>;purpose=jcard;call-reason=Travel.",
+                      "caller_reason": "Travel.",
+                      "caller_name" : "Alice Liddell",
                       "jcard" : "[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Alice Liddell\"],[ \"email\",{},\"text\",\"alice@example.com\"]]]",
                       "attest" : "A",
                       "origid" : "3F9C2836-7E40-11E7-BA58-7831C1B8DEBA",
@@ -356,14 +358,16 @@ paths:
                       "from" : "\"Alice\" <sip:+17035550001@example.com>",
                       "to" : "\"John\" <sip:+15715550002@example.com>",
                       "passport_type" : "rcd",
-                      "call_reason" : "Travel",
+                      "caller_reason" : "Travel",
                       "caller_name" : "Alice Liddell",
                       "alt_present_number" : "<sip:+18005550000@example.com>",
                       "jcard" : "[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Alice Liddell\"],[ \"email\",{},\"text\",\"alice@example.com\"]]]",
                       "jcard_uri" : "cid:123456",
                       "rcd_issuer" : "Disney, Inc.",
                       "rcd_integrity" : true,
-                      "rcd_hash_algorithm" : "sha384"
+                      "rcd_hash_algorithm" : "sha384",
+                      "caller_reason": "Travel.",
+                      "rcd_signature": "sha512-oODCNbWggTlXfGx1wMpFhdA6Kt2vLjNsRnwks+ffezUUTubjGLSUhqLkSjsE3SZKPWG+gywfYmKjcPtz6uMyog=="
                     }'
 
             Response: 
@@ -9485,7 +9489,7 @@ paths:
                 -d '{
                       "from" : "\"Alice\" <sip:+17035550001@example.com>",
                       "to" : "\"John\" <sip:+15715550002@example.com>",
-                      "call_reason" : "Travel",
+                      "caller_reason" : "Travel",
                       "caller_name" : "Alice Liddell",
                       "alt_present_number" : "<sip:+18005550000@example.com>",
                       "jcard" : "[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Alice Liddell\"],[ \"email\",{},\"text\",\"alice@example.com\"]]]",
@@ -18835,28 +18839,36 @@ components:
             example: [ "ets.0, wps.1", "q735.1" ]
         call_info:
           type: string
-          description: The 'Call-Info' header value for extracting jcard_uri and call_reason values used in constructing RCD PASSporT. If specified, must be a valid SIP 'Call-Info' header value
-          example: <http://example.com/alice.json>;purpose=jcard;call-reason=Adventure
-        call_reason:
+          description: Optional "Call-Info" header value for extracting "crn" and "jcard_uri" values
+          example: <http://example.com/alice.json>;purpose=jcard;call-reason=Travel
+        caller_reason:
           type: string
-          description: The call reason to be used for constructing RCD PASSporT
+          description: Optional "crn" value specified by RCD PASSporT extension
           example: Travel
+        alt_present_number:
+          type: string
+          description: Optional "apn" value specified by RCD PASSporT extension
+          example: Disney <sip:+18005550000@example.com>
         caller_name: 
           type: string
-          description: The CNAM to be used for constructing RCD PASSporT
+          description: Optional "nam" value specified by RCD PASSporT extension
           example: Alice Liddell
         jcard: 
           type: string
-          description: The JSON string representing a valid JCARD
+          description: Optional JSON string for "jcd" value specified by RCD PASSporT extension
           example: "[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Alice Liddell\"],[ \"email\",{},\"text\",\"alice@example.com\"]]]"
         jcard_uri:
           type: string
           example: cid:123456
-          description: The URI identifying the location of the JCARD. If specified, must be valid URI
+          description: Optional "jcl" value specified by RCD PASSporT extension
+        rcd_issuer:
+          type: string
+          example: Disney, Inc.
+          description: Optional "iss" value specified by RCD PASSporT extension
         rcd_integrity:
           type: boolean
           example: true
-          description: The flag for generating RCD PASSporT integrity hash. If specified, must be either true or false, with default as true
+          description: Optional boolean flag for generating "rcdi" value. It's the flag for generating RCD PASSporT integrity hash. If specified, must be either true or false, with default as true
         rcd_hash_algorithm:
           type: string
           example: sha384
@@ -18864,7 +18876,7 @@ components:
         rcd_signature: 
           type: string
           example: sha512-oODCNbWggTlXfGx1wMpFhdA6Kt2vLjNsRnwks+ffezUUTubjGLSUhqLkSjsE3SZKPWG+gywfYmKjcPtz6uMyog==
-          description: The pre-calculated signature of RCD PASSporT integrity hash. If specified, must be not empty or blank and must be a base64 string prefixed with the hash algorithm name
+          description: Optional "rcdi" value specified by RCD PASSporT extension. It's the pre-calculated signature of RCD PASSporT integrity hash. If specified, must be not empty or blank and must be a base64 string prefixed with the hash algorithm name
         pai:
           type: array
           description: List of 'P-Asserted-Identity' header values from SIP INVITE message. If specified, must be one as specified in RFC3325 Section 9.1
@@ -19109,6 +19121,38 @@ components:
         robocall:
           type: boolean
           description: Flag for returning Robocall Call Insight data. If specified, must be true or false
+        call_info:
+          type: string
+          description: Optional "Call-Info" header value for extracting "crn" and "jcard_uri" values
+          example: <http://example.com/alice.json>;purpose=jcard;call-reason=Travel
+        caller_reason:
+          type: string
+          description: Optional "crn" value specified by RCD PASSporT extension
+          example: Travel
+        alt_present_number:
+          type: string
+          description: Optional "apn" value specified by RCD PASSporT extension
+          example: Disney <sip:+18005550000@example.com>
+        caller_name: 
+          type: string
+          description: Optional "nam" value specified by RCD PASSporT extension
+          example: Alice Liddell
+        jcard: 
+          type: string
+          description: Optional JSON string for "jcd" value specified by RCD PASSporT extension
+          example: "[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Alice Liddell\"],[ \"email\",{},\"text\",\"alice@example.com\"]]]"
+        jcard_uri:
+          type: string
+          example: cid:123456
+          description: Optional "jcl" value specified by RCD PASSporT extension
+        rcd_issuer:
+          type: string
+          example: Disney, Inc.
+          description: Optional "iss" value specified by RCD PASSporT extension
+        rcd_integrity:
+          type: boolean
+          example: true
+          description: Optional boolean flag for generating "rcdi" value. It's the flag for generating RCD PASSporT integrity hash. If specified, must be either true or false, with default as true
     VerifyErrorResponse:
       required:
         - error

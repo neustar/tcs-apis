@@ -1187,7 +1187,7 @@ components:
               description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
               items:
                 type: string
-                example: ["12155551212"] 
+                example: "null"
             uri: 
               type: array
               description: Used if the "orig" or "dest" is given in a SIP URI

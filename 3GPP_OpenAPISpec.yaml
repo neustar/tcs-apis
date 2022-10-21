@@ -614,7 +614,7 @@ paths:
               $ref: '#/components/schemas/divVerificationRequest'
       x-code-samples:
         - lang: curl
-          label: 1 Forwarding
+          label: 1 Diversion
           source: |
             Request: 
             {
@@ -623,7 +623,7 @@ paths:
               "to": "\"John\" <sip:+15715550002@example.com>",
               "dest": "\"Voice_Mail\" <sip:+15715550000@example.com>",
               "time": 1664216863,
-              "protectedHeaders": {"div": {"tn": "15715550002","hi": null}}
+              "protectedHeaders": "Diversion: sip:15715550002@10.10.100.12;reason=unknown;privacy=off"
             }
             Response: 
             {
@@ -664,116 +664,116 @@ paths:
                   }
               ]
             }
-        - lang: curl
-          label: 2 Forwarding
-          source: |
-            Request: 
-            {
-              "identityHeaders": [
-                "eyJhbGciOiJFUzI1NiIsInBwdCI6ImRpdiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAyIl19LCJkaXYiOnsidG4iOiIxNTcxNTU1MDAwMCJ9LCJpYXQiOjE2MzgzOTM4NjksIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9fQ.Hc73JFhnXgocq9q0nldHR5SdMHNBftGfQouslhDT0BPhGmcCnOGiN9L-J3CQsbd2z7wA6hqVSC2gAfPc7lSYiQ;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"div\"",
-                "eyJhbGciOiJFUzI1NiIsInBwdCI6ImRpdiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAzIl19LCJkaXYiOnsidG4iOiIxNTcxNTU1MDAwMiJ9LCJpYXQiOjE2MzgzOTQxODgsIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9fQ.Y9BbjcndUXyMZl6j1GsQpYgGE7VpPobLmwIqcYNELu3Cx0phwVEHre0TQHZiQB5N-Vbl-GveTphJDkfbfStBkA;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"div\""
-              ],
-              "from": "\"Alice\" <sip:+17035550001@example.com>",
-              "to": "\"Rob\" <sip:+15715550003@example.com>",
-              "dest": "\"Voice_Mail\" <sip:+15715550000@example.com>",
-              "time": 1664216863,
-              "protectedHeaders": {"div": {"tn": "15715550003","hi": null}}
-            }
-            Response: 
-            {
-              "divResult":[
-                  [
-                    "15715550000,TN-Validation-Passed",
-                    "15715550002,TN-Validation-Passed"
-                  ]
-              ],
-              "verifyResults":[
-                  {
-                    "verifyResult":[
-                        {
-                          "reasonCode":400,
-                          "reasonText":"Failure Reason",
-                          "passport":"kjhytrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\"",
-                          "validClaims":{
-                              "ppt":"div",
-                              "attest":"A",
-                              "dest":{
-                                "tn":[
-                                    [
-                                      "12155551212"
-                                    ]
-                                ],
-                                "uri":[
-                                    [
-                                      "sip:Voice_Mail@example.com"
-                                    ]
-                                ]
-                              },
-                              "iat":1664199282,
-                              "orig":{
-                                "tn":"12155551211"
-                              },
-                              "origid":"123e4567-e89b-12d3-a456-426655440000",
-                              "rph":[
-                                {
-                                    "auth":[
-                                      "ets.0",
-                                      "wps.0"
-                                    ]
-                                }
-                              ],
-                              "sph":"psap-callback",
-                              "div":{
-                                "tn":"121555551212",
-                                "hi":null
-                              }
-                          }
-                        },
-                        {
-                          "reasonCode":400,
-                          "reasonText":"Failure Reason",
-                          "passport":"kjhytrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\"",
-                          "validClaims":{
-                              "ppt":"div",
-                              "attest":"A",
-                              "dest":{
-                                "tn":[
-                                    [
-                                      "12155551212"
-                                    ]
-                                ],
-                                "uri":[
-                                    [
-                                      "sip:Voice_Mail@example.com"
-                                    ]
-                                ]
-                              },
-                              "iat":1664199282,
-                              "orig":{
-                                "tn":"12155551211"
-                              },
-                              "origid":"123e4567-e89b-12d3-a456-426655440000",
-                              "rph":[
-                                {
-                                    "auth":[
-                                      "ets.0",
-                                      "wps.0"
-                                    ]
-                                }
-                              ],
-                              "sph":"psap-callback",
-                              "div":{
-                                "tn":"121555551212",
-                                "hi":null
-                              }
-                          }
-                        }
-                    ],
-                    "ppt":"div",
-                    "status":"pass"
-                  }
-              ]
-            }
+        # - lang: curl
+        #   label: 2 Diversion
+        #   source: |
+        #     Request: 
+        #     {
+        #       "identityHeaders": [
+        #         "eyJhbGciOiJFUzI1NiIsInBwdCI6ImRpdiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAyIl19LCJkaXYiOnsidG4iOiIxNTcxNTU1MDAwMCJ9LCJpYXQiOjE2MzgzOTM4NjksIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9fQ.Hc73JFhnXgocq9q0nldHR5SdMHNBftGfQouslhDT0BPhGmcCnOGiN9L-J3CQsbd2z7wA6hqVSC2gAfPc7lSYiQ;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"div\"",
+        #         "eyJhbGciOiJFUzI1NiIsInBwdCI6ImRpdiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAzIl19LCJkaXYiOnsidG4iOiIxNTcxNTU1MDAwMiJ9LCJpYXQiOjE2MzgzOTQxODgsIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9fQ.Y9BbjcndUXyMZl6j1GsQpYgGE7VpPobLmwIqcYNELu3Cx0phwVEHre0TQHZiQB5N-Vbl-GveTphJDkfbfStBkA;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"div\""
+        #       ],
+        #       "from": "\"Alice\" <sip:+17035550001@example.com>",
+        #       "to": "\"Rob\" <sip:+15715550003@example.com>",
+        #       "dest": "\"Voice_Mail\" <sip:+15715550000@example.com>",
+        #       "time": 1664216863,
+        #       "protectedHeaders": "Diversion: sip:15715550003@10.10.100.12;reason=unknown;privacy=off"
+        #     }
+        #     Response: 
+        #     {
+        #       "divResult":[
+        #           [
+        #             "15715550000,TN-Validation-Passed",
+        #             "15715550002,TN-Validation-Passed"
+        #           ]
+        #       ],
+        #       "verifyResults":[
+        #           {
+        #             "verifyResult":[
+        #                 {
+        #                   "reasonCode":400,
+        #                   "reasonText":"Failure Reason",
+        #                   "passport":"kjhytrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\"",
+        #                   "validClaims":{
+        #                       "ppt":"div",
+        #                       "attest":"A",
+        #                       "dest":{
+        #                         "tn":[
+        #                             [
+        #                               "12155551212"
+        #                             ]
+        #                         ],
+        #                         "uri":[
+        #                             [
+        #                               "sip:Voice_Mail@example.com"
+        #                             ]
+        #                         ]
+        #                       },
+        #                       "iat":1664199282,
+        #                       "orig":{
+        #                         "tn":"12155551211"
+        #                       },
+        #                       "origid":"123e4567-e89b-12d3-a456-426655440000",
+        #                       "rph":[
+        #                         {
+        #                             "auth":[
+        #                               "ets.0",
+        #                               "wps.0"
+        #                             ]
+        #                         }
+        #                       ],
+        #                       "sph":"psap-callback",
+        #                       "div":{
+        #                         "tn":"121555551212",
+        #                         "hi":null
+        #                       }
+        #                   }
+        #                 },
+        #                 {
+        #                   "reasonCode":400,
+        #                   "reasonText":"Failure Reason",
+        #                   "passport":"kjhytrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\"",
+        #                   "validClaims":{
+        #                       "ppt":"div",
+        #                       "attest":"A",
+        #                       "dest":{
+        #                         "tn":[
+        #                             [
+        #                               "12155551212"
+        #                             ]
+        #                         ],
+        #                         "uri":[
+        #                             [
+        #                               "sip:Voice_Mail@example.com"
+        #                             ]
+        #                         ]
+        #                       },
+        #                       "iat":1664199282,
+        #                       "orig":{
+        #                         "tn":"12155551211"
+        #                       },
+        #                       "origid":"123e4567-e89b-12d3-a456-426655440000",
+        #                       "rph":[
+        #                         {
+        #                             "auth":[
+        #                               "ets.0",
+        #                               "wps.0"
+        #                             ]
+        #                         }
+        #                       ],
+        #                       "sph":"psap-callback",
+        #                       "div":{
+        #                         "tn":"121555551212",
+        #                         "hi":null
+        #                       }
+        #                   }
+        #                 }
+        #             ],
+        #             "ppt":"div",
+        #             "status":"pass"
+        #           }
+        #       ]
+        #     }
       responses:
         '200':
           description: OK
@@ -1269,13 +1269,14 @@ components:
         from: 
           type: string
           description: The asserted identity, taken from the P-Asserted-Identity or the From header field of the incoming request
-          example: "sip:Alice@example.com or 12155551212"
+          example: "sip:Alice@example.com or 12155551211"
         protectedHeaders: 
           type: array
           items:
             type: string
           description: Contains the SIP header field(s) protected by claims in the PASSporT(s) of the identityHeaders array (i.e., "rph" and/or "div")
-          example: {"div": {"tn": "121555551212","hi": null}}
+          example: ["Diversion: sip:12155551212@10.10.100.12;reason=unknown;privacy=off",
+                    "Resource-Priority: ets.0, wps.0"]
     verificationResponse:
       title: verificationResponse
       type: object
@@ -1513,7 +1514,7 @@ components:
           items:
             type: string
           description: Contains the SIP header field(s) protected by claims in the PASSporT(s) of the identityHeaders array (i.e., "rph" and/or "div")
-          example: {"div": {"tn": "12155551212","hi": null}}
+          example: "Diversion: sip:12155551212@10.10.100.12;reason=unknown;privacy=off"
     rphVerificationRequest:
       title: rphVerificationRequest
       type: object
@@ -1551,4 +1552,4 @@ components:
           items:
             type: string
           description: Contains the SIP header field(s) protected by claims in the PASSporT(s) of the identityHeaders array (i.e., "rph" and/or "div")
-          example: {"rph":[{"auth":["ets.0","wps.0"]}]}
+          example: Resource-Priority:ets.0, wps.0

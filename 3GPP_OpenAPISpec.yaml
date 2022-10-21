@@ -1350,7 +1350,7 @@ components:
           description: Parameter informing of the result of the verification of diverting identities. For each verified identity, the "verstat" parameter is added to the verified identity. It includes array of one or more [div, verstatValue] tuples
           items:
             type: string
-            example: ["12155551213, TN-Validation-Passed"]
+            example: ["12155551212, TN-Validation-Passed"]
         verstatValue: 
           type: string
           description: Parameter informing of the result of the verification of originating identity. To be used in the "verstat" parameter added to the verified identity. The parameter is mandatory if the request contains a PASSporT "shaken" JSON Web Token
@@ -1400,10 +1400,10 @@ components:
                 example:
                   - ppt: shaken
                     status: pass
-                    validClaims: {"dest":{"tn":[["12155551212"]],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"origid":"123e4567-e89b-12d3-a456-426655440000"}
+                    validClaims: {"attest": "A , B or C","dest":{"tn":[["12155551212"]],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"origid":"123e4567-e89b-12d3-a456-426655440000"}
                   - ppt: div
                     status: pass
-                    validClaims: {"dest":{"tn":[["12155551213"]],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"origid":"123e4567-e89b-12d3-a456-426655440000","div":{"tn":"121555551212","hi":null}}
+                    validClaims: {"dest":{"tn":[["12155551213"]],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"div":{"tn":"121555551212","hi":null}}
                   - ppt: rph
                     status: pass
                     validClaims: {"dest":{"tn":[["12155551212"]],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"rph":[{"auth":["ets.0","wps.0"]}]}

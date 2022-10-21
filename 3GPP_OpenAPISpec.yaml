@@ -1451,28 +1451,16 @@ components:
                     validClaims: 
                       type: string
                       description: This parameter contains the payload of the verified PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "pass"
-                      example: "\"Identity\":\"eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1dXRobi5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzIwMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBiwiZGVzdCI6eyJ0biI6WyIxMjM1NTU1MTIxMyJdfSwiaWF0IjoxNjExOTYyMTA5LCJta3kiOlt7ImFsZyI6InNoY0yNTYiLCJkaWciOiIwMjFBQ0M1NDI3QUJFQjlDNTMzRjNFNEI2NTJFN0Q0NjNGNTQ0MkNENTRGMTdBMDNBMjdERjlCMDdGNDYxOUIyIn0seyJhbGciOiJzaGEtMjU2IiwiZGlnIjoiNEFBREI5QjEzRjgyMTgzQjU0MDIxMkRGM0U1RDQ5NkIxOUU1N0NBQjNFNEI2NTJFN0Q0NjNGNTQ0MkNENTRGMSJ9XSwib3JpZyI6eyJ0biI6IjEyMzU1NTUxMjEyIn0sIm9yaWdpZCI6IjhhOGVjNjE4LWM2YjktMzBhZS1iNDI3LWFmNDEwNGIxYzAyYyJ9.sxY3n5VcdUVOdrzOGEkix3f46t35wt9t5miTOva1moUwEyhMv28tJjpBBh6VyUZ1OLCrq3q7ikGgbnCDYXyzRg;info<https://caauthn.neustarlab.biz/ccid/authn/v2/certs/20001.10001>;alg=ES256;ppt=\"shaken\""
                 example:
-                  - reasonCode: 400
-                    reasonText: Failure Reason
-                    passport: "kjhytrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"rph\""
-                    validClaims: {"ppt":"shaken, div or rph","attest":"A , B or C","dest":{"tn":[["12155551212"]],"uri":[["sip:Voice_Mail@example.com"]]},"iat":1664199282,"orig":{"tn":"12155551211"},"origid":"123e4567-e89b-12d3-a456-426655440000","rph":[{"auth":["ets.0","wps.0"]}],"sph":"psap-callback","div":{"tn":"121555551212","hi":null}}
-                  - reasonCode: 400
-                    reasonText: Failure Reason
-                    passport: "kjhytrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"rph\""
-                    validClaims: {"ppt":"shaken, div or rph","attest":"A , B or C","dest":{"tn":[["12155551212"]],"uri":[["sip:Voice_Mail@example.com"]]},"iat":1664199282,"orig":{"tn":"12155551211"},"origid":"123e4567-e89b-12d3-a456-426655440000","rph":[{"auth":["ets.0","wps.0"]}],"sph":"psap-callback","div":{"tn":"121555551212","hi":null}}
-                  - reasonCode: 400
-                    reasonText: Failure Reason
-                    passport: "kjhytrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"rph\""
-                    validClaims: {"ppt":"rph","attest":"A","dest":{"tn":[["12155551212"]],"uri":[["sip:Voice_Mail@example.com"]]},"iat":1664199282,"orig":{"tn":"12155551211"},"origid":"123e4567-e89b-12d3-a456-426655440000","rph":[{"auth":["ets.0","wps.0"]}],"sph":"psap-callback","div":{"tn":"121555551212","hi":null}}
-              ppt: 
-                type: string
-                description: Identifies the type of PASSporT associated with this verifyResult entry
-                example: rph
-              status: 
-                type: string
-                description: Identifies the verification result of the PASSporT associated with this verifyResult entry
-                example: pass
+                  - validClaims: {"dest":{"tn":[["12155551212"]],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"rph":[{"auth":["ets.0","wps.0"]}]}
+              # ppt: 
+              #   type: string
+              #   description: Identifies the type of PASSporT associated with this verifyResult entry
+              #   example: rph
+              # status: 
+              #   type: string
+              #   description: Identifies the verification result of the PASSporT associated with this verifyResult entry
+              #   example: pass
     divVerificationRequest:
       title: divVerificationRequest
       type: object

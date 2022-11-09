@@ -360,10 +360,8 @@ paths:
               },
               "rph": [
                 {
-                  "auth": [
-                    "ets.0",
-                    "wps.0"
-                  ]
+                  "ets.0",
+                  "wps.0"
                 }
               ]
             }
@@ -509,9 +507,7 @@ paths:
                               "attest":"A , B or C",
                               "dest":{
                                 "tn":[
-                                    [
-                                      "12155551213"
-                                    ]
+                                  "12155551213"
                                 ],
                                 "uri":null
                               },
@@ -780,10 +776,8 @@ paths:
         #                       "origid":"123e4567-e89b-12d3-a456-426655440000",
         #                       "rph":[
         #                         {
-        #                             "auth":[
-        #                               "ets.0",
-        #                               "wps.0"
-        #                             ]
+        #                             "ets.0",
+        #                             "wps.0"
         #                         }
         #                       ],
         #                       "sph":"psap-callback",
@@ -819,10 +813,8 @@ paths:
         #                       "origid":"123e4567-e89b-12d3-a456-426655440000",
         #                       "rph":[
         #                         {
-        #                             "auth":[
-        #                               "ets.0",
-        #                               "wps.0"
-        #                             ]
+        #                             "ets.0",
+        #                             "wps.0"
         #                         }
         #                       ],
         #                       "sph":"psap-callback",
@@ -1067,11 +1059,9 @@ components:
       title: signingRequest
       type: object
       required: 
-        - attest
         - dest
         - iat
         - orig
-        - origid
       properties:
         ppt:
           type: string
@@ -1084,15 +1074,13 @@ components:
         dest:
           type: object
           description: Identifying the called user taken from the To header field for a "shaken" or "rph" PASSporT, and from the Request-URI after retargeting for a "div" PASSporT
-          required: 
-            - tn
           properties: 
             tn: 
               type: array
               description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
               items:
                 type: string
-                example: ["12155551213"] 
+                example: "12155551213"
             uri: 
               type: array
               description: Used if the "orig" or "dest" is given in a SIP URI
@@ -1104,7 +1092,7 @@ components:
           description: Time since 1 January 1970 in Numeric Date format
           example: 1664199282
         orig: 
-          type: string
+          type: object
           description: Identifying the calling user
           example: {"tn":"12155551211"}
         origid: 
@@ -1116,7 +1104,7 @@ components:
           items:
             type: string
           description: Applicable only if "ppt" = "rph". Array of strings that correspond to the r-values indicated in the SIP Resource-Priority header field. Contains assertion of the priority level of the user to be used for a given communication session
-          example: [{"auth":["ets.0", "wps.0"]}]
+          example: ["ets.0", "wps.0"]
         sph: 
           type: string
           description: Applicable only if "ppt" = "rph". Contains header field value "psap-callback" of the SIP Priority header field
@@ -1124,13 +1112,15 @@ components:
         div:
           type: object
           description: Applicable only if "ppt" = "div". Identifying the diverting user; i.e., the user identified in the Request-URI before retargeting
-          required: 
-            - tn
           properties: 
             tn:
               type: string
               description: Allowed characters as for local-number-digits and global-number-digits.The number needs to be in canonical form 
               example: "121555551212"
+            uri:
+              type: array
+              description: Used if the "orig" or "dest" is given in a SIP URI
+              example: null
             hi:
               type: string
               description: The "index" header field parameter is included in the entry identifying the diverting user in the History-Info header field
@@ -1147,15 +1137,13 @@ components:
         dest:
           type: object
           description: Identifying the called user taken from the To header field for a "shaken" or "rph" PASSporT, and from the Request-URI after retargeting for a "div" PASSporT
-          required: 
-            - tn
           properties: 
             tn: 
               type: array
               description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
               items:
                 type: string
-                example: ["12155551212"] 
+                example: "12155551212"
             uri: 
               type: array
               description: Used if the "orig" or "dest" is given in a SIP URI
@@ -1167,7 +1155,7 @@ components:
           description: Time since 1 January 1970 in Numeric Date format
           example: 1664199282
         orig: 
-          type: string
+          type: object
           description: Identifying the calling user
           example: {"tn":"12155551211"}
         rph: 
@@ -1175,7 +1163,7 @@ components:
           items:
             type: string
           description: Array of strings that correspond to the r-values indicated in the SIP Resource-Priority header field. Contains assertion of the priority level of the user to be used for a given communication session
-          example: [{"auth":["ets.0", "wps.0"]}]
+          example: ["ets.0", "wps.0"]
         sph: 
           type: string
           description: Contains header field value "psap-callback" of the SIP Priority header field
@@ -1192,8 +1180,6 @@ components:
         dest:
           type: object
           description: Identifying the called user taken from the To header field for a "shaken" or "rph" PASSporT, and from the Request-URI after retargeting for a "div" PASSporT
-          required: 
-            - tn
           properties: 
             tn: 
               type: array
@@ -1206,7 +1192,7 @@ components:
               description: Used if the "orig" or "dest" is given in a SIP URI
               items:
                 type: string
-                example: ["sip:Voice_Mail@example.com"]
+                example: "sip:Voice_Mail@example.com"
         div:
           type: object
           description: Identifying the diverting user; i.e., the user identified in the Request-URI before retargeting
@@ -1226,7 +1212,7 @@ components:
           description: Time since 1 January 1970 in Numeric Date format
           example: 1664199282
         orig: 
-          type: string
+          type: object
           description: Identifying the calling user
           example: {"tn":"12155551211"}
     signingResponse:
@@ -1395,18 +1381,18 @@ components:
                       type: string
                       description: Contains the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
                     validClaims: 
-                      type: string
+                      type: object
                       description: This parameter contains the payload of the verified PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "pass"
                 example:
                   - ppt: shaken
                     status: pass
-                    validClaims: {"attest": "A , B or C","dest":{"tn":[["12155551212"]],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"origid":"123e4567-e89b-12d3-a456-426655440000"}
+                    validClaims: {"attest": "A , B or C","dest":{"tn":["12155551212"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"origid":"123e4567-e89b-12d3-a456-426655440000"}
                   - ppt: div
                     status: pass
-                    validClaims: {"dest":{"tn":[["12155551213"]],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"div":{"tn":"121555551212","hi":null}}
+                    validClaims: {"dest":{"tn":["12155551213"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"div":{"tn":"121555551212","hi":null}}
                   - ppt: rph
                     status: pass
-                    validClaims: {"dest":{"tn":[["12155551212"]],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"rph":[{"auth":["ets.0","wps.0"]}]}
+                    validClaims: {"dest":{"tn":["12155551212"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"rph":["ets.0","wps.0"]}
     divVerificationResponse:
       title: verificationResponse
       type: object
@@ -1416,7 +1402,7 @@ components:
           description: Parameter informing of the result of the verification of diverting identities. For each verified identity, the "verstat" parameter is added to the verified identity. It includes array of one or more [div, verstatValue] tuples
           items:
             type: string
-            example: [["12155551212", "TN-Validation-Passed"]]
+            example: ["12155551212", "TN-Validation-Passed"]
         verifyResults:
           description: Each array entry contains the verification results of a PASSporT contained in the request
           type: array
@@ -1453,12 +1439,12 @@ components:
                       type: string
                       description: Contains the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
                     validClaims: 
-                      type: string
+                      type: object
                       description: This parameter contains the payload of the verified PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "pass"
                 example:
                   - ppt: div
                     status: pass
-                    validClaims: {"dest":{"tn":[["12155551213"]],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"div":{"tn":"121555551212","hi":null}}
+                    validClaims: {"dest":{"tn":["12155551213"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"div":{"tn":"121555551212","hi":null}}
     rphVerificationResponse:
       title: verificationResponse
       type: object
@@ -1503,12 +1489,12 @@ components:
                       type: string
                       description: Contains the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
                     validClaims: 
-                      type: string
+                      type: object
                       description: This parameter contains the payload of the verified PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "pass"
                 example:
                   - ppt: rph
                     status: pass
-                    validClaims: {"dest":{"tn":[["12155551212"]],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"rph":[{"auth":["ets.0","wps.0"]}]}
+                    validClaims: {"dest":{"tn":["12155551212"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"rph":["ets.0","wps.0"]}
     divVerificationRequest:
       title: divVerificationRequest
       type: object

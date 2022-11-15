@@ -1499,7 +1499,6 @@ components:
       title: divVerificationRequest
       type: object
       required: 
-        - identityHeader
         - identityHeaders
         - to
         - time
@@ -1541,7 +1540,6 @@ components:
       title: rphVerificationRequest
       type: object
       required: 
-        - identityHeader
         - identityHeaders
         - to
         - time

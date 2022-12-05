@@ -1336,7 +1336,7 @@ components:
           description: Parameter informing of the result of the verification of diverting identities. For each verified identity, the "verstat" parameter is added to the verified identity. It includes array of one or more [div, verstatValue] tuples
           items:
             type: string
-            example: ["12155551212, TN-Validation-Passed"]
+            example: ["12155551212", "TN-Validation-Passed"]
         verstatValue: 
           type: string
           description: Parameter informing of the result of the verification of originating identity. To be used in the "verstat" parameter added to the verified identity. The parameter is mandatory if the request contains a PASSporT "shaken" JSON Web Token
@@ -1350,49 +1350,39 @@ components:
           type: array
           items:
             type: object
+            description: Contains the verification results of a single Identity header field contained in the identityHeader parameter or an entry in the identityHeaders array of the verification request. The "ppt" and "status" parameters are always present. The inclusion of the other parameters depends on the value of the "status" parameter
             required: 
-              - verifyResult
               - ppt
               - status
             properties:
-              verifyResult: 
-                description: Contains the verification results of a single Identity header field contained in the identityHeader parameter or an entry in the identityHeaders array of the verification request. The "ppt" and "status" parameters are always present. The inclusion of the other parameters depends on the value of the "status" parameter
-                type: array
-                items:
-                  type: object
-                  required: 
-                    - verifyResult
-                    - ppt
-                    - status
-                  properties:
-                    ppt: 
-                      type: string
-                      description: Identifies the type of PASSporT associated with this verifyResult entry
-                    status: 
-                      type: string
-                      description: Identifies the verification result of the PASSporT associated with this verifyResult entry
-                    reasonCode: 
-                      type: integer
-                      description: Identifies the failure reason code of the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
-                    reasonText: 
-                      type: string
-                      description: Identifies the failure text associated with the failure reason code. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
-                    passport: 
-                      type: string
-                      description: Contains the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
-                    validClaims: 
-                      type: object
-                      description: This parameter contains the payload of the verified PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "pass"
-                example:
-                  - ppt: shaken
-                    status: pass
-                    validClaims: {"attest": "A , B or C","dest":{"tn":["12155551212"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"origid":"123e4567-e89b-12d3-a456-426655440000"}
-                  - ppt: div
-                    status: pass
-                    validClaims: {"dest":{"tn":["12155551213"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"div":{"tn":"121555551212","hi":null}}
-                  - ppt: rph
-                    status: pass
-                    validClaims: {"dest":{"tn":["12155551212"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"rph":["ets.0","wps.0"]}
+              ppt:
+                type: string
+                description: Identifies the type of PASSporT associated with this verifyResult entry
+              status:
+                type: string
+                description: Identifies the verification result of the PASSporT associated with this verifyResult entry
+              reasonCode:
+                type: integer
+                description: Identifies the failure reason code of the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
+              reasonText:
+                type: string
+                description: Identifies the failure text associated with the failure reason code. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
+              passport:
+                type: string
+                description: Contains the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
+              validClaims:
+                type: object
+                description: This parameter contains the payload of the verified PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "pass"
+          example:
+            - ppt: shaken
+              status: pass
+              validClaims: {"attest": "A , B or C","dest":{"tn":["12155551212"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"origid":"123e4567-e89b-12d3-a456-426655440000"}
+            - ppt: div
+              status: pass
+              validClaims: {"dest":{"tn":["12155551213"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"div":{"tn":"121555551212","hi":null}}
+            - ppt: rph
+              status: pass
+              validClaims: {"dest":{"tn":["12155551212"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"rph":["ets.0","wps.0"]}
     divVerificationResponse:
       title: verificationResponse
       type: object
@@ -1408,43 +1398,33 @@ components:
           type: array
           items:
             type: object
+            description: Contains the verification results of a single Identity header field contained in the identityHeader parameter or an entry in the identityHeaders array of the verification request. The "ppt" and "status" parameters are always present. The inclusion of the other parameters depends on the value of the "status" parameter
             required: 
-              - verifyResult
               - ppt
               - status
             properties:
-              verifyResult: 
-                description: Contains the verification results of a single Identity header field contained in the identityHeader parameter or an entry in the identityHeaders array of the verification request. The "ppt" and "status" parameters are always present. The inclusion of the other parameters depends on the value of the "status" parameter
-                type: array
-                items:
-                  type: object
-                  required: 
-                    - verifyResult
-                    - ppt
-                    - status
-                  properties:
-                    ppt: 
-                      type: string
-                      description: Identifies the type of PASSporT associated with this verifyResult entry
-                    status: 
-                      type: string
-                      description: Identifies the verification result of the PASSporT associated with this verifyResult entry
-                    reasonCode: 
-                      type: integer
-                      description: Identifies the failure reason code of the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
-                    reasonText: 
-                      type: string
-                      description: Identifies the failure text associated with the failure reason code. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
-                    passport: 
-                      type: string
-                      description: Contains the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
-                    validClaims: 
-                      type: object
-                      description: This parameter contains the payload of the verified PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "pass"
-                example:
-                  - ppt: div
-                    status: pass
-                    validClaims: {"dest":{"tn":["12155551213"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"div":{"tn":"121555551212","hi":null}}
+              ppt:
+                type: string
+                description: Identifies the type of PASSporT associated with this verifyResult entry
+              status:
+                type: string
+                description: Identifies the verification result of the PASSporT associated with this verifyResult entry
+              reasonCode:
+                type: integer
+                description: Identifies the failure reason code of the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
+              reasonText:
+                type: string
+                description: Identifies the failure text associated with the failure reason code. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
+              passport:
+                type: string
+                description: Contains the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
+              validClaims:
+                type: object
+                description: This parameter contains the payload of the verified PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "pass"
+          example:
+            - ppt: div
+              status: pass
+              validClaims: {"dest":{"tn":["12155551213"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"div":{"tn":"121555551212","hi":null}}
     rphVerificationResponse:
       title: verificationResponse
       type: object
@@ -1458,43 +1438,33 @@ components:
           type: array
           items:
             type: object
+            description: Contains the verification results of a single Identity header field contained in the identityHeader parameter or an entry in the identityHeaders array of the verification request. The "ppt" and "status" parameters are always present. The inclusion of the other parameters depends on the value of the "status" parameter
             required: 
-              - verifyResult
               - ppt
               - status
             properties:
-              verifyResult: 
-                description: Contains the verification results of a single Identity header field contained in the identityHeader parameter or an entry in the identityHeaders array of the verification request. The "ppt" and "status" parameters are always present. The inclusion of the other parameters depends on the value of the "status" parameter
-                type: array
-                items:
-                  type: object
-                  required: 
-                    - verifyResult
-                    - ppt
-                    - status
-                  properties:
-                    ppt: 
-                      type: string
-                      description: Identifies the type of PASSporT associated with this verifyResult entry
-                    status: 
-                      type: string
-                      description: Identifies the verification result of the PASSporT associated with this verifyResult entry
-                    reasonCode: 
-                      type: integer
-                      description: Identifies the failure reason code of the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
-                    reasonText: 
-                      type: string
-                      description: Identifies the failure text associated with the failure reason code. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
-                    passport: 
-                      type: string
-                      description: Contains the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
-                    validClaims: 
-                      type: object
-                      description: This parameter contains the payload of the verified PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "pass"
-                example:
-                  - ppt: rph
-                    status: pass
-                    validClaims: {"dest":{"tn":["12155551212"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"rph":["ets.0","wps.0"]}
+              ppt:
+                type: string
+                description: Identifies the type of PASSporT associated with this verifyResult entry
+              status:
+                type: string
+                description: Identifies the verification result of the PASSporT associated with this verifyResult entry
+              reasonCode:
+                type: integer
+                description: Identifies the failure reason code of the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
+              reasonText:
+                type: string
+                description: Identifies the failure text associated with the failure reason code. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
+              passport:
+                type: string
+                description: Contains the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
+              validClaims:
+                type: object
+                description: This parameter contains the payload of the verified PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "pass"
+          example:
+            - ppt: rph
+              status: pass
+              validClaims: {"dest":{"tn":["12155551212"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"rph":["ets.0","wps.0"]}
     divVerificationRequest:
       title: divVerificationRequest
       type: object
@@ -1535,7 +1505,7 @@ components:
           items:
             type: string
           description: Contains the SIP header field(s) protected by claims in the PASSporT(s) of the identityHeaders array (i.e., "rph" and/or "div")
-          example: "Diversion: sip:12155551212@10.10.100.12;reason=unknown;privacy=off"
+          example: ["Diversion: sip:12155551212@10.10.100.12;reason=unknown;privacy=off"]
     rphVerificationRequest:
       title: rphVerificationRequest
       type: object
@@ -1572,4 +1542,4 @@ components:
           items:
             type: string
           description: Contains the SIP header field(s) protected by claims in the PASSporT(s) of the identityHeaders array (i.e., "rph" and/or "div")
-          example: Resource-Priority:ets.0, wps.0
+          example: ["Resource-Priority:ets.0, wps.0"]

@@ -724,112 +724,88 @@ paths:
                   }
               ]
             }
-        # - lang: curl
-        #   label: 2 Diversion
-        #   source: |
-        #     Request: 
-        #     {
-        #       "identityHeaders": [
-        #         "eyJhbGciOiJFUzI1NiIsInBwdCI6ImRpdiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAyIl19LCJkaXYiOnsidG4iOiIxNTcxNTU1MDAwMCJ9LCJpYXQiOjE2MzgzOTM4NjksIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9fQ.Hc73JFhnXgocq9q0nldHR5SdMHNBftGfQouslhDT0BPhGmcCnOGiN9L-J3CQsbd2z7wA6hqVSC2gAfPc7lSYiQ;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"div\"",
-        #         "eyJhbGciOiJFUzI1NiIsInBwdCI6ImRpdiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAzIl19LCJkaXYiOnsidG4iOiIxNTcxNTU1MDAwMiJ9LCJpYXQiOjE2MzgzOTQxODgsIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9fQ.Y9BbjcndUXyMZl6j1GsQpYgGE7VpPobLmwIqcYNELu3Cx0phwVEHre0TQHZiQB5N-Vbl-GveTphJDkfbfStBkA;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"div\""
-        #       ],
-        #       "from": "\"Alice\" <sip:+17035550001@example.com>",
-        #       "to": "\"Rob\" <sip:+15715550003@example.com>",
-        #       "dest": "\"Voice_Mail\" <sip:+15715550000@example.com>",
-        #       "time": 1664216863,
-        #       "protectedHeaders": "Diversion: sip:15715550003@10.10.100.12;reason=unknown;privacy=off"
-        #     }
-        #     Response: 
-        #     {
-        #       "divResult":[
-        #           [
-        #             "15715550000,TN-Validation-Passed",
-        #             "15715550002,TN-Validation-Passed"
-        #           ]
-        #       ],
-        #       "verifyResults":[
-        #           {
-        #             "verifyResult":[
-        #                 {
-        #                   "reasonCode":400,
-        #                   "reasonText":"Failure Reason",
-        #                   "passport":"kjhytrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\"",
-        #                   "validClaims":{
-        #                       "ppt":"div",
-        #                       "attest":"A",
-        #                       "dest":{
-        #                         "tn":[
-        #                             [
-        #                               "12155551212"
-        #                             ]
-        #                         ],
-        #                         "uri":[
-        #                             [
-        #                               "sip:Voice_Mail@example.com"
-        #                             ]
-        #                         ]
-        #                       },
-        #                       "iat":1664199282,
-        #                       "orig":{
-        #                         "tn":"12155551211"
-        #                       },
-        #                       "origid":"123e4567-e89b-12d3-a456-426655440000",
-        #                       "rph":[
-        #                         {
-        #                             "ets.0",
-        #                             "wps.0"
-        #                         }
-        #                       ],
-        #                       "sph":"psap-callback",
-        #                       "div":{
-        #                         "tn":"121555551212",
-        #                         "hi":null
-        #                       }
-        #                   }
-        #                 },
-        #                 {
-        #                   "reasonCode":400,
-        #                   "reasonText":"Failure Reason",
-        #                   "passport":"kjhytrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\"",
-        #                   "validClaims":{
-        #                       "ppt":"div",
-        #                       "attest":"A",
-        #                       "dest":{
-        #                         "tn":[
-        #                             [
-        #                               "12155551212"
-        #                             ]
-        #                         ],
-        #                         "uri":[
-        #                             [
-        #                               "sip:Voice_Mail@example.com"
-        #                             ]
-        #                         ]
-        #                       },
-        #                       "iat":1664199282,
-        #                       "orig":{
-        #                         "tn":"12155551211"
-        #                       },
-        #                       "origid":"123e4567-e89b-12d3-a456-426655440000",
-        #                       "rph":[
-        #                         {
-        #                             "ets.0",
-        #                             "wps.0"
-        #                         }
-        #                       ],
-        #                       "sph":"psap-callback",
-        #                       "div":{
-        #                         "tn":"121555551212",
-        #                         "hi":null
-        #                       }
-        #                   }
-        #                 }
-        #             ],
-        #             "ppt":"div",
-        #             "status":"pass"
-        #           }
-        #       ]
-        #     }
+        - lang: curl
+          label: 2 Diversion
+          source: |
+            Request: 
+            {
+              "identityHeaders": [
+                "eyJhbGciOiJFUzI1NiIsInBwdCI6ImRpdiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAyIl19LCJkaXYiOnsidG4iOiIxNTcxNTU1MDAwMCJ9LCJpYXQiOjE2MzgzOTM4NjksIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9fQ.Hc73JFhnXgocq9q0nldHR5SdMHNBftGfQouslhDT0BPhGmcCnOGiN9L-J3CQsbd2z7wA6hqVSC2gAfPc7lSYiQ;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"div\"",
+                "eyJhbGciOiJFUzI1NiIsInBwdCI6ImRpdiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAzIl19LCJkaXYiOnsidG4iOiIxNTcxNTU1MDAwMiJ9LCJpYXQiOjE2MzgzOTQxODgsIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9fQ.Y9BbjcndUXyMZl6j1GsQpYgGE7VpPobLmwIqcYNELu3Cx0phwVEHre0TQHZiQB5N-Vbl-GveTphJDkfbfStBkA;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"div\""
+              ],
+              "from": "\"Alice\" <sip:+17035550001@example.com>",
+              "to": "\"Rob\" <sip:+15715550003@example.com>",
+              "dest": "\"Voice_Mail\" <sip:+15715550000@example.com>",
+              "time": 1664216863,
+              "protectedHeaders": "[Diversion: sip:15715550003@10.10.100.13;reason=unknown;privacy=off
+                                  , Diversion: sip:15715550002@10.10.100.12;reason=unknown;privacy=off]"
+                                   
+            }
+            Response: 
+            {
+              "divResult": [
+                [
+                  [
+                    "15715550003,TN-Validation-Passed",
+                    "15715550002,TN-Validation-Passed"
+                  ]
+                ]
+              ],
+              "verifyResults": [
+                {
+                  "verifyResult": [
+                    {
+                      "ppt": "div",
+                      "status": "pass",
+                      "validClaims": {
+                        "dest": {
+                          "tn": [
+                            [
+                              "15715550002"
+                            ]
+                          ],
+                          "uri": null
+                        },
+                        "iat": 1664199282,
+                        "orig": {
+                          "tn": "17035550001"
+                        },
+                        "div": {
+                          "tn": "15715550003",
+                          "hi": null
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "verifyResult": [
+                    {
+                      "ppt": "div",
+                      "status": "pass",
+                      "validClaims": {
+                        "dest": {
+                          "tn": [
+                            [
+                              "15715550000"
+                            ]
+                          ],
+                          "uri": null
+                        },
+                        "iat": 1664199282,
+                        "orig": {
+                          "tn": "17035550001"
+                        },
+                        "div": {
+                          "tn": "15715550002",
+                          "hi": null
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
       responses:
         '200':
           description: OK
@@ -1094,7 +1070,19 @@ components:
         orig: 
           type: object
           description: Identifying the calling user
-          example: {"tn":"12155551211"}
+          properties: 
+            tn: 
+              type: array
+              description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
+              items:
+                type: string
+                example: "12155551211"
+            uri: 
+              type: array
+              description: Used if the "orig" or "dest" is given in a SIP URI
+              items:
+                type: string
+                example: null
         origid: 
           type: string
           description: An opaque origination identifier in the recommended format of a Universally Unique Identifier (UUID)
@@ -1157,7 +1145,19 @@ components:
         orig: 
           type: object
           description: Identifying the calling user
-          example: {"tn":"12155551211"}
+          properties: 
+            tn: 
+              type: array
+              description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
+              items:
+                type: string
+                example: "12155551211"
+            uri: 
+              type: array
+              description: Used if the "orig" or "dest" is given in a SIP URI
+              items:
+                type: string
+                example: null
         rph: 
           type: array
           items:
@@ -1214,7 +1214,19 @@ components:
         orig: 
           type: object
           description: Identifying the calling user
-          example: {"tn":"12155551211"}
+          properties: 
+            tn: 
+              type: array
+              description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
+              items:
+                type: string
+                example: "12155551211"
+            uri: 
+              type: array
+              description: Used if the "orig" or "dest" is given in a SIP URI
+              items:
+                type: string
+                example: null
     signingResponse:
       title: signingResponse
       type: object
@@ -1305,21 +1317,57 @@ components:
           example: ["mjhtrrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"div\"", 
                     "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"rph\""]
         to:
-          type: string
+          type: object
           description: The destination identity taken from the To header field. Used when no "div" claim is included
-          example: "sip:Bob@example.com or 12155551212"
+          properties: 
+            tn: 
+              type: array
+              description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
+              items:
+                type: string
+                example: "12155551212"
+            uri: 
+              type: array
+              description: Used if the "orig" or "dest" is given in a SIP URI
+              items:
+                type: string
+                example: null
         dest: 
-          type: string
+          type: object
           description: The destination identity taken from the Request-URI in the incoming request
-          example: "sip:Voice_Mail@example.com or 12155551213"
+          properties: 
+            tn: 
+              type: array
+              description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
+              items:
+                type: string
+                example: "12155551213"
+            uri: 
+              type: array
+              description: Used if the "orig" or "dest" is given in a SIP URI
+              items:
+                type: string
+                example: null
         time: 
           type: integer
           description: Time based on the Date header field in the incoming request
           example: 1664216863
         from: 
-          type: string
+          type: object
           description: The asserted identity, taken from the P-Asserted-Identity or the From header field of the incoming request
-          example: "sip:Alice@example.com or 12155551211"
+          properties: 
+            tn: 
+              type: array
+              description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
+              items:
+                type: string
+                example: "12155551211"
+            uri: 
+              type: array
+              description: Used if the "orig" or "dest" is given in a SIP URI
+              items:
+                type: string
+                example: null
         protectedHeaders: 
           type: array
           items:
@@ -1485,21 +1533,57 @@ components:
           description: This parameter contains one or more "div" and/or "rph" Identity header field values to be verified
           example: ["eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"div\""]
         to: 
-          type: string
+          type: object
           description: The destination identity taken from the To header field. Used when no "div" claim is included
-          example: "sip:Bob@example.com or 12155551212"
+          properties: 
+            tn: 
+              type: array
+              description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
+              items:
+                type: string
+                example: "12155551212"
+            uri: 
+              type: array
+              description: Used if the "orig" or "dest" is given in a SIP URI
+              items:
+                type: string
+                example: null
         dest: 
-          type: string
+          type: object
           description: The destination identity taken from the Request-URI in the incoming request
-          example: "sip:Voice_Mail@example.com or 12155551213"
+          properties: 
+            tn: 
+              type: array
+              description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
+              items:
+                type: string
+                example: "12155551213"
+            uri: 
+              type: array
+              description: Used if the "orig" or "dest" is given in a SIP URI
+              items:
+                type: string
+                example: null
         time: 
           type: integer
           description: Time based on the Date header field in the incoming request
           example: 1664216863
         from: 
-          type: string
+          type: object
           description: The asserted identity, taken from the P-Asserted-Identity or the From header field of the incoming request
-          example: "sip:Alice@example.com or 12155551211"
+          properties: 
+            tn: 
+              type: array
+              description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
+              items:
+                type: string
+                example: "12155551211"
+            uri: 
+              type: array
+              description: Used if the "orig" or "dest" is given in a SIP URI
+              items:
+                type: string
+                example: null
         protectedHeaders: 
           type: array
           items:
@@ -1526,17 +1610,41 @@ components:
           description: This parameter contains one or more "div" and/or "rph" Identity header field values to be verified
           example: ["eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"rph\""]
         to: 
-          type: string
+          type: object
           description: The destination identity taken from the To header field. Used when no "div" claim is included
-          example: "sip:Bob@example.com or 12155551212"
+          properties: 
+            tn: 
+              type: array
+              description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
+              items:
+                type: string
+                example: "12155551212"
+            uri: 
+              type: array
+              description: Used if the "orig" or "dest" is given in a SIP URI
+              items:
+                type: string
+                example: null
         time: 
           type: integer
           description: Time based on the Date header field in the incoming request
           example: 1664216863
         from: 
-          type: string
+          type: object
           description: The asserted identity, taken from the P-Asserted-Identity or the From header field of the incoming request
-          example: "sip:Alice@example.com or 12155551211"
+          properties: 
+            tn: 
+              type: array
+              description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
+              items:
+                type: string
+                example: "12155551211"
+            uri: 
+              type: array
+              description: Used if the "orig" or "dest" is given in a SIP URI
+              items:
+                type: string
+                example: null
         protectedHeaders: 
           type: array
           items:

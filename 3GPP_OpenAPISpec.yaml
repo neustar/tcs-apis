@@ -605,12 +605,13 @@ paths:
               "time": 1664216863,
               "from": "sip:Alice@example.com or 12155551211"
             }
-
             Response: 
             {
               "verstatValue":"TN-Validation-Passed",
               "verifyResults":[
                   {
+                    "ppt":"shaken",
+                    "status":"pass",
                     "verifyResult":[
                         {
                           "ppt":"shaken",
@@ -619,7 +620,7 @@ paths:
                               "attest":"A , B or C",
                               "dest":{
                                 "tn":[
-                                  "12155551213"
+                                    "12155551213"
                                 ],
                                 "uri":null
                               },
@@ -632,6 +633,436 @@ paths:
                         }
                     ]
                   }
+              ]
+            }
+        - lang: curl
+          label: SHAKEN w/1-Diversion
+          source: |
+            Request: 
+            {
+              "identityHeader": "kjhytrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\"",
+              "identityHeaders": ["eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjM4MzkzNjE0LCJvcmlnIjp7InRuIjoiMTcwMzU1NTAwMDEifSwib3JpZ2lkIjoiZTUxNzM3MDMtYWNjZS00MzM4LTg3ODYtZDEzNDg2Y2I0MjM2IiwicmNkIjp7Im5hbSI6IkFsaWNlIn0sInJjZGkiOnsiL25hbSI6InNoYTI1Ni1POFVRWXBjOFJZMWFieTJOWktBakpHTlVyWDRHU3g1T0FKN0lvR21hTUVNPSJ9fQ.8h3_745L_J8VyJyp3TL5woU6HsJLruc_7yT9FreBHXF6YfS4ZUGeKIK4HuFAWzKEakoEWvM5nZgvcwAmqxbn4w;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"div\""],
+              "from": ""\"Alice\" <sip:+17035550001@example.com>",
+              "to": "\"John\" <sip:+15715550002@example.com>",
+              "dest": "\"Voice_Mail\" <sip:+15715550000@example.com>",
+              "time": 1664216863,
+              "protectedHeaders": "Diversion: sip:15715550002@10.10.100.12;reason=unknown;privacy=off"
+            }
+            Response: 
+            {
+              "divResult":[
+                  {
+                    "div":{
+                        "tn":"15715550002"
+                    },
+                    "verstatValue":"TN-Validation-Passed"
+                  }
+              ],
+              "verstatValue":"TN-Validation-Passed",
+              "verifyResults":[
+                  {
+                    "ppt":"shaken",
+                    "status":"pass",
+                    "verifyResult":{
+                        "ppt":"shaken",
+                        "status":"pass",
+                        "validClaims":{
+                          "attest":"A",
+                          "dest":{
+                              "tn":[
+                                "12155551213"
+                              ],
+                              "uri":null
+                          },
+                          "iat":1664199282,
+                          "orig":{
+                              "tn":"12155551211"
+                          },
+                          "origid":"123e4567-e89b-12d3-a456-426655440000"
+                        }
+                    }
+                  },
+                  {
+                    "ppt":"div",
+                    "status":"pass",
+                    "verifyResult":{
+                        "ppt":"div",
+                        "status":"pass",
+                        "validClaims":{
+                          "dest":{
+                              "tn":[
+                                [
+                                    "15715550000"
+                                ]
+                              ],
+                              "uri":null
+                          },
+                          "iat":1664199282,
+                          "orig":{
+                              "tn":"17035550001"
+                          },
+                          "div":{
+                              "tn":"15715550002",
+                              "hi":null
+                          }
+                        }
+                    }
+                  }
+              ]
+            }
+        - lang: curl
+          label: SHAKEN w/2-Diversion
+          source: |
+            Request: 
+            {
+              "identityHeader": "kjhytrciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\"",
+              "identityHeaders": [
+                "eyJhbGciOiJFUzI1NiIsInBwdCI6ImRpdiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAyIl19LCJkaXYiOnsidG4iOiIxNTcxNTU1MDAwMCJ9LCJpYXQiOjE2MzgzOTM4NjksIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9fQ.Hc73JFhnXgocq9q0nldHR5SdMHNBftGfQouslhDT0BPhGmcCnOGiN9L-J3CQsbd2z7wA6hqVSC2gAfPc7lSYiQ;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"div\"",
+                "eyJhbGciOiJFUzI1NiIsInBwdCI6ImRpdiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAzIl19LCJkaXYiOnsidG4iOiIxNTcxNTU1MDAwMiJ9LCJpYXQiOjE2MzgzOTQxODgsIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9fQ.Y9BbjcndUXyMZl6j1GsQpYgGE7VpPobLmwIqcYNELu3Cx0phwVEHre0TQHZiQB5N-Vbl-GveTphJDkfbfStBkA;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"div\""
+              ],
+              "from": ""\"Alice\" <sip:+17035550001@example.com>",
+              "to": "\"John\" <sip:+15715550002@example.com>",
+              "dest": "\"Voice_Mail\" <sip:+15715550000@example.com>",
+              "time": 1664216863,
+              "protectedHeaders": "[Diversion: sip:15715550003@10.10.100.13;reason=unknown;privacy=off
+                                   ,Diversion: sip:15715550002@10.10.100.12;reason=unknown;privacy=off]"
+            }
+            Response: 
+            {
+              "divResult":[
+                  {
+                    "div":{
+                        "tn":"15715550003"
+                    },
+                    "verstatValue":"TN-Validation-Passed"
+                  },
+                  {
+                    "div":{
+                        "tn":"15715550002"
+                    },
+                    "verstatValue":"TN-Validation-Passed"
+                  }
+              ],
+              "verstatValue":"TN-Validation-Passed",
+              "verifyResults":[
+                  {
+                    "ppt":"shaken",
+                    "status":"pass",
+                    "verifyResult":{
+                        "ppt":"shaken",
+                        "status":"pass",
+                        "validClaims":{
+                          "attest":"A",
+                          "dest":{
+                              "tn":[
+                                "12155551213"
+                              ],
+                              "uri":null
+                          },
+                          "iat":1664199282,
+                          "orig":{
+                              "tn":"12155551211"
+                          },
+                          "origid":"123e4567-e89b-12d3-a456-426655440000"
+                        }
+                    }
+                  },
+                  {
+                    "ppt":"div",
+                    "status":"pass",
+                    "verifyResult":{
+                        "ppt":"div",
+                        "status":"pass",
+                        "validClaims":{
+                          "dest":{
+                              "tn":[
+                                [
+                                    "15715550002"
+                                ]
+                              ],
+                              "uri":null
+                          },
+                          "iat":1664199282,
+                          "orig":{
+                              "tn":"17035550001"
+                          },
+                          "div":{
+                              "tn":"15715550003",
+                              "hi":null
+                          }
+                        }
+                    }
+                  },
+                  {
+                    "ppt":"div",
+                    "status":"pass",
+                    "verifyResult":{
+                        "ppt":"div",
+                        "status":"pass",
+                        "validClaims":{
+                          "dest":{
+                              "tn":[
+                                [
+                                    "15715550000"
+                                ]
+                              ],
+                              "uri":null
+                          },
+                          "iat":1664199282,
+                          "orig":{
+                              "tn":"17035550001"
+                          },
+                          "div":{
+                              "tn":"15715550002",
+                              "hi":null
+                          }
+                        }
+                    }
+                  }
+              ]
+            }
+        - lang: curl
+          label: RPH
+          source: |
+            Request: 
+            {
+              "identityHeaders": [
+                "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"rph\""
+              ],
+              "to": {
+                "tn": [
+                  "12155551212"
+                ],
+                "uri": [
+                  null
+                ]
+              },
+              "time": 1664216863,
+              "from": {
+                "tn": "12155551211",
+                "uri": null
+              },
+              "protectedHeaders": [
+                "Resource-Priority:ets.0, wps.0"
+              ]
+            }
+            Response: 
+            {
+              "verstatPriority":"RPH-Validation-Passed",
+              "verifyResults":[
+                  {
+                    "ppt":"rph",
+                    "status":"pass",
+                    "verifyResult":{
+                        "ppt":"rph",
+                        "status":"pass",
+                        "validClaims":{
+                          "dest":{
+                              "tn":[
+                                "12155551212"
+                              ],
+                              "uri":null
+                          },
+                          "iat":1664199282,
+                          "orig":{
+                              "tn":"12155551211"
+                          },
+                          "rph":[
+                              "ets.0",
+                              "wps.0"
+                          ]
+                        }
+                    }
+                  }
+              ]
+            }
+        - lang: curl
+          label: SHAKEN w/RPH
+          source: |
+            Request: 
+            {
+              "identityHeader": "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\"",
+              "identityHeaders": [
+                "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"rph\""
+              ],
+              "to": {
+                "tn": [
+                  "12155551212"
+                ],
+                "uri": [
+                  null
+                ]
+              },
+              "time": 1664216863,
+              "from": {
+                "tn": "12155551211",
+                "uri": null
+              },
+              "protectedHeaders": [
+                "Resource-Priority:ets.0, wps.0"
+              ]
+            }
+            Response: 
+            {
+              "verstatPriority": "RPH-Validation-Passed",
+              "verstatValue": "TN-Validation-Passed",
+              "verifyResults": [
+                {
+                  "ppt":"shaken",
+                  "status":"pass",
+                  "verifyResult":{
+                      "ppt":"shaken",
+                      "status":"pass",
+                      "validClaims":{
+                        "attest":"A",
+                        "dest":{
+                            "tn":[
+                              "12155551213"
+                            ],
+                            "uri":null
+                        },
+                        "iat":1664199282,
+                        "orig":{
+                            "tn":"12155551211"
+                        },
+                        "origid":"123e4567-e89b-12d3-a456-426655440000"
+                      }
+                  }
+                },
+                {
+                  "ppt": "rph",
+                  "status": "pass",
+                  "verifyResult":{
+                    "validClaims": {
+                      "dest": {
+                        "tn": [
+                          "12155551212"
+                        ],
+                        "uri": null
+                      },
+                      "iat": 1664199282,
+                      "orig": {
+                        "tn": "12155551211"
+                      },
+                      "rph": [
+                        "ets.0",
+                        "wps.0"
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+        - lang: curl
+          label: SHAKEN w/RPH-DIV
+          source: |
+            Request: 
+            {
+              "identityHeader": "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\"",
+              "identityHeaders": [
+                "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"rph\"",
+                "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjM4MzkzNjE0LCJvcmlnIjp7InRuIjoiMTcwMzU1NTAwMDEifSwib3JpZ2lkIjoiZTUxNzM3MDMtYWNjZS00MzM4LTg3ODYtZDEzNDg2Y2I0MjM2IiwicmNkIjp7Im5hbSI6IkFsaWNlIn0sInJjZGkiOnsiL25hbSI6InNoYTI1Ni1POFVRWXBjOFJZMWFieTJOWktBakpHTlVyWDRHU3g1T0FKN0lvR21hTUVNPSJ9fQ.8h3_745L_J8VyJyp3TL5woU6HsJLruc_7yT9FreBHXF6YfS4ZUGeKIK4HuFAWzKEakoEWvM5nZgvcwAmqxbn4w;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"div\""
+              ],
+              "to": {
+                "tn": [
+                  "12155551212"
+                ],
+                "uri": [
+                  null
+                ]
+              },
+              "time": 1664216863,
+              "from": {
+                "tn": "12155551211",
+                "uri": null
+              },
+              "protectedHeaders": [
+                "Resource-Priority:ets.0, wps.0"
+              ]
+            }
+            Response: 
+            {
+              "divResult":[
+                {
+                  "div":{
+                      "tn":"15715550002"
+                  },
+                  "verstatValue":"TN-Validation-Passed"
+                }
+              ],
+              "verstatPriority": "RPH-Validation-Passed",
+              "verstatValue": "TN-Validation-Passed",
+              "verifyResults": [
+                {
+                  "ppt":"shaken",
+                  "status":"pass",
+                  "verifyResult":{
+                      "ppt":"shaken",
+                      "status":"pass",
+                      "validClaims":{
+                        "attest":"A",
+                        "dest":{
+                            "tn":[
+                              "12155551213"
+                            ],
+                            "uri":null
+                        },
+                        "iat":1664199282,
+                        "orig":{
+                            "tn":"12155551211"
+                        },
+                        "origid":"123e4567-e89b-12d3-a456-426655440000"
+                      }
+                  }
+                },
+                {
+                  "ppt": "rph",
+                  "status": "pass",
+                  "verifyResult":{
+                    "validClaims": {
+                      "dest": {
+                        "tn": [
+                          "12155551212"
+                        ],
+                        "uri": null
+                      },
+                      "iat": 1664199282,
+                      "orig": {
+                        "tn": "12155551211"
+                      },
+                      "rph": [
+                        "ets.0",
+                        "wps.0"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "ppt":"div",
+                  "status":"pass",
+                  "verifyResult":{
+                      "ppt":"div",
+                      "status":"pass",
+                      "validClaims":{
+                        "dest":{
+                            "tn":[
+                              [
+                                  "15715550000"
+                              ]
+                            ],
+                            "uri":null
+                        },
+                        "iat":1664199282,
+                        "orig":{
+                            "tn":"17035550001"
+                        },
+                        "div":{
+                            "tn":"15715550002",
+                            "hi":null
+                        }
+                      }
+                  }
+                }
               ]
             }
       responses:
@@ -1510,41 +1941,63 @@ components:
         verifyResults:
           description: Each array entry contains the verification results of a PASSporT contained in the request
           type: array
-          items:
+          items: 
             type: object
-            description: Contains the verification results of a single Identity header field contained in the identityHeader parameter or an entry in the identityHeaders array of the verification request. The "ppt" and "status" parameters are always present. The inclusion of the other parameters depends on the value of the "status" parameter
             required: 
+              - verifyResult
               - ppt
               - status
-            properties:
+            properties: 
+              verifyResult:
+                description: Contains the verification results of a single Identity header field contained in the identityHeader parameter or an entry of the identityHeaders array of the verification request.The ppt and status parameters are always present. The inclusion of the other parameters in the tuple depends on the value of the status parameter.
+                type: object
+                required: 
+                - ppt
+                - status
+                properties:
+                  ppt:
+                    type: string
+                    description: Identifies the type of PASSporT associated with this verifyResult entry
+                  status:
+                    type: string
+                    description: Identifies the verification result of the PASSporT associated with this verifyResult entry
+                  reasonCode:
+                    type: integer
+                    description: Identifies the failure reason code of the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
+                  reasonText:
+                    type: string
+                    description: Identifies the failure text associated with the failure reason code. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
+                  passport:
+                    type: string
+                    description: Contains the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
+                  validClaims:
+                    type: object
+                    description: This parameter contains the payload of the verified PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "pass"
               ppt:
                 type: string
                 description: Identifies the type of PASSporT associated with this verifyResult entry
               status:
                 type: string
                 description: Identifies the verification result of the PASSporT associated with this verifyResult entry
-              reasonCode:
-                type: integer
-                description: Identifies the failure reason code of the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
-              reasonText:
-                type: string
-                description: Identifies the failure text associated with the failure reason code. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
-              passport:
-                type: string
-                description: Contains the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
-              validClaims:
-                type: object
-                description: This parameter contains the payload of the verified PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "pass"
           example:
-            - ppt: shaken
+            - verifyResult: 
+                ppt: shaken
+                status: pass
+                validClaims: {"attest":"A , B or C","dest":{"tn":["12155551212"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"origid":"123e4567-e89b-12d3-a456-426655440000"}
+              ppt: shaken
               status: pass
-              validClaims: {"attest": "A , B or C","dest":{"tn":["12155551212"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"origid":"123e4567-e89b-12d3-a456-426655440000"}
-            - ppt: div
+            - verifyResult:
+                ppt: "div"
+                status: "pass"
+                validClaims: {"dest":{"tn":["12155551213"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"div":{"tn":"121555551212","hi":null}}
+              ppt: div
               status: pass
-              validClaims: {"dest":{"tn":["12155551213"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"div":{"tn":"121555551212","hi":null}}
-            - ppt: rph
+            - verifyResult: 
+                ppt: rph
+                status: "pass"
+                validClaims: {"dest":{"tn":["12155551212"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"rph":["ets.0","wps.0"]}
+              ppt: rph
               status: pass
-              validClaims: {"dest":{"tn":["12155551212"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"rph":["ets.0","wps.0"]}
     divVerificationResponse:
       title: verificationResponse
       type: object

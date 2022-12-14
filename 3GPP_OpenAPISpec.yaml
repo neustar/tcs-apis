@@ -1951,7 +1951,7 @@ components:
                       example: null
               verstatValue:
                 type: string
-                example: TN-Validation-Passed
+                example: TN-Validation-Passed 
         verifyResults:
           description: Each array entry contains the verification results of a PASSporT contained in the request
           type: array

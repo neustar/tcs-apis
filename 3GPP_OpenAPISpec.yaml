@@ -610,8 +610,7 @@ paths:
                               "dest":{
                                 "tn":[
                                     "12155551213"
-                                ],
-                                "uri":null
+                                ]
                               },
                               "iat":1664199282,
                               "orig":{
@@ -657,13 +656,12 @@ paths:
                           "attest":"A",
                           "dest":{
                               "tn":[
-                                "12155551213"
-                              ],
-                              "uri":null
+                                "15715550002"
+                              ]
                           },
                           "iat":1664199282,
                           "orig":{
-                              "tn":"12155551211"
+                              "tn":"17035550001"
                           },
                           "origid":"123e4567-e89b-12d3-a456-426655440000"
                         }
@@ -679,16 +677,14 @@ paths:
                                 [
                                     "15715550000"
                                 ]
-                              ],
-                              "uri":null
+                              ]
                           },
                           "iat":1664199282,
                           "orig":{
                               "tn":"17035550001"
                           },
                           "div":{
-                              "tn":"15715550002",
-                              "hi":null
+                              "tn":"15715550002"
                           }
                         }
                     }
@@ -738,13 +734,12 @@ paths:
                           "attest":"A",
                           "dest":{
                               "tn":[
-                                "12155551213"
-                              ],
-                              "uri":null
+                                "15715550002"
+                              ]
                           },
                           "iat":1664199282,
                           "orig":{
-                              "tn":"12155551211"
+                              "tn":"17035550001"
                           },
                           "origid":"123e4567-e89b-12d3-a456-426655440000"
                         }
@@ -758,18 +753,16 @@ paths:
                           "dest":{
                               "tn":[
                                 [
-                                    "15715550002"
+                                    "15715550000"
                                 ]
-                              ],
-                              "uri":null
+                              ]
                           },
                           "iat":1664199282,
                           "orig":{
                               "tn":"17035550001"
                           },
                           "div":{
-                              "tn":"15715550003",
-                              "hi":null
+                              "tn":"15715550003"
                           }
                         }
                     }
@@ -782,18 +775,16 @@ paths:
                           "dest":{
                               "tn":[
                                 [
-                                    "15715550000"
+                                    "15715550003"
                                 ]
-                              ],
-                              "uri":null
+                              ]
                           },
                           "iat":1664199282,
                           "orig":{
                               "tn":"17035550001"
                           },
                           "div":{
-                              "tn":"15715550002",
-                              "hi":null
+                              "tn":"15715550002"
                           }
                         }
                     }
@@ -811,15 +802,11 @@ paths:
               "to": {
                 "tn": [
                   "12155551212"
-                ],
-                "uri": [
-                  null
                 ]
               },
               "time": 1664216863,
               "from": {
-                "tn": "12155551211",
-                "uri": null
+                "tn": "12155551211"
               },
               "protectedHeaders": [
                 "Resource-Priority:ets.0, wps.0"
@@ -837,8 +824,7 @@ paths:
                           "dest":{
                               "tn":[
                                 "12155551212"
-                              ],
-                              "uri":null
+                              ]
                           },
                           "iat":1664199282,
                           "orig":{
@@ -865,15 +851,11 @@ paths:
               "to": {
                 "tn": [
                   "12155551212"
-                ],
-                "uri": [
-                  null
                 ]
               },
               "time": 1664216863,
               "from": {
-                "tn": "12155551211",
-                "uri": null
+                "tn": "12155551211"
               },
               "protectedHeaders": [
                 "Resource-Priority:ets.0, wps.0"
@@ -892,9 +874,8 @@ paths:
                         "attest":"A",
                         "dest":{
                             "tn":[
-                              "12155551213"
-                            ],
-                            "uri":null
+                              "12155551212"
+                            ]
                         },
                         "iat":1664199282,
                         "orig":{
@@ -906,12 +887,13 @@ paths:
                 },
                 {
                   "verifyResult":{
+                    "ppt": "rph",
+                    "status": "pass",
                     "validClaims": {
                       "dest": {
                         "tn": [
                           "12155551212"
-                        ],
-                        "uri": null
+                        ]
                       },
                       "iat": 1664199282,
                       "orig": {
@@ -921,9 +903,7 @@ paths:
                         "ets.0",
                         "wps.0"
                       ]
-                    },
-                    "ppt": "rph",
-                    "status": "pass",
+                    }
                   }
                 }
               ]
@@ -938,19 +918,10 @@ paths:
                 "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"rph\"",
                 "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL2NhLWNtcy5uZXVzdGFybGFiLmJpei9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDE1LjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjM4MzkzNjE0LCJvcmlnIjp7InRuIjoiMTcwMzU1NTAwMDEifSwib3JpZ2lkIjoiZTUxNzM3MDMtYWNjZS00MzM4LTg3ODYtZDEzNDg2Y2I0MjM2IiwicmNkIjp7Im5hbSI6IkFsaWNlIn0sInJjZGkiOnsiL25hbSI6InNoYTI1Ni1POFVRWXBjOFJZMWFieTJOWktBakpHTlVyWDRHU3g1T0FKN0lvR21hTUVNPSJ9fQ.8h3_745L_J8VyJyp3TL5woU6HsJLruc_7yT9FreBHXF6YfS4ZUGeKIK4HuFAWzKEakoEWvM5nZgvcwAmqxbn4w;info=<http://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"div\""
               ],
-              "to": {
-                "tn": [
-                  "12155551212"
-                ],
-                "uri": [
-                  null
-                ]
-              },
+              "from": ""\"Alice\" <sip:+12155551211@example.com>",
+              "to": "\"John\" <sip:+12155551212@example.com>",
+              "dest": "\"Voice_Mail\" <sip:+12155551213@example.com>",
               "time": 1664216863,
-              "from": {
-                "tn": "12155551211",
-                "uri": null
-              },
               "protectedHeaders": [
                 "Resource-Priority:ets.0, wps.0"
               ]
@@ -960,7 +931,7 @@ paths:
               "divResult":[
                 {
                   "div":{
-                      "tn":"15715550002"
+                      "tn":"12155551212"
                   },
                   "verstatValue":"TN-Validation-Passed"
                 }
@@ -976,9 +947,8 @@ paths:
                         "attest":"A",
                         "dest":{
                             "tn":[
-                              "12155551213"
-                            ],
-                            "uri":null
+                              "12155551212"
+                            ]
                         },
                         "iat":1664199282,
                         "orig":{
@@ -996,8 +966,7 @@ paths:
                       "dest": {
                         "tn": [
                           "12155551212"
-                        ],
-                        "uri": null
+                        ]
                       },
                       "iat": 1664199282,
                       "orig": {
@@ -1018,18 +987,16 @@ paths:
                         "dest":{
                             "tn":[
                               [
-                                  "15715550000"
+                                  "12155551213"
                               ]
-                            ],
-                            "uri":null
+                            ]
                         },
                         "iat":1664199282,
                         "orig":{
-                            "tn":"17035550001"
+                            "tn":"12155551211"
                         },
                         "div":{
-                            "tn":"15715550002",
-                            "hi":null 
+                            "tn":"12155551212"
                         }
                       }
                   }
@@ -1832,7 +1799,7 @@ components:
                 example: "12155551212"
             uri: 
               type: array
-              description: Used if the "orig" or "dest" is given in a SIP URI
+              description: Used if the “from”, “to” or “dest” is given in a SIP URI
               items:
                 type: string
                 example: null
@@ -1848,7 +1815,7 @@ components:
                 example: "12155551213"
             uri: 
               type: array
-              description: Used if the "orig" or "dest" is given in a SIP URI
+              description: Used if the “from”, “to” or “dest” is given in a SIP URI
               items:
                 type: string
                 example: null
@@ -1866,7 +1833,7 @@ components:
               example: "12155551211"
             uri: 
               type: string
-              description: Used if the "orig" or "dest" is given in a SIP URI
+              description: Used if the “from”, “to” or “dest” is given in a SIP URI
               example: null
         protectedHeaders: 
           type: array
@@ -1888,9 +1855,18 @@ components:
               div:
                 type: object
                 properties: 
-                  tn:
+                  tn: 
                     type: string
-                    example: "12155551212"
+                    description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
+                    items:
+                      type: string
+                      example: "12155551212"
+                  uri: 
+                    type: string
+                    description: Used if the “from”, “to” or “dest” is given in a SIP URI
+                    items:
+                      type: string
+                      example: null
               verstatValue:
                 type: string
                 example: TN-Validation-Passed
@@ -1961,9 +1937,18 @@ components:
               div:
                 type: object
                 properties: 
-                  tn:
+                  tn: 
                     type: string
-                    example: "12155551212"
+                    description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
+                    items:
+                      type: string
+                      example: "12155551212"
+                  uri: 
+                    type: string
+                    description: Used if the “from”, “to” or “dest” is given in a SIP URI
+                    items:
+                      type: string
+                      example: null
               verstatValue:
                 type: string
                 example: TN-Validation-Passed
@@ -2082,7 +2067,7 @@ components:
                 example: "12155551212"
             uri: 
               type: array
-              description: Used if the "orig" or "dest" is given in a SIP URI
+              description: Used if the “from”, “to” or “dest” is given in a SIP URI
               items:
                 type: string
                 example: null
@@ -2098,7 +2083,7 @@ components:
                 example: "12155551213"
             uri: 
               type: array
-              description: Used if the "orig" or "dest" is given in a SIP URI
+              description: Used if the “from”, “to” or “dest” is given in a SIP URI
               items:
                 type: string
                 example: null
@@ -2116,7 +2101,7 @@ components:
               example: "12155551211"
             uri: 
               type: string
-              description: Used if the "orig" or "dest" is given in a SIP URI
+              description: Used if the “from”, “to” or “dest” is given in a SIP URI
               example: null
         protectedHeaders: 
           type: array
@@ -2155,7 +2140,7 @@ components:
                 example: "12155551212"
             uri: 
               type: array
-              description: Used if the "orig" or "dest" is given in a SIP URI
+              description: Used if the “from”, “to” or “dest” is given in a SIP URI
               items:
                 type: string
                 example: null
@@ -2173,7 +2158,7 @@ components:
               example: "12155551211"
             uri: 
               type: string
-              description: Used if the "orig" or "dest" is given in a SIP URI
+              description: Used if the “from”, “to” or “dest” is given in a SIP URI
               example: null
         protectedHeaders: 
           type: array

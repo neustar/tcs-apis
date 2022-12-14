@@ -1858,15 +1858,11 @@ components:
                   tn: 
                     type: string
                     description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
-                    items:
-                      type: string
-                      example: "12155551212"
+                    example: "12155551212"
                   uri: 
                     type: string
                     description: Used if the “from”, “to” or “dest” is given in a SIP URI
-                    items:
-                      type: string
-                      example: null
+                    example: null
               verstatValue:
                 type: string
                 example: TN-Validation-Passed
@@ -1940,15 +1936,11 @@ components:
                   tn: 
                     type: string
                     description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
-                    items:
-                      type: string
-                      example: "12155551212"
+                    example: "12155551212"
                   uri: 
                     type: string
                     description: Used if the “from”, “to” or “dest” is given in a SIP URI
-                    items:
-                      type: string
-                      example: null
+                    example: null
               verstatValue:
                 type: string
                 example: TN-Validation-Passed 

@@ -141,12 +141,11 @@ paths:
               "orig": {
                 "tn": "12155551211"
               },
-              "rph": [
-                {
-                  "ets.0",
-                  "wps.0"
-                }
-              ]
+              "rph": {
+                "auth": [
+                  "esnet.0"
+                ]
+              }
             }
             Response: 
             {
@@ -167,10 +166,12 @@ paths:
               "orig": {
                 "tn": "12155551211"
               },
-              "rph": [
-                "ets.0",
-                "wps.0"
-              ],
+              "rph": {
+                "auth": [
+                  "esnet.0"
+                ]
+              }
+            },
               "sph": "psap-callback"
             }
             Response: 
@@ -461,12 +462,11 @@ paths:
               "orig": {
                 "tn": "12155551211"
               },
-              "rph": [
-                {
-                  "ets.0",
-                  "wps.0"
-                }
-              ]
+              "rph": {
+                "auth": [
+                  "esnet.0"
+                ]
+              }
             }
       responses:
         '200':
@@ -606,7 +606,7 @@ paths:
                           "ppt":"shaken",
                           "status":"pass",
                           "validClaims":{
-                              "attest":"A , B or C",
+                              "attest":"B",
                               "dest":{
                                 "tn":[
                                     "12155551213"
@@ -809,7 +809,7 @@ paths:
                 "tn": "12155551211"
               },
               "protectedHeaders": [
-                "Resource-Priority:ets.0, wps.0"
+                "Resource-Priority:esnet.0"
               ]
             }
             Response: 
@@ -830,12 +830,10 @@ paths:
                           "orig":{
                               "tn":"12155551211"
                           },
-                          "rph":[
-                              "ets.0",
-                              "wps.0"
-                          ]
-                        }
-                    }
+                          "rph": {
+                            "auth": ["esnet.0"]
+                          } 
+                      }
                   }
               ]
             }
@@ -858,7 +856,7 @@ paths:
                 "tn": "12155551211"
               },
               "protectedHeaders": [
-                "Resource-Priority:ets.0, wps.0"
+                "Resource-Priority:esnet.0"
               ]
             }
             Response: 
@@ -899,10 +897,9 @@ paths:
                       "orig": {
                         "tn": "12155551211"
                       },
-                      "rph": [
-                        "ets.0",
-                        "wps.0"
-                      ]
+                      "rph": {
+                        "auth": ["esnet.0"]
+                      }
                     }
                   }
                 }
@@ -923,7 +920,8 @@ paths:
               "dest": "\"Voice_Mail\" <sip:+12155551213@example.com>",
               "time": 1664216863,
               "protectedHeaders": [
-                "Resource-Priority:ets.0, wps.0"
+                "Resource-Priority:esnet.0",
+                "Diversion: sip:12155551212@10.10.100.12;reason=unknown;privacy=off"
               ]
             }
             Response: 
@@ -972,10 +970,9 @@ paths:
                       "orig": {
                         "tn": "12155551211"
                       },
-                      "rph": [
-                        "ets.0",
-                        "wps.0"
-                      ]
+                      "rph": {
+                        "auth": ["esnet.0"]
+                      }
                     }
                   }
                 },
@@ -1567,11 +1564,14 @@ components:
           description: An opaque origination identifier in the recommended format of a Universally Unique Identifier (UUID)
           example: 123e4567-e89b-12d3-a456-426655440000
         rph: 
-          type: array
-          items:
-            type: string
+          type: object
           description: Applicable only if "ppt" = "rph". Array of strings that correspond to the r-values indicated in the SIP Resource-Priority header field. Contains assertion of the priority level of the user to be used for a given communication session
-          example: ["ets.0", "wps.0"]
+          properties: 
+            auth:
+              type: array
+              items:
+                type: string
+              example: ["esnet.0"]
         sph: 
           type: string
           description: Applicable only if "ppt" = "rph". Contains header field value "psap-callback" of the SIP Priority header field
@@ -1634,11 +1634,14 @@ components:
               description: Used if the "orig" or "dest" is given in a SIP URI
               example: null
         rph: 
-          type: array
-          items:
-            type: string
-          description: Array of strings that correspond to the r-values indicated in the SIP Resource-Priority header field. Contains assertion of the priority level of the user to be used for a given communication session
-          example: ["ets.0", "wps.0"]
+          type: object
+          properties: 
+            auth:
+              type: array
+              items:
+                type: string
+                description: Array of strings that correspond to the r-values indicated in the SIP Resource-Priority header field. Contains assertion of the priority level of the user to be used for a given communication session
+                example: ["esnet.0"]
         sph: 
           type: string
           description: Contains header field value "psap-callback" of the SIP Priority header field
@@ -1841,7 +1844,7 @@ components:
             type: string
           description: Contains the SIP header field(s) protected by claims in the PASSporT(s) of the identityHeaders array (i.e., "rph" and/or "div")
           example: ["Diversion: sip:12155551212@10.10.100.12;reason=unknown;privacy=off",
-                    "Resource-Priority: ets.0, wps.0"]
+                    "Resource-Priority: esnet.0"]
     verificationResponse:
       title: verificationResponse
       type: object
@@ -1911,7 +1914,7 @@ components:
             - verifyResult: 
                 ppt: shaken
                 status: pass
-                validClaims: {"attest":"A , B or C","dest":{"tn":["12155551212"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"origid":"123e4567-e89b-12d3-a456-426655440000"}
+                validClaims: {"attest":"B","dest":{"tn":["12155551212"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"origid":"123e4567-e89b-12d3-a456-426655440000"}
             - verifyResult:
                 ppt: "div"
                 status: "pass"
@@ -1919,7 +1922,7 @@ components:
             - verifyResult: 
                 ppt: rph
                 status: "pass"
-                validClaims: {"dest":{"tn":["12155551212"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"rph":["ets.0","wps.0"]}
+                validClaims: {"dest":{"tn":["12155551212"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"rph":{"auth":["esnet.0"]}}
     divVerificationResponse:
       title: verificationResponse
       type: object
@@ -2027,7 +2030,7 @@ components:
             - verifyResult: 
                 ppt: rph
                 status: "pass"
-                validClaims: {"dest":{"tn":["12155551212"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"rph":["ets.0","wps.0"]}
+                validClaims: {"dest":{"tn":["12155551212"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"rph":{"auth":["esnet.0"]}}
     divVerificationRequest:
       title: divVerificationRequest
       type: object
@@ -2157,4 +2160,4 @@ components:
           items:
             type: string
           description: Contains the SIP header field(s) protected by claims in the PASSporT(s) of the identityHeaders array (i.e., "rph" and/or "div")
-          example: ["Resource-Priority:ets.0, wps.0"]
+          example: ["Resource-Priority:esnet.0"]

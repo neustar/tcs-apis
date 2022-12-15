@@ -2160,4 +2160,4 @@ components:
           items:
             type: string
           description: Contains the SIP header field(s) protected by claims in the PASSporT(s) of the identityHeaders array (i.e., "rph" and/or "div")
-          example: ["Resource-Priority:esnet.0"]
+          example: ["Resource-Priority:esnet.0"] 

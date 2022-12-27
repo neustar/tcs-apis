@@ -133,11 +133,7 @@ paths:
                   ]
               },
               "iat": 1671467383,
-              "rph": {
-                  "auth": [
-                      "esnet.1"
-                  ]
-              }
+              "rph":{"auth":["ets.0","wps.0"]}
             }
             Response: 
             {
@@ -832,33 +828,32 @@ paths:
             }
             Response: 
             {
-                "verstatValue": "TN-Validation-Passed",
-                "verifyResults": [
-                    {
-                        "verifyResult": {
-                            "ppt": "rph",
-                            "status": "pass",
-                            "validClaims": {
-                                "dest": {
-                                    "tn": [
-                                        "15715550000"
-                                    ]
-                                },
-                                "iat": 1671733921,
-                                "orig": {
-                                    "tn": "17035550001"
-                                },
-                                "rph": {
-                                    "auth": [
-                                        "esnet.1"
-                                    ]
-                                },
-                                "sph": "psap-callback"
-                            }
-                        }
-                    }
-                ],
-                "verstatPriority": "RPH-Validation-Passed"
+              "verifyResults": [
+                  {
+                      "verifyResult": {
+                          "ppt": "rph",
+                          "status": "pass",
+                          "validClaims": {
+                              "dest": {
+                                  "tn": [
+                                      "15715550000"
+                                  ]
+                              },
+                              "iat": 1671733921,
+                              "orig": {
+                                  "tn": "17035550001"
+                              },
+                              "rph": {
+                                  "auth": [
+                                      "esnet.1"
+                                  ]
+                              },
+                              "sph": "psap-callback"
+                          }
+                      }
+                  }
+              ],
+              "verstatPriority": "RPH-Validation-Passed"
             }
         - lang: curl
           label: SHAKEN w/RPH

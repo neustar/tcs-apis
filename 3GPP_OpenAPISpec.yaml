@@ -1055,11 +1055,19 @@ components:
         displayName: 
           type: string
           description: The display name of the originator of the call, which the client may get from SIP signaling or other means
-          example: "[V]James Smith"
+          example: "James Smith"
     verificationResponse:
       title: verificationResponse
       type: object
       properties:
+        requestId:
+          type: string
+          description: An opaque identifier that, when provided, is reflected in the response to support troubleshooting and fault analysis
+          example: "45690"
+        displayName: 
+          type: string
+          description: The display name, reflected from the request, but possibly modified by Call Validation Treatment
+          example: "[V]John Smith"
         divResult:
           type: array
           description: Parameter informing of the result of the verification of diverting identities. For each verified identity, the "verstat" parameter is added to the verified identity. It includes array of one or more [div, verstatValue] tuples
@@ -1115,9 +1123,6 @@ components:
                   reasonText:
                     type: string
                     description: Identifies the failure text associated with the failure reason code. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
-                  displayName: 
-                    type: string
-                    description: The display name, reflected from the request, but possibly modified by Call Validation Treatment
                   reasonDescription:
                     type: string
                     description: Provides a more detailed description of the Verification Service failure. This is included, if available, only when the verifyResult "status" parameter has a value of "fail"
@@ -1131,15 +1136,12 @@ components:
             - verifyResult: 
                 ppt: shaken
                 status: pass
-                displayName: "[V]James Smith"
                 validClaims: {"attest":"B","dest":{"tn":["12155551212"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"origid":"123e4567-e89b-12d3-a456-426655440000"}
             - verifyResult:
                 ppt: "div"
                 status: "pass"
-                displayName: "[V]James Smith"
                 validClaims: {"dest":{"tn":["12155551213"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"div":{"tn":"121555551212","hi":null}}
             - verifyResult: 
                 ppt: rph
                 status: "pass"
-                displayName: "[V]James Smith"
                 validClaims: {"dest":{"tn":["12155551212"],"uri":null},"iat":1664199282,"orig":{"tn":"12155551211"},"rph":{"auth":["esnet.0"]}}

@@ -176,12 +176,15 @@ paths:
                 shaken:
                   value: 
                     identityHeader: "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"shaken\""
+                    requestId: "12378"
                 div: 
                   value: 
                     identityHeader: "kjytrfvbOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"div\""
+                    requestId: "12378"
                 rph:  
                   value: 
                     identityHeader: "mnbvfrewqaJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cDovL05FVS1DMDJGRzJLN01MODU6ODA4MC9jY2lkL2F1dGhuL3YyL2NlcnRzLzExMDAxLjEwMDAxIn0.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjQ5NTM2NTMxLCJvcmlnIjp7InVyaSI6InNpcDphbGljZUBleGFtcGxlLmNvbSJ9LCJvcmlnaWQiOiJjODcyNDU3NS1iNzgxLTExZWMtYjU3NC0wMjQyYWMxMTAwMDIifQ.piGZhwqwWaKM4cOcrDTMeFKOY5UlekVDlKZTxlge4x0ERnSe9uW4400gaoVFdpGiTOzoCt9QdSfwLV_hcmvT0g;info=<http://NEU-C02FG2K7ML85:8080/ccid/authn/v2/certs/11001.10001>;alg=ES256;ppt=\"rph\""
+                    requestId: "12378"
         '400':
           description: Service error in processing request 
           content:
@@ -946,6 +949,14 @@ components:
               type: string
               description: The "index" header field parameter is included in the entry identifying the diverting user in the History-Info header field
               example: null
+        profileId: 
+          type: string
+          description: Value may be used by the Authentication Service to make certain decisions regarding processing of a signing request
+          example: "Profile-1234"
+        requestId: 
+          type: string
+          description: An opaque identifier that, when provided, is reflected in the response to support troubleshooting and fault analysis
+          example: "12378"
     signingResponse:
       title: signingResponse
       type: object
@@ -955,6 +966,9 @@ components:
         identityHeader:
           type: string
           description: Identity header field value according to RFC 8224. This string cannot be NULL
+        requestId: 
+          type: string
+          description: An opaque identifier that is reflected from the request in order to make possible the transaction traceability in case of troubleshooting and fault analysis
     verificationRequest:
       title: verificationRequest
       type: object
@@ -1030,10 +1044,30 @@ components:
           description: Contains the SIP header field(s) protected by claims in the PASSporT(s) of the identityHeaders array (i.e., "rph" and/or "div")
           example: ["Diversion: sip:12155551212@10.10.100.12;reason=unknown;privacy=off",
                     "Resource-Priority: esnet.0"]
+        profileId: 
+          type: string
+          description: Value may be used by the Verification Service to make certain decisions regarding processing of a verification request
+          example: "Profile-5678"
+        requestId: 
+          type: string
+          description: An opaque identifier that, when provided, is reflected in the response to support troubleshooting and fault analysis
+          example: "45690"
+        displayName: 
+          type: string
+          description: The display name of the originator of the call, which the client may get from SIP signaling or other means
+          example: "James Smith"
     verificationResponse:
       title: verificationResponse
       type: object
       properties:
+        requestId:
+          type: string
+          description: An opaque identifier that, when provided, is reflected in the response to support troubleshooting and fault analysis
+          example: "45690"
+        displayName: 
+          type: string
+          description: The display name, reflected from the request, but possibly modified by Call Validation Treatment
+          example: "[V]John Smith"
         divResult:
           type: array
           description: Parameter informing of the result of the verification of diverting identities. For each verified identity, the "verstat" parameter is added to the verified identity. It includes array of one or more [div, verstatValue] tuples
@@ -1089,6 +1123,9 @@ components:
                   reasonText:
                     type: string
                     description: Identifies the failure text associated with the failure reason code. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"
+                  reasonDescription:
+                    type: string
+                    description: Provides a more detailed description of the Verification Service failure. This is included, if available, only when the verifyResult "status" parameter has a value of "fail"
                   passport:
                     type: string
                     description: Contains the failing PASSporT. Optional since this is included only when the verifyResult "status" parameter has a value of "fail"

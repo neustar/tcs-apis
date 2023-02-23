@@ -26,6 +26,7 @@ jobs:
 
       - name: Install and Build 🔧
         run: |
+          npx browserslist@latest --update-db
           npm install --force
           npm run build
           

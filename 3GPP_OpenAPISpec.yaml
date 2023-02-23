@@ -886,15 +886,15 @@ components:
           description: Identifying the relation between the service provider attesting the identity and the subscriber
         dest:
           type: object
-          description: Identifying the called user taken from the To header field for a "shaken" or "rph" PASSporT, and from the Request-URI after retargeting for a "div" PASSporT. Either 'tn' or 'uri' should be supplied
+          description: Identifying the called user taken from the To header field for a "shaken" or "rph" PASSporT, and from the Request-URI after retargeting for a "div" PASSporT. Either 'tn' or 'uri' must be supplied
           properties: 
             tn: 
               type: string
-              description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form. Accepted input formats - <ol><li>“tn”:”17035550001”</li></ol>
+              description: Allowed characters as for local-number-digits and global-number-digits. The number must to be in canonical form. Accepted input formats (note that a server implementation may support more formats) - <ol><li>“tn”:”17035550001”</li></ol>
               example: "12155551213"
             uri: 
               type: string
-              description: Used if the "orig" or "dest" is given in a SIP URI. Accepted input formats - <ol><li>“uri”:"&lt;sip:+121555551212@example.com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+121555551212@example.com&gt;"</li></ol>
+              description: Used if the "orig" or "dest" is given as a URI. Accepted input formats (note that a server implementation may support more formats) - <ol><li>“uri”:"&lt;sip:+121555551212@example.com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+121555551212@example.com&gt;"</li></ol>
               example: null
         iat: 
           type: integer
@@ -902,15 +902,15 @@ components:
           example: 1664199282
         orig: 
           type: object
-          description: Identifying the calling user. Either 'tn' or 'uri' should be supplied
+          description: Identifying the calling user. Either 'tn' or 'uri' must be supplied
           properties: 
             tn: 
               type: string
-              description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form. Accepted input formats - <ol><li>“tn”:”17035550001”</li></ol>
+              description: Allowed characters as for local-number-digits and global-number-digits. The number must be in canonical form. Accepted input format (note that a server implementation may support more formats) - <ol><li>“tn”:”17035550001”</li></ol>
               example: "12155551211"
             uri: 
               type: string
-              description: Used if the "orig" or "dest" is given in a SIP URI. Accepted input formats - <ol><li>“uri”:"&lt;sip:+121555551212@example.com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+121555551212@example.com&gt;"</li></ol>
+              description: Used if the "orig" or "dest" is given as a URI. Accepted input formats (note that a server implementation may support more formats)  - <ol><li>“uri”:"&lt;sip:+121555551212@example.com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+121555551212@example.com&gt;"</li></ol>
               example: null
         origid: 
           type: string
@@ -991,13 +991,13 @@ components:
           properties: 
             tn: 
               type: array
-              description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form. Accepted input formats - <ol><li>“tn”:”17035550001”</li></ol>
+              description: Allowed characters as for local-number-digits and global-number-digits. The number must be in canonical form. Accepted input format (note that a server implementation may support more formats) - <ol><li>“tn”:”17035550001”</li></ol>
               items:
                 type: string
                 example: "12155551212"
             uri: 
               type: array
-              description: Used if the “from”, “to” or “dest” is given in a SIP URI. Accepted input formats - <ol><li>“uri”:"&lt;sip:+121555551212@example.com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+121555551212@example.com&gt;"</li></ol>
+              description: Used if the “from”, “to” or “dest” is given as a URI. Accepted input formats - <ol><li>“uri”:"&lt;sip:+121555551212@example.com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+121555551212@example.com&gt;"</li></ol>
               items:
                 type: string
                 example: null
@@ -1007,13 +1007,13 @@ components:
           properties: 
             tn: 
               type: array
-              description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form. Accepted input formats - <ol><li>“tn”:”17035550001”</li></ol>
+              description: Allowed characters as for local-number-digits and global-number-digits. The number must be in canonical form. Accepted input format (note that a server implementation may support more formats) - <ol><li>“tn”:”17035550001”</li></ol>
               items:
                 type: string
                 example: "12155551213"
             uri: 
               type: array
-              description: Used if the “from”, “to” or “dest” is given in a SIP URI. Accepted input formats - <ol><li>“uri”:"&lt;sip:+121555551212@example.com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+121555551212@example.com&gt;"</li></ol>
+              description: Used if the “from”, “to” or “dest” is given as a URI. Accepted input formats (note that a server implementation may support more formats)  - <ol><li>“uri”:"&lt;sip:+121555551212@example.com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+121555551212@example.com&gt;"</li></ol>
               items:
                 type: string
                 example: null
@@ -1023,15 +1023,15 @@ components:
           example: 1664216863
         from: 
           type: object
-          description: The asserted identity, taken from the P-Asserted-Identity or the From header field of the incoming request. Either 'tn' or 'uri' needs to be supplied.
+          description: The asserted identity, taken from the P-Asserted-Identity or the From header field of the incoming request. Either 'tn' or 'uri' must be supplied.
           properties: 
             tn: 
               type: string
-              description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
+              description: Allowed characters as for local-number-digits and global-number-digits. The number must be in canonical form. Accepted input format (note that a server implementation may support more formats) - <ol><li>“tn”:”17035550001”</li></ol>
               example: "12155551211"
             uri: 
               type: string
-              description: Used if the “from”, “to” or “dest” is given in a SIP URI
+              description: Used if the "from", "to" or “dest” is given as a URI. Accepted input formats (note that a server implementation may support more formats) - <ol><li>“uri”:"&lt;sip:+121555551212@example.com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+121555551212@example.com&gt;"</li></ol>
               example: null
         protectedHeaders: 
           type: array

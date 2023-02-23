@@ -82,7 +82,7 @@ paths:
               },
               "dest": {
                   "tn": [
-                      "<sip:+121555551212@example.com>"
+                      "<sip:+17325551212@example.com>"
                   ]
               },
               "div": {
@@ -105,7 +105,7 @@ paths:
               },
               "dest": {
                   "tn": [
-                      "<sip:+121555551212@example.com>"
+                      "<sip:+17325551212@example.com>"
                   ]
               },
               "div": {
@@ -303,9 +303,8 @@ paths:
             {
               "identityHeader": "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1jbXMubmV1c3RhcmxhYi5iaXovY2NpZC9hdXRobi92Mi9jZXJ0cy8xMTAwMS4xMDAwNSJ9.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjcxNTYyNTA2LCJvcmlnIjp7InRuIjoiMTcwMzU1NTAwMDEifSwib3JpZ2lkIjoiMjA4ODQ0OGMtNzE4ZS00OTMwLWJlNWQtMGVjOWIyNWQyZjAwIn0.JCjexv3fvANmT8ovwLwnnbYDMqwgIyoHgm2sCBUs8I8ZcDiRcGJSDXItMqayFwNuEOIyAax1r-RFlmioRiIxaQ;info=<https://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11001.10005>;alg=ES256;ppt=\"shaken\"",
               "from": {
-                  "tn": [
-                      "<sip:+17035550001@example.com>"
-                  ]
+                "tn": 
+                  "<sip:+17035550001@example.com>"
               },
               "to": {
                   "tn": [
@@ -349,9 +348,8 @@ paths:
                   "eyJhbGciOiJFUzI1NiIsInBwdCI6ImRpdiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1jbXMubmV1c3RhcmxhYi5iaXovY2NpZC9hdXRobi92Mi9jZXJ0cy8xMTAwMS4xMDAwNSJ9.eyJkZXN0Ijp7InRuIjpbIjEyMTU1NTU1MTIxMiJdfSwiZGl2Ijp7InRuIjoiMTU3MTU1NTAwMDAifSwiaWF0IjoxNjcxNjQzMzQyLCJvcmlnIjp7InRuIjoiMTcwMzU1NTAwMDEifX0._dDZvZEVZSMBdnJxUUOozAPhl6wvrLB9T26wl52dsmktQQl8JN7HpqADM8bInrbbbom6I6MID57K2Lk12W0GbA;info=<https://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11001.10005>;alg=ES256;ppt=\"div\""
               ],
               "from": {
-                  "tn": [
-                      "<sip:+17035550001@example.com>"
-                  ]
+                "tn": 
+                  "<sip:+17035550001@example.com>"
               },
               "to": {
                   "tn": [
@@ -360,7 +358,7 @@ paths:
               },
               "dest": {
                   "tn": [
-                      "<sip:+121555551212@example.com>"
+                      "<sip:+17325551212@example.com>"
                   ]
               },
               "time": 1664216863,
@@ -430,9 +428,8 @@ paths:
                   "eyJhbGciOiJFUzI1NiIsInBwdCI6ImRpdiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1jbXMubmV1c3RhcmxhYi5iaXovY2NpZC9hdXRobi92Mi9jZXJ0cy8xMTAwMS4xMDAwNSJ9.eyJkZXN0Ijp7InRuIjpbIjEyMTU1NTU1MTIxMyJdfSwiZGl2Ijp7InRuIjoiMTIxNTU1NTUxMjEyIn0sImlhdCI6MTY3MTY0OTY2OSwib3JpZyI6eyJ0biI6IjE3MDM1NTUwMDAxIn19.nDbddr0rmu5OHZ8oezA88x_c0EwRWLKmU9gaFeIAwzrDItJ5RVzTlr1KiZTDUh31NP75RzjhqAdHXyX_FkrDyQ;info=<https://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11001.10005>;alg=ES256;ppt=\"div\""
               ],
               "from": {
-                  "tn": [
-                      "<sip:+17035550001@example.com>"
-                  ]
+                "tn": 
+                    "<sip:+17035550001@example.com>"
               },
               "to": {
                   "tn": [
@@ -536,9 +533,8 @@ paths:
             {
               "identityHeader": "eyJhbGciOiJFUzI1NiIsInBwdCI6InJwaCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1jbXMubmV1c3RhcmxhYi5iaXovY2NpZC9hdXRobi92Mi9jZXJ0cy8xMTAxNS4xMDAwMSJ9.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAwIl19LCJpYXQiOjE2NzE3MzM5MjEsIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJycGgiOnsiYXV0aCI6WyJlc25ldC4xIl19LCJzcGgiOiJwc2FwLWNhbGxiYWNrIn0.k5Hanlb8ckCzGYdQS6m8v1xgUv0k4QNiSI8FG3UVZtW4jT4g2u_VYcXJ9R2p5SmQp6Fz2O3eBEwjrkvUKtrTIA;info=<https://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"rph\"",
               "from": {
-                  "tn": [
-                      "<sip:+17035550001@example.com>"
-                  ]
+                "tn": 
+                    "<sip:+17035550001@example.com>"
               },
               "to": {
                   "tn": [
@@ -589,9 +585,8 @@ paths:
                     "eyJhbGciOiJFUzI1NiIsInBwdCI6InJwaCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1jbXMubmV1c3RhcmxhYi5iaXovY2NpZC9hdXRobi92Mi9jZXJ0cy8xMTAxNS4xMDAwMSJ9.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAwIl19LCJpYXQiOjE2NzE3MzM3MjMsIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJycGgiOnsiYXV0aCI6WyJlc25ldC4xIl19LCJzcGgiOiJwc2FwLWNhbGxiYWNrIn0.wmUw-Kf6Jt8rUtAVcpbHxJU7praKho8epR5YEpph0iOB3T_JZIivIX-mlR1VxK9ao_2y6JfEg9Gambi3xFBqEQ;info=<https://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"rph\""
                 ],
                 "from": {
-                    "tn": [
-                        "<sip:+17035550001@example.com>"
-                    ]
+                  "tn": 
+                      "<sip:+17035550001@example.com>"
                 },
                 "to": {
                     "tn": [
@@ -663,9 +658,8 @@ paths:
                   "eyJhbGciOiJFUzI1NiIsInBwdCI6InJwaCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1jbXMubmV1c3RhcmxhYi5iaXovY2NpZC9hdXRobi92Mi9jZXJ0cy8xMTAxNS4xMDAwMSJ9.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAwIl19LCJpYXQiOjE2NzE3MzM5MjEsIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJycGgiOnsiYXV0aCI6WyJlc25ldC4xIl19LCJzcGgiOiJwc2FwLWNhbGxiYWNrIn0.k5Hanlb8ckCzGYdQS6m8v1xgUv0k4QNiSI8FG3UVZtW4jT4g2u_VYcXJ9R2p5SmQp6Fz2O3eBEwjrkvUKtrTIA;info=<https://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"rph\""
               ],
               "from":{
-                  "tn":[
-                    "<sip:+17035550001@example.com>"
-                  ]
+                "tn":
+                  "<sip:+17035550001@example.com>"
               },
               "to":{
                   "tn":[
@@ -674,7 +668,7 @@ paths:
               },
               "dest":{
                   "tn":[
-                    "<sip:+121555551212@example.com>"
+                    "<sip:+17325551212@example.com>"
                   ]
               },
               "time":1664216863,
@@ -889,13 +883,17 @@ components:
           description: Identifying the called user taken from the To header field for a "shaken" or "rph" PASSporT, and from the Request-URI after retargeting for a "div" PASSporT. Either 'tn' or 'uri' must be supplied
           properties: 
             tn: 
-              type: string
+              type: array
               description: Allowed characters as for local-number-digits and global-number-digits. The number must to be in canonical form. Accepted input formats (note that a server implementation may support more formats) - <ol><li>“tn”:”17035550001”</li></ol>
-              example: "12155551213"
+              items:
+                type: string
+                example: "12155551213"
             uri: 
-              type: string
-              description: Used if the "orig" or "dest" is given as a URI. Accepted input formats (note that a server implementation may support more formats) - <ol><li>“uri”:"&lt;sip:+121555551212@example.com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+121555551212@example.com&gt;"</li></ol>
-              example: null
+              type: array
+              description: Used if the "orig" or "dest" is given as a URI. Accepted input formats (note that a server implementation may support more formats) - <ol><li>“uri”:"&lt;sip:+17325551212&#64;example&#46;com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+17325551212&#64;example&#46;com&gt;"</li></ol>
+              items: 
+                type: string
+                example: null
         iat: 
           type: integer
           description: Time since 1 January 1970 in Numeric Date format
@@ -910,7 +908,7 @@ components:
               example: "12155551211"
             uri: 
               type: string
-              description: Used if the "orig" or "dest" is given as a URI. Accepted input formats (note that a server implementation may support more formats)  - <ol><li>“uri”:"&lt;sip:+121555551212@example.com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+121555551212@example.com&gt;"</li></ol>
+              description: Used if the "orig" or "dest" is given as a URI. Accepted input formats (note that a server implementation may support more formats)  - <ol><li>“uri”:"&lt;sip:+17325551212&#64;example&#46;com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+17325551212&#64;example&#46;com&gt;"</li></ol>
               example: null
         origid: 
           type: string
@@ -997,7 +995,7 @@ components:
                 example: "12155551212"
             uri: 
               type: array
-              description: Used if the “from”, “to” or “dest” is given as a URI. Accepted input formats - <ol><li>“uri”:"&lt;sip:+121555551212@example.com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+121555551212@example.com&gt;"</li></ol>
+              description: Used if the “from”, “to” or “dest” is given as a URI. Accepted input formats - <ol><li>“uri”:"&lt;sip:+17325551212&#64;example&#46;com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+17325551212&#64;example&#46;com&gt;"</li></ol>
               items:
                 type: string
                 example: null
@@ -1013,7 +1011,7 @@ components:
                 example: "12155551213"
             uri: 
               type: array
-              description: Used if the “from”, “to” or “dest” is given as a URI. Accepted input formats (note that a server implementation may support more formats)  - <ol><li>“uri”:"&lt;sip:+121555551212@example.com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+121555551212@example.com&gt;"</li></ol>
+              description: Used if the “from”, “to” or “dest” is given as a URI. Accepted input formats (note that a server implementation may support more formats)  - <ol><li>“uri”:"&lt;sip:+17325551212&#64;example&#46;com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+17325551212&#64;example&#46;com&gt;"</li></ol>
               items:
                 type: string
                 example: null
@@ -1031,7 +1029,7 @@ components:
               example: "12155551211"
             uri: 
               type: string
-              description: Used if the "from", "to" or “dest” is given as a URI. Accepted input formats (note that a server implementation may support more formats) - <ol><li>“uri”:"&lt;sip:+121555551212@example.com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+121555551212@example.com&gt;"</li></ol>
+              description: Used if the "from", "to" or “dest” is given as a URI. Accepted input formats (note that a server implementation may support more formats) - <ol><li>“uri”:"&lt;sip:+17325551212&#64;example&#46;com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+17325551212&#64;example&#46;com&gt;"</li></ol>
               example: null
         protectedHeaders: 
           type: array

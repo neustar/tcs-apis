@@ -27,8 +27,8 @@ jobs:
       - name: Install and Build 🔧
         run: |
           # npx browserslist@latest --update-db
-          # npm install --force
-          # npm run build
+          npm install --force
+          npm run build
           
       - name: Build 3GPP HTML
         run: |

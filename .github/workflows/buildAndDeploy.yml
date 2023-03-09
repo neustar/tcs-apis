@@ -27,6 +27,7 @@ jobs:
       - name: Install and Build 🔧
         run: |
           npm cache clean --force
+          npm install caniuse-lite
           npx browserslist@latest --update-db
           npm install --force
           npm run build

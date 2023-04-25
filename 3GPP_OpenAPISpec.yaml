@@ -6,7 +6,7 @@ info:
   title: 3GPP-based Call Authentication APIs
   description: Definition of the Application Server HTTP messages and data types for signing and verification using the Ms reference point. These APIs are designed to be compliant with the referenced 3GPP specification, while also including several optional enhancements.  Such enhancements may or may not be brought back into the 3GPP CT1 working group for consideration.
   contact: {}
-  version: '1.0, TS 24.229, Release 17.9.0'
+  version: 'TS 24.229, Release 17.10.0, 2023-03'
 servers:
   - url: http://localhost:8080/stir/v1
     description: signing resource URI 

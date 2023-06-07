@@ -88,15 +88,15 @@ paths:
               "signingRequest": {
                 "ppt": "div",
                 "orig": {
-                    "tn": "<sip:+17035550001@example.com>"
+                    "tn": "17035550001"
                 },
                 "dest": {
                     "tn": [
-                        "<sip:+17325551212@example.com>"
+                        "17325551212"
                     ]
                 },
                 "div": {
-                    "tn": "<sip:+15715550000@example.com>"
+                    "tn": "15715550000"
                 },
                 "iat": 1671466865
               }
@@ -115,15 +115,15 @@ paths:
               "signingRequest": {
                 "ppt": "div",
                 "orig": {
-                    "tn": "<sip:+17035550001@example.com>"
+                    "tn": "17035550001"
                 },
                 "dest": {
                     "tn": [
-                        "<sip:+17325551212@example.com>"
+                        "17325551212"
                     ]
                 },
                 "div": {
-                    "tn": "<sip:+15715550000@example.com>",
+                    "tn": "15715550000",
                     "hi": "1.1"
                 },
                 "iat": 1671466865
@@ -143,11 +143,11 @@ paths:
               "signingRequest": {
                 "ppt": "rph",
                 "orig": {
-                    "tn": "<sip:+17035550001@example.com>"
+                    "tn": "17035550001"
                 },
                 "dest": {
                     "tn": [
-                        "<sip:+15715550000@example.com>"
+                        "15715550000"
                     ]
                 },
                 "iat": 1671467383,
@@ -168,11 +168,11 @@ paths:
               "signingRequest": {
                 "ppt": "rph",
                 "orig": {
-                    "tn": "<sip:+17035550001@example.com>"
+                    "tn": "17035550001"
                 },
                 "dest": {
                     "tn": [
-                        "<sip:+15715550000@example.com>"
+                        "15715550000"
                     ]
                 },
                 "iat": 1671467383,
@@ -333,11 +333,11 @@ paths:
                 "identityHeader": "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1jbXMubmV1c3RhcmxhYi5iaXovY2NpZC9hdXRobi92Mi9jZXJ0cy8xMTAwMS4xMDAwNSJ9.eyJhdHRlc3QiOiJBIiwiZGVzdCI6eyJ0biI6WyIxNTcxNTU1MDAwMCJdfSwiaWF0IjoxNjcxNTYyNTA2LCJvcmlnIjp7InRuIjoiMTcwMzU1NTAwMDEifSwib3JpZ2lkIjoiMjA4ODQ0OGMtNzE4ZS00OTMwLWJlNWQtMGVjOWIyNWQyZjAwIn0.JCjexv3fvANmT8ovwLwnnbYDMqwgIyoHgm2sCBUs8I8ZcDiRcGJSDXItMqayFwNuEOIyAax1r-RFlmioRiIxaQ;info=<https://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11001.10005>;alg=ES256;ppt=\"shaken\"",
                 "from": {
                   "tn": 
-                    "<sip:+17035550001@example.com>"
+                    "17035550001"
                 },
                 "to": {
                   "tn": 
-                    "<sip:+15715550000@example.com>"
+                    "15715550000"
                 },
                 "time": 1671468206
               }
@@ -381,15 +381,15 @@ paths:
                 ],
                 "from": {
                   "tn": 
-                    "<sip:+17035550001@example.com>"
+                    "17035550001"
                 },
                 "to": {
                   "tn": 
-                    "<sip:+15715550000@example.com>"
+                    "15715550000"
                 },
                 "dest": {
                   "tn": 
-                    "<sip:+17325551212@example.com>"
+                    "17325551212"
                 },
                 "time": 1664216863,
                 "protectedHeaders": "[Diversion: sip:121555551212@10.10.100.12;reason=unknown;privacy=off]"
@@ -463,15 +463,15 @@ paths:
                 ],
                 "from": {
                   "tn": 
-                    "<sip:+17035550001@example.com>"
+                    "17035550001"
                 },
                 "to": {
                   "tn": 
-                    "<sip:+15715550000@example.com>"
+                    "15715550000"
                 },
                 "dest": {
                   "tn": 
-                    "<sip:+121555551213@example.com>"
+                    "121555551213"
                 },
                 "time": 1664216863,
                 "protectedHeaders": [
@@ -570,11 +570,11 @@ paths:
                 "identityHeader": "eyJhbGciOiJFUzI1NiIsInBwdCI6InJwaCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1jbXMubmV1c3RhcmxhYi5iaXovY2NpZC9hdXRobi92Mi9jZXJ0cy8xMTAxNS4xMDAwMSJ9.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAwIl19LCJpYXQiOjE2NzE3MzM5MjEsIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJycGgiOnsiYXV0aCI6WyJlc25ldC4xIl19LCJzcGgiOiJwc2FwLWNhbGxiYWNrIn0.k5Hanlb8ckCzGYdQS6m8v1xgUv0k4QNiSI8FG3UVZtW4jT4g2u_VYcXJ9R2p5SmQp6Fz2O3eBEwjrkvUKtrTIA;info=<https://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"rph\"",
                 "from": {
                   "tn": 
-                    "<sip:+17035550001@example.com>"
+                    "17035550001"
                 },
                 "to": {
                   "tn": 
-                    "<sip:+15715550000@example.com>"
+                    "15715550000"
                 },
                 "time": 1671468206,
                 "protectedHeaders": [
@@ -701,15 +701,15 @@ paths:
                 ],
                 "from":{
                   "tn":
-                    "<sip:+17035550001@example.com>"
+                    "17035550001"
                 },
                 "to":{
                   "tn":
-                    "<sip:+15715550000@example.com>"
+                    "15715550000"
                 },
                 "dest":{
                   "tn":
-                    "<sip:+17325551212@example.com>"
+                    "17325551212"
                 },
                 "time":1664216863,
                 "protectedHeaders":[

@@ -36,11 +36,11 @@ paths:
               "signingRequest": {
                 "attest": "A",
                 "orig": {
-                    "tn": "<sip:+17035550001@example.com>"
+                    "tn": "17035550001"
                 },
                 "dest": {
                     "tn": [
-                        "<sip:+15715550000@example.com>"
+                        "15715550000"
                     ]
                 },
                 "iat": 1671467335,
@@ -63,11 +63,11 @@ paths:
                 "ppt": "shaken"
                 "attest": "A",
                 "orig": {
-                    "tn": "<sip:+17035550001@example.com>"
+                    "uri": "sip:+17035550001@example.com"
                 },
                 "dest": {
-                    "tn": [
-                        "<sip:+15715550000@example.com>"
+                    "uri": [
+                        "sip:+15715550000@example.com"
                     ]
                 },
                 "iat": 1671467335,
@@ -625,11 +625,11 @@ paths:
                   ],
                   "from": {
                     "tn": 
-                      "<sip:+17035550001@example.com>"
+                      "17035550001"
                   },
                   "to": {
                     "tn": 
-                      "<sip:+15715550000@example.com>"
+                      "15715550000"
                   },
                   "time": 1664216863,
                   "protectedHeaders": [

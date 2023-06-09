@@ -6,7 +6,7 @@ info:
   title: 3GPP-based Call Authentication APIs
   description: Definition of the Application Server HTTP messages and data types for signing and verification using the Ms reference point. These APIs are designed to be compliant with the referenced 3GPP specification, while also including several optional enhancements.  Such enhancements may or may not be brought back into the 3GPP CT1 working group for consideration.
   contact: {}
-  version: '1.0, TS 24.229, Release 17.9.0'
+  version: '1.0, TS 24.229, Release 17.10.0'
 servers:
   - url: http://localhost:8080/stir/v1
     description: signing resource URI 
@@ -63,11 +63,11 @@ paths:
                 "ppt": "shaken"
                 "attest": "A",
                 "orig": {
-                    "uri": "sip:+17035550001@example.com"
+                    "uri": "sip:john@asterisk.com"
                 },
                 "dest": {
                     "uri": [
-                        "sip:+15715550000@example.com"
+                        "sip:jack@asterisk.com"
                     ]
                 },
                 "iat": 1671467335,
@@ -936,7 +936,7 @@ components:
                     example: "12155551213"
                 uri: 
                   type: array
-                  description: Used if the "orig" or "dest" is given as a URI. Accepted input formats (note that a server implementation may support more formats) - <ol><li>“uri”:"&lt;sip:+17325551212&#64;example&#46;com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+17325551212&#64;example&#46;com&gt;"</li></ol>
+                  description: Used if the "orig" or "dest" is given as a URI. Accepted input formats (note that a server implementation may support more formats) - <ol><li>“uri”:"sip:john&#64;asterisk&#46;com"</li> <li>“uri”:"sips:john&#64;asterisk&#46;com"</li></ol>
                   items: 
                     type: string
                     example: null
@@ -954,7 +954,7 @@ components:
                   example: "12155551211"
                 uri: 
                   type: string
-                  description: Used if the "orig" or "dest" is given as a URI. Accepted input formats (note that a server implementation may support more formats)  - <ol><li>“uri”:"&lt;sip:+17325551212&#64;example&#46;com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+17325551212&#64;example&#46;com&gt;"</li></ol>
+                  description: Used if the "orig" or "dest" is given as a URI. Accepted input formats (note that a server implementation may support more formats)  - <ol><li>“uri”:"sip:john&#64;asterisk&#46;com"</li> <li>“uri”:"sips:john&#64;asterisk&#46;com"</li></ol>
                   example: null
             origid: 
               type: string
@@ -1045,7 +1045,7 @@ components:
                   example: "12155551212"
                 uri: 
                   type: string
-                  description: Used if the “from”, “to” or “dest” is given as a URI. Accepted input formats - <ol><li>“uri”:"&lt;sip:+17325551212&#64;example&#46;com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+17325551212&#64;example&#46;com&gt;"</li></ol>
+                  description: Used if the “from”, “to” or “dest” is given as a URI. Accepted input formats - <ol><li>“uri”:"sip:john&#64;asterisk&#46;com"</li>  <li>“uri”:"sips:john&#64;asterisk&#46;com"</li></ol>
                   example: null
             dest: 
               type: object
@@ -1057,7 +1057,7 @@ components:
                   example: "12155551213"
                 uri: 
                   type: string
-                  description: Used if the “from”, “to” or “dest” is given as a URI. Accepted input formats (note that a server implementation may support more formats)  - <ol><li>“uri”:"&lt;sip:+17325551212&#64;example&#46;com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+17325551212&#64;example&#46;com&gt;"</li></ol>
+                  description: Used if the “from”, “to” or “dest” is given as a URI. Accepted input formats (note that a server implementation may support more formats)  - <ol><li>“uri”:"sip:john&#64;asterisk&#46;com"</li> <li>“uri”:"sips:john&#64;asterisk&#46;com"</li></ol>
                   example: null
             time: 
               type: integer
@@ -1073,7 +1073,7 @@ components:
                   example: "12155551211"
                 uri: 
                   type: string
-                  description: Used if the "from", "to" or “dest” is given as a URI. Accepted input formats (note that a server implementation may support more formats) - <ol><li>“uri”:"&lt;sip:+17325551212&#64;example&#46;com&gt;"</li> <li>“uri”:"&lt;tel:+17035550001&gt;"</li> <li>“uri”:"&lt;sips:+17325551212&#64;example&#46;com&gt;"</li></ol>
+                  description: Used if the "from", "to" or “dest” is given as a URI. Accepted input formats (note that a server implementation may support more formats) - <ol><li>“uri”:"sip:john&#64;asterisk&#46;com"</li> <li>“uri”:"sips:john&#64;asterisk&#46;com"</li></ol>
                   example: null
             protectedHeaders: 
               type: array

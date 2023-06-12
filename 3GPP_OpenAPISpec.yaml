@@ -578,7 +578,7 @@ paths:
                 },
                 "time": 1671468206,
                 "protectedHeaders": [
-                    "Resource-Priority: esnet.1"
+                    "Resource-Priority: ets.0"
                 ]
               }
             }
@@ -778,10 +778,9 @@ paths:
                                 },
                                 "rph": {
                                     "auth": [
-                                        "esnet.1"
+                                        "ets.0"
                                     ]
-                                },
-                                "sph": "psap-callback"
+                                }
                             }
                         }
                     }
@@ -930,7 +929,7 @@ components:
               properties: 
                 tn: 
                   type: array
-                  description: Allowed characters as for local-number-digits and global-number-digits. The number must to be in canonical form. Accepted input formats (note that a server implementation may support more formats) - <ol><li>“tn”:”17035550001”</li></ol>
+                  description: Allowed characters as for local-number-digits and global-number-digits. The number must be in canonical form. Accepted input format (note that a server implementation may support more formats) - <ol><li>“tn”:”17035550001”</li></ol>
                   items:
                     type: string
                     example: "12155551213"
@@ -939,7 +938,7 @@ components:
                   description: Used if the "orig" or "dest" is given as a URI. Accepted input formats (note that a server implementation may support more formats) - <ol><li>“uri”:"sip:john&#64;asterisk&#46;com"</li> <li>“uri”:"sips:john&#64;asterisk&#46;com"</li></ol>
                   items: 
                     type: string
-                    example: null
+                    example: "john@asterisk.com"
             iat: 
               type: integer
               description: Time since 1 January 1970 in Numeric Date format
@@ -955,7 +954,7 @@ components:
                 uri: 
                   type: string
                   description: Used if the "orig" or "dest" is given as a URI. Accepted input formats (note that a server implementation may support more formats)  - <ol><li>“uri”:"sip:john&#64;asterisk&#46;com"</li> <li>“uri”:"sips:john&#64;asterisk&#46;com"</li></ol>
-                  example: null
+                  example: "alice@asterisk.com"
             origid: 
               type: string
               description: An opaque origination identifier in the recommended format of a Universally Unique Identifier (UUID)
@@ -979,16 +978,16 @@ components:
               properties: 
                 tn:
                   type: string
-                  description: Allowed characters as for local-number-digits and global-number-digits.The number needs to be in canonical form 
+                  description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form.  See “orig” or “dest” above for accepted format
                   example: "121555551212"
                 uri: 
                   type: string
-                  description: Used if the "orig" or "dest" is given in a SIP URI
-                  example: null
+                  description: Used if the "orig" or "dest" is given in a SIP URI.  See “orig” or “dest” above for accepted formats
+                  example: "fred@example.com"
                 hi:
                   type: string
-                  description: The "index" header field parameter is included in the entry identifying the diverting user in the History-Info header field
-                  example: null
+                  description: The "index" header field parameter identifying the diverting user in the History-Info header field.  For example, “1.1.1”
+                  example: "1.1.1"
             profileId: 
               type: string
               description: Value may be used by the Authentication Service to make certain decisions regarding processing of a signing request
@@ -1045,8 +1044,8 @@ components:
                   example: "12155551212"
                 uri: 
                   type: string
-                  description: Used if the “from”, “to” or “dest” is given as a URI. Accepted input formats - <ol><li>“uri”:"sip:john&#64;asterisk&#46;com"</li>  <li>“uri”:"sips:john&#64;asterisk&#46;com"</li></ol>
-                  example: null
+                  description: Used if the “from”, “to” or “dest” is given as a URI. Accepted input formats (note that a server implementation may support more formats) - <ol><li>“uri”:"sip:john&#64;asterisk&#46;com"</li>  <li>“uri”:"sips:john&#64;asterisk&#46;com"</li></ol>
+                  example: "fred@example.com"
             dest: 
               type: object
               description: The destination identity taken from the Request-URI in the incoming request
@@ -1058,7 +1057,7 @@ components:
                 uri: 
                   type: string
                   description: Used if the “from”, “to” or “dest” is given as a URI. Accepted input formats (note that a server implementation may support more formats)  - <ol><li>“uri”:"sip:john&#64;asterisk&#46;com"</li> <li>“uri”:"sips:john&#64;asterisk&#46;com"</li></ol>
-                  example: null
+                  example: "john@asterisk.com"
             time: 
               type: integer
               description: Time based on the Date header field in the incoming request
@@ -1074,7 +1073,7 @@ components:
                 uri: 
                   type: string
                   description: Used if the "from", "to" or “dest” is given as a URI. Accepted input formats (note that a server implementation may support more formats) - <ol><li>“uri”:"sip:john&#64;asterisk&#46;com"</li> <li>“uri”:"sips:john&#64;asterisk&#46;com"</li></ol>
-                  example: null
+                  example: "alice@asterisk.com"
             protectedHeaders: 
               type: array
               items:
@@ -1088,7 +1087,7 @@ components:
               example: "Profile-5678"
             requestId: 
               type: string
-              description: An opaque identifier that, when provided, is reflected in the response to support troubleshooting and fault analysis
+              description: An opaque identifier that is reflected from the request to support troubleshooting and fault analysis
               example: "45690"
             displayName: 
               type: string
@@ -1111,7 +1110,7 @@ components:
               example: "[V]John Smith"
             divResult:
               type: array
-              description: Parameter informing of the result of the verification of diverting identities. For each verified identity, the "verstat" parameter is added to the verified identity. It includes array of one or more [div, verstatValue] tuples
+              description: Parameter informing of the result of the verification of diverting identities. For each verified identity, the "verstat" parameter is added to the verified identity. The “divResult” parameter is an array of one or more [div, verstatValue] tuples
               items:
                 type: object
                 properties: 
@@ -1120,11 +1119,11 @@ components:
                     properties: 
                       tn: 
                         type: string
-                        description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form
+                        description: Allowed characters as for local-number-digits and global-number-digits. The number needs to be in canonical form. See “from”, “to” or “dest” above for accepted format
                         example: "12155551212"
                       uri: 
                         type: string
-                        description: Used if the “from”, “to” or “dest” is given in a SIP URI
+                        description: Used if the “from”, “to” or “dest” is given in a SIP URI. See “from”, “to” or “dest” above for accepted formats
                         example: null
                   verstatValue:
                     type: string

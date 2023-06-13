@@ -4,7 +4,7 @@ info:
     url: 'https://raw.githubusercontent.com/neustar/tcs-apis/main/docs/newNeustarLogo.jpeg'
     altText: 3GPP Authentication & Verification Service APIs
   title: 3GPP-based Call Authentication APIs
-  description: Definition of the Application Server HTTP messages and data types for signing and verification using the Ms reference point. These APIs are designed to be compliant with the referenced 3GPP specification, while also including several optional enhancements.  Such enhancements may or may not be brought back into the 3GPP CT1 working group for consideration.
+  description: Note:- the above download will output the 3GPP-based Call Authentication APIs in OpenAPI format.<br><br>Definition of the Application Server HTTP messages and data types for signing and verification using the Ms reference point. These APIs are designed to be compliant with the referenced 3GPP specification, while also including several optional enhancements.  Such enhancements may or may not be brought back into the 3GPP CT1 working group for consideration.
   contact: {}
   version: '1.0, TS 24.229, Release 17.10.0'
 servers:
@@ -602,10 +602,9 @@ paths:
                                 },
                                 "rph": {
                                     "auth": [
-                                        "esnet.1"
+                                        "ets.0"
                                     ]
-                                },
-                                "sph": "psap-callback"
+                                }
                             }
                         }
                     }
@@ -1010,7 +1009,7 @@ components:
               description: Identity header field value according to RFC 8224. This string cannot be NULL
             requestId: 
               type: string
-              description: An opaque identifier that is reflected from the request in order to make possible the transaction traceability in case of troubleshooting and fault analysis
+              description: An opaque identifier that is reflected from the request to support troubleshooting and fault analysis
     verificationRequest:
       title: verificationRequest
       properties: 
@@ -1087,7 +1086,7 @@ components:
               example: "Profile-5678"
             requestId: 
               type: string
-              description: An opaque identifier that is reflected from the request to support troubleshooting and fault analysis
+              description: An opaque identifier that, when provided, is reflected in the response to support troubleshooting and fault analysis
               example: "45690"
             displayName: 
               type: string
@@ -1102,7 +1101,7 @@ components:
           properties: 
             requestId:
               type: string
-              description: An opaque identifier that, when provided, is reflected in the response to support troubleshooting and fault analysis
+              description: An opaque identifier that is reflected from the request to support troubleshooting and fault analysis
               example: "45690"
             displayName: 
               type: string

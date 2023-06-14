@@ -4,7 +4,7 @@ info:
     url: 'https://raw.githubusercontent.com/neustar/tcs-apis/main/docs/newNeustarLogo.jpeg'
     altText: 3GPP Authentication & Verification Service APIs
   title: 3GPP-based Call Authentication APIs
-  description: Note:- the above download will output the 3GPP-based Call Authentication APIs in OpenAPI format.<br><br>Definition of the Application Server HTTP messages and data types for signing and verification using the Ms reference point. These APIs are designed to be compliant with the referenced 3GPP specification, while also including several optional enhancements.  Such enhancements may or may not be brought back into the 3GPP CT1 working group for consideration.
+  description: Note:- The above download will output the 3GPP-based Call Authentication APIs in OpenAPI format.<br><br>Definition of the Application Server HTTP messages and data types for signing and verification using the Ms reference point. These APIs are designed to be compliant with the referenced 3GPP specification, while also including several optional enhancements.  Such enhancements may or may not be brought back into the 3GPP CT1 working group for consideration.
   contact: {}
   version: '1.0, TS 24.229, Release 17.10.0'
 servers:
@@ -567,7 +567,9 @@ paths:
             Request: 
             {
               "verificationRequest": {
-                "identityHeader": "eyJhbGciOiJFUzI1NiIsInBwdCI6InJwaCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1jbXMubmV1c3RhcmxhYi5iaXovY2NpZC9hdXRobi92Mi9jZXJ0cy8xMTAxNS4xMDAwMSJ9.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAwIl19LCJpYXQiOjE2NzE3MzM5MjEsIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJycGgiOnsiYXV0aCI6WyJlc25ldC4xIl19LCJzcGgiOiJwc2FwLWNhbGxiYWNrIn0.k5Hanlb8ckCzGYdQS6m8v1xgUv0k4QNiSI8FG3UVZtW4jT4g2u_VYcXJ9R2p5SmQp6Fz2O3eBEwjrkvUKtrTIA;info=<https://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"rph\"",
+                "identityHeaders": [
+                                    "eyJhbGciOiJFUzI1NiIsInBwdCI6InJwaCIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly9jYS1jbXMubmV1c3RhcmxhYi5iaXovY2NpZC9hdXRobi92Mi9jZXJ0cy8xMTAxNS4xMDAwMSJ9.eyJkZXN0Ijp7InRuIjpbIjE1NzE1NTUwMDAwIl19LCJpYXQiOjE2NzE3MzM5MjEsIm9yaWciOnsidG4iOiIxNzAzNTU1MDAwMSJ9LCJycGgiOnsiYXV0aCI6WyJlc25ldC4xIl19LCJzcGgiOiJwc2FwLWNhbGxiYWNrIn0.k5Hanlb8ckCzGYdQS6m8v1xgUv0k4QNiSI8FG3UVZtW4jT4g2u_VYcXJ9R2p5SmQp6Fz2O3eBEwjrkvUKtrTIA;info=<https://ca-cms.neustarlab.biz/ccid/authn/v2/certs/11015.10001>;alg=ES256;ppt=\"rph\""
+                                   ],
                 "from": {
                   "tn": 
                     "17035550001"

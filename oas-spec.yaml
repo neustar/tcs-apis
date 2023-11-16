@@ -9420,6 +9420,9 @@ paths:
                       "status" : "all",
                       "verstat" : true,
                       "identity_info" : true,
+                      "cnam" : true,
+                      "ecnam" : true, 
+                      "robocall" : true
                       "request_id" : "X-REQUEST-ID-12345"
             }'
 
@@ -9430,12 +9433,12 @@ paths:
               "verstat" : "TN-Validation-Passed",
               "identity_info" : [ {
                 "status" : "Ok",
-                "params" : "info=<https://cr-uat.ccid.neustar.biz/ccid/authn/v2/certs/11475.10001>;alg=ES256;ppt=\"shaken\"",
+                "params" : "info=<http://ca.example.com/test.der>;alg=ES256;ppt=\"shaken\"",
                 "header" : {
                   "alg" : "ES256",
                   "ppt" : "shaken",
                   "typ" : "passport",
-                  "x5u" : "https://cr-uat.ccid.neustar.biz/ccid/authn/v2/certs/11475.10001"
+                  "x5u" : "http://ca.example.com/test.der"
                 },
                 "claim" : {
                   "attest" : "A",
@@ -9453,13 +9456,66 @@ paths:
                   "orig" : {
                     "tn" : "17035550001"
                   },
-                  "origid" : "3F9C2836-7E40-11E7-BA58-7831C1B8DEBA"
+                  "origid" : "123456-ABCD-999999",
+                  "rcd" : {
+                    "nam" : "Alice"
+                  }
                 },
                 "certificate_info" : {
-                  "subject" : "CN=KEYTOOL-TEST-EC-256, OU=IOT Labs, O=\"Neustar, Inc.\", L=Sterling, ST=VA, C=US",
-                  "issuer" : "CN=KEYTOOL-TEST-EC-256, OU=IOT Labs, O=\"Neustar, Inc.\", L=Sterling, ST=VA, C=US"
+                  "subject" : "C=US, ST=VA, L=Somewhere, O=\"AcmeTelecom, Inc.\", OU=VOIP, CN=TEST-EC-256-EXT-TN-JWT",
+                  "issuer" : "C=US, O=Neustar IOT Lab, CN=CallAuthnCA",
+                  "tn_auth_list" : [ {
+                    "spc" : "X001"
+                  }, {
+                    "range" : {
+                      "start" : "15714340000",
+                      "count" : 10000
+                    }
+                  }, {
+                    "one" : "17035550000"
+                  } ]
                 }
-              } ]
+              } ],
+              "cnam" : "Alice In Wonderland",
+              "ecnam" : {
+                "display_template" : "none",
+                "business_name" : "Disney World",
+                "department" : "Theme Park",
+                "line_type" : "Wireline",
+                "subscriber_type" : "Business",
+                "business_type" : "Entertainment",
+                "business_address" : "Walt Disney World Resort",
+                "locality" : "Orlando, FL",
+                "city" : "Orlando",
+                "state" : "FL",
+                "country" : "US",
+                "postal_code" : "32830",
+                "website_url" : "http://movies.disney.com/alice-in-wonderland-1951",
+                "logo_url" : "https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png",
+                "tagline" : "#AliceInWonderLand",
+                "employee_name" : "Alice",
+                "first_name" : "Alice",
+                "last_name" : "Liddell",
+                "job_title" : "Adventurer",
+                "headshot_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I",
+                "email" : "alice@disney.com",
+                "cnam" : "Alice In Wonderland",
+                "call_purpose" : "Customer Support",
+                "social_media_info" : {
+                  "Facebook" : "https://www.facebook.com/DisneyAliceInWonderland",
+                  "Twitter" : "https://twitter.com/Disney"
+                },
+                "p_asserted_identity" : "\"Alice In Wonderland\" <sip:alice@example.com;tmpl=none;bn=Disney%20World;dept=Theme%20Park;lt=Wireline;st=Business;bt=Entertainment;ba=Walt%20Disney%20World%20Resort;cs=Orlando, FL;city=Orlando;state=FL;ct=US;zip=32830;wb=http://movies.disney.com/alice-in-wonderland-1951;lg=https://static-mh.content.disney.io/matterhorn/assets/goc/nav-logo-dark@2x-2b3eb08c507c.png;tg=#AliceInWonderLand;sm=%7B%22Facebook%22%3A%22https%3A%2F%2Fwww.facebook.com%2FDisneyAliceInWonderland%22%2C%22Twitter%22%3A%22https%3A%2F%2Ftwitter.com%2FDisney%22%7D;nm=Alice;fn=Alice;ln=Liddell;jt=Adventurer;hs=https://encrypted-tbn0.gstatic.com/images?q%3dtbn:ANd9GcR2Q1GWX6hdmMr2dh10SoTeEKEn4S4toc4V3yAJCrPQHlzWvr_I;cp=Customer Support;email=alice@disney.com>"
+              },
+              "call_insight" : {
+                "call_treatment" : "allow",
+                "fraud_score" : 0,
+                "category_id" : 0,
+                "data_model" : "titan",
+                "category" : "N/A",
+                "overlay_name" : "[V] ",
+                "original_calling_name" : "Alice"
+              }
             }
         - lang: curl
           label: Integrated STIR Verify and SHAKEN Signing

@@ -52,7 +52,7 @@ tags:
 - name: Verification Service with Call Validation Treatment (CVT)
 
 paths:
-  /authn/identityj-j:
+  /authn/v2/identityj-j:
     post:
       tags:
       - Authentication Service
@@ -168,7 +168,7 @@ paths:
           label: STIR 
           source: |
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
                 -d '{
@@ -185,7 +185,7 @@ paths:
           label: SHAKEN
           source: | 
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
                 -d '{
@@ -205,7 +205,7 @@ paths:
           label: STIR Compact  
           source: |
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
                 -d '{
@@ -223,7 +223,7 @@ paths:
           label: SHAKEN All Data 
           source: |
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
                 -d '{
@@ -257,7 +257,7 @@ paths:
           source: |
             <<<<<<<<<<<<<< RCD Service Needs to be enabled on the AS profile >>>>>>>>>>>>>
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
                 -d '{
@@ -295,7 +295,7 @@ paths:
           label: DIV 
           source: |
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
                 -d '{
@@ -314,7 +314,7 @@ paths:
           label: RPH 
           source: |
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
                 -d '{
@@ -333,7 +333,7 @@ paths:
           label: RCD w/nam 
           source: |
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
                 -d '{
@@ -1990,7 +1990,7 @@ paths:
                     developer_message: Internal server error
                     attributes: 
                       key: value
-  /authn/identitys-j:
+  /authn/v2/identitys-j:
     post:
       tags:
       - Authentication Service
@@ -2106,7 +2106,7 @@ paths:
           label: STIR w/SIP INVITE 
           source: |
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: application/json' \
                 -d 'INVITE sip:+15715550000@proxy.example.com;transport=UDP SIP/2.0
@@ -2122,7 +2122,7 @@ paths:
           label: SHAKEN w/SIP INVITE 
           source: |
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953&ppt=shaken' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/identity?apiKey=c07939ca0d0847038866f953&ppt=shaken' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: application/json' \
                 -d 'INVITE sip:+15715550000@proxy.example.com;transport=UDP SIP/2.0
@@ -2138,7 +2138,7 @@ paths:
           label: SHAKEN w/Entire SIP INVITE 
           source: |
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/identity?apiKey=c07939ca0d0847038866f953&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: application/json' \
                 -d 'INVITE sip:+15715550000@proxy.example.com;transport=UDP SIP/2.0
@@ -3768,7 +3768,7 @@ paths:
                     developer_message: Internal server error
                     attributes: 
                       key: value
-  /authn/identitys-s:
+  /authn/v2/identitys-s:
     post:
       tags:
       - Authentication Service
@@ -3887,7 +3887,7 @@ paths:
           label: STIR w/SIP INVITE
           source: |
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/identity?apiKey=c07939ca0d0847038866f953' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: text/plain' \
                 -d 'INVITE sip:+15715550000@proxy.example.com;transport=UDP SIP/2.0
@@ -3905,7 +3905,7 @@ paths:
           label: SHAKEN w/SIP INVITE
           source: |
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953&ppt=shaken' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/identity?apiKey=c07939ca0d0847038866f953&ppt=shaken' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: text/plain' \
                 -d 'INVITE sip:+15715550000@proxy.example.com;transport=UDP SIP/2.0
@@ -3924,7 +3924,7 @@ paths:
           label: SHAKEN w/Entire SIP INVITE
           source: |
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/identity?apiKey=c07939ca0d0847038866f953&compact=false&ppt=shaken&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: text/plain' \
                 -d 'INVITE sip:+15715550000@proxy.example.com;transport=UDP SIP/2.0
@@ -5587,7 +5587,7 @@ paths:
                     developer_message: Internal server error
                     attributes: 
                       key: value
-  /authn/identitymps:
+  /authn/v2/identitymps:
     post:
       tags:
       - Authentication Service
@@ -5703,7 +5703,7 @@ paths:
           label: RCD w/Multipart SIP INVITE  
           source: |
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953&compact=false&ppt=rcd&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/identity?apiKey=c07939ca0d0847038866f953&compact=false&ppt=rcd&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: text/plain' \
                 -d 'INVITE sip:+15715550000@proxy.example.com;transport=UDP SIP/2.0
@@ -7386,7 +7386,7 @@ paths:
                     developer_message: Internal server error
                     attributes: 
                       key: value
-  /authn/identitympj:
+  /authn/v2/identitympj:
     post:
       tags:
       - Authentication Service
@@ -7502,7 +7502,7 @@ paths:
           label: RCD w/Multipart SIP INVITE  
           source: |
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/identity?apiKey=c07939ca0d0847038866f953&compact=false&ppt=rcd&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/authn/v2/identity?apiKey=c07939ca0d0847038866f953&compact=false&ppt=rcd&origcc=1&destcc=1&attest=A&origid=AAA-BBB-CCCC' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: application/json' \
                 -d 'INVITE sip:+15715550000@proxy.example.com;transport=UDP SIP/2.0
@@ -9143,7 +9143,7 @@ paths:
                     developer_message: Internal server error
                     attributes: 
                       key: value
-  /verify/identityj-j:
+  /verify/v2/identityj-j:
     post:
       tags:
       - Verification Service
@@ -9261,7 +9261,7 @@ paths:
           label: STIR
           source: | 
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
                 -d '{
@@ -9278,7 +9278,7 @@ paths:
           label: SHAKEN
           source: | 
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
                 -d '{
@@ -9295,7 +9295,7 @@ paths:
           label: SHAKEN w/verstat
           source: | 
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
                 -d '{
@@ -9314,7 +9314,7 @@ paths:
           label: DIV
           source: |
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
                 -d '{
@@ -9332,7 +9332,7 @@ paths:
           label: RPH w/SPH
           source: | 
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
                 -d '{
@@ -9352,7 +9352,7 @@ paths:
           label: SHAKEN w/Request ID & Identity Header Data
           source: |
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
                 -d '{
@@ -9399,7 +9399,7 @@ paths:
           label: SHAKEN All Data
           source: |
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
                 -d '{
@@ -9522,7 +9522,7 @@ paths:
           source: |
             Request: 
             <<<<<<<<<<<< VS Profile needs to be configured for Re-Signing >>>>>>>>>>>>>
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=7826148d26e8470ba1be4548' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=7826148d26e8470ba1be4548' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
                 -d '{
@@ -11699,7 +11699,7 @@ paths:
                       http_status_code: 500
                       sip_code: 500
                       reason: Internal server error
-  /verify/identitys-j:
+  /verify/v2/identitys-j:
     post:
       tags:
       - Verification Service
@@ -11817,7 +11817,7 @@ paths:
           label: SHAKEN w/SIP INVITE
           source: | 
             Request:
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: application/json' \
                 -d 'INVITE sip:+15715550000@proxy.example.com;transport=UDP SIP/2.0
@@ -11862,7 +11862,7 @@ paths:
           label: SHAKEN w/SIP INVITE & CNAM
           source: | 
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4&cnam=true' -i -X POST     
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=10679965b0504406a3f02cc4&cnam=true' -i -X POST     
                 -H 'Content-Type: text/plain'     
               -H 'Accept: application/json'     
               -d 'INVITE sip:+15715550000@proxy.example.com;transport=UDP SIP/2.0
@@ -11906,7 +11906,7 @@ paths:
           label: SHAKEN w/SIP INVITE, CNAM & High Robocall Score
           source: | 
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4&cnam=true&robocall=true' -i -X POST     
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=10679965b0504406a3f02cc4&cnam=true&robocall=true' -i -X POST     
                 -H 'Content-Type: text/plain'     
                 -H 'Accept: application/json'     
                 -d 'INVITE sip:+15715550000@proxy.example.com;transport=UDP SIP/2.0
@@ -11961,7 +11961,7 @@ paths:
           label: SHAKEN w/SIP INVITE, CNAM & Low Robocall Score
           source: | 
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4&cnam=true&robocall=true' -i -X POST     
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=10679965b0504406a3f02cc4&cnam=true&robocall=true' -i -X POST     
                 -H 'Content-Type: text/plain'     
                 -H 'Accept: application/json'     
                 -d 'INVITE sip:+15715550000@proxy.example.com;transport=UDP SIP/2.0
@@ -12016,7 +12016,7 @@ paths:
           source: |
             Request: 
             <<<<<<<<<<<< VS Profile needs to be configured for Re-Signing >>>>>>>>>>>>>
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=7826148d26e8470ba1be4548' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=7826148d26e8470ba1be4548' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: application/json' \
                 -d 'INVITE sip:+15715550000@proxy.example.com;transport=UDP SIP/2.0
@@ -14085,7 +14085,7 @@ paths:
                       http_status_code: 500
                       sip_code: 500
                       reason: Internal server error
-  /verify/identitys-s:
+  /verify/v2/identitys-s:
     post:
       tags:
       - Verification Service
@@ -14206,7 +14206,7 @@ paths:
           label: SHAKEN w/SIP INVITE
           source: | 
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST     
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST     
                   -H 'Content-Type: text/plain'     
                   -H 'Accept: text/plain'     
                   -d 'INVITE sip:+15715550000@proxy.example.com;transport=UDP SIP/2.0
@@ -14278,7 +14278,7 @@ paths:
           label: SHAKEN w/SIP INVITE & Verified CNAM Prefix
           source: | 
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4&status=all&cnamPrefix=%5BV%5D,%5BX%5D' -i -X POST     
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=10679965b0504406a3f02cc4&status=all&cnamPrefix=%5BV%5D,%5BX%5D' -i -X POST     
                 -H 'Content-Type: text/plain'     
                 -H 'Accept: text/plain'     
                 -d 'INVITE sip:+15715550000@proxy.example.com;transport=UDP SIP/2.0
@@ -14350,7 +14350,7 @@ paths:
           label: SHAKEN w/SIP INVITE & Unverified CNAM Prefix
           source: | 
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4&status=all&cnamPrefix=%5BV%5D,%5BX%5D' -i -X POST     
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=10679965b0504406a3f02cc4&status=all&cnamPrefix=%5BV%5D,%5BX%5D' -i -X POST     
                 -H 'Content-Type: text/plain'     
                 -H 'Accept: text/plain'     
                 -d 'INVITE sip:+15715550000@proxy.example.com;transport=UDP SIP/2.0
@@ -14422,7 +14422,7 @@ paths:
           label: SHAKEN w/SIP INVITE & CNAM Prefix w/Tagging
           source: | 
             Request: 
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4&status=all&origcc=1,44&destcc=1&cnam=true&robocall=true&cnamPrefix=%5BV%5D,%5BX%5D&verstat=TN-Validation-Passed&identity=true' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=10679965b0504406a3f02cc4&status=all&origcc=1,44&destcc=1&cnam=true&robocall=true&cnamPrefix=%5BV%5D,%5BX%5D&verstat=TN-Validation-Passed&identity=true' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: text/plain' \
                 -d 'INVITE sip:+15715550000@proxy.example.com;transport=UDP SIP/2.0
@@ -14497,7 +14497,7 @@ paths:
           source: |
             Request: 
             <<<<<<<<<<<< VS Profile needs to be configured for Re-Signing >>>>>>>>>>>>>
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=7826148d26e8470ba1be4548' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=7826148d26e8470ba1be4548' -i -X POST \
                 -H 'Content-Type: text/plain' \
                 -H 'Accept: text/plain' \
                 -d 'INVITE sip:+15715550000@proxy.example.com;transport=UDP SIP/2.0
@@ -16600,7 +16600,7 @@ paths:
                       http_status_code: 500
                       sip_code: 500
                       reason: Internal server error
-  /verify/identityCVT:
+  /verify/v2/identityCVT:
     post:
       tags:
       - Verification Service with Call Validation Treatment (CVT)
@@ -16718,7 +16718,7 @@ paths:
           source: |
             Request: 
             <<<<<<<<<<<<<<<<<<<<<<<<<<< CNAM Service needs to be enabled/subscribed to >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
                 -d '{
@@ -16738,7 +16738,7 @@ paths:
           source: | 
             Request: 
             <<<<<<<<<<<<<<<<<<<<<<<<<<< Robocall Service needs to be enabled/subscribed to >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
                 -d '{
@@ -16769,7 +16769,7 @@ paths:
           source: | 
             Request: 
             <<<<<<<<<<<<<<<<<<<<<<<<<<< Robocall Service needs to be enabled/subscribed to >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
                 -d '{
@@ -16800,7 +16800,7 @@ paths:
           source: | 
             Request: 
             <<<<<<<<<<<<<<<<<<<<<<<<<<< Robocall Service needs to be enabled/subscribed to >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
+            curl 'https://{hostname}:{port}/{optionalRoutingPath}/verify/v2/identity?apiKey=10679965b0504406a3f02cc4' -i -X POST \
                 -H 'Content-Type: application/json' \
                 -H 'Accept: application/json' \
                 -d '{

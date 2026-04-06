@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CCID Authentication Service — API Developer Guide v6.0.1</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent:       #0ea5e9;
+  --accent-dark:  #0284c7;
+  --nav-bg:       #0f172a;
+  --nav-w:        220px;
+  --text:         #1e293b;
+  --text-2:       #475569;
+  --text-3:       #94a3b8;
+  --border:       #e2e8f0;
+  --bg:           #f8fafc;
+  --white:        #ffffff;
+  --code-bg:      #0f172a;
+  --green:        #16a34a;
+  --green-bg:     #f0fdf4;
+  --green-border: #86efac;
+  --amber:        #d97706;
+  --amber-bg:     #fffbeb;
+  --amber-border: #fde68a;
+  --red:          #dc2626;
+  --red-bg:       #fef2f2;
+  --red-border:   #fca5a5;
+  --orange:       #c2410c;
+  --orange-bg:    #fff7ed;
+  --orange-border:#fdba74;
+  --radius:       10px;
+  --header-h:     56px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── HEADER ── */
+#hdr {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: var(--header-h);
+  background: var(--nav-bg);
+  display: flex; align-items: center; gap: 14px;
+  padding: 0 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.hdr-logo {
+  display: flex; align-items: center; flex-shrink: 0;
+}
+.hdr-logo img {
+  height: 34px; width: auto; display: block;
+}
+.hdr-title { font-size: 14px; font-weight: 600; color: #fff; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hdr-badge {
+  font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px;
+  background: rgba(14,165,233,0.15); border: 1px solid rgba(14,165,233,0.35);
+  color: var(--accent); letter-spacing: 0.04em; white-space: nowrap; flex-shrink: 0;
+}
+#menu-btn {
+  display: none; background: none; border: none; cursor: pointer;
+  color: rgba(255,255,255,0.7); padding: 4px; flex-shrink: 0;
+}
+#menu-btn svg { width: 22px; height: 22px; }
+
+/* ── LAYOUT ── */
+#layout { display: flex; margin-top: var(--header-h); min-height: calc(100vh - var(--header-h)); }
+
+/* ── SIDEBAR ── */
+#sidebar {
+  width: var(--nav-w); flex-shrink: 0;
+  background: var(--nav-bg);
+  position: fixed; top: var(--header-h); left: 0; bottom: 0;
+  overflow-y: auto; overflow-x: hidden;
+  padding: 24px 0 48px;
+  scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.08) transparent;
+  transition: transform 0.25s ease;
+  z-index: 150;
+}
+#sidebar::-webkit-scrollbar { width: 3px; }
+#sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.nav-group-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.25); padding: 16px 20px 6px;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 9px;
+  padding: 7px 20px; cursor: pointer;
+  color: rgba(255,255,255,0.55); font-size: 13px;
+  border-left: 3px solid transparent;
+  transition: all 0.15s; user-select: none;
+}
+.nav-item:hover { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.9); }
+.nav-item.active { background: rgba(14,165,233,0.1); color: var(--accent); border-left-color: var(--accent); font-weight: 500; }
+.nav-icon { width: 15px; height: 15px; opacity: 0.5; flex-shrink: 0; }
+.nav-item.active .nav-icon { opacity: 1; }
+.nav-method {
+  font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px;
+  background: #22c55e; color: #fff; letter-spacing: 0.05em; flex-shrink: 0;
+}
+.nav-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 8px 20px; }
+
+/* ── MAIN CONTENT ── */
+#content { margin-left: var(--nav-w); flex: 1; min-width: 0; max-width: 900px; padding: 0 0 80px; }
+
+/* ── SECTIONS ── */
+.section { padding: 48px 52px; border-bottom: 1px solid var(--border); }
+.section:last-child { border-bottom: none; }
+
+.version-tag {
+  display: inline-flex; align-items: center;
+  background: var(--accent); color: #fff;
+  font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px;
+  letter-spacing: 0.05em; margin-bottom: 16px;
+}
+h1.page-title { font-size: 30px; font-weight: 800; color: var(--text); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 14px; }
+h2.sec-title  { font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; margin-bottom: 12px; }
+.sec-desc { color: var(--text-2); font-size: 14px; line-height: 1.75; margin-bottom: 20px; max-width: 620px; }
+
+/* ── PROPS TABLE ── */
+.props-table {
+  display: grid; grid-template-columns: 130px 1fr;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; max-width: 480px; margin-top: 4px;
+}
+.pt-key {
+  background: #f1f5f9; padding: 9px 14px;
+  font-size: 11px; font-weight: 700; color: var(--text-3);
+  text-transform: uppercase; letter-spacing: 0.07em;
+  border-bottom: 1px solid var(--border);
+}
+.pt-val {
+  background: var(--white); padding: 9px 14px;
+  font-size: 13px; color: var(--text); font-weight: 500;
+  border-bottom: 1px solid var(--border);
+}
+.pt-key:last-of-type, .pt-val:last-of-type,
+.props-table > :nth-last-child(-n+2) { border-bottom: none; }
+.pt-val code { font-family: ui-monospace, monospace; font-size: 12px; background: #f1f5f9; padding: 1px 5px; border-radius: 3px; color: var(--accent-dark); }
+
+/* ── CALLOUT NOTES ── */
+.note {
+  display: flex; gap: 12px; border-radius: 8px; padding: 14px 16px;
+  margin: 16px 0; max-width: 640px;
+  background: #eff6ff; border: 1px solid #bfdbfe;
+}
+.note.green  { background: var(--green-bg);  border-color: var(--green-border); }
+.note.amber  { background: var(--amber-bg);  border-color: var(--amber-border); }
+.note.red    { background: var(--red-bg);    border-color: var(--red-border); }
+.note-icon { width: 17px; height: 17px; flex-shrink: 0; margin-top: 2px; color: #3b82f6; }
+.note.green .note-icon { color: var(--green); }
+.note.amber .note-icon { color: var(--amber); }
+.note.red   .note-icon { color: var(--red); }
+.note-body { font-size: 13px; line-height: 1.65; color: #1e40af; }
+.note.green .note-body { color: #14532d; }
+.note.amber .note-body { color: #78350f; }
+.note.red   .note-body { color: #7f1d1d; }
+.note-body strong { font-weight: 600; }
+
+/* ── URL BLOCK ── */
+.url-block {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 8px; padding: 13px 18px; margin: 16px 0; max-width: 560px;
+}
+.url-label { font-size: 10px; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: var(--text-3); flex-shrink: 0; }
+.url-val { font-family: ui-monospace, monospace; font-size: 13px; color: var(--accent-dark); font-weight: 600; word-break: break-all; }
+
+.env-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+.env-chip {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 6px; padding: 6px 12px; font-size: 12px; color: var(--text-2);
+}
+.env-dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
+.env-chip strong { color: var(--text); font-weight: 600; }
+
+/* ── AUTH CARDS ── */
+.auth-cards { display: flex; flex-direction: column; gap: 12px; margin: 16px 0; max-width: 620px; }
+.auth-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px 18px;
+  display: flex; gap: 14px;
+}
+.auth-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--accent); color: #fff;
+  font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.auth-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.auth-desc  { font-size: 13px; color: var(--text-2); line-height: 1.65; }
+.auth-desc code { font-family: ui-monospace, monospace; font-size: 12px; background: #f1f5f9; padding: 1px 5px; border-radius: 3px; color: var(--accent-dark); }
+
+/* ── ENDPOINT BADGE ── */
+.endpoint-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 8px; padding: 9px 16px; margin-bottom: 20px;
+}
+.method-pill { font-size: 12px; font-weight: 800; padding: 3px 10px; border-radius: 4px; letter-spacing: 0.05em; background: #dcfce7; color: #15803d; }
+.ep-path { font-family: ui-monospace, monospace; font-size: 14px; font-weight: 600; color: var(--text); }
+
+/* ── PARAMS ── */
+.params-block { margin-bottom: 32px; }
+.params-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--text-3); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border);
+}
+.param-row { display: flex; gap: 0; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.param-row:last-child { border-bottom: none; }
+.param-left { width: 170px; flex-shrink: 0; padding-right: 16px; }
+.param-name { font-family: ui-monospace, monospace; font-size: 13px; font-weight: 700; color: var(--text); display: block; margin-bottom: 2px; }
+.param-type { font-size: 11px; color: var(--text-3); font-family: ui-monospace, monospace; }
+.param-right { flex: 1; }
+.badge-req { display: inline-block; font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 3px; background: var(--red-bg); color: var(--red); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 5px; }
+.badge-opt { display: inline-block; font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 3px; background: #f1f5f9; color: var(--text-3); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 5px; }
+.param-desc { font-size: 13px; color: var(--text-2); line-height: 1.65; margin-bottom: 3px; }
+.param-desc code, .param-eg code { font-family: ui-monospace, monospace; font-size: 11px; background: #f1f5f9; padding: 1px 5px; border-radius: 3px; color: var(--accent-dark); }
+.param-constraint { font-size: 11px; color: var(--text-3); font-family: ui-monospace, monospace; margin-bottom: 3px; }
+.param-eg { font-size: 11px; color: var(--text-3); }
+
+/* ── CODE BLOCK ── */
+.code-wrap {
+  background: var(--code-bg); border-radius: var(--radius);
+  margin: 16px 0; overflow: hidden; max-width: 640px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.code-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px; border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.code-lang { font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+.copy-btn {
+  display: flex; align-items: center; gap: 5px;
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 5px; color: rgba(255,255,255,0.45);
+  font-size: 11px; font-weight: 600; padding: 3px 10px;
+  cursor: pointer; transition: all 0.15s; font-family: inherit;
+}
+.copy-btn:hover { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.85); }
+.copy-btn.copied { background: rgba(34,197,94,0.15); border-color: rgba(34,197,94,0.3); color: #4ade80; }
+.copy-btn svg { width: 12px; height: 12px; }
+pre.code-pre {
+  font-family: ui-monospace,'SF Mono','Fira Code',Consolas,monospace;
+  font-size: 13px; line-height: 1.65; padding: 16px;
+  color: #e2e8f0; overflow-x: auto; margin: 0; background: transparent;
+  white-space: pre;
+  scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+pre.code-pre::-webkit-scrollbar { height: 4px; }
+pre.code-pre::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+.ck  { color: #7dd3fc; }
+.cs  { color: #86efac; }
+.cn  { color: #fbbf24; }
+.cp  { color: #94a3b8; }
+.cm  { color: #f87171; }
+.cu  { color: #a5b4fc; }
+.cc  { color: #64748b; font-style: italic; }
+.chk { color: #c4b5fd; }
+
+/* ── RESPONSE TABS ── */
+.resp-section { margin-top: 32px; }
+.resp-label { font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--text-3); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.resp-tabs { display: flex; gap: 6px; margin-bottom: 18px; flex-wrap: wrap; }
+.resp-tab {
+  padding: 5px 14px; border-radius: 6px; font-size: 12px; font-weight: 600;
+  cursor: pointer; border: 1px solid var(--border); background: var(--white);
+  color: var(--text-2); transition: all 0.15s; user-select: none;
+}
+.resp-tab:hover { border-color: #94a3b8; color: var(--text); }
+.resp-tab.t200 { background: #dcfce7; border-color: #86efac; color: #15803d; }
+.resp-tab.t403 { background: var(--orange-bg); border-color: var(--orange-border); color: var(--orange); }
+.resp-tab.t400 { background: var(--red-bg); border-color: var(--red-border); color: var(--red); }
+.resp-panel { display: none; }
+.resp-panel.active { display: block; }
+.status-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.status-pill { font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 4px; }
+.s200 { background: #dcfce7; color: #15803d; }
+.s400 { background: var(--red-bg); color: var(--red); }
+.s403 { background: var(--orange-bg); color: var(--orange); }
+.resp-desc { font-size: 13px; color: var(--text-2); line-height: 1.65; margin-bottom: 14px; }
+
+/* ── ERROR ITEMS ── */
+.error-item {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 8px; padding: 14px 16px; margin-bottom: 10px;
+}
+.error-hdr { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; flex-wrap: wrap; }
+.error-id { font-family: ui-monospace, monospace; font-size: 13px; font-weight: 700; color: var(--text); }
+.error-badge { font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 3px; background: #f1f5f9; color: var(--text-3); font-family: ui-monospace, monospace; }
+.error-reason { font-size: 13px; color: var(--text-2); line-height: 1.5; margin-bottom: 10px; }
+.error-reason code { font-family: ui-monospace, monospace; font-size: 12px; background: #f1f5f9; padding: 1px 4px; border-radius: 3px; }
+.error-json {
+  background: #f8fafc; border: 1px solid var(--border); border-radius: 6px;
+  padding: 12px 14px; font-family: ui-monospace, monospace;
+  font-size: 12px; line-height: 1.7; color: var(--text); overflow-x: auto;
+}
+
+/* ── ERROR TABLE ── */
+.err-table-wrap { overflow-x: auto; margin-top: 16px; border: 1px solid var(--border); border-radius: var(--radius); }
+.err-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.err-table thead tr { background: #f1f5f9; }
+.err-table th { padding: 10px 14px; text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-3); border-bottom: 1px solid var(--border); white-space: nowrap; }
+.err-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.err-table tr:last-child td { border-bottom: none; }
+.err-table tbody tr:hover td { background: #f8fafc; }
+.eid { font-family: ui-monospace, monospace; font-size: 12px; font-weight: 600; color: var(--text); white-space: nowrap; }
+.ereason { color: var(--text-2); font-size: 13px; }
+
+/* ── COPY POPOVER ── */
+#copy-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.6); z-index: 9999;
+  align-items: center; justify-content: center; padding: 20px;
+}
+#copy-overlay.visible { display: flex; }
+#copy-popover {
+  background: #1e293b; border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px; padding: 22px; width: min(580px, 100%);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+}
+#copy-popover-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 10px; }
+#copy-popover-text {
+  width: 100%; background: #0f172a; border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 7px; padding: 12px; color: #e2e8f0; resize: none;
+  font-family: ui-monospace, monospace; font-size: 12.5px; line-height: 1.6;
+  min-height: 80px; max-height: 260px; overflow-y: auto;
+}
+#copy-popover-hint { margin-top: 10px; font-size: 12px; color: rgba(255,255,255,0.35); text-align: center; }
+#copy-popover-hint kbd {
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 4px; padding: 1px 6px; font-size: 11px; font-family: inherit; color: rgba(255,255,255,0.65);
+}
+#copy-popover-close {
+  display: block; margin: 14px auto 0;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 7px; padding: 7px 24px; color: rgba(255,255,255,0.6);
+  font-size: 12px; cursor: pointer; font-family: inherit; transition: all 0.15s;
+}
+#copy-popover-close:hover { background: rgba(255,255,255,0.14); color: #fff; }
+
+/* ── MOBILE OVERLAY ── */
+#sidebar-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5); z-index: 140;
+}
+#sidebar-overlay.visible { display: block; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) {
+  #menu-btn { display: flex; }
+  #sidebar { transform: translateX(-100%); }
+  #sidebar.open { transform: translateX(0); }
+  #content { margin-left: 0; }
+  .section { padding: 36px 24px; }
+  h1.page-title { font-size: 24px; }
+  h2.sec-title  { font-size: 19px; }
+  .param-row { flex-direction: column; gap: 6px; }
+  .param-left { width: 100%; }
+}
+@media (max-width: 480px) {
+  .section { padding: 28px 16px; }
+  .code-wrap { max-width: 100%; }
+  .auth-card { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="hdr">
+  <button id="menu-btn" aria-label="Toggle menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+  <div class="hdr-logo">
+    <img src="https://ccid.tcs-trustlab.com/stamp-blu.svg" alt="TransUnion" />
+  </div>
+  <div class="hdr-title">CCID Authentication Service</div>
+  <div class="hdr-badge">v6.0.1</div>
+</header>
+
+<div id="sidebar-overlay"></div>
+
+<div id="layout">
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="nav-group-label">General</div>
+  <div class="nav-item active" data-sec="overview">
+    <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+    Overview
+  </div>
+  <div class="nav-item" data-sec="base-url">
+    <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95a15.65 15.65 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.92 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.987 7.987 0 0 1 5.08 16zm2.95-8H5.08a7.987 7.987 0 0 1 4.33-3.56A15.65 15.65 0 0 0 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2s.07-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>
+    Base URL
+  </div>
+  <div class="nav-item" data-sec="authentication">
+    <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+    Authentication
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-group-label">Endpoints</div>
+  <div class="nav-item" data-sec="identity">
+    <span class="nav-method">POST</span>
+    /identity
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-group-label">Reference</div>
+  <div class="nav-item" data-sec="error-reference">
+    <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+    Error Reference
+  </div>
+</nav>
+
+<!-- CONTENT -->
+<main id="content">
+
+  <!-- OVERVIEW -->
+  <section class="section" id="overview">
+    <div class="version-tag">v6.0.1</div>
+    <h1 class="page-title">CCID Authentication Service</h1>
+    <p class="sec-desc">
+      A standards-based REST API for verifying caller identity using <strong>IETF RFC 8224</strong> and the
+      <strong>ATIS SHAKEN</strong> framework. Enables service providers to assert and validate telephone number
+      authenticity in real-time, reducing robocall fraud across the PSTN.
+    </p>
+    <p class="sec-desc">
+      Operated by <strong>TransUnion</strong> via the Tech Enabler platform. All credentials and onboarding
+      are managed directly by the TransUnion team.
+    </p>
+    <div class="props-table">
+      <div class="pt-key">Standard</div>   <div class="pt-val">IETF RFC 8224 / ATIS SHAKEN</div>
+      <div class="pt-key">Protocol</div>   <div class="pt-val">HTTPS / REST</div>
+      <div class="pt-key">Format</div>     <div class="pt-val"><code>application/json</code></div>
+      <div class="pt-key">Auth</div>       <div class="pt-val">API Key / IP Allowlist (CIDR)</div>
+      <div class="pt-key">Version</div>    <div class="pt-val">v6.0.1</div>
+      <div class="pt-key">Operator</div>   <div class="pt-val">TransUnion / Tech Enabler</div>
+    </div>
+  </section>
+
+  <!-- BASE URL -->
+  <section class="section" id="base-url">
+    <h2 class="sec-title">Base URL</h2>
+    <p class="sec-desc">All requests must be made over HTTPS. Plain HTTP is rejected. TLS 1.2 or higher is required.</p>
+    <div class="url-block">
+      <span class="url-label">Base URL</span>
+      <span class="url-val">https://authn.ccid.neustar.biz/ccid/authn/v2</span>
+    </div>
+    <div class="env-row">
+      <div class="env-chip"><div class="env-dot"></div><span><strong>Production</strong> &mdash; Live environment</span></div>
+      <div class="env-chip"><div class="env-dot" style="background:#94a3b8;"></div><span><strong>TLS 1.2+</strong> required</span></div>
+    </div>
+    <div class="note amber" style="margin-top:20px;">
+      <svg class="note-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+      <div class="note-body"><strong>No sandbox environment</strong> is currently available. All test calls hit production. Coordinate with the TransUnion team before running load tests.</div>
+    </div>
+    <div class="code-wrap">
+      <div class="code-header">
+        <span class="code-lang">Base URL</span>
+        <button class="copy-btn" data-copy="https://authn.ccid.neustar.biz/ccid/authn/v2">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+          Copy
+        </button>
+      </div>
+      <pre class="code-pre"><span class="cs">https://authn.ccid.neustar.biz/ccid/authn/v2</span></pre>
+    </div>
+  </section>
+
+  <!-- AUTHENTICATION -->
+  <section class="section" id="authentication">
+    <h2 class="sec-title">Authentication</h2>
+    <p class="sec-desc">The CCID API supports two authentication methods. Every request must satisfy at least one.</p>
+    <div class="note green">
+      <svg class="note-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/></svg>
+      <div class="note-body"><strong>Credentials are issued by TransUnion.</strong> Contact the TransUnion Tech Enabler team to obtain an API key or register IP addresses. There is no self-service onboarding.</div>
+    </div>
+    <div class="auth-cards">
+      <div class="auth-card">
+        <div class="auth-num">1</div>
+        <div>
+          <div class="auth-title">API Key &mdash; Query Parameter</div>
+          <div class="auth-desc">Append <code>apiKey=YOUR_API_KEY</code> to every request URL. The key is provisioned by TransUnion and must be kept confidential.<br>Example: <code>POST /identity?apiKey=YOUR_API_KEY</code></div>
+        </div>
+      </div>
+      <div class="auth-card">
+        <div class="auth-num">2</div>
+        <div>
+          <div class="auth-title">Remote IP Allowlist &mdash; CIDR</div>
+          <div class="auth-desc">Requests from pre-registered static IPs or CIDR ranges are automatically authenticated. <strong>No <code>apiKey</code> parameter is needed</strong> &mdash; the source IP is the credential. IPs must be registered during provisioning.</div>
+        </div>
+      </div>
+    </div>
+    <div class="note" style="margin-top:4px;">
+      <svg class="note-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+      <div class="note-body">If no valid authentication is provided the API returns <strong>ApiKeyRequired (HTTP 400)</strong>. An invalid key returns <strong>ApiKeyInvalid (HTTP 400)</strong>.</div>
+    </div>
+  </section>
+
+  <!-- POST /identity -->
+  <section class="section" id="identity">
+    <div class="endpoint-badge">
+      <span class="method-pill">POST</span>
+      <span class="ep-path">/identity</span>
+    </div>
+    <h2 class="sec-title">Verify Caller Identity</h2>
+    <p class="sec-desc">Submits a caller identity assertion. The service validates the calling party's telephone number against the SHAKEN framework and returns <strong>200 OK</strong> with an empty body on success.</p>
+    <p class="sec-desc" style="margin-top:-8px;">Full endpoint: <code style="font-family:ui-monospace,monospace;font-size:12px;background:#f1f5f9;padding:2px 7px;border-radius:4px;color:var(--accent-dark);">https://authn.ccid.neustar.biz/ccid/authn/v2/identity</code></p>
+
+    <!-- Query Params -->
+    <div class="params-block" style="margin-top:28px;">
+      <div class="params-label">Query Parameters</div>
+      <div class="param-row">
+        <div class="param-left"><span class="param-name">apiKey</span><span class="param-type">string</span></div>
+        <div class="param-right">
+          <span class="badge-opt">Optional</span>
+          <p class="param-desc">Your provisioned API key. Required unless the request originates from a pre-registered IP or CIDR range.</p>
+          <p class="param-eg">Example: <code>YOUR_API_KEY</code></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Headers -->
+    <div class="params-block">
+      <div class="params-label">Request Headers</div>
+      <div class="param-row">
+        <div class="param-left"><span class="param-name">Content-Type</span><span class="param-type">string</span></div>
+        <div class="param-right">
+          <span class="badge-req">Required</span>
+          <p class="param-desc">Must be <code>application/json</code>.</p>
+        </div>
+      </div>
+      <div class="param-row">
+        <div class="param-left"><span class="param-name">Accept</span><span class="param-type">string</span></div>
+        <div class="param-right">
+          <span class="badge-req">Required</span>
+          <p class="param-desc">Must be <code>application/json</code> to receive structured error responses.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="params-block">
+      <div class="params-label">Request Body &nbsp;<span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-3);font-size:11px;">application/json</span></div>
+      <div class="param-row">
+        <div class="param-left"><span class="param-name">from</span><span class="param-type">string</span></div>
+        <div class="param-right">
+          <span class="badge-req">Required</span>
+          <p class="param-desc">Calling party's telephone number in TEL URI format (RFC 3966).</p>
+          <p class="param-constraint">Format: tel:+E.164</p>
+          <p class="param-eg">Example: <code>tel:+12232146979</code></p>
+        </div>
+      </div>
+      <div class="param-row">
+        <div class="param-left"><span class="param-name">to</span><span class="param-type">string</span></div>
+        <div class="param-right">
+          <span class="badge-req">Required</span>
+          <p class="param-desc">Called party's telephone number in TEL URI format.</p>
+          <p class="param-constraint">Format: tel:+E.164</p>
+          <p class="param-eg">Example: <code>tel:+12482989788</code></p>
+        </div>
+      </div>
+      <div class="param-row">
+        <div class="param-left"><span class="param-name">origid</span><span class="param-type">string</span></div>
+        <div class="param-right">
+          <span class="badge-opt">Optional</span>
+          <p class="param-desc">Unique origination identifier for call tracing and audit logging. Should be unique per call session.</p>
+          <p class="param-eg">Example: <code>usefulenterpriseuniquenumber</code></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- cURL Example -->
+    <div class="code-wrap">
+      <div class="code-header">
+        <span class="code-lang">cURL</span>
+        <button class="copy-btn" data-copy="curl --location 'https://authn.ccid.neustar.biz/ccid/authn/v2/identity?apiKey=YOUR_API_KEY' --header 'Content-Type: application/json' --header 'Accept: application/json' --data '{&quot;from&quot;:&quot;tel:+12232146979&quot;,&quot;to&quot;:&quot;tel:+12482989788&quot;,&quot;origid&quot;:&quot;usefulenterpriseuniquenumber&quot;}'">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+          Copy
+        </button>
+      </div>
+      <pre class="code-pre"><span class="cm">curl</span> --location \
+  <span class="cs">'https://authn.ccid.neustar.biz/ccid/authn/v2/identity?apiKey=YOUR_API_KEY'</span> \
+  --header <span class="cs">'Content-Type: application/json'</span> \
+  --header <span class="cs">'Accept: application/json'</span> \
+  --data <span class="cs">'{
+    "from":   "tel:+12232146979",
+    "to":     "tel:+12482989788",
+    "origid": "usefulenterpriseuniquenumber"
+  }'</span></pre>
+    </div>
+
+    <!-- Request Body Example -->
+    <div class="code-wrap">
+      <div class="code-header">
+        <span class="code-lang">Request Body</span>
+        <button class="copy-btn" data-copy='{"from":"tel:+12232146979","to":"tel:+12482989788","origid":"usefulenterpriseuniquenumber"}'>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+          Copy
+        </button>
+      </div>
+      <pre class="code-pre"><span class="cp">{</span>
+  <span class="ck">"from"</span><span class="cp">:</span>   <span class="cs">"tel:+12232146979"</span><span class="cp">,</span>
+  <span class="ck">"to"</span><span class="cp">:</span>     <span class="cs">"tel:+12482989788"</span><span class="cp">,</span>
+  <span class="ck">"origid"</span><span class="cp">:</span> <span class="cs">"usefulenterpriseuniquenumber"</span>
+<span class="cp">}</span></pre>
+    </div>
+
+    <!-- Responses -->
+    <div class="resp-section">
+      <div class="resp-label">Responses</div>
+      <div class="resp-tabs">
+        <div class="resp-tab t200" data-resp="r200">200 OK</div>
+        <div class="resp-tab" data-resp="r403">403 Forbidden</div>
+        <div class="resp-tab" data-resp="r400">400 Bad Request</div>
+      </div>
+
+      <div class="resp-panel active" id="r200">
+        <div class="status-row"><span class="status-pill s200">200 OK</span></div>
+        <p class="resp-desc">Identity assertion accepted. The response body is intentionally empty &mdash; do not attempt to parse it.</p>
+        <div class="note">
+          <svg class="note-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          <div class="note-body"><strong>Empty body by design.</strong> A 200 status alone confirms the assertion was accepted.</div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">Response</span></div>
+          <pre class="code-pre"><span class="cc"># HTTP/1.1 200 OK</span>
+<span class="cc"># Content-Length: 0</span>
+<span class="cc"># Body: (empty)</span></pre>
+        </div>
+      </div>
+
+      <div class="resp-panel" id="r403">
+        <div class="status-row"><span class="status-pill s403">403 Forbidden</span></div>
+        <p class="resp-desc">Returned when a required request body field is missing.</p>
+        <div class="error-item">
+          <div class="error-hdr"><span class="error-id">RequestFromHeaderRequired</span><span class="error-badge">HTTP 403</span></div>
+          <div class="error-reason">The <code>from</code> field is missing from the request body.</div>
+          <pre class="error-json">{
+  "error_id":         "RequestFromHeaderRequired",
+  "http_status_code": 403,
+  "reason":           "From header value required",
+  "timestamp":        "Thu, 2 Apr 2026 13:04:03 GMT"
+}</pre>
+        </div>
+        <div class="error-item">
+          <div class="error-hdr"><span class="error-id">RequestToHeaderRequired</span><span class="error-badge">HTTP 403</span></div>
+          <div class="error-reason">The <code>to</code> field is missing from the request body.</div>
+          <pre class="error-json">{
+  "error_id":         "RequestToHeaderRequired",
+  "http_status_code": 403,
+  "reason":           "To header value required",
+  "timestamp":        "Thu, 2 Apr 2026 13:04:03 GMT"
+}</pre>
+        </div>
+      </div>
+
+      <div class="resp-panel" id="r400">
+        <div class="status-row"><span class="status-pill s400">400 Bad Request</span></div>
+        <p class="resp-desc">Returned when API key authentication fails or is missing.</p>
+        <div class="error-item">
+          <div class="error-hdr"><span class="error-id">ApiKeyRequired</span><span class="error-badge">HTTP 400</span></div>
+          <div class="error-reason">No API key was provided and the request IP is not on the allowlist.</div>
+          <pre class="error-json">{
+  "error_id":         "ApiKeyRequired",
+  "http_status_code": 400,
+  "reason":           "API key is required",
+  "timestamp":        "Thu, 2 Apr 2026 13:04:03 GMT"
+}</pre>
+        </div>
+        <div class="error-item">
+          <div class="error-hdr"><span class="error-id">ApiKeyInvalid</span><span class="error-badge">HTTP 400</span></div>
+          <div class="error-reason">The provided API key does not match any active key on record.</div>
+          <pre class="error-json">{
+  "error_id":         "ApiKeyInvalid",
+  "http_status_code": 400,
+  "reason":           "API key is invalid",
+  "timestamp":        "Thu, 2 Apr 2026 13:04:03 GMT"
+}</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ERROR REFERENCE -->
+  <section class="section" id="error-reference">
+    <h2 class="sec-title">Error Reference</h2>
+    <p class="sec-desc">All error responses share a consistent JSON structure. The table below lists all known error codes and their HTTP status codes.</p>
+    <div class="note" style="margin-bottom:4px;">
+      <svg class="note-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+      <div class="note-body"><strong>Error format:</strong> <code style="font-family:ui-monospace,monospace;font-size:11px;">{ "error_id", "http_status_code", "reason", "timestamp" }</code></div>
+    </div>
+    <div class="err-table-wrap">
+      <table class="err-table">
+        <thead><tr><th>Error ID</th><th style="text-align:center;">HTTP</th><th>Reason</th></tr></thead>
+        <tbody id="error-table-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+</div>
+
+<!-- COPY POPOVER -->
+<div id="copy-overlay">
+  <div id="copy-popover">
+    <div id="copy-popover-label">Copy to clipboard</div>
+    <textarea id="copy-popover-text" readonly spellcheck="false"></textarea>
+    <div id="copy-popover-hint">Text is selected &mdash; press <kbd>Ctrl+C</kbd> or <kbd>Cmd+C</kbd> to copy</div>
+    <button id="copy-popover-close">Close</button>
+  </div>
+</div>
+
+<script>
+// ── ERROR TABLE ──
+const ERRORS = [
+  ['ApiKeyRequired',           '400', 'API key is required'],
+  ['ApiKeyInvalid',            '400', 'API key is invalid'],
+  ['RequestFromHeaderRequired','403', 'From header value required'],
+  ['RequestToHeaderRequired',  '403', 'To header value required'],
+  ['MediaTypeException',       '400', 'Content-Type is invalid or not supported'],
+  ['MessageParseException',    '400', 'Error in parsing the request'],
+  ['InvalidParameterException','400', 'Parameter is missing or invalid'],
+  ['CustomerNotFound',         '400', 'Customer not found'],
+  ['InternalServerError',      '500', 'Internal server error'],
+];
+function httpBadge(c) {
+  const s = c==='403'?'background:#fff7ed;color:#c2410c;':c==='500'?'background:#fce7f3;color:#831843;':'background:#fef2f2;color:#dc2626;';
+  return `<span style="display:inline-block;padding:2px 9px;border-radius:4px;font-size:11px;font-weight:700;font-family:ui-monospace,monospace;${s}">${c}</span>`;
+}
+(function(){
+  const tb = document.getElementById('error-table-body');
+  if(tb) tb.innerHTML = ERRORS.map(([id,http,reason])=>`<tr><td class="eid">${id}</td><td style="text-align:center;">${httpBadge(http)}</td><td class="ereason">${reason}</td></tr>`).join('');
+})();
+
+// ── SIDEBAR NAV ──
+const sections = ['overview','base-url','authentication','identity','error-reference'];
+function setActive(id) {
+  document.querySelectorAll('.nav-item[data-sec]').forEach(n => n.classList.toggle('active', n.dataset.sec === id));
+}
+document.querySelectorAll('.nav-item[data-sec]').forEach(item => {
+  item.addEventListener('click', () => {
+    const el = document.getElementById(item.dataset.sec);
+    if(el) { el.scrollIntoView({behavior:'smooth',block:'start'}); }
+    closeSidebar();
+  });
+});
+
+// ── SCROLLSPY ──
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) setActive(e.target.id); });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(id => { const el = document.getElementById(id); if(el) obs.observe(el); });
+
+// ── RESPONSE TABS ──
+document.querySelectorAll('.resp-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const section = tab.closest('.resp-section');
+    section.querySelectorAll('.resp-tab').forEach(t => t.className = 'resp-tab');
+    section.querySelectorAll('.resp-panel').forEach(p => p.classList.remove('active'));
+    const map = {r200:'t200',r403:'t403',r400:'t400'};
+    tab.classList.add(map[tab.dataset.resp] || '');
+    const panel = document.getElementById(tab.dataset.resp);
+    if(panel) panel.classList.add('active');
+  });
+});
+
+// ── MOBILE MENU ──
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebar-overlay');
+function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('visible'); }
+document.getElementById('menu-btn').addEventListener('click', () => {
+  sidebar.classList.toggle('open'); overlay.classList.toggle('visible');
+});
+overlay.addEventListener('click', closeSidebar);
+
+// ── COPY ──
+const copyOverlay  = document.getElementById('copy-overlay');
+const copyTextarea = document.getElementById('copy-popover-text');
+const copyClose    = document.getElementById('copy-popover-close');
+let   _copyBtn     = null;
+
+function decodeAttr(s) {
+  return s.replace(/&quot;/g,'"').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>');
+}
+function markCopied(btn) {
+  if(!btn) return;
+  const orig = btn.innerHTML;
+  btn.classList.add('copied');
+  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Copied';
+  setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = orig; }, 2000);
+}
+function showPopover(text, btn) {
+  _copyBtn = btn;
+  copyTextarea.value = text;
+  copyOverlay.classList.add('visible');
+  setTimeout(() => { copyTextarea.focus(); copyTextarea.select(); copyTextarea.setSelectionRange(0,99999); }, 60);
+  if(navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(() => { copyOverlay.classList.remove('visible'); markCopied(btn); }).catch(()=>{});
+  }
+}
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const text = btn.dataset.copy ? decodeAttr(btn.dataset.copy)
+      : (btn.closest('.code-wrap').querySelector('pre')||{}).innerText||'';
+    showPopover(text, btn);
+  });
+});
+copyClose.addEventListener('click', () => copyOverlay.classList.remove('visible'));
+copyOverlay.addEventListener('click', e => { if(e.target===copyOverlay) copyOverlay.classList.remove('visible'); });
+document.addEventListener('keydown', e => { if(e.key==='Escape') copyOverlay.classList.remove('visible'); });
+copyTextarea.addEventListener('keydown', e => {
+  if((e.ctrlKey||e.metaKey) && e.key==='c') {
+    setTimeout(() => { copyOverlay.classList.remove('visible'); markCopied(_copyBtn); }, 80);
+  }
+});
+</script>
+</body>
+</html>

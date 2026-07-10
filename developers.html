@@ -2994,11 +2994,11 @@ For more information, see https://radix-ui.com/primitives/docs/components/${A.do
       "feature": "RICH-BCD",
       "partner_name": "verizon",
       "current_status": "Enable-Completed",
-      "previous_status": "Enable-Failed"
+      "previous_status": "Enable-Requested"
     }
   ],
   "retryPolicy": {
-    "attempt": 2
+    "attempt": 1
   }
 }`,callerProfile:`{
   "id": "6a21477b61700f5448489853|1780570819553|0|2722868",
@@ -3014,8 +3014,8 @@ For more information, see https://radix-ui.com/primitives/docs/components/${A.do
       "type": "partner_status",
       "feature": "RICH-BCD",
       "partner_name": "att",
-      "current_status": "ENABLE_COMPLETED",
-      "previous_status": "ENABLE_REQUESTED"
+      "current_status": "Enable-Completed",
+      "previous_status": "Enable-Requested"
     }
   ],
   "retryPolicy": {
@@ -3034,13 +3034,13 @@ For more information, see https://radix-ui.com/primitives/docs/components/${A.do
       "type": "partner_status",
       "feature": "RICH-BCD",
       "partner_name": "att",
-      "current_status": "ENABLE_COMPLETED",
-      "previous_status": "ENABLE_REQUESTED",
+      "current_status": "Enable-Completed",
+      "previous_status": "Enable-Requested",
       "callerProfile": "Endpointcheck1_RICH_BCD_20260504-092942"
     }
   ],
   "retryPolicy": {
-    "attempt": 2
+    "attempt": 1
   }
 }`,tnVetting:`{
   "id": "6a21477b61700f5448489853|1780570819553|0|2722868",
@@ -3054,12 +3054,12 @@ For more information, see https://radix-ui.com/primitives/docs/components/${A.do
   "data": [
     {
       "type": "vetting_status",
-      "current_status": "VETTING_SUCCESSFUL",
-      "previous_status": "VETTING_IN_PROGRESS"
+      "current_status": "Vetting-Successful",
+      "previous_status": "Vetting-In-Progress"
     }
   ],
   "retryPolicy": {
-    "attempt": 2
+    "attempt": 1
   }
 }`,tnTagging:`{
   "id": "6a21477b61700f5448489853|1780570819553|0|2722868",
@@ -3085,7 +3085,7 @@ For more information, see https://radix-ui.com/primitives/docs/components/${A.do
     }
   ],
   "retryPolicy": {
-    "attempt": 2
+    "attempt": 1
   }
 }`},gp={subject:"CCID Webhook Notification - Account {{accountId}}",body:`Dear Customer,
 

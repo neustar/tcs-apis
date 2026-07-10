@@ -2982,97 +2982,110 @@ For more information, see https://radix-ui.com/primitives/docs/components/${A.do
 }`,responseBody:`{
   "encrypted_value": "X9aP7KqM2R8vZtYcH1fL"
 }`,responseStatus:200}],RC={"wb-enable-account":{pathParams:[{path:"accountId",type:"String",required:!0,description:"The unique account identifier from AAM",constraints:"Must be a valid, existing AAM account ID"}],requestFields:[{path:"name",type:"String",required:!0,description:"Account name"},{path:"type",type:"String",required:!0,description:"Account type",constraints:"ENTERPRISE"},{path:"status",type:"String",required:!0,description:"Account status",constraints:"ACTIVE | INACTIVE"},{path:"relationship",type:"String",required:!0,description:"Account relationship",constraints:"DIRECT"},{path:"parent_account",type:"Array<String>",required:!1,description:"Parent account IDs"},{path:"billing",type:"Object",required:!0,description:"Billing configuration (id, model, frequency)"},{path:"service[].type",type:"String",required:!0,description:"Service type to enable. Include `WB` to enable Webhook service.",constraints:"WB | SDPR | other supported services"},{path:"child_account_enabled",type:"Boolean",required:!1,description:"Whether child accounts are allowed"},{path:"start_date",type:"DateTime",required:!0,description:"Account start date (RFC 1123)"},{path:"end_date",type:"DateTime",required:!0,description:"Account end date (RFC 1123)"},{path:"application",type:"Array<String>",required:!0,description:"Applications enabled on the account",constraints:"CCID, TCS"}],responseFields:[{path:"accountId",type:"String",required:!0,description:"The account ID that was updated"},{path:"message",type:"String",required:!0,description:"Confirmation message"}]},"wb-create-user":{requestFields:[{path:"user_id",type:"String",required:!0,description:"Unique user identifier"},{path:"user_name",type:"String",required:!0,description:"User display name"},{path:"company_id",type:"String",required:!0,description:"AAM company / account ID this user belongs to"},{path:"email",type:"String",required:!0,description:"User email address"},{path:"first_name",type:"String",required:!0,description:"First name"},{path:"last_name",type:"String",required:!0,description:"Last name"},{path:"phone",type:"String",required:!1,description:"Phone number"},{path:"roles.WB",type:"Array<String>",required:!1,description:"Webhook roles to assign",constraints:"WB_COMPANY_ADMIN"},{path:"roles.SDPR",type:"Array<String>",required:!1,description:"SDPR roles"},{path:"roles.AAM",type:"Array<String>",required:!1,description:"AAM roles"},{path:"comment",type:"String",required:!1,description:"Free-text comment"},{path:"status",type:"String",required:!0,description:"User status",constraints:"ACTIVE | INACTIVE"},{path:"user_type",type:"String",required:!0,description:"User type",constraints:"API | UI"},{path:"application",type:"Array<String>",required:!0,description:"Applications the user can access",constraints:"TCS"}],responseFields:[{path:"user_id",type:"String",required:!0,description:"The user ID that was created"},{path:"message",type:"String",required:!0,description:"Confirmation message"}]},"wb-update-user":{requestFields:[{path:"user_id",type:"String",required:!0,description:"Unique user identifier"},{path:"user_name",type:"String",required:!0,description:"User display name"},{path:"company_id",type:"String",required:!0,description:"AAM company / account ID this user belongs to"},{path:"email",type:"String",required:!0,description:"User email address"},{path:"first_name",type:"String",required:!0,description:"First name"},{path:"last_name",type:"String",required:!0,description:"Last name"},{path:"phone",type:"String",required:!1,description:"Phone number"},{path:"roles.WB",type:"Array<String>",required:!1,description:"Webhook roles to assign",constraints:"WB_COMPANY_ADMIN"},{path:"roles.SDPR",type:"Array<String>",required:!1,description:"SDPR roles"},{path:"roles.AAM",type:"Array<String>",required:!1,description:"AAM roles"},{path:"comment",type:"String",required:!1,description:"Free-text comment"},{path:"status",type:"String",required:!0,description:"User status",constraints:"ACTIVE | INACTIVE"},{path:"user_type",type:"String",required:!0,description:"User type",constraints:"API | UI"},{path:"application",type:"Array<String>",required:!0,description:"Applications the user can access",constraints:"TCS"}],responseFields:[{path:"user_id",type:"String",required:!0,description:"The user ID that was updated"},{path:"message",type:"String",required:!0,description:"Confirmation message"}]},"wb-register":{pathParams:[{path:"accountId",type:"String",required:!0,description:"The account ID (from AAM) to register the webhook under",constraints:"Account must have WB service enabled"}],requestFields:[{path:"webhook_name",type:"String",required:!0,description:"A human-readable name for this webhook configuration"},{path:"description",type:"String",required:!1,description:"Optional description of the webhook purpose"},{path:"state",type:"String",required:!0,description:"Initial state of the webhook",constraints:"ACTIVE | PAUSED"},{path:"max_retry",type:"Integer",required:!0,description:"Maximum number of retry attempts for failed deliveries",constraints:"Recommended: 3-5"},{path:"email",type:"Array",required:!0,description:"Email addresses or PDLs to notify after max retries are exhausted and for cool-off events"},{path:"auth_type",type:"String",required:!0,description:"Authentication method for your callback endpoint",constraints:"oAuth | apiKey | none"},{path:"credentials.username",type:"String",required:!1,description:"Username for oAuth (required if auth_type is 'oAuth')"},{path:"credentials.password",type:"String",required:!1,description:"Encrypted password for oAuth (required if auth_type is 'oAuth'). Must be encrypted using the Encryption Utility."},{path:"credentials.login_url",type:"String",required:!1,description:"Login URL for oAuth token retrieval"},{path:"credentials.api_key",type:"String",required:!1,description:"API key name (required if auth_type is 'apiKey')"},{path:"credentials.api_value",type:"String",required:!1,description:"Encrypted API key value (required if auth_type is 'apiKey'). Must be encrypted using the Encryption Utility."},{path:"credentials.location",type:"String",required:!1,description:"Where to place the API key",constraints:"Header | Query Param"},{path:"services[].name",type:"String",required:!0,description:"Service name to subscribe to",constraints:"e.g., sdpr"},{path:"services[].entities[].type",type:"String",required:!0,description:"The entity scope level",constraints:"account | tcsasset | callerprofile"},{path:"services[].entities[].data.webhook_url",type:"String",required:!0,description:"Your HTTPS callback URL for this scope",constraints:"Must be a valid HTTPS URL"},{path:"services[].entities[].data.event_types[].event_type",type:"String",required:!0,description:"The event category to subscribe to",constraints:"vetting_status | partner_status | tagging_status"},{path:"services[].entities[].data.event_types[].trigger_on",type:"Array",required:!0,description:"Specific status values to trigger on",constraints:"See Event Reference for valid values"},{path:"services[].entities[].data.features",type:"Array",required:!0,description:"Feature filter for notifications. At least one feature must be configured. Use CNO for tagging_status events.",constraints:"CNO | AUTH-BCD | RICH-BCD | SPOOF-CALL-PROTECTION"}],responseFields:[{path:"id",type:"String",required:!0,description:"Unique webhook identifier assigned by the system"},{path:"webhook_name",type:"String",required:!0,description:"The registered webhook name"},{path:"state",type:"String",required:!0,description:"Current state of the webhook",constraints:"ACTIVE | PAUSED"}]},"wb-get":{pathParams:[{path:"accountId",type:"String",required:!0,description:"The account ID for the webhook to retrieve"}],responseFields:[{path:"id",type:"String",required:!0,description:"Unique webhook identifier"},{path:"webhook_name",type:"String",required:!0,description:"The registered webhook name"},{path:"description",type:"String",required:!1,description:"Description of the webhook purpose"},{path:"state",type:"String",required:!0,description:"Current state of the webhook",constraints:"ACTIVE | PAUSED"},{path:"max_retry",type:"Integer",required:!0,description:"Maximum retry attempts for failed deliveries"},{path:"email",type:"Array",required:!0,description:"Notification email addresses"},{path:"auth_type",type:"String",required:!0,description:"Authentication method configured",constraints:"oAuth | apiKey | none"},{path:"credentials",type:"Object",required:!1,description:"Auth credentials as registered. Encrypted secrets are returned in encrypted form; never re-disclosed in plain text."},{path:"services",type:"Array",required:!0,description:"Registered service scopes, entity bindings, event filters, and feature flags — mirrors the registration payload"}]},"wb-update":{pathParams:[{path:"accountId",type:"String",required:!0,description:"The account ID for the webhook to update"}],requestFields:[{path:"webhook_name",type:"String",required:!0,description:"A human-readable name for this webhook configuration"},{path:"description",type:"String",required:!1,description:"Optional description of the webhook purpose"},{path:"state",type:"String",required:!0,description:"State of the webhook. Set to PAUSED to pause deliveries or ACTIVE to resume.",constraints:"ACTIVE | PAUSED"},{path:"max_retry",type:"Integer",required:!0,description:"Maximum number of retry attempts for failed deliveries",constraints:"Recommended: 3-5"},{path:"email",type:"Array",required:!0,description:"Email addresses or PDLs to notify after max retries are exhausted and for cool-off events"},{path:"auth_type",type:"String",required:!0,description:"Authentication method for your callback endpoint",constraints:"oAuth | apiKey | none"},{path:"credentials.username",type:"String",required:!1,description:"Username for oAuth (required if auth_type is 'oAuth')"},{path:"credentials.password",type:"String",required:!1,description:"Encrypted password for oAuth (required if auth_type is 'oAuth'). Must be encrypted using the Encryption Utility."},{path:"credentials.login_url",type:"String",required:!1,description:"Login URL for oAuth token retrieval"},{path:"credentials.api_key",type:"String",required:!1,description:"API key name (required if auth_type is 'apiKey')"},{path:"credentials.api_value",type:"String",required:!1,description:"Encrypted API key value (required if auth_type is 'apiKey'). Must be encrypted using the Encryption Utility."},{path:"credentials.location",type:"String",required:!1,description:"Where to place the API key",constraints:"Header | Query Param"},{path:"services[].name",type:"String",required:!0,description:"Service name to subscribe to",constraints:"e.g., sdpr"},{path:"services[].entities[].type",type:"String",required:!0,description:"The entity scope level",constraints:"account | tcsasset | callerprofile"},{path:"services[].entities[].data.webhook_url",type:"String",required:!0,description:"Your HTTPS callback URL for this scope",constraints:"Must be a valid HTTPS URL"},{path:"services[].entities[].data.event_types[].event_type",type:"String",required:!0,description:"The event category to subscribe to",constraints:"vetting_status | partner_status | tagging_status"},{path:"services[].entities[].data.event_types[].trigger_on",type:"Array",required:!0,description:"Specific status values to trigger on",constraints:"See Event Reference for valid values"},{path:"services[].entities[].data.features",type:"Array",required:!0,description:"Feature filter for notifications. At least one feature must be configured. Use CNO for tagging_status events.",constraints:"CNO | AUTH-BCD | RICH-BCD | SPOOF-CALL-PROTECTION"}],responseFields:[{path:"id",type:"String",required:!0,description:"Unique webhook identifier"},{path:"webhook_name",type:"String",required:!0,description:"The updated webhook name"},{path:"description",type:"String",required:!1,description:"Description of the webhook purpose"},{path:"topic_name",type:"String",required:!0,description:"Internal topic name assigned by the delivery engine"},{path:"email",type:"Array",required:!0,description:"Notification email addresses"},{path:"company_id",type:"String",required:!0,description:"Company identifier associated with the account"},{path:"name",type:"String",required:!0,description:"Account name"},{path:"state",type:"String",required:!0,description:"Current state of the webhook",constraints:"ACTIVE | PAUSED"},{path:"max_retry",type:"Integer",required:!0,description:"Maximum retry attempts for failed deliveries"},{path:"auth_type",type:"String",required:!0,description:"Authentication method configured",constraints:"oAuth | apiKey | none"},{path:"credentials",type:"Object",required:!1,description:"Auth credentials as registered. Encrypted secrets are returned in encrypted form; never re-disclosed in plain text."},{path:"services",type:"Array",required:!0,description:"Updated service scopes, entity bindings, event filters, and feature flags — mirrors the submitted payload"},{path:"start_date",type:"String",required:!0,description:"Subscription start date (RFC 1123)"},{path:"end_date",type:"String",required:!0,description:"Subscription end date (RFC 1123)"},{path:"created_by",type:"String",required:!0,description:"User who originally created the webhook"},{path:"created_date",type:"String",required:!0,description:"Original creation timestamp (RFC 1123)"},{path:"updated_by",type:"String",required:!0,description:"User who last updated the webhook"},{path:"updated_date",type:"String",required:!0,description:"Last update timestamp (RFC 1123)"}]},"wb-delete":{pathParams:[{path:"accountId",type:"String",required:!0,description:"The account ID whose webhook should be deleted"}],responseFields:[{path:"message",type:"String",required:!0,description:"Confirmation message"},{path:"status",type:"Integer",required:!0,description:"HTTP status code",constraints:"200"}]},"wb-encrypt":{requestFields:[{path:"value",type:"String",required:!0,description:"The plain-text secret (password or API key) to encrypt"}],responseFields:[{path:"encrypted_value",type:"String",required:!0,description:"The encrypted value to use as `credentials.password` (oAuth) or `credentials.api_value` (apiKey) when registering a webhook"}]}},bp=["Authentication","Account Setup","Webhook Management"],da=e=>Gs.find(A=>A.id===e),dt={account:`{
-  "id": "f1h6i7j9-3e2g-4f46-gh8i-6k7j8f9g0h1i",
-  "event_create_date": "2026-04-20T14:45:10Z",
+  "id": "6a4571a4ae50b827d5702b40|1782936604773|0|4252220",
+  "event_create_date": "Wed, 1 Jul 2026 20:10:05 GMT",
   "entity": {
     "type": "account",
-    "account_id": "acc_12345"
+    "account_id": "xuvkshk6gq"
   },
   "data": [
     {
       "type": "partner_status",
+      "feature": "RICH-BCD",
+      "partner_name": "verizon",
       "current_status": "Enable-Completed",
-      "previous_status": "Enable-Processing"
+      "previous_status": "Enable-Failed"
     }
   ],
   "retryPolicy": {
-    "attempt": 1
+    "attempt": 2
   }
 }`,callerProfile:`{
-  "id": "e0g5h6i8-2d1f-4e35-fg7h-5j6i7e8f9g0h",
-  "event_create_date": "2026-04-20T14:55:12Z",
+  "id": "6a21477b61700f5448489853|1780570819553|0|2722868",
+  "event_create_date": "Thu, 4 Jun 2026 11:00:19 GMT",
   "entity": {
     "type": "callerprofile",
-    "id": "6762897023d6164ac81f92e8",
-    "name": "caller profile name1",
-    "account_id": "neustar"
+    "account_id": "xzijz41l1h",
+    "id": "evt-oid-005",
+    "name": "Endpointcheck1_RICH_BCD_20260504-092942"
   },
   "data": [
     {
       "type": "partner_status",
-      "current_status": "Enable-Completed",
-      "previous_status": "Enable-Failed"
+      "feature": "RICH-BCD",
+      "partner_name": "att",
+      "current_status": "ENABLE_COMPLETED",
+      "previous_status": "ENABLE_REQUESTED"
     }
   ],
   "retryPolicy": {
     "attempt": 1
   }
 }`,tnPartnerStatus:`{
-  "id": "c5h3e4f6-0g9d-5c13-de5f-3h4g5c6d7e8f",
-  "event_create_date": "2026-04-20T15:05:33.112Z",
+  "id": "6a21477b61700f5448489853|1780570819553|0|2722868",
+  "event_create_date": "Thu, 4 Jun 2026 11:00:19 GMT",
   "entity": {
     "type": "tcsasset",
-    "account_id": "acc_12345",
-    "tn": "+1.97774581001",
-    "callerProfileId": "Priya_CNO_20251022-130308"
+    "account_id": "xzijz41l1h",
+    "tn": "+1.2252687789"
   },
   "data": [
     {
       "type": "partner_status",
-      "current_status": "Enable-Completed",
-      "previous_status": "Enable-Processing"
+      "feature": "RICH-BCD",
+      "partner_name": "att",
+      "current_status": "ENABLE_COMPLETED",
+      "previous_status": "ENABLE_REQUESTED",
+      "callerProfile": "Endpointcheck1_RICH_BCD_20260504-092942"
     }
   ],
   "retryPolicy": {
-    "attempt": 1
+    "attempt": 2
   }
 }`,tnVetting:`{
-  "id": "a3f1c2d4-8e7b-4a91-bc3d-1f2e3a4b5c6d",
-  "event_create_date": "2026-04-20T14:30:22.452Z",
+  "id": "6a21477b61700f5448489853|1780570819553|0|2722868",
+  "event_create_date": "Thu, 4 Jun 2026 11:00:19 GMT",
   "entity": {
     "type": "tcsasset",
-    "account_id": "acc_12345",
-    "tn": "+1.97774581001",
-    "callerProfileId": "Priya_CNO_20251022-130308"
+    "account_id": "xzijz41l1h",
+    "tn": "+1.2252687789",
+    "callerProfile": "Endpointcheck1_CNO_20260504-092942"
   },
   "data": [
     {
       "type": "vetting_status",
       "current_status": "VETTING_SUCCESSFUL",
-      "previous_status": "VETTING_EXCEPTION"
+      "previous_status": "VETTING_IN_PROGRESS"
     }
   ],
   "retryPolicy": {
-    "attempt": 1
+    "attempt": 2
   }
 }`,tnTagging:`{
-  "id": "b4g2d3e5-9f8c-4b02-cd4e-2g3f4b5c6d7e",
-  "event_create_date": "2026-04-20T15:12:08.331Z",
+  "id": "6a21477b61700f5448489853|1780570819553|0|2722868",
+  "event_create_date": "Thu, 4 Jun 2026 11:00:19 GMT",
   "entity": {
     "type": "tcsasset",
-    "account_id": "acc_12345",
-    "tn": "+1.97774581001",
-    "callerProfileId": "Priya_CNO_20251022-130308"
+    "account_id": "xzijz41l1h",
+    "tn": "+1.2252687789",
+    "callerProfile": "Endpointcheck1_CNO_20260504-092942"
   },
   "data": [
     {
       "type": "tagging_status",
+      "partner_name": "att",
+      "current_status": "AG",
+      "previous_status": "AP"
+    },
+    {
+      "type": "tagging_status",
+      "partner_name": "verizon",
       "current_status": "TG",
-      "previous_status": "AG"
+      "previous_status": "AP"
     }
   ],
   "retryPolicy": {
-    "attempt": 1
+    "attempt": 2
   }
 }`},gp={subject:"CCID Webhook Notification - Account {{accountId}}",body:`Dear Customer,
 

@@ -1,8 +1,8 @@
-# TransUnion Trusted Call Solutions (TCS) - API - 6.6.2
+# TransUnion Trusted Call Solutions (TCS) - API - 6.6.4
 openapi: "3.0.3"
 info:
-  title: "TransUnion Trusted Call Solutions (TCS) - API - 6.6.2"
-  version: "6.6.2"
+  title: "TransUnion Trusted Call Solutions (TCS) - API - 6.6.4"
+  version: "6.6.4"
   description: "Unified OpenAPI specification for the TransUnion Trusted Call Solutions (TCS) platform. Covers Call Authentication (AAM login/token), SDPR account, feature, caller profile, business profile, image, image profile, and TN asset endpoints across CCID, CNO, BCD, and SCP products, plus Analytics and Webhook Notification APIs. The inbound webhook event delivery contract is documented under x-webhooks."
   contact:
     name: "Transunion TCS Customer Support"
@@ -154,12 +154,6 @@ paths:
                   idToken:
                     type: "string"
                     description: "JWT ID token containing the authenticated user's identity claims (subject, email, account context)"
-                required:
-                - "status"
-                - "message"
-                - "accessToken"
-                - "refreshToken"
-                - "idToken"
               example:
                 status: "success"
                 message: "Login is successful"
@@ -202,14 +196,26 @@ paths:
                   description: "The relationship type to TransUnion"
                 parent_account:
                   type: "array"
-                  items: {}
+                  items:
+                    type: "string"
                   description: "List of parent account IDs this account belongs to"
                 billing:
                   type: "object"
                   description: "Billing configuration object with id, model, frequency"
+                  properties:
+                    id:
+                      type: "string"
+                    model:
+                      type: "string"
+                    frequency:
+                      type: "string"
                 service:
                   type: "array"
-                  items: {}
+                  items:
+                    type: "object"
+                    properties:
+                      type:
+                        type: "string"
                   description: "Services to provision for this account"
                 child_account_enabled:
                   type: "boolean"
@@ -244,6 +250,17 @@ paths:
                 address:
                   type: "object"
                   description: "Physical address object"
+                  properties:
+                    street:
+                      type: "string"
+                    city:
+                      type: "string"
+                    postal_code:
+                      type: "string"
+                    state_or_province:
+                      type: "string"
+                    country_code:
+                      type: "string"
                 start_date:
                   type: "string"
                   x-format: "date-time"
@@ -254,7 +271,8 @@ paths:
                   description: "The contract end date"
                 application:
                   type: "array"
-                  items: {}
+                  items:
+                    type: "string"
                   description: "Applications this account is provisioned for"
                 ein:
                   type: "string"
@@ -264,7 +282,8 @@ paths:
                   description: "DUNS number"
                 name_alias:
                   type: "array"
-                  items: {}
+                  items:
+                    type: "string"
                   description: "Alternative names for the account"
               required:
               - "name"
@@ -346,11 +365,19 @@ paths:
                     description: "The relationship type to TransUnion"
                   parent_account:
                     type: "array"
-                    items: {}
+                    items:
+                      type: "string"
                     description: "Parent account IDs"
                   billing:
                     type: "object"
                     description: "Billing configuration object"
+                    properties:
+                      id:
+                        type: "string"
+                      model:
+                        type: "string"
+                      frequency:
+                        type: "string"
                   service:
                     type: "array"
                     items:
@@ -359,8 +386,8 @@ paths:
                         id:
                           type: "string"
                           description: "Service ID assigned by the system"
-                      required:
-                      - "id"
+                        type:
+                          type: "string"
                     description: "List of provisioned services, each with type and assigned id"
                   child_account_enabled:
                     type: "boolean"
@@ -396,6 +423,17 @@ paths:
                   address:
                     type: "object"
                     description: "Physical address with street, city, postal_code, state_or_province, country_code"
+                    properties:
+                      street:
+                        type: "string"
+                      city:
+                        type: "string"
+                      postal_code:
+                        type: "string"
+                      state_or_province:
+                        type: "string"
+                      country_code:
+                        type: "string"
                   start_date:
                     type: "string"
                     x-format: "date-time"
@@ -406,7 +444,8 @@ paths:
                     description: "Contract end date"
                   application:
                     type: "array"
-                    items: {}
+                    items:
+                      type: "string"
                     description: "Provisioned applications"
                   ein:
                     type: "string"
@@ -418,7 +457,8 @@ paths:
                     x-constraints: "9 digits"
                   name_alias:
                     type: "array"
-                    items: {}
+                    items:
+                      type: "string"
                     description: "Alternative names or DBAs for the account"
                   vetting:
                     type: "object"
@@ -448,23 +488,6 @@ paths:
                     type: "string"
                     x-format: "date-time"
                     description: "Timestamp of the last update"
-                required:
-                - "id"
-                - "name"
-                - "type"
-                - "status"
-                - "relationship"
-                - "parent_account"
-                - "billing"
-                - "service"
-                - "child_account_enabled"
-                - "start_date"
-                - "end_date"
-                - "application"
-                - "created_by"
-                - "created_date"
-                - "updated_by"
-                - "updated_date"
               example:
                 id: "xi0vhua3b4"
                 name: "user_sample enterprise1"
@@ -561,11 +584,19 @@ paths:
                       description: "Relationship type to TransUnion"
                     parent_account:
                       type: "array"
-                      items: {}
+                      items:
+                        type: "string"
                       description: "Parent account IDs"
                     billing:
                       type: "object"
                       description: "Billing configuration with id, model, and frequency"
+                      properties:
+                        id:
+                          type: "string"
+                        model:
+                          type: "string"
+                        frequency:
+                          type: "string"
                     service:
                       type: "array"
                       items:
@@ -577,9 +608,6 @@ paths:
                           id:
                             type: "string"
                             description: "Service identifier"
-                        required:
-                        - "type"
-                        - "id"
                       description: "List of provisioned services (SDPR, WB, STIAS, etc.)"
                     child_account_enabled:
                       type: "boolean"
@@ -596,7 +624,8 @@ paths:
                       x-constraints: "RFC 1123 format"
                     application:
                       type: "array"
-                      items: {}
+                      items:
+                        type: "string"
                       description: "Provisioned applications"
                       x-constraints: "CCID, TCS"
                     domain:
@@ -630,6 +659,17 @@ paths:
                     address:
                       type: "object"
                       description: "Physical address with street, city, postal_code, state_or_province, country_code"
+                      properties:
+                        street:
+                          type: "string"
+                        city:
+                          type: "string"
+                        postal_code:
+                          type: "string"
+                        state_or_province:
+                          type: "string"
+                        country_code:
+                          type: "string"
                     ein:
                       type: "string"
                       description: "Employer Identification Number"
@@ -640,7 +680,8 @@ paths:
                       x-constraints: "9 digits"
                     name_alias:
                       type: "array"
-                      items: {}
+                      items:
+                        type: "string"
                       description: "Alternative names or DBAs for the account"
                     vetting:
                       type: "object"
@@ -668,23 +709,6 @@ paths:
                       type: "string"
                       x-format: "date-time"
                       description: "Last update timestamp"
-                  required:
-                  - "id"
-                  - "name"
-                  - "type"
-                  - "status"
-                  - "relationship"
-                  - "parent_account"
-                  - "billing"
-                  - "service"
-                  - "child_account_enabled"
-                  - "start_date"
-                  - "end_date"
-                  - "application"
-                  - "created_by"
-                  - "created_date"
-                  - "updated_by"
-                  - "updated_date"
               example:
               - id: "xeb9ekoawz"
                 name: "user_sample enterprise"
@@ -840,11 +864,19 @@ paths:
                     description: "Relationship type to TransUnion"
                   parent_account:
                     type: "array"
-                    items: {}
+                    items:
+                      type: "string"
                     description: "Parent account IDs"
                   billing:
                     type: "object"
                     description: "Billing configuration with id, model, and frequency"
+                    properties:
+                      id:
+                        type: "string"
+                      model:
+                        type: "string"
+                      frequency:
+                        type: "string"
                   service:
                     type: "array"
                     items:
@@ -856,9 +888,6 @@ paths:
                         id:
                           type: "string"
                           description: "Service identifier"
-                      required:
-                      - "type"
-                      - "id"
                     description: "List of provisioned services (SDPR, WB, STIAS, etc.)"
                   child_account_enabled:
                     type: "boolean"
@@ -875,7 +904,8 @@ paths:
                     x-constraints: "RFC 1123 format"
                   application:
                     type: "array"
-                    items: {}
+                    items:
+                      type: "string"
                     description: "Provisioned applications"
                     x-constraints: "CCID, TCS"
                   domain:
@@ -909,6 +939,17 @@ paths:
                   address:
                     type: "object"
                     description: "Physical address with street, city, postal_code, state_or_province, country_code"
+                    properties:
+                      street:
+                        type: "string"
+                      city:
+                        type: "string"
+                      postal_code:
+                        type: "string"
+                      state_or_province:
+                        type: "string"
+                      country_code:
+                        type: "string"
                   ein:
                     type: "string"
                     description: "Employer Identification Number"
@@ -919,7 +960,8 @@ paths:
                     x-constraints: "9 digits"
                   name_alias:
                     type: "array"
-                    items: {}
+                    items:
+                      type: "string"
                     description: "Alternative names or DBAs for the account"
                   vetting:
                     type: "object"
@@ -947,23 +989,6 @@ paths:
                     type: "string"
                     x-format: "date-time"
                     description: "Last update timestamp"
-                required:
-                - "id"
-                - "name"
-                - "type"
-                - "status"
-                - "relationship"
-                - "parent_account"
-                - "billing"
-                - "service"
-                - "child_account_enabled"
-                - "start_date"
-                - "end_date"
-                - "application"
-                - "created_by"
-                - "created_date"
-                - "updated_by"
-                - "updated_date"
               example:
                 id: "xeb9ekoawz"
                 name: "user_sample enterprise"
@@ -1063,14 +1088,28 @@ paths:
                   description: "Relationship type"
                 parent_account:
                   type: "array"
-                  items: {}
+                  items:
+                    type: "string"
                   description: "Parent account IDs"
                 billing:
                   type: "object"
                   description: "Billing configuration object with id, model, frequency"
+                  properties:
+                    id:
+                      type: "string"
+                    model:
+                      type: "string"
+                    frequency:
+                      type: "string"
                 service:
                   type: "array"
-                  items: {}
+                  items:
+                    type: "object"
+                    properties:
+                      type:
+                        type: "string"
+                      id:
+                        type: "string"
                   description: "Services provisioned for this account"
                 child_account_enabled:
                   type: "boolean"
@@ -1105,6 +1144,17 @@ paths:
                 address:
                   type: "object"
                   description: "Physical address object"
+                  properties:
+                    street:
+                      type: "string"
+                    city:
+                      type: "string"
+                    postal_code:
+                      type: "string"
+                    state_or_province:
+                      type: "string"
+                    country_code:
+                      type: "string"
                 start_date:
                   type: "string"
                   x-format: "date-time"
@@ -1115,7 +1165,8 @@ paths:
                   description: "The contract end date"
                 application:
                   type: "array"
-                  items: {}
+                  items:
+                    type: "string"
                   description: "Applications this account is provisioned for"
                 ein:
                   type: "string"
@@ -1125,7 +1176,8 @@ paths:
                   description: "DUNS number"
                 name_alias:
                   type: "array"
-                  items: {}
+                  items:
+                    type: "string"
                   description: "Alternative names for the account"
                 vetting:
                   type: "object"
@@ -1226,11 +1278,19 @@ paths:
                     description: "Relationship type to TransUnion"
                   parent_account:
                     type: "array"
-                    items: {}
+                    items:
+                      type: "string"
                     description: "Parent account IDs"
                   billing:
                     type: "object"
                     description: "Billing configuration with id, model, and frequency"
+                    properties:
+                      id:
+                        type: "string"
+                      model:
+                        type: "string"
+                      frequency:
+                        type: "string"
                   service:
                     type: "array"
                     items:
@@ -1242,9 +1302,6 @@ paths:
                         id:
                           type: "string"
                           description: "Service identifier"
-                      required:
-                      - "type"
-                      - "id"
                     description: "List of provisioned services (SDPR, WB, STIAS, etc.)"
                   child_account_enabled:
                     type: "boolean"
@@ -1280,6 +1337,17 @@ paths:
                   address:
                     type: "object"
                     description: "Physical address with street, city, postal_code, state_or_province, country_code"
+                    properties:
+                      street:
+                        type: "string"
+                      city:
+                        type: "string"
+                      postal_code:
+                        type: "string"
+                      state_or_province:
+                        type: "string"
+                      country_code:
+                        type: "string"
                   start_date:
                     type: "string"
                     x-format: "date-time"
@@ -1292,7 +1360,8 @@ paths:
                     x-constraints: "RFC 1123 format"
                   application:
                     type: "array"
-                    items: {}
+                    items:
+                      type: "string"
                     description: "Provisioned applications"
                     x-constraints: "CCID, TCS"
                   ein:
@@ -1305,7 +1374,8 @@ paths:
                     x-constraints: "9 digits"
                   name_alias:
                     type: "array"
-                    items: {}
+                    items:
+                      type: "string"
                     description: "Alternative names or DBAs for the account"
                   vetting:
                     type: "object"
@@ -1333,23 +1403,6 @@ paths:
                     type: "string"
                     x-format: "date-time"
                     description: "Timestamp of this update"
-                required:
-                - "id"
-                - "name"
-                - "type"
-                - "status"
-                - "relationship"
-                - "parent_account"
-                - "billing"
-                - "service"
-                - "child_account_enabled"
-                - "start_date"
-                - "end_date"
-                - "application"
-                - "created_by"
-                - "created_date"
-                - "updated_by"
-                - "updated_date"
               example:
                 id: "xeb9ekoawz"
                 name: "user_sample enterprise"
@@ -1462,7 +1515,8 @@ paths:
                   description: "Entity that sold the service to the end customer"
                 distributor:
                   type: "array"
-                  items: {}
+                  items:
+                    type: "string"
                   description: "List of distributors predefined per country"
               required:
               - "lead_generation"
@@ -1488,11 +1542,9 @@ paths:
                     x-constraints: "Always TransUnion"
                   distributor:
                     type: "array"
-                    items: {}
+                    items:
+                      type: "string"
                     description: "Active distributors for this account"
-                required:
-                - "account_id"
-                - "lead_generation"
               example:
                 lead_generation: "TransUnion"
                 distributor:
@@ -1537,12 +1589,10 @@ paths:
                     x-constraints: "Always TransUnion"
                   distributor:
                     type: "array"
-                    items: {}
+                    items:
+                      type: "string"
                     description: "List of active distributors"
                     x-constraints: "Valid for US: [AT&T]"
-                required:
-                - "account_id"
-                - "lead_generation"
               example:
                 lead_generation: "TransUnion"
                 distributor:
@@ -1579,7 +1629,8 @@ paths:
               properties:
                 feature:
                   type: "array"
-                  items: {}
+                  items:
+                    type: "string"
                   description: "List of feature types to enable on the account"
                 service:
                   type: "array"
@@ -1724,7 +1775,8 @@ paths:
                     description: "The account identifier"
                   feature:
                     type: "array"
-                    items: {}
+                    items:
+                      type: "string"
                     description: "List of attached features"
                   service:
                     type: "array"
@@ -1740,8 +1792,10 @@ paths:
                                 type: "string"
                                 description: "Current partner status after processing"
                                 x-constraints: "Transitions through: Enable-Requested → Enable-Processing → Enable-Completed (or Enable-Failed)"
-                            required:
-                            - "status"
+                              name:
+                                type: "string"
+                        name:
+                          type: "string"
                     description: "Service configuration with partner statuses"
                   workflow_status:
                     type: "string"
@@ -1763,12 +1817,6 @@ paths:
                     x-format: "date-time"
                     description: "Last update timestamp"
                     x-constraints: "RFC 1123 format"
-                required:
-                - "account_id"
-                - "feature"
-                - "service"
-                - "created_by"
-                - "created_date"
               examples:
                 attach-feature:
                   summary: "Attach Features"
@@ -1912,7 +1960,8 @@ paths:
                     description: "The account identifier"
                   feature:
                     type: "array"
-                    items: {}
+                    items:
+                      type: "string"
                     description: "List of attached feature types"
                   service:
                     type: "array"
@@ -1935,13 +1984,7 @@ paths:
                                 type: "string"
                                 description: "Current partner enablement status"
                                 x-constraints: "Full lifecycle: Enable-Requested → Enable-Processing → Enable-Completed/Failed → Disable-Requested → ..."
-                            required:
-                            - "name"
-                            - "status"
                           description: "Carrier partner status list"
-                      required:
-                      - "name"
-                      - "partner"
                     description: "Service configuration with partner statuses"
                   workflow_status:
                     type: "string"
@@ -1960,12 +2003,6 @@ paths:
                     type: "string"
                     x-format: "date-time"
                     description: "Last update timestamp"
-                required:
-                - "account_id"
-                - "feature"
-                - "service"
-                - "created_by"
-                - "created_date"
               example:
                 account_id: "x59tj8rtv1"
                 feature:
@@ -2047,6 +2084,7 @@ paths:
             "application/json":
               schema:
                 type: "object"
+                properties: {}
               example: {}
         "401":
           description: "Unauthorized — invalid or expired access token"
@@ -2167,19 +2205,6 @@ paths:
                   updated_date:
                     type: "string"
                     description: "Timestamp when the image was last updated (RFC 1123)"
-                required:
-                - "id"
-                - "name"
-                - "type"
-                - "width"
-                - "height"
-                - "size"
-                - "image_url"
-                - "account_id"
-                - "parent_account_id"
-                - "super_account_id"
-                - "created_by"
-                - "created_date"
               examples:
                 create-image:
                   summary: "Create Image with URL"
@@ -2247,7 +2272,44 @@ paths:
           content:
             "application/json":
               schema:
-                type: "object"
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    id:
+                      type: "string"
+                    name:
+                      type: "string"
+                    type:
+                      type: "string"
+                    width:
+                      type: "integer"
+                    height:
+                      type: "integer"
+                    size:
+                      type: "integer"
+                    note:
+                      type: "string"
+                    url:
+                      type: "string"
+                    image_url:
+                      type: "string"
+                    account_id:
+                      type: "string"
+                    parent_account_id:
+                      type: "string"
+                    super_account_id:
+                      type: "string"
+                    billing_id:
+                      type: "string"
+                    created_by:
+                      type: "string"
+                    created_date:
+                      type: "string"
+                    updated_by:
+                      type: "string"
+                    updated_date:
+                      type: "string"
               example:
               - id: "90860ccc-9b34-4229-9d9c-29bf9074b674"
                 name: "Smiley-Face-256x256"
@@ -2390,19 +2452,6 @@ paths:
                   updated_date:
                     type: "string"
                     description: "Timestamp when the image was last updated (RFC 1123)"
-                required:
-                - "id"
-                - "name"
-                - "type"
-                - "width"
-                - "height"
-                - "size"
-                - "image_url"
-                - "account_id"
-                - "parent_account_id"
-                - "super_account_id"
-                - "created_by"
-                - "created_date"
               example:
                 id: "90860ccc-9b34-4229-9d9c-29bf9074b674"
                 name: "Smiley-Face-Updated"
@@ -2507,19 +2556,6 @@ paths:
                   updated_date:
                     type: "string"
                     description: "Timestamp when the image was last updated (RFC 1123)"
-                required:
-                - "id"
-                - "name"
-                - "type"
-                - "width"
-                - "height"
-                - "size"
-                - "image_url"
-                - "account_id"
-                - "parent_account_id"
-                - "super_account_id"
-                - "created_by"
-                - "created_date"
               example:
                 id: "90860ccc-9b34-4229-9d9c-29bf9074b674"
                 name: "Smiley-Face-256x256"
@@ -2685,13 +2721,8 @@ paths:
                                 type: "string"
                                 description: "Vetting/enablement status for the partner"
                                 x-constraints: "e.g. Enable-Requested, Enable-Completed"
-                            required:
-                            - "name"
-                            - "status"
                           description: "Carrier partner vetting statuses"
                           x-constraints: "Each entry: { name, status }. Names: att, tmobile, verizon"
-                      required:
-                      - "partner"
                     description: "Service wrapper containing carrier partner vetting statuses"
                   vetting:
                     type: "object"
@@ -2706,9 +2737,6 @@ paths:
                         x-format: "date-time"
                         description: "Timestamp of the vetting status"
                         x-constraints: "RFC 1123 format"
-                    required:
-                    - "status"
-                    - "status_timestamp"
                   created_by:
                     type: "string"
                     description: "User who created the image profile"
@@ -2717,15 +2745,8 @@ paths:
                     x-format: "date-time"
                     description: "Creation timestamp"
                     x-constraints: "RFC 1123 format"
-                required:
-                - "id"
-                - "name"
-                - "image_id"
-                - "image_url"
-                - "service"
-                - "vetting"
-                - "created_by"
-                - "created_date"
+                  account_id:
+                    type: "string"
               example:
                 id: "69d4a87d7b3c6e58d402225e"
                 name: "imageProfileTest"
@@ -2809,13 +2830,8 @@ paths:
                                   type: "string"
                                   description: "Enablement status for the partner"
                                   x-constraints: "e.g. Enable-Requested, Enable-Completed"
-                              required:
-                              - "name"
-                              - "status"
                             description: "Carrier partner statuses"
                             x-constraints: "Each entry: { name, status }"
-                        required:
-                        - "partner"
                       description: "Service wrapper containing carrier partner statuses populated after vetting approval"
                     vetting:
                       type: "object"
@@ -2829,9 +2845,6 @@ paths:
                           type: "string"
                           x-format: "date-time"
                           description: "Timestamp of the vetting status"
-                      required:
-                      - "status"
-                      - "status_timestamp"
                     created_by:
                       type: "string"
                       description: "Creator user ID"
@@ -2846,18 +2859,6 @@ paths:
                       type: "string"
                       x-format: "date-time"
                       description: "Last update timestamp"
-                  required:
-                  - "id"
-                  - "name"
-                  - "account_id"
-                  - "image_id"
-                  - "image_url"
-                  - "service"
-                  - "vetting"
-                  - "created_by"
-                  - "created_date"
-                  - "updated_by"
-                  - "updated_date"
               example:
               - id: "69d4a87d7b3c6e58d402225e"
                 name: "imageProfileTest"
@@ -2968,13 +2969,8 @@ paths:
                                 type: "string"
                                 description: "Enablement status for the partner"
                                 x-constraints: "e.g. Enable-Requested, Enable-Completed"
-                            required:
-                            - "name"
-                            - "status"
                           description: "Carrier partner statuses"
                           x-constraints: "Each entry: { name, status }. Names: att, tmobile, verizon"
-                      required:
-                      - "partner"
                     description: "Service wrapper containing carrier partner statuses populated after vetting approval"
                   vetting:
                     type: "object"
@@ -2988,9 +2984,6 @@ paths:
                         type: "string"
                         x-format: "date-time"
                         description: "Timestamp of the vetting status"
-                    required:
-                    - "status"
-                    - "status_timestamp"
                   created_by:
                     type: "string"
                     description: "Creator user ID"
@@ -3005,18 +2998,6 @@ paths:
                     type: "string"
                     x-format: "date-time"
                     description: "Last update timestamp"
-                required:
-                - "id"
-                - "name"
-                - "account_id"
-                - "image_id"
-                - "image_url"
-                - "service"
-                - "vetting"
-                - "created_by"
-                - "created_date"
-                - "updated_by"
-                - "updated_date"
               example:
                 id: "69d4a87d7b3c6e58d402225e"
                 name: "imageProfileTest"
@@ -3236,12 +3217,6 @@ paths:
                         type: "string"
                         description: "Postal or ZIP code"
                         x-constraints: "Max 20 characters"
-                    required:
-                    - "address"
-                    - "city"
-                    - "state"
-                    - "country"
-                    - "zip"
                   contact:
                     type: "array"
                     items:
@@ -3303,9 +3278,6 @@ paths:
                           type: "string"
                           description: "Enablement status of the BPO end client for a specific carrier partner"
                           x-constraints: "Restricted values: TU-Review-Requested, Enable-Requested, Enable-Processing, Enable-Failed, Enable-Completed"
-                      required:
-                      - "name"
-                      - "status"
                     description: "Carrier partners the Business Profile (and its associated Caller Profile / TNs) can be provisioned for"
                   created_by:
                     type: "string"
@@ -3316,17 +3288,6 @@ paths:
                     x-format: "date-time"
                     description: "System-generated timestamp when the Business Profile was created"
                     x-constraints: "RFC 1123 format"
-                required:
-                - "id"
-                - "account_id"
-                - "name"
-                - "category"
-                - "address"
-                - "contact"
-                - "url"
-                - "partner"
-                - "created_by"
-                - "created_date"
               example:
                 id: "6a4be99cc590d730704257f6"
                 account_id: "xmu9u4v18q"
@@ -3422,12 +3383,6 @@ paths:
                           type: "string"
                           description: "Postal or ZIP code"
                           x-constraints: "Max 20 characters"
-                      required:
-                      - "address"
-                      - "city"
-                      - "state"
-                      - "country"
-                      - "zip"
                     contact:
                       type: "array"
                       items:
@@ -3471,9 +3426,6 @@ paths:
                             type: "string"
                             description: "Per-partner enablement status"
                             x-constraints: "Restricted values: TU-Review-Requested, Enable-Requested, Enable-Processing, Enable-Failed, Enable-Completed"
-                        required:
-                        - "name"
-                        - "status"
                       description: "Carrier partners the Business Profile can be provisioned for"
                     created_by:
                       type: "string"
@@ -3487,17 +3439,6 @@ paths:
                     account_name:
                       type: "string"
                       description: "Name of the parent account"
-                  required:
-                  - "id"
-                  - "account_id"
-                  - "name"
-                  - "category"
-                  - "address"
-                  - "contact"
-                  - "url"
-                  - "partner"
-                  - "created_by"
-                  - "created_date"
               example:
               - id: "6a4be99cc590d730704257f6"
                 account_id: "xmu9u4v18q"
@@ -3628,12 +3569,6 @@ paths:
                         type: "string"
                         description: "Postal or ZIP code"
                         x-constraints: "Max 20 characters"
-                    required:
-                    - "address"
-                    - "city"
-                    - "state"
-                    - "country"
-                    - "zip"
                   contact:
                     type: "array"
                     items:
@@ -3695,9 +3630,6 @@ paths:
                           type: "string"
                           description: "Per-partner enablement status"
                           x-constraints: "Restricted values: TU-Review-Requested, Enable-Requested, Enable-Processing, Enable-Failed, Enable-Completed"
-                      required:
-                      - "name"
-                      - "status"
                     description: "Carrier partners the Business Profile can be provisioned for"
                   created_by:
                     type: "string"
@@ -3708,17 +3640,6 @@ paths:
                     x-format: "date-time"
                     description: "Creation timestamp"
                     x-constraints: "RFC 1123 format"
-                required:
-                - "id"
-                - "account_id"
-                - "name"
-                - "category"
-                - "address"
-                - "contact"
-                - "url"
-                - "partner"
-                - "created_by"
-                - "created_date"
               example:
                 id: "6a4be9b5047e104bdc9302aa"
                 account_id: "xmu9u4v18q"
@@ -3921,13 +3842,7 @@ paths:
                                 type: "string"
                                 description: "Current partner status"
                                 x-constraints: "TU-Review-Requested → Enable-Requested → Enable-Processing → Enable-Completed"
-                            required:
-                            - "name"
-                            - "status"
                           description: "Carrier partner status entries"
-                      required:
-                      - "name"
-                      - "partner"
                     description: "Service configuration echoed back with partner statuses"
                   vetting:
                     type: "object"
@@ -3972,13 +3887,6 @@ paths:
                     type: "string"
                     description: "The caller name to display on landline devices (echoed from the request). Mandatory for CNO."
                     x-constraints: "Up to 15 characters"
-                required:
-                - "id"
-                - "name"
-                - "account_id"
-                - "service"
-                - "created_by"
-                - "created_date"
               examples:
                 attach-bcd-caller-profile:
                   summary: "Attach Rich BCD Caller Profile"
@@ -4151,13 +4059,7 @@ paths:
                                 status:
                                   type: "string"
                                   description: "Current partner enablement status"
-                              required:
-                              - "name"
-                              - "status"
                             description: "Carrier partner status entries"
-                        required:
-                        - "name"
-                        - "partner"
                       description: "Service configuration with partner statuses"
                     vetting:
                       type: "object"
@@ -4185,13 +4087,6 @@ paths:
                     business_profile_name:
                       type: "string"
                       description: "Associated Business Profile name (returned only for BPO accounts)"
-                  required:
-                  - "id"
-                  - "name"
-                  - "account_id"
-                  - "service"
-                  - "created_by"
-                  - "created_date"
               example:
               - id: "699f684820a7a57a0a67c03a"
                 name: "Your Company Name_BCD_Rich_20260225-212320"
@@ -4338,13 +4233,7 @@ paths:
                                 type: "string"
                                 description: "Partner enablement status"
                                 x-constraints: "Enable-Completed indicates fully activated"
-                            required:
-                            - "name"
-                            - "status"
                           description: "Carrier partner status entries"
-                      required:
-                      - "name"
-                      - "partner"
                     description: "Service configuration with current partner statuses"
                   vetting:
                     type: "object"
@@ -4372,13 +4261,6 @@ paths:
                   business_profile_name:
                     type: "string"
                     description: "Associated Business Profile name (returned only for BPO accounts)"
-                required:
-                - "id"
-                - "name"
-                - "account_id"
-                - "service"
-                - "created_by"
-                - "created_date"
               example:
                 id: "699f684820a7a57a0a67c03a"
                 name: "Your Company Name_CNO_20260225-212320"
@@ -4451,7 +4333,8 @@ paths:
                   description: "Describes the intended calling use case. Mandatory for the CNO feature."
                 label:
                   type: "array"
-                  items: {}
+                  items:
+                    type: "string"
                   description: "User-defined labels to categorize/track telephone numbers"
               required:
               - "caller_profile_id"
@@ -4531,9 +4414,6 @@ paths:
                             type: "integer"
                             description: "Number of TNs in range"
                             x-constraints: "Always 1 (ranges not supported)"
-                        required:
-                        - "start"
-                        - "count"
                   vetting:
                     type: "object"
                     properties:
@@ -4550,8 +4430,6 @@ paths:
                         type: "string"
                         x-format: "date-time"
                         description: "When vetting status last changed"
-                    required:
-                    - "status"
                   caller_profile:
                     type: "string"
                     description: "Name of the associated caller profile"
@@ -4560,7 +4438,8 @@ paths:
                     description: "ID of the associated caller profile"
                   label:
                     type: "array"
-                    items: {}
+                    items:
+                      type: "string"
                     description: "User-defined labels echoed back on the asset"
                     x-constraints: "Array of strings, each up to 60 characters"
                   calling_use_case:
@@ -4571,6 +4450,7 @@ paths:
                     type: "object"
                     description: "Tagging status per partner"
                     x-constraints: "Partner names (att, verizon, tmobile) mapped to status: TG (Tagged), AP (Appeal Pending), AG (Appeal Granted), AD (Appeal Declined), CIP (Customer Input Pending)"
+                    properties: {}
                   partner_data:
                     type: "array"
                     items:
@@ -4596,10 +4476,6 @@ paths:
                               caller_profile:
                                 type: "string"
                                 description: "Caller profile name used by this partner"
-                            required:
-                            - "name"
-                            - "status"
-                            - "caller_profile"
                           description: "Partner statuses for this feature"
                     description: "Per-feature partner enablement data"
                   created_by:
@@ -4609,14 +4485,6 @@ paths:
                     type: "string"
                     x-format: "date-time"
                     description: "Creation timestamp"
-                required:
-                - "id"
-                - "state"
-                - "vetter"
-                - "full_ownership"
-                - "partner_data"
-                - "created_by"
-                - "created_date"
               examples:
                 create-tn-asset:
                   summary: "Create TN Asset"
@@ -4784,9 +4652,6 @@ paths:
                             count:
                               type: "integer"
                               description: "Always 1"
-                          required:
-                          - "start"
-                          - "count"
                     vetting:
                       type: "object"
                       description: "Vetting status object"
@@ -4803,10 +4668,6 @@ paths:
                           type: "string"
                           x-format: "date-time"
                           description: "When vetting status last changed"
-                      required:
-                      - "request_timestamp"
-                      - "status"
-                      - "status_timestamp"
                     caller_profile:
                       type: "string"
                       description: "Associated caller profile name"
@@ -4815,7 +4676,8 @@ paths:
                       description: "Associated caller profile ID"
                     label:
                       type: "array"
-                      items: {}
+                      items:
+                        type: "string"
                       description: "User-defined labels on the asset"
                       x-constraints: "Array of strings, each up to 60 characters"
                     calling_use_case:
@@ -4825,6 +4687,9 @@ paths:
                     tagging_status:
                       type: "object"
                       description: "Per-partner tagging status (partner name → tag code)"
+                      properties:
+                        att:
+                          type: "string"
                     partner_data:
                       type: "array"
                       items:
@@ -4848,14 +4713,7 @@ paths:
                                 caller_profile:
                                   type: "string"
                                   description: "Caller profile name used by this partner"
-                              required:
-                              - "name"
-                              - "status"
-                              - "caller_profile"
                             description: "Partner status entries"
-                        required:
-                        - "name"
-                        - "partner"
                       description: "Per-feature partner enablement data"
                     created_by:
                       type: "string"
@@ -4871,26 +4729,6 @@ paths:
                       type: "string"
                       x-format: "date-time"
                       description: "Last update timestamp"
-                  required:
-                  - "id"
-                  - "state"
-                  - "type"
-                  - "version"
-                  - "account_id"
-                  - "account_name"
-                  - "vetter"
-                  - "priority"
-                  - "full_ownership"
-                  - "owner_type"
-                  - "parent_account_id"
-                  - "super_account_id"
-                  - "tn"
-                  - "vetting"
-                  - "caller_profile"
-                  - "caller_profile_id"
-                  - "partner_data"
-                  - "created_by"
-                  - "created_date"
               example:
               - id: "69a088f66ccc0121aeb816d2"
                 state: "VETTING"
@@ -4990,7 +4828,8 @@ paths:
                   description: "Update the intended calling use case. Mandatory for the CNO feature."
                 label:
                   type: "array"
-                  items: {}
+                  items:
+                    type: "string"
                   description: "Updated labels"
             example:
               full_ownership: false
@@ -5017,7 +4856,8 @@ paths:
                     description: "Current asset state"
                   label:
                     type: "array"
-                    items: {}
+                    items:
+                      type: "string"
                     description: "Updated label values"
                     x-constraints: "Array of strings, each up to 60 characters"
                   caller_profile_id:
@@ -5039,9 +4879,8 @@ paths:
                         x-format: "date-time"
                         description: "When vetting status last changed"
                         x-constraints: "RFC 1123 format"
-                    required:
-                    - "status"
-                    - "status_timestamp"
+                      request_timestamp:
+                        type: "string"
                   updated_by:
                     type: "string"
                     description: "User who performed the update"
@@ -5049,12 +4888,57 @@ paths:
                     type: "string"
                     x-format: "date-time"
                     description: "Update timestamp"
-                required:
-                - "id"
-                - "state"
-                - "caller_profile_id"
-                - "updated_by"
-                - "updated_date"
+                  account_id:
+                    type: "string"
+                  vetter:
+                    type: "string"
+                  priority:
+                    type: "integer"
+                  full_ownership:
+                    type: "boolean"
+                  owner_type:
+                    type: "string"
+                  parent_account_id:
+                    type: "string"
+                  super_account_id:
+                    type: "string"
+                  tn:
+                    type: "object"
+                    properties:
+                      orig:
+                        type: "object"
+                        properties:
+                          start:
+                            type: "string"
+                          count:
+                            type: "integer"
+                  caller_profile:
+                    type: "string"
+                  tagging_status:
+                    type: "object"
+                    properties: {}
+                  partner_data:
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        name:
+                          type: "string"
+                        partner:
+                          type: "array"
+                          items:
+                            type: "object"
+                            properties:
+                              name:
+                                type: "string"
+                              status:
+                                type: "string"
+                              caller_profile:
+                                type: "string"
+                  created_by:
+                    type: "string"
+                  created_date:
+                    type: "string"
               example:
                 id: "69aa0525232c112395eb458e"
                 state: "ACTIVE"
@@ -5160,11 +5044,6 @@ paths:
                           count:
                             type: "integer"
                             description: "Number of TNs in range — always 1"
-                        required:
-                        - "start"
-                        - "count"
-                    required:
-                    - "orig"
                   vetting:
                     type: "object"
                     description: "Vetting status object"
@@ -5183,10 +5062,6 @@ paths:
                         x-format: "date-time"
                         description: "When vetting status last changed"
                         x-constraints: "RFC 1123 format"
-                    required:
-                    - "request_timestamp"
-                    - "status"
-                    - "status_timestamp"
                   caller_profile:
                     type: "string"
                     description: "Associated caller profile name"
@@ -5195,7 +5070,8 @@ paths:
                     description: "Associated caller profile ID"
                   label:
                     type: "array"
-                    items: {}
+                    items:
+                      type: "string"
                     description: "User-defined labels on the asset"
                     x-constraints: "Array of strings, each up to 60 characters"
                   calling_use_case:
@@ -5206,6 +5082,9 @@ paths:
                     type: "object"
                     description: "Per-partner tagging status — keys are partner names (att, verizon, tmobile)"
                     x-constraints: "Values: TG (Tagged), AP (Appeal Pending), AG (Appeal Granted), AD (Appeal Declined), CIP (Customer Input Pending)"
+                    properties:
+                      att:
+                        type: "string"
                   partner_data:
                     type: "array"
                     items:
@@ -5231,14 +5110,7 @@ paths:
                               caller_profile:
                                 type: "string"
                                 description: "Caller profile name used by this partner"
-                            required:
-                            - "name"
-                            - "status"
-                            - "caller_profile"
                           description: "Partner status entries for this feature"
-                      required:
-                      - "name"
-                      - "partner"
                     description: "Per-feature partner enablement data with statuses"
                   created_by:
                     type: "string"
@@ -5254,19 +5126,14 @@ paths:
                     type: "string"
                     x-format: "date-time"
                     description: "Last update timestamp"
-                required:
-                - "id"
-                - "state"
-                - "account_id"
-                - "vetter"
-                - "full_ownership"
-                - "tn"
-                - "vetting"
-                - "caller_profile"
-                - "caller_profile_id"
-                - "partner_data"
-                - "created_by"
-                - "created_date"
+                  priority:
+                    type: "integer"
+                  owner_type:
+                    type: "string"
+                  parent_account_id:
+                    type: "string"
+                  super_account_id:
+                    type: "string"
               example:
                 id: "69a088f66ccc0121aeb816d2"
                 state: "ACTIVE"
@@ -5689,7 +5556,8 @@ paths:
                   x-constraints: "Recommended: 3-5"
                 email:
                   type: "array"
-                  items: {}
+                  items:
+                    type: "string"
                   description: "Email addresses or PDLs to notify after max retries are exhausted and for cool-off events"
                 auth_type:
                   type: "string"
@@ -5753,7 +5621,8 @@ paths:
                                         x-constraints: "vetting_status | partner_status | tagging_status"
                                       trigger_on:
                                         type: "array"
-                                        items: {}
+                                        items:
+                                          type: "string"
                                         description: "Specific status values to trigger on"
                                         x-constraints: "vetting_status: VETTING_SUCCESSFUL | VETTING_EXCEPTION | VETTING_DEFERRED | VETTING_SUBMITTED | VETTING_IN_PROGRESS | PREVETTED; partner_status: Enable-Completed | Enable-Failed | Disable-Completed | Disable-Failed | Suspend-Completed | Suspend-Failed | Resume-Completed | Resume-Failed; tagging_status: TG | AG | AP | AD | CIP"
                                     required:
@@ -5761,7 +5630,8 @@ paths:
                                     - "trigger_on"
                                 features:
                                   type: "array"
-                                  items: {}
+                                  items:
+                                    type: "string"
                                   description: "Feature filter for notifications. At least one feature must be configured. Use CNO for tagging_status events."
                                   x-constraints: "CNO | AUTH-BCD | RICH-BCD | SPOOF-CALL-PROTECTION"
                               required:
@@ -5868,7 +5738,8 @@ paths:
                     description: "Internal topic name assigned by the delivery engine"
                   email:
                     type: "array"
-                    items: {}
+                    items:
+                      type: "string"
                     description: "Notification email addresses"
                   company_id:
                     type: "string"
@@ -5890,9 +5761,47 @@ paths:
                   credentials:
                     type: "object"
                     description: "Auth credentials as registered. Encrypted secrets are returned in encrypted form; never re-disclosed in plain text."
+                    properties:
+                      api_key:
+                        type: "string"
+                      api_value:
+                        type: "string"
+                      location:
+                        type: "string"
                   services:
                     type: "array"
-                    items: {}
+                    items:
+                      type: "object"
+                      properties:
+                        name:
+                          type: "string"
+                        entities:
+                          type: "array"
+                          items:
+                            type: "object"
+                            properties:
+                              type:
+                                type: "string"
+                              data:
+                                type: "object"
+                                properties:
+                                  webhook_url:
+                                    type: "string"
+                                  event_types:
+                                    type: "array"
+                                    items:
+                                      type: "object"
+                                      properties:
+                                        event_type:
+                                          type: "string"
+                                        trigger_on:
+                                          type: "array"
+                                          items:
+                                            type: "string"
+                                  features:
+                                    type: "array"
+                                    items:
+                                      type: "string"
                     description: "Updated service scopes, entity bindings, event filters, and feature flags — mirrors the submitted payload"
                   start_date:
                     type: "string"
@@ -5912,23 +5821,6 @@ paths:
                   updated_date:
                     type: "string"
                     description: "Last update timestamp (RFC 1123)"
-                required:
-                - "id"
-                - "webhook_name"
-                - "topic_name"
-                - "email"
-                - "company_id"
-                - "name"
-                - "state"
-                - "max_retry"
-                - "auth_type"
-                - "services"
-                - "start_date"
-                - "end_date"
-                - "created_by"
-                - "created_date"
-                - "updated_by"
-                - "updated_date"
               example:
                 id: "6a4d8b35debc0050f9af148f"
                 webhook_name: "Webhook Notifications for Enterprise A"
@@ -6053,7 +5945,8 @@ paths:
                     description: "Maximum retry attempts for failed deliveries"
                   email:
                     type: "array"
-                    items: {}
+                    items:
+                      type: "string"
                     description: "Notification email addresses"
                   auth_type:
                     type: "string"
@@ -6062,18 +5955,66 @@ paths:
                   credentials:
                     type: "object"
                     description: "Auth credentials as registered. Encrypted secrets are returned in encrypted form; never re-disclosed in plain text."
+                    properties:
+                      api_key:
+                        type: "string"
+                      api_value:
+                        type: "string"
+                      location:
+                        type: "string"
                   services:
                     type: "array"
-                    items: {}
+                    items:
+                      type: "object"
+                      properties:
+                        name:
+                          type: "string"
+                        entities:
+                          type: "array"
+                          items:
+                            type: "object"
+                            properties:
+                              type:
+                                type: "string"
+                              data:
+                                type: "object"
+                                properties:
+                                  webhook_url:
+                                    type: "string"
+                                  event_types:
+                                    type: "array"
+                                    items:
+                                      type: "object"
+                                      properties:
+                                        event_type:
+                                          type: "string"
+                                        trigger_on:
+                                          type: "array"
+                                          items:
+                                            type: "string"
+                                  features:
+                                    type: "array"
+                                    items:
+                                      type: "string"
                     description: "Registered service scopes, entity bindings, event filters, and feature flags — mirrors the registration payload"
-                required:
-                - "id"
-                - "webhook_name"
-                - "state"
-                - "max_retry"
-                - "email"
-                - "auth_type"
-                - "services"
+                  topic_name:
+                    type: "string"
+                  company_id:
+                    type: "string"
+                  name:
+                    type: "string"
+                  start_date:
+                    type: "string"
+                  end_date:
+                    type: "string"
+                  created_by:
+                    type: "string"
+                  created_date:
+                    type: "string"
+                  updated_by:
+                    type: "string"
+                  updated_date:
+                    type: "string"
               example:
                 id: "6a4d8b35debc0050f9af148f"
                 webhook_name: "Webhook Notifications for Enterprise A"
@@ -6225,8 +6166,6 @@ paths:
                   encrypted_value:
                     type: "string"
                     description: "The encrypted value to use as `credentials.password` (oAuth) or `credentials.api_value` (apiKey) when registering a webhook"
-                required:
-                - "encrypted_value"
               example:
                 encrypted_value: "X9aP7KqM2R8vZtYcH1fL"
         "401":
@@ -6248,6 +6187,48 @@ x-webhooks:
           "application/json":
             schema:
               type: "object"
+              properties:
+                id:
+                  type: "string"
+                event_create_date:
+                  type: "string"
+                entity:
+                  type: "object"
+                  properties:
+                    type:
+                      type: "string"
+                    account_id:
+                      type: "string"
+                    id:
+                      type: "string"
+                    name:
+                      type: "string"
+                    tn:
+                      type: "string"
+                    callerProfile:
+                      type: "string"
+                data:
+                  type: "array"
+                  items:
+                    type: "object"
+                    properties:
+                      type:
+                        type: "string"
+                      feature:
+                        type: "string"
+                      partner_name:
+                        type: "string"
+                      current_status:
+                        type: "string"
+                      previous_status:
+                        type: "string"
+                retryPolicy:
+                  type: "object"
+                  properties:
+                    attempt:
+                      type: "integer"
+                    waittime_in_seconds:
+                      type: "integer"
             examples:
               account:
                 summary: "Account-level event"

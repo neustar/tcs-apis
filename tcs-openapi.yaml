@@ -1,8 +1,8 @@
-# TransUnion Trusted Call Solutions (TCS) - API - 6.6.4
+# TransUnion Trusted Call Solutions (TCS) - API - 6.6.5
 openapi: "3.0.3"
 info:
-  title: "TransUnion Trusted Call Solutions (TCS) - API - 6.6.4"
-  version: "6.6.4"
+  title: "TransUnion Trusted Call Solutions (TCS) - API - 6.6.5"
+  version: "6.6.5"
   description: "Unified OpenAPI specification for the TransUnion Trusted Call Solutions (TCS) platform. Covers Call Authentication (AAM login/token), SDPR account, feature, caller profile, business profile, image, image profile, and TN asset endpoints across CCID, CNO, BCD, and SCP products, plus Analytics and Webhook Notification APIs. The inbound webhook event delivery contract is documented under x-webhooks."
   contact:
     name: "Transunion TCS Customer Support"
@@ -554,9 +554,21 @@ paths:
       - BearerAuth: []
       x-source-id: "list-account"
       x-source-name: "List Accounts"
+      parameters:
+      - name: "Pagination-Token"
+        in: "header"
+        required: false
+        description: "Opaque cursor used to fetch the next page of results. Omit on the first request. Use the value returned in the Pagination-Token response header of the previous call. When the response does not include this header, there are no more pages."
+        schema:
+          type: "string"
       responses:
         "200":
           description: "OK"
+          headers:
+            Pagination-Token:
+              description: "Opaque cursor for the next page of results. Send it back as the Pagination-Token request header on the following call. When this header is absent, the last page has been reached."
+              schema:
+                type: "string"
           content:
             "application/json":
               schema:
@@ -2266,9 +2278,20 @@ paths:
         description: "Unique identifier of the account"
         schema:
           type: "string"
+      - name: "Pagination-Token"
+        in: "header"
+        required: false
+        description: "Opaque cursor used to fetch the next page of results. Omit on the first request. Use the value returned in the Pagination-Token response header of the previous call. When the response does not include this header, there are no more pages."
+        schema:
+          type: "string"
       responses:
         "200":
           description: "OK"
+          headers:
+            Pagination-Token:
+              description: "Opaque cursor for the next page of results. Send it back as the Pagination-Token request header on the following call. When this header is absent, the last page has been reached."
+              schema:
+                type: "string"
           content:
             "application/json":
               schema:
@@ -2787,9 +2810,32 @@ paths:
         description: "Unique identifier of the account"
         schema:
           type: "string"
+      - name: "limit"
+        in: "query"
+        required: false
+        description: "Maximum number of image profiles to return in the response. Used to control page size when paginating. Defaults to the system maximum if omitted."
+        schema:
+          type: "string"
+      - name: "offset"
+        in: "query"
+        required: false
+        description: "Zero-based index of the first image profile to return. Combined with `limit`, this skips the specified number of records to fetch the next page (e.g. offset=100 with limit=50 returns records 101–150)."
+        schema:
+          type: "string"
+      - name: "Pagination-Token"
+        in: "header"
+        required: false
+        description: "Opaque cursor used to fetch the next page of results. Omit on the first request. Use the value returned in the Pagination-Token response header of the previous call. When the response does not include this header, there are no more pages."
+        schema:
+          type: "string"
       responses:
         "200":
           description: "OK"
+          headers:
+            Pagination-Token:
+              description: "Opaque cursor for the next page of results. Send it back as the Pagination-Token request header on the following call. When this header is absent, the last page has been reached."
+              schema:
+                type: "string"
           content:
             "application/json":
               schema:
@@ -3336,9 +3382,20 @@ paths:
         description: "Unique identifier of the BPO's account"
         schema:
           type: "string"
+      - name: "Pagination-Token"
+        in: "header"
+        required: false
+        description: "Opaque cursor used to fetch the next page of results. Omit on the first request. Use the value returned in the Pagination-Token response header of the previous call. When the response does not include this header, there are no more pages."
+        schema:
+          type: "string"
       responses:
         "200":
           description: "OK"
+          headers:
+            Pagination-Token:
+              description: "Opaque cursor for the next page of results. Send it back as the Pagination-Token request header on the following call. When this header is absent, the last page has been reached."
+              schema:
+                type: "string"
           content:
             "application/json":
               schema:
@@ -4003,9 +4060,32 @@ paths:
         description: "Unique identifier of the account"
         schema:
           type: "string"
+      - name: "limit"
+        in: "query"
+        required: false
+        description: "Maximum number of caller profiles to return in the response. Used to control page size when paginating. Defaults to the system maximum if omitted."
+        schema:
+          type: "string"
+      - name: "offset"
+        in: "query"
+        required: false
+        description: "Zero-based index of the first caller profile to return. Combined with `limit`, this skips the specified number of records to fetch the next page (e.g. offset=100 with limit=50 returns records 101–150)."
+        schema:
+          type: "string"
+      - name: "Pagination-Token"
+        in: "header"
+        required: false
+        description: "Opaque cursor used to fetch the next page of results. Omit on the first request. Use the value returned in the Pagination-Token response header of the previous call. When the response does not include this header, there are no more pages."
+        schema:
+          type: "string"
       responses:
         "200":
           description: "OK"
+          headers:
+            Pagination-Token:
+              description: "Opaque cursor for the next page of results. Send it back as the Pagination-Token request header on the following call. When this header is absent, the last page has been reached."
+              schema:
+                type: "string"
           content:
             "application/json":
               schema:
@@ -4587,9 +4667,32 @@ paths:
         description: "Unique identifier of the account"
         schema:
           type: "string"
+      - name: "limit"
+        in: "query"
+        required: false
+        description: "Maximum number of TN assets to return in the response. Used to control page size when paginating. Defaults to the system maximum if omitted."
+        schema:
+          type: "string"
+      - name: "offset"
+        in: "query"
+        required: false
+        description: "Zero-based index of the first TN asset to return. Combined with `limit`, this skips the specified number of records to fetch the next page (e.g. offset=100 with limit=50 returns records 101–150)."
+        schema:
+          type: "string"
+      - name: "Pagination-Token"
+        in: "header"
+        required: false
+        description: "Opaque cursor used to fetch the next page of results. Omit on the first request. Use the value returned in the Pagination-Token response header of the previous call. When the response does not include this header, there are no more pages."
+        schema:
+          type: "string"
       responses:
         "200":
           description: "OK"
+          headers:
+            Pagination-Token:
+              description: "Opaque cursor for the next page of results. Send it back as the Pagination-Token request header on the following call. When this header is absent, the last page has been reached."
+              schema:
+                type: "string"
           content:
             "application/json":
               schema:

@@ -1,8 +1,8 @@
-# TransUnion Trusted Call Solutions (TCS) - API - 6.6.5
+# TransUnion Trusted Call Solutions (TCS) - API - 6.6.6
 openapi: "3.0.3"
 info:
-  title: "TransUnion Trusted Call Solutions (TCS) - API - 6.6.5"
-  version: "6.6.5"
+  title: "TransUnion Trusted Call Solutions (TCS) - API - 6.6.6"
+  version: "6.6.6"
   description: "Unified OpenAPI specification for the TransUnion Trusted Call Solutions (TCS) platform. Covers Call Authentication (AAM login/token), SDPR account, feature, caller profile, business profile, image, image profile, and TN asset endpoints across CCID, CNO, BCD, and SCP products, plus Analytics and Webhook Notification APIs. The inbound webhook event delivery contract is documented under x-webhooks."
   contact:
     name: "Transunion TCS Customer Support"
@@ -11,8 +11,8 @@ info:
 servers:
 - url: "https://api-rst.ccid.neustar.biz"
   description: "Production"
-- url: "https://api-uat-rst.ccid.neustar.biz"
-  description: "UAT / Sandbox"
+- url: "https://api-rst.uat.trucontact.transunion.com"
+  description: "UAT (Sandbox)"
 components:
   securitySchemes:
     BearerAuth:
@@ -157,6 +157,66 @@ paths:
               example:
                 status: "success"
                 message: "Login is successful"
+                accessToken: "<JWT_ACCESS_TOKEN>"
+                refreshToken: "<JWT_REFRESH_TOKEN>"
+                idToken: "<JWT_ID_TOKEN>"
+        "401":
+          description: "Unauthorized — invalid or expired access token"
+        "404":
+          description: "Not Found — resource does not exist"
+  "/ccid/aam/v1/refresh-token":
+    post:
+      summary: "Refresh Auth Token"
+      description: "Renew an API session without resending your username and password. Send the current access token in the Authorization header and the refresh token returned by Create Auth Token (or a previous Refresh Auth Token call) in the request body. A new set of tokens is returned."
+      operationId: "refresh-token"
+      tags:
+      - "Authentication"
+      security:
+      - BearerAuth: []
+      x-source-id: "refresh-token"
+      x-source-name: "Refresh Auth Token"
+      requestBody:
+        required: true
+        content:
+          "application/json":
+            schema:
+              type: "object"
+              properties:
+                refreshToken:
+                  type: "string"
+                  description: "The refresh token returned by [Create Auth Token](/products/bcd/api/auth-token) or a previous Refresh Auth Token call"
+              required:
+              - "refreshToken"
+            example:
+              refreshToken: "<JWT_REFRESH_TOKEN>"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  status:
+                    type: "string"
+                    description: "Result of the refresh attempt"
+                    x-constraints: "\"success\" or \"failure\""
+                  message:
+                    type: "string"
+                    description: "Human-readable result message"
+                  accessToken:
+                    type: "string"
+                    description: "New JWT access token for subsequent API calls"
+                    x-constraints: "Bearer token, include in Authorization header"
+                  refreshToken:
+                    type: "string"
+                    description: "New JWT refresh token for the next renewal"
+                  idToken:
+                    type: "string"
+                    description: "JWT ID token containing the authenticated user's identity claims"
+              example:
+                status: "success"
+                message: "RefreshToken is successful"
                 accessToken: "<JWT_ACCESS_TOKEN>"
                 refreshToken: "<JWT_REFRESH_TOKEN>"
                 idToken: "<JWT_ID_TOKEN>"
@@ -2493,6 +2553,39 @@ paths:
                 created_date: "Sun, 3 May 2026 23:53:01 GMT"
                 updated_by: "UserID"
                 updated_date: "Tue, 5 May 2026 14:22:10 GMT"
+        "400":
+          description: "Bad Request"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  error_id:
+                    type: "string"
+                  http_status_code:
+                    type: "integer"
+                  reason:
+                    type: "string"
+                  timestamp:
+                    type: "string"
+                  attributes:
+                    type: "object"
+                    properties:
+                      object_type:
+                        type: "string"
+                      object_field:
+                        type: "string"
+                      name:
+                        type: "string"
+              example:
+                error_id: "ObjectAlreadyExisted"
+                http_status_code: 400
+                reason: "Object already existed"
+                timestamp: "Thu, 25 Jun 2026 17:43:05 GMT"
+                attributes:
+                  object_type: "Image"
+                  object_field: "name"
+                  name: "Smiley-Face-256x256"
         "401":
           description: "Unauthorized — invalid or expired access token"
         "404":
@@ -4646,6 +4739,45 @@ paths:
                         caller_profile: "Your Company Name_BCD_Rich_20260225-212320"
                     created_by: "user_v4_api_prod"
                     created_date: "Thu, 5 Mar 2026 22:32:02 GMT"
+        "400":
+          description: "Bad Request — If you receive this error, the TN — or a TN with the same or similar service — already exists on the TransUnion platform under another account. Contact TransUnion support to resolve the conflict before attempting to provision the number."
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  error_id:
+                    type: "string"
+                  http_status_code:
+                    type: "integer"
+                  sip_code:
+                    type: "integer"
+                  reason:
+                    type: "string"
+                  timestamp:
+                    type: "string"
+                  developer_message:
+                    type: "string"
+                  attributes:
+                    type: "object"
+                    properties:
+                      object_type:
+                        type: "string"
+                      object_field:
+                        type: "string"
+                      "tn.orig.start":
+                        type: "string"
+              example:
+                error_id: "ObjectAlreadyExisted"
+                http_status_code: 400
+                sip_code: 400
+                reason: "Object already existed"
+                timestamp: "Thu, 24 Sep 2026 16:03:05 GMT"
+                developer_message: "TN cannot be provisioned because another account already has BCD/Auth/SCP features"
+                attributes:
+                  object_type: "TcsAsset"
+                  object_field: "tn.orig.start"
+                  "tn.orig.start": "+1.6782478115"
         "401":
           description: "Unauthorized — invalid or expired access token"
         "404":

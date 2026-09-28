@@ -3425,7 +3425,7 @@ client.calls.create(
 In the **Response** section, enter:`,code:`{
   "translationMap": {},
   "translationMapDefaults": {},
-  "successTemplate": "{"status": "success"}"
+  "successTemplate": "{\\"status\\": \\"success\\"}"
 }`,language:"json"},{title:"Step 3.4 — Run Test",content:'Test the data action to ensure it\'s configured correctly.\n\n1. Click on the **Test** tab\n2. Enter test input values:\n   - `fromNumber`: A valid 10-digit phone number (e.g., `7033886651`)\n   - `toNumber`: A valid 10-digit phone number (e.g., `5035166763`)\n3. Click **Run Test**\n4. Verify results:\n   - Success Response: `{"status": "success"}`\n   - HTTP Status Code: `200 OK` or `201 Created`\n5. Once testing is successful, click **Publish** to make the action available for use in call flows',images:[{src:ap,alt:"Genesys Cloud — Successful action test results",caption:"Successful test results showing 'Action successfully run' with status SUCCESS"}]},{title:"Test Checklist",content:`- Integration is **Active**
 - Action is **Published**
 - Test execution returns success status

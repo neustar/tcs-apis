@@ -1,8 +1,8 @@
-# TransUnion Trusted Call Solutions (TCS) - API - 6.6.8
+# TransUnion Trusted Call Solutions (TCS) - API - 6.10.0
 openapi: "3.0.3"
 info:
-  title: "TransUnion Trusted Call Solutions (TCS) - API - 6.6.8"
-  version: "6.6.8"
+  title: "TransUnion Trusted Call Solutions (TCS) - API - 6.10.0"
+  version: "6.10.0"
   description: "Unified OpenAPI specification for the TransUnion Trusted Call Solutions (TCS) platform. Covers Call Authentication (AAM login/token), SDPR account, feature, caller profile, business profile, image, image profile, and TN asset endpoints across CCID, CNO, BCD, and SCP products, plus Analytics and Webhook Notification APIs. The inbound webhook event delivery contract is documented under x-webhooks."
   contact:
     name: "Transunion TCS Customer Support"
@@ -4547,6 +4547,12 @@ paths:
                   items:
                     type: "string"
                   description: "User-defined labels to categorize/track telephone numbers"
+                csr_data:
+                  type: "object"
+                  properties:
+                    enable_csr_deposit:
+                      type: "boolean"
+                      description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. Defaults to null when omitted"
               required:
               - "caller_profile_id"
             examples:
@@ -4572,6 +4578,8 @@ paths:
                   label:
                   - "test$label1"
                   - "test$label8"
+                  csr_data:
+                    enable_csr_deposit: true
       responses:
         "201":
           description: "Created"
@@ -4653,6 +4661,13 @@ paths:
                       type: "string"
                     description: "User-defined labels echoed back on the asset"
                     x-constraints: "Array of strings, each up to 60 characters"
+                  csr_data:
+                    type: "object"
+                    properties:
+                      enable_csr_deposit:
+                        type: "boolean"
+                        description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. Defaults to null when omitted"
+                        x-constraints: "Optional; null when not configured"
                   calling_use_case:
                     type: "string"
                     description: "Intended calling use case echoed from the request (mandatory when CNO is attached)"
@@ -4946,6 +4961,13 @@ paths:
                         type: "string"
                       description: "User-defined labels on the asset"
                       x-constraints: "Array of strings, each up to 60 characters"
+                    csr_data:
+                      type: "object"
+                      properties:
+                        enable_csr_deposit:
+                          type: "boolean"
+                          description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. Defaults to null when omitted"
+                          x-constraints: "Optional; null when not configured"
                     calling_use_case:
                       type: "string"
                       description: "Intended calling use case (mandatory when CNO is attached)"
@@ -5097,6 +5119,12 @@ paths:
                   items:
                     type: "string"
                   description: "Updated labels"
+                csr_data:
+                  type: "object"
+                  properties:
+                    enable_csr_deposit:
+                      type: "boolean"
+                      description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. Defaults to null when omitted"
             example:
               full_ownership: false
               tn:
@@ -5126,6 +5154,13 @@ paths:
                       type: "string"
                     description: "Updated label values"
                     x-constraints: "Array of strings, each up to 60 characters"
+                  csr_data:
+                    type: "object"
+                    properties:
+                      enable_csr_deposit:
+                        type: "boolean"
+                        description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. Defaults to null when omitted"
+                        x-constraints: "Optional; null when not configured"
                   caller_profile_id:
                     type: "string"
                     description: "Updated caller profile association"
@@ -5340,6 +5375,13 @@ paths:
                       type: "string"
                     description: "User-defined labels on the asset"
                     x-constraints: "Array of strings, each up to 60 characters"
+                  csr_data:
+                    type: "object"
+                    properties:
+                      enable_csr_deposit:
+                        type: "boolean"
+                        description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. Defaults to null when omitted"
+                        x-constraints: "Optional; null when not configured"
                   calling_use_case:
                     type: "string"
                     description: "Intended calling use case (mandatory when CNO is attached)"
@@ -5520,7 +5562,7 @@ paths:
       - name: "end_time"
         in: "query"
         required: true
-        description: "End of analytics window in UTC (e.g. 2026-04-01T23:59:59Z)."
+        description: "End of analytics window in UTC (e.g. 2026-04-01T23:59:59Z). Analytics are generally available 24 hours after the day they cover, so the previous day's data is typically available the following day."
         schema:
           type: "string"
           format: "date-time"
@@ -5596,7 +5638,7 @@ paths:
           description: "Not Found"
   "/ccid/analytics/v1/admin/account/{accountId}/tns":
     get:
-      summary: "All TN Analytics (Account-wide)"
+      summary: "Multiple TN Analytics"
       description: "Returns cursor-paginated analytics for every TN in the account. Response includes X-Next-Cursor and X-Total-Count headers."
       operationId: "analytics-all-tns"
       tags:
@@ -5633,7 +5675,7 @@ paths:
       - name: "end_time"
         in: "query"
         required: true
-        description: "End of analytics window in UTC (e.g. 2026-04-01T23:59:59Z)."
+        description: "End of analytics window in UTC (e.g. 2026-04-01T23:59:59Z). Analytics are generally available 24 hours after the day they cover, so the previous day's data is typically available the following day."
         schema:
           type: "string"
           format: "date-time"

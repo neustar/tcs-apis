@@ -4552,7 +4552,7 @@ paths:
                   properties:
                     enable_csr_deposit:
                       type: "boolean"
-                      description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. Defaults to null when omitted"
+                      description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. When false, call authentication is disabled for this TN even if the caller profile it is assigned to has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY. Defaults to null when omitted"
               required:
               - "caller_profile_id"
             examples:
@@ -4666,8 +4666,8 @@ paths:
                     properties:
                       enable_csr_deposit:
                         type: "boolean"
-                        description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. Defaults to null when omitted"
-                        x-constraints: "Optional; null when not configured"
+                        description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. When false, call authentication is disabled for this TN even if the caller profile it is assigned to has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY. Defaults to null when omitted"
+                        x-constraints: "Optional; null when not configured; FALSE disables call authentication for this TN even when the assigned caller profile has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY"
                   calling_use_case:
                     type: "string"
                     description: "Intended calling use case echoed from the request (mandatory when CNO is attached)"
@@ -4966,8 +4966,8 @@ paths:
                       properties:
                         enable_csr_deposit:
                           type: "boolean"
-                          description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. Defaults to null when omitted"
-                          x-constraints: "Optional; null when not configured"
+                          description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. When false, call authentication is disabled for this TN even if the caller profile it is assigned to has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY. Defaults to null when omitted"
+                          x-constraints: "Optional; null when not configured; FALSE disables call authentication for this TN even when the assigned caller profile has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY"
                     calling_use_case:
                       type: "string"
                       description: "Intended calling use case (mandatory when CNO is attached)"
@@ -5124,7 +5124,7 @@ paths:
                   properties:
                     enable_csr_deposit:
                       type: "boolean"
-                      description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. Defaults to null when omitted"
+                      description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. When false, call authentication is disabled for this TN even if the caller profile it is assigned to has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY. Defaults to null when omitted"
             example:
               full_ownership: false
               tn:
@@ -5159,8 +5159,8 @@ paths:
                     properties:
                       enable_csr_deposit:
                         type: "boolean"
-                        description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. Defaults to null when omitted"
-                        x-constraints: "Optional; null when not configured"
+                        description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. When false, call authentication is disabled for this TN even if the caller profile it is assigned to has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY. Defaults to null when omitted"
+                        x-constraints: "Optional; null when not configured; FALSE disables call authentication for this TN even when the assigned caller profile has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY"
                   caller_profile_id:
                     type: "string"
                     description: "Updated caller profile association"
@@ -5380,8 +5380,8 @@ paths:
                     properties:
                       enable_csr_deposit:
                         type: "boolean"
-                        description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. Defaults to null when omitted"
-                        x-constraints: "Optional; null when not configured"
+                        description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. When false, call authentication is disabled for this TN even if the caller profile it is assigned to has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY. Defaults to null when omitted"
+                        x-constraints: "Optional; null when not configured; FALSE disables call authentication for this TN even when the assigned caller profile has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY"
                   calling_use_case:
                     type: "string"
                     description: "Intended calling use case (mandatory when CNO is attached)"

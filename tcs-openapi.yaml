@@ -1,8 +1,8 @@
-# TransUnion Trusted Call Solutions (TCS) - API - 6.10.0
+# TransUnion Trusted Call Solutions (TCS) - API - 6.10.1
 openapi: "3.0.3"
 info:
-  title: "TransUnion Trusted Call Solutions (TCS) - API - 6.10.0"
-  version: "6.10.0"
+  title: "TransUnion Trusted Call Solutions (TCS) - API - 6.10.1"
+  version: "6.10.1"
   description: "Unified OpenAPI specification for the TransUnion Trusted Call Solutions (TCS) platform. Covers Call Authentication (AAM login/token), SDPR account, feature, caller profile, business profile, image, image profile, and TN asset endpoints across CCID, CNO, BCD, and SCP products, plus Analytics and Webhook Notification APIs. The inbound webhook event delivery contract is documented under x-webhooks."
   contact:
     name: "Transunion TCS Customer Support"
@@ -265,10 +265,13 @@ paths:
                   properties:
                     id:
                       type: "string"
+                      description: "Identifier assigned to the account for billing purposes"
                     model:
                       type: "string"
+                      description: "Billing model applicable to the account"
                     frequency:
                       type: "string"
+                      description: "Billing frequency applicable to the account"
                 service:
                   type: "array"
                   items:
@@ -313,14 +316,19 @@ paths:
                   properties:
                     street:
                       type: "string"
+                      description: "Street address of the account address"
                     city:
                       type: "string"
+                      description: "City of the account address"
                     postal_code:
                       type: "string"
+                      description: "Postal code of the account address"
                     state_or_province:
                       type: "string"
+                      description: "State or province of the account address"
                     country_code:
                       type: "string"
+                      description: "Country code of the account address"
                 start_date:
                   type: "string"
                   x-format: "date-time"
@@ -414,6 +422,7 @@ paths:
                   name:
                     type: "string"
                     description: "The display name for the enterprise account"
+                    x-constraints: "Length between 1 and 100"
                   type:
                     type: "string"
                     description: "The type of account"
@@ -431,13 +440,20 @@ paths:
                   billing:
                     type: "object"
                     description: "Billing configuration object"
+                    x-constraints: "Must be a valid Billing object"
                     properties:
                       id:
                         type: "string"
+                        description: "Identifier assigned to the account for billing purposes"
+                        x-constraints: "Alphanumeric UUID. Maximum length 64"
                       model:
                         type: "string"
+                        description: "Billing model applicable to the account"
+                        x-constraints: "OTHER, TRANSACTION, or SUBSCRIPTION"
                       frequency:
                         type: "string"
+                        description: "Billing frequency applicable to the account"
+                        x-constraints: "MONTHLY, QUARTERLY, or ANNUALLY"
                   service:
                     type: "array"
                     items:
@@ -446,18 +462,22 @@ paths:
                         id:
                           type: "string"
                           description: "Service ID assigned by the system"
+                          x-constraints: "Assigned by the specific service, such as the Customer Id created in SDPR, STIAS, STIVS, KMS, or CVT"
                         type:
                           type: "string"
                     description: "List of provisioned services, each with type and assigned id"
                   child_account_enabled:
                     type: "boolean"
                     description: "Whether child accounts are enabled"
+                    x-constraints: "Must be true or false"
                   domain:
                     type: "string"
                     description: "Domain associated with the account"
+                    x-constraints: "Valid domain (e.g., example.com); length between 1 and 50"
                   comment:
                     type: "string"
                     description: "Free-text comment about the account"
+                    x-constraints: "Maximum length 50 if specified"
                   contact:
                     type: "array"
                     items:
@@ -466,60 +486,80 @@ paths:
                         first_name:
                           type: "string"
                           description: "First name of the contact"
+                          x-constraints: "May contain letters, dashes, spaces, apostrophes, commas, and periods. Length between 1 and 50"
                         last_name:
                           type: "string"
                           description: "Last name of the contact"
+                          x-constraints: "May contain letters, dashes, spaces, apostrophes, commas, and periods. Length between 1 and 50"
                         email:
                           type: "string"
                           description: "Email address of the contact"
+                          x-constraints: "Must be a valid email address. Length 0 to 50"
                         phone:
                           type: "string"
                           description: "Phone number of the contact"
+                          x-constraints: "Must be in +<country_code>.<phone_number> format (e.g., +1.7201234567). Length 11 to 17"
                         type:
                           type: "string"
                           description: "Contact type"
                           x-constraints: "PRIMARY or SECONDARY"
                     description: "List of contacts for the account. Each entry includes first_name, last_name, email, phone, and type."
+                    x-constraints: "Must be a list of valid Contact objects if specified, with one PRIMARY and one optional SECONDARY"
                   address:
                     type: "object"
                     description: "Physical address with street, city, postal_code, state_or_province, country_code"
+                    x-constraints: "Must be a valid Address object if specified"
                     properties:
                       street:
                         type: "string"
+                        description: "Street address of the account address"
+                        x-constraints: "Must be a valid street address. Length 0 to 255"
                       city:
                         type: "string"
+                        description: "City of the account address"
+                        x-constraints: "Must be a valid city. Length 0 to 255"
                       postal_code:
                         type: "string"
+                        description: "Postal code of the account address"
+                        x-constraints: "Must be a valid postal code. Length 0 to 255"
                       state_or_province:
                         type: "string"
+                        description: "State or province of the account address"
+                        x-constraints: "Must be a valid state or province. Length 0 to 16"
                       country_code:
                         type: "string"
+                        description: "Country code of the account address"
+                        x-constraints: "Must be a valid ISO-3166 two-letter country code, such as US or CA"
                   start_date:
                     type: "string"
                     x-format: "date-time"
                     description: "Contract start date"
+                    x-constraints: "RFC 1123 format"
                   end_date:
                     type: "string"
                     x-format: "date-time"
                     description: "Contract end date"
+                    x-constraints: "RFC 1123 format"
                   application:
                     type: "array"
                     items:
                       type: "string"
                     description: "Provisioned applications"
+                    x-constraints: "CCID, TCS; each element length between 1 and 100"
                   ein:
                     type: "string"
                     description: "Employer Identification Number"
-                    x-constraints: "9 digits"
+                    x-constraints: "Must be 9 digits if specified"
                   duns:
                     type: "string"
                     description: "Dun & Bradstreet DUNS number"
-                    x-constraints: "9 digits"
+                    x-constraints: "Must be 9 digits if specified"
                   name_alias:
                     type: "array"
                     items:
                       type: "string"
                     description: "Alternative names or DBAs for the account"
+                    x-constraints: "Up to 5 aliases, each 1-75 characters"
                   vetting:
                     type: "object"
                     properties:
@@ -535,7 +575,7 @@ paths:
                   created_by:
                     type: "string"
                     description: "User ID that created the object"
-                    x-constraints: "Length between 1 and 64"
+                    x-constraints: "User ID who created the account"
                   created_date:
                     type: "string"
                     x-format: "date-time"
@@ -544,10 +584,12 @@ paths:
                   updated_by:
                     type: "string"
                     description: "User ID that last updated the object"
+                    x-constraints: "User ID who updated the account"
                   updated_date:
                     type: "string"
                     x-format: "date-time"
                     description: "Timestamp of the last update"
+                    x-constraints: "RFC 1123 format"
               example:
                 id: "xi0vhua3b4"
                 name: "user_sample enterprise1"
@@ -648,6 +690,7 @@ paths:
                     name:
                       type: "string"
                       description: "Account display name"
+                      x-constraints: "Length between 1 and 100"
                     type:
                       type: "string"
                       description: "Account type"
@@ -667,13 +710,20 @@ paths:
                     billing:
                       type: "object"
                       description: "Billing configuration with id, model, and frequency"
+                      x-constraints: "Must be a valid Billing object"
                       properties:
                         id:
                           type: "string"
+                          description: "Identifier assigned to the account for billing purposes"
+                          x-constraints: "Alphanumeric UUID. Maximum length 64"
                         model:
                           type: "string"
+                          description: "Billing model applicable to the account"
+                          x-constraints: "OTHER, TRANSACTION, or SUBSCRIPTION"
                         frequency:
                           type: "string"
+                          description: "Billing frequency applicable to the account"
+                          x-constraints: "MONTHLY, QUARTERLY, or ANNUALLY"
                     service:
                       type: "array"
                       items:
@@ -685,10 +735,12 @@ paths:
                           id:
                             type: "string"
                             description: "Service identifier"
+                            x-constraints: "Assigned by the specific service, such as the Customer Id created in SDPR, STIAS, STIVS, KMS, or CVT"
                       description: "List of provisioned services (SDPR, WB, STIAS, etc.)"
                     child_account_enabled:
                       type: "boolean"
                       description: "Whether child accounts are enabled"
+                      x-constraints: "Must be true or false"
                     start_date:
                       type: "string"
                       x-format: "date-time"
@@ -704,13 +756,15 @@ paths:
                       items:
                         type: "string"
                       description: "Provisioned applications"
-                      x-constraints: "CCID, TCS"
+                      x-constraints: "CCID, TCS; each element length between 1 and 100"
                     domain:
                       type: "string"
                       description: "Domain associated with the account"
+                      x-constraints: "Valid domain (e.g., example.com); length between 1 and 50"
                     comment:
                       type: "string"
                       description: "Free-text comment about the account"
+                      x-constraints: "Maximum length 50 if specified"
                     contact:
                       type: "array"
                       items:
@@ -719,47 +773,64 @@ paths:
                           first_name:
                             type: "string"
                             description: "First name of the contact"
+                            x-constraints: "May contain letters, dashes, spaces, apostrophes, commas, and periods. Length between 1 and 50"
                           last_name:
                             type: "string"
                             description: "Last name of the contact"
+                            x-constraints: "May contain letters, dashes, spaces, apostrophes, commas, and periods. Length between 1 and 50"
                           email:
                             type: "string"
                             description: "Email address of the contact"
+                            x-constraints: "Must be a valid email address. Length 0 to 50"
                           phone:
                             type: "string"
                             description: "Phone number of the contact"
+                            x-constraints: "Must be in +<country_code>.<phone_number> format (e.g., +1.7201234567). Length 11 to 17"
                           type:
                             type: "string"
                             description: "Contact type"
                             x-constraints: "PRIMARY or SECONDARY"
                       description: "List of contacts for the account. Each entry includes first_name, last_name, email, phone, and type."
+                      x-constraints: "Must be a list of valid Contact objects if specified, with one PRIMARY and one optional SECONDARY"
                     address:
                       type: "object"
                       description: "Physical address with street, city, postal_code, state_or_province, country_code"
+                      x-constraints: "Must be a valid Address object if specified"
                       properties:
                         street:
                           type: "string"
+                          description: "Street address of the account address"
+                          x-constraints: "Must be a valid street address. Length 0 to 255"
                         city:
                           type: "string"
+                          description: "City of the account address"
+                          x-constraints: "Must be a valid city. Length 0 to 255"
                         postal_code:
                           type: "string"
+                          description: "Postal code of the account address"
+                          x-constraints: "Must be a valid postal code. Length 0 to 255"
                         state_or_province:
                           type: "string"
+                          description: "State or province of the account address"
+                          x-constraints: "Must be a valid state or province. Length 0 to 16"
                         country_code:
                           type: "string"
+                          description: "Country code of the account address"
+                          x-constraints: "Must be a valid ISO-3166 two-letter country code, such as US or CA"
                     ein:
                       type: "string"
                       description: "Employer Identification Number"
-                      x-constraints: "9 digits"
+                      x-constraints: "Must be 9 digits if specified"
                     duns:
                       type: "string"
                       description: "Dun & Bradstreet DUNS number"
-                      x-constraints: "9 digits"
+                      x-constraints: "Must be 9 digits if specified"
                     name_alias:
                       type: "array"
                       items:
                         type: "string"
                       description: "Alternative names or DBAs for the account"
+                      x-constraints: "Up to 5 aliases, each 1-75 characters"
                     vetting:
                       type: "object"
                       properties:
@@ -775,17 +846,21 @@ paths:
                     created_by:
                       type: "string"
                       description: "User ID that created the account"
+                      x-constraints: "User ID who created the account"
                     created_date:
                       type: "string"
                       x-format: "date-time"
                       description: "Account creation timestamp"
+                      x-constraints: "RFC 1123 format"
                     updated_by:
                       type: "string"
                       description: "User ID that last updated the account"
+                      x-constraints: "User ID who updated the account"
                     updated_date:
                       type: "string"
                       x-format: "date-time"
                       description: "Last update timestamp"
+                      x-constraints: "RFC 1123 format"
               example:
               - id: "xeb9ekoawz"
                 name: "user_sample enterprise"
@@ -928,6 +1003,7 @@ paths:
                   name:
                     type: "string"
                     description: "Account display name"
+                    x-constraints: "Length between 1 and 100"
                   type:
                     type: "string"
                     description: "Account type"
@@ -947,13 +1023,20 @@ paths:
                   billing:
                     type: "object"
                     description: "Billing configuration with id, model, and frequency"
+                    x-constraints: "Must be a valid Billing object"
                     properties:
                       id:
                         type: "string"
+                        description: "Identifier assigned to the account for billing purposes"
+                        x-constraints: "Alphanumeric UUID. Maximum length 64"
                       model:
                         type: "string"
+                        description: "Billing model applicable to the account"
+                        x-constraints: "OTHER, TRANSACTION, or SUBSCRIPTION"
                       frequency:
                         type: "string"
+                        description: "Billing frequency applicable to the account"
+                        x-constraints: "MONTHLY, QUARTERLY, or ANNUALLY"
                   service:
                     type: "array"
                     items:
@@ -965,10 +1048,12 @@ paths:
                         id:
                           type: "string"
                           description: "Service identifier"
+                          x-constraints: "Assigned by the specific service, such as the Customer Id created in SDPR, STIAS, STIVS, KMS, or CVT"
                     description: "List of provisioned services (SDPR, WB, STIAS, etc.)"
                   child_account_enabled:
                     type: "boolean"
                     description: "Whether child accounts are enabled"
+                    x-constraints: "Must be true or false"
                   start_date:
                     type: "string"
                     x-format: "date-time"
@@ -984,13 +1069,15 @@ paths:
                     items:
                       type: "string"
                     description: "Provisioned applications"
-                    x-constraints: "CCID, TCS"
+                    x-constraints: "CCID, TCS; each element length between 1 and 100"
                   domain:
                     type: "string"
                     description: "Domain associated with the account"
+                    x-constraints: "Valid domain (e.g., example.com); length between 1 and 50"
                   comment:
                     type: "string"
                     description: "Free-text comment about the account"
+                    x-constraints: "Maximum length 50 if specified"
                   contact:
                     type: "array"
                     items:
@@ -999,47 +1086,64 @@ paths:
                         first_name:
                           type: "string"
                           description: "First name of the contact"
+                          x-constraints: "May contain letters, dashes, spaces, apostrophes, commas, and periods. Length between 1 and 50"
                         last_name:
                           type: "string"
                           description: "Last name of the contact"
+                          x-constraints: "May contain letters, dashes, spaces, apostrophes, commas, and periods. Length between 1 and 50"
                         email:
                           type: "string"
                           description: "Email address of the contact"
+                          x-constraints: "Must be a valid email address. Length 0 to 50"
                         phone:
                           type: "string"
                           description: "Phone number of the contact"
+                          x-constraints: "Must be in +<country_code>.<phone_number> format (e.g., +1.7201234567). Length 11 to 17"
                         type:
                           type: "string"
                           description: "Contact type"
                           x-constraints: "PRIMARY or SECONDARY"
                     description: "List of contacts for the account. Each entry includes first_name, last_name, email, phone, and type."
+                    x-constraints: "Must be a list of valid Contact objects if specified, with one PRIMARY and one optional SECONDARY"
                   address:
                     type: "object"
                     description: "Physical address with street, city, postal_code, state_or_province, country_code"
+                    x-constraints: "Must be a valid Address object if specified"
                     properties:
                       street:
                         type: "string"
+                        description: "Street address of the account address"
+                        x-constraints: "Must be a valid street address. Length 0 to 255"
                       city:
                         type: "string"
+                        description: "City of the account address"
+                        x-constraints: "Must be a valid city. Length 0 to 255"
                       postal_code:
                         type: "string"
+                        description: "Postal code of the account address"
+                        x-constraints: "Must be a valid postal code. Length 0 to 255"
                       state_or_province:
                         type: "string"
+                        description: "State or province of the account address"
+                        x-constraints: "Must be a valid state or province. Length 0 to 16"
                       country_code:
                         type: "string"
+                        description: "Country code of the account address"
+                        x-constraints: "Must be a valid ISO-3166 two-letter country code, such as US or CA"
                   ein:
                     type: "string"
                     description: "Employer Identification Number"
-                    x-constraints: "9 digits"
+                    x-constraints: "Must be 9 digits if specified"
                   duns:
                     type: "string"
                     description: "Dun & Bradstreet DUNS number"
-                    x-constraints: "9 digits"
+                    x-constraints: "Must be 9 digits if specified"
                   name_alias:
                     type: "array"
                     items:
                       type: "string"
                     description: "Alternative names or DBAs for the account"
+                    x-constraints: "Up to 5 aliases, each 1-75 characters"
                   vetting:
                     type: "object"
                     properties:
@@ -1055,17 +1159,21 @@ paths:
                   created_by:
                     type: "string"
                     description: "User ID that created the account"
+                    x-constraints: "User ID who created the account"
                   created_date:
                     type: "string"
                     x-format: "date-time"
                     description: "Account creation timestamp"
+                    x-constraints: "RFC 1123 format"
                   updated_by:
                     type: "string"
                     description: "User ID that last updated the account"
+                    x-constraints: "User ID who updated the account"
                   updated_date:
                     type: "string"
                     x-format: "date-time"
                     description: "Last update timestamp"
+                    x-constraints: "RFC 1123 format"
               example:
                 id: "xeb9ekoawz"
                 name: "user_sample enterprise"
@@ -1174,10 +1282,13 @@ paths:
                   properties:
                     id:
                       type: "string"
+                      description: "Identifier assigned to the account for billing purposes"
                     model:
                       type: "string"
+                      description: "Billing model applicable to the account"
                     frequency:
                       type: "string"
+                      description: "Billing frequency applicable to the account"
                 service:
                   type: "array"
                   items:
@@ -1224,14 +1335,19 @@ paths:
                   properties:
                     street:
                       type: "string"
+                      description: "Street address of the account address"
                     city:
                       type: "string"
+                      description: "City of the account address"
                     postal_code:
                       type: "string"
+                      description: "Postal code of the account address"
                     state_or_province:
                       type: "string"
+                      description: "State or province of the account address"
                     country_code:
                       type: "string"
+                      description: "Country code of the account address"
                 start_date:
                   type: "string"
                   x-format: "date-time"
@@ -1342,6 +1458,7 @@ paths:
                   name:
                     type: "string"
                     description: "Updated account name"
+                    x-constraints: "Length between 1 and 100"
                   type:
                     type: "string"
                     description: "Account type"
@@ -1361,13 +1478,20 @@ paths:
                   billing:
                     type: "object"
                     description: "Billing configuration with id, model, and frequency"
+                    x-constraints: "Must be a valid Billing object"
                     properties:
                       id:
                         type: "string"
+                        description: "Identifier assigned to the account for billing purposes"
+                        x-constraints: "Alphanumeric UUID. Maximum length 64"
                       model:
                         type: "string"
+                        description: "Billing model applicable to the account"
+                        x-constraints: "OTHER, TRANSACTION, or SUBSCRIPTION"
                       frequency:
                         type: "string"
+                        description: "Billing frequency applicable to the account"
+                        x-constraints: "MONTHLY, QUARTERLY, or ANNUALLY"
                   service:
                     type: "array"
                     items:
@@ -1379,16 +1503,20 @@ paths:
                         id:
                           type: "string"
                           description: "Service identifier"
+                          x-constraints: "Assigned by the specific service, such as the Customer Id created in SDPR, STIAS, STIVS, KMS, or CVT"
                     description: "List of provisioned services (SDPR, WB, STIAS, etc.)"
                   child_account_enabled:
                     type: "boolean"
                     description: "Whether child accounts are enabled"
+                    x-constraints: "Must be true or false"
                   domain:
                     type: "string"
                     description: "Domain associated with the account"
+                    x-constraints: "Valid domain (e.g., example.com); length between 1 and 50"
                   comment:
                     type: "string"
                     description: "Free-text comment about the account"
+                    x-constraints: "Maximum length 50 if specified"
                   contact:
                     type: "array"
                     items:
@@ -1397,34 +1525,50 @@ paths:
                         first_name:
                           type: "string"
                           description: "First name of the contact"
+                          x-constraints: "May contain letters, dashes, spaces, apostrophes, commas, and periods. Length between 1 and 50"
                         last_name:
                           type: "string"
                           description: "Last name of the contact"
+                          x-constraints: "May contain letters, dashes, spaces, apostrophes, commas, and periods. Length between 1 and 50"
                         email:
                           type: "string"
                           description: "Email address of the contact"
+                          x-constraints: "Must be a valid email address. Length 0 to 50"
                         phone:
                           type: "string"
                           description: "Phone number of the contact"
+                          x-constraints: "Must be in +<country_code>.<phone_number> format (e.g., +1.7201234567). Length 11 to 17"
                         type:
                           type: "string"
                           description: "Contact type"
                           x-constraints: "PRIMARY or SECONDARY"
                     description: "List of contacts for the account. Each entry includes first_name, last_name, email, phone, and type."
+                    x-constraints: "Must be a list of valid Contact objects if specified, with one PRIMARY and one optional SECONDARY"
                   address:
                     type: "object"
                     description: "Physical address with street, city, postal_code, state_or_province, country_code"
+                    x-constraints: "Must be a valid Address object if specified"
                     properties:
                       street:
                         type: "string"
+                        description: "Street address of the account address"
+                        x-constraints: "Must be a valid street address. Length 0 to 255"
                       city:
                         type: "string"
+                        description: "City of the account address"
+                        x-constraints: "Must be a valid city. Length 0 to 255"
                       postal_code:
                         type: "string"
+                        description: "Postal code of the account address"
+                        x-constraints: "Must be a valid postal code. Length 0 to 255"
                       state_or_province:
                         type: "string"
+                        description: "State or province of the account address"
+                        x-constraints: "Must be a valid state or province. Length 0 to 16"
                       country_code:
                         type: "string"
+                        description: "Country code of the account address"
+                        x-constraints: "Must be a valid ISO-3166 two-letter country code, such as US or CA"
                   start_date:
                     type: "string"
                     x-format: "date-time"
@@ -1440,20 +1584,21 @@ paths:
                     items:
                       type: "string"
                     description: "Provisioned applications"
-                    x-constraints: "CCID, TCS"
+                    x-constraints: "CCID, TCS; each element length between 1 and 100"
                   ein:
                     type: "string"
                     description: "Employer Identification Number"
-                    x-constraints: "9 digits"
+                    x-constraints: "Must be 9 digits if specified"
                   duns:
                     type: "string"
                     description: "Dun & Bradstreet DUNS number"
-                    x-constraints: "9 digits"
+                    x-constraints: "Must be 9 digits if specified"
                   name_alias:
                     type: "array"
                     items:
                       type: "string"
                     description: "Alternative names or DBAs for the account"
+                    x-constraints: "Up to 5 aliases, each 1-75 characters"
                   vetting:
                     type: "object"
                     properties:
@@ -1469,17 +1614,21 @@ paths:
                   created_by:
                     type: "string"
                     description: "Original creator user ID"
+                    x-constraints: "User ID who created the account"
                   created_date:
                     type: "string"
                     x-format: "date-time"
                     description: "Original creation date"
+                    x-constraints: "RFC 1123 format"
                   updated_by:
                     type: "string"
                     description: "User who performed the update"
+                    x-constraints: "User ID who updated the account"
                   updated_date:
                     type: "string"
                     x-format: "date-time"
                     description: "Timestamp of this update"
+                    x-constraints: "RFC 1123 format"
               example:
                 id: "xeb9ekoawz"
                 name: "user_sample enterprise"

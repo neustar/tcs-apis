@@ -1,8 +1,8 @@
-# TransUnion Trusted Call Solutions (TCS) - API - 6.10.1
+# TransUnion Trusted Call Solutions (TCS) - API - 6.10.3
 openapi: "3.0.3"
 info:
-  title: "TransUnion Trusted Call Solutions (TCS) - API - 6.10.1"
-  version: "6.10.1"
+  title: "TransUnion Trusted Call Solutions (TCS) - API - 6.10.3"
+  version: "6.10.3"
   description: "Unified OpenAPI specification for the TransUnion Trusted Call Solutions (TCS) platform. Covers Call Authentication (AAM login/token), SDPR account, feature, caller profile, business profile, image, image profile, and TN asset endpoints across CCID, CNO, BCD, and SCP products, plus Analytics and Webhook Notification APIs. The inbound webhook event delivery contract is documented under x-webhooks."
   contact:
     name: "Transunion TCS Customer Support"
@@ -1765,12 +1765,13 @@ paths:
                   lead_generation:
                     type: "string"
                     description: "Lead generation entity"
-                    x-constraints: "Always TransUnion"
+                    x-constraints: "US: TransUnion\nCA: Bell Canada, TransUnion, Telus, Rogers"
                   distributor:
                     type: "array"
                     items:
                       type: "string"
                     description: "Active distributors for this account"
+                    x-constraints: "US: [AT&T]\nCA: [Bell Canada, Telus]"
               example:
                 lead_generation: "TransUnion"
                 distributor:
@@ -1812,13 +1813,13 @@ paths:
                   lead_generation:
                     type: "string"
                     description: "Lead generation entity"
-                    x-constraints: "Always TransUnion"
+                    x-constraints: "US: TransUnion\nCA: Bell Canada, TransUnion, Telus, Rogers"
                   distributor:
                     type: "array"
                     items:
                       type: "string"
                     description: "List of active distributors"
-                    x-constraints: "Valid for US: [AT&T]"
+                    x-constraints: "US: [AT&T]\nCA: [Bell Canada, Telus]"
               example:
                 lead_generation: "TransUnion"
                 distributor:
@@ -2205,7 +2206,7 @@ paths:
                               name:
                                 type: "string"
                                 description: "Partner name"
-                                x-constraints: "att, verizon, or tmobile"
+                                x-constraints: "US: att, verizon, tmobile\nCA: bellcanada, rogers, telus"
                               status:
                                 type: "string"
                                 description: "Current partner enablement status"
@@ -3005,7 +3006,7 @@ paths:
                               name:
                                 type: "string"
                                 description: "Carrier partner name"
-                                x-constraints: "att | tmobile | verizon"
+                                x-constraints: "US: att, verizon, tmobile\nCA: bellcanada, rogers, telus"
                               status:
                                 type: "string"
                                 description: "Vetting/enablement status for the partner"
@@ -3139,7 +3140,7 @@ paths:
                                 name:
                                   type: "string"
                                   description: "Carrier partner name"
-                                  x-constraints: "att | tmobile | verizon"
+                                  x-constraints: "US: att, verizon, tmobile\nCA: bellcanada, rogers, telus"
                                 status:
                                   type: "string"
                                   description: "Enablement status for the partner"
@@ -3289,7 +3290,7 @@ paths:
                               name:
                                 type: "string"
                                 description: "Carrier partner name"
-                                x-constraints: "att | tmobile | verizon"
+                                x-constraints: "US: att, verizon, tmobile\nCA: bellcanada, rogers, telus"
                               status:
                                 type: "string"
                                 description: "Enablement status for the partner"
@@ -3377,6 +3378,46 @@ paths:
       responses:
         "200":
           description: "OK"
+        "401":
+          description: "Unauthorized — invalid or expired access token"
+        "404":
+          description: "Not Found — resource does not exist"
+  "/ccid/sdpr/v4/admin/account/{accountId}/image-profile/count":
+    get:
+      summary: "Count Image Profiles"
+      description: "Return the total number of image profiles that exist under an account."
+      operationId: "count-image-profiles"
+      tags:
+      - "Image Profile"
+      security:
+      - BearerAuth: []
+      x-source-id: "count-image-profiles"
+      x-source-name: "Count Image Profiles"
+      parameters:
+      - name: "accountId"
+        in: "path"
+        required: true
+        description: "Unique identifier of the account"
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  total_count:
+                    type: "integer"
+                    description: "Total number of image profiles under the account"
+                  entity_type:
+                    type: "string"
+                    description: "Type of object counted"
+                    x-constraints: "ImageProfile"
+              example:
+                total_count: 1
+                entity_type: "ImageProfile"
         "401":
           description: "Unauthorized — invalid or expired access token"
         "404":
@@ -4181,7 +4222,7 @@ paths:
                               name:
                                 type: "string"
                                 description: "Carrier partner name"
-                                x-constraints: "att | tmobile | verizon"
+                                x-constraints: "US: att, verizon, tmobile\nCA: bellcanada, rogers, telus"
                               status:
                                 type: "string"
                                 description: "Current partner status"
@@ -4415,7 +4456,7 @@ paths:
                                 name:
                                   type: "string"
                                   description: "Carrier partner name"
-                                  x-constraints: "att | tmobile | verizon"
+                                  x-constraints: "US: att, verizon, tmobile\nCA: bellcanada, rogers, telus"
                                 status:
                                   type: "string"
                                   description: "Current partner enablement status"
@@ -4588,7 +4629,7 @@ paths:
                               name:
                                 type: "string"
                                 description: "Carrier partner name"
-                                x-constraints: "att | tmobile | verizon"
+                                x-constraints: "US: att, verizon, tmobile\nCA: bellcanada, rogers, telus"
                               status:
                                 type: "string"
                                 description: "Partner enablement status"
@@ -4642,6 +4683,46 @@ paths:
                   status_timestamp: "Wed, 25 Feb 2026 21:23:20 GMT"
                 created_by: "user_v4_api_prod"
                 created_date: "Wed, 25 Feb 2026 21:23:20 GMT"
+        "401":
+          description: "Unauthorized — invalid or expired access token"
+        "404":
+          description: "Not Found — resource does not exist"
+  "/ccid/sdpr/v4/admin/account/{accountId}/caller-profile/count":
+    get:
+      summary: "Count Caller Profiles"
+      description: "Return the total number of caller profiles that exist under an account."
+      operationId: "count-caller-profiles"
+      tags:
+      - "Caller Profile"
+      security:
+      - BearerAuth: []
+      x-source-id: "count-caller-profiles"
+      x-source-name: "Count Caller Profiles"
+      parameters:
+      - name: "accountId"
+        in: "path"
+        required: true
+        description: "Unique identifier of the account"
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  total_count:
+                    type: "integer"
+                    description: "Total number of caller profiles under the account"
+                  entity_type:
+                    type: "string"
+                    description: "Type of object counted"
+                    x-constraints: "CallerProfile"
+              example:
+                total_count: 1
+                entity_type: "CallerProfile"
         "401":
           description: "Unauthorized — invalid or expired access token"
         "404":
@@ -4701,7 +4782,7 @@ paths:
                   properties:
                     enable_csr_deposit:
                       type: "boolean"
-                      description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. When false, call authentication is disabled for this TN even if the caller profile it is assigned to has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY. Defaults to null when omitted"
+                      description: "Call Session Registry (CSR) setting. When present and set to true, call authentication requests made from this TN result in end-to-end call authentication. When false, call authentication is disabled for this TN even if the caller profile it is assigned to has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY."
               required:
               - "caller_profile_id"
             examples:
@@ -4815,8 +4896,8 @@ paths:
                     properties:
                       enable_csr_deposit:
                         type: "boolean"
-                        description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. When false, call authentication is disabled for this TN even if the caller profile it is assigned to has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY. Defaults to null when omitted"
-                        x-constraints: "Optional; null when not configured; FALSE disables call authentication for this TN even when the assigned caller profile has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY"
+                        description: "Call Session Registry (CSR) setting. When present and set to true, call authentication requests made from this TN result in end-to-end call authentication. When false, call authentication is disabled for this TN even if the caller profile it is assigned to has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY."
+                        x-constraints: "Optional; FALSE disables call authentication for this TN even when the assigned caller profile has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY"
                   calling_use_case:
                     type: "string"
                     description: "Intended calling use case echoed from the request (mandatory when CNO is attached)"
@@ -4843,7 +4924,7 @@ paths:
                               name:
                                 type: "string"
                                 description: "Carrier partner name"
-                                x-constraints: "att, verizon, or tmobile"
+                                x-constraints: "US: att, verizon, tmobile\nCA: bellcanada, rogers, telus"
                               status:
                                 type: "string"
                                 description: "Partner activation status"
@@ -5115,8 +5196,8 @@ paths:
                       properties:
                         enable_csr_deposit:
                           type: "boolean"
-                          description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. When false, call authentication is disabled for this TN even if the caller profile it is assigned to has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY. Defaults to null when omitted"
-                          x-constraints: "Optional; null when not configured; FALSE disables call authentication for this TN even when the assigned caller profile has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY"
+                          description: "Call Session Registry (CSR) setting. When present and set to true, call authentication requests made from this TN result in end-to-end call authentication. When false, call authentication is disabled for this TN even if the caller profile it is assigned to has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY."
+                          x-constraints: "Optional; FALSE disables call authentication for this TN even when the assigned caller profile has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY"
                     calling_use_case:
                       type: "string"
                       description: "Intended calling use case (mandatory when CNO is attached)"
@@ -5143,7 +5224,7 @@ paths:
                                 name:
                                   type: "string"
                                   description: "Carrier partner name"
-                                  x-constraints: "att | tmobile | verizon"
+                                  x-constraints: "US: att, verizon, tmobile\nCA: bellcanada, rogers, telus"
                                 status:
                                   type: "string"
                                   description: "Partner activation status"
@@ -5273,7 +5354,7 @@ paths:
                   properties:
                     enable_csr_deposit:
                       type: "boolean"
-                      description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. When false, call authentication is disabled for this TN even if the caller profile it is assigned to has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY. Defaults to null when omitted"
+                      description: "Call Session Registry (CSR) setting. When present and set to true, call authentication requests made from this TN result in end-to-end call authentication. When false, call authentication is disabled for this TN even if the caller profile it is assigned to has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY."
             example:
               full_ownership: false
               tn:
@@ -5308,8 +5389,8 @@ paths:
                     properties:
                       enable_csr_deposit:
                         type: "boolean"
-                        description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. When false, call authentication is disabled for this TN even if the caller profile it is assigned to has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY. Defaults to null when omitted"
-                        x-constraints: "Optional; null when not configured; FALSE disables call authentication for this TN even when the assigned caller profile has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY"
+                        description: "Call Session Registry (CSR) setting. When present and set to true, call authentication requests made from this TN result in end-to-end call authentication. When false, call authentication is disabled for this TN even if the caller profile it is assigned to has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY."
+                        x-constraints: "Optional; FALSE disables call authentication for this TN even when the assigned caller profile has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY"
                   caller_profile_id:
                     type: "string"
                     description: "Updated caller profile association"
@@ -5529,8 +5610,8 @@ paths:
                     properties:
                       enable_csr_deposit:
                         type: "boolean"
-                        description: "Call Session Registry (CSR) setting. When true, call authentication requests made from this TN result in end-to-end call authentication. When false, call authentication is disabled for this TN even if the caller profile it is assigned to has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY. Defaults to null when omitted"
-                        x-constraints: "Optional; null when not configured; FALSE disables call authentication for this TN even when the assigned caller profile has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY"
+                        description: "Call Session Registry (CSR) setting. When present and set to true, call authentication requests made from this TN result in end-to-end call authentication. When false, call authentication is disabled for this TN even if the caller profile it is assigned to has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY."
+                        x-constraints: "Optional; FALSE disables call authentication for this TN even when the assigned caller profile has SCP, RICH-BCD, AUTH-BCD, or AUTH-ONLY"
                   calling_use_case:
                     type: "string"
                     description: "Intended calling use case (mandatory when CNO is attached)"
@@ -5559,7 +5640,7 @@ paths:
                               name:
                                 type: "string"
                                 description: "Carrier partner name"
-                                x-constraints: "att | tmobile | verizon"
+                                x-constraints: "US: att, verizon, tmobile\nCA: bellcanada, rogers, telus"
                               status:
                                 type: "string"
                                 description: "Partner activation status"
@@ -5662,6 +5743,46 @@ paths:
       responses:
         "200":
           description: "OK"
+        "401":
+          description: "Unauthorized — invalid or expired access token"
+        "404":
+          description: "Not Found — resource does not exist"
+  "/ccid/sdpr/v4/admin/account/{accountId}/orig/tcs/asset/count":
+    get:
+      summary: "Count TN Assets"
+      description: "Return the total number of TN assets that exist under an account. This is a quick way to see how many TNs are provisioned on an account without paging through the full list."
+      operationId: "count-tn-assets"
+      tags:
+      - "TN Assets"
+      security:
+      - BearerAuth: []
+      x-source-id: "count-tn-assets"
+      x-source-name: "Count TN Assets"
+      parameters:
+      - name: "accountId"
+        in: "path"
+        required: true
+        description: "Unique identifier of the account"
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  total_count:
+                    type: "integer"
+                    description: "Total number of TN assets under the account"
+                  entity_type:
+                    type: "string"
+                    description: "Type of object counted"
+                    x-constraints: "TcsAsset"
+              example:
+                total_count: 120
+                entity_type: "TcsAsset"
         "401":
           description: "Unauthorized — invalid or expired access token"
         "404":

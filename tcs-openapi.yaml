@@ -1,8 +1,8 @@
-# TransUnion Trusted Call Solutions (TCS) - API - 6.10.3
+# TransUnion Trusted Call Solutions (TCS) - API - 6.10.4
 openapi: "3.0.3"
 info:
-  title: "TransUnion Trusted Call Solutions (TCS) - API - 6.10.3"
-  version: "6.10.3"
+  title: "TransUnion Trusted Call Solutions (TCS) - API - 6.10.4"
+  version: "6.10.4"
   description: "Unified OpenAPI specification for the TransUnion Trusted Call Solutions (TCS) platform. Covers Call Authentication (AAM login/token), SDPR account, feature, caller profile, business profile, image, image profile, and TN asset endpoints across CCID, CNO, BCD, and SCP products, plus Analytics and Webhook Notification APIs. The inbound webhook event delivery contract is documented under x-webhooks."
   contact:
     name: "Transunion TCS Customer Support"
@@ -160,10 +160,24 @@ paths:
                 accessToken: "<JWT_ACCESS_TOKEN>"
                 refreshToken: "<JWT_REFRESH_TOKEN>"
                 idToken: "<JWT_ID_TOKEN>"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
   "/ccid/aam/v1/refresh-token":
     post:
       summary: "Refresh Auth Token"
@@ -220,10 +234,24 @@ paths:
                 accessToken: "<JWT_ACCESS_TOKEN>"
                 refreshToken: "<JWT_REFRESH_TOKEN>"
                 idToken: "<JWT_ID_TOKEN>"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
   "/ccid/aam/v2/admin/account":
     post:
       summary: "Create Account"
@@ -642,10 +670,24 @@ paths:
                 created_date: "Mon, 23 Mar 2026 16:42:42 GMT"
                 updated_by: "user_v4_api_prod"
                 updated_date: "Mon, 23 Mar 2026 16:42:42 GMT"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
     get:
       summary: "List Accounts"
       description: "List accounts visible to the authenticated admin. Each entry mirrors the full account object returned by Get Account. Use the `limit` and `offset` query parameters to page through large result sets."
@@ -966,10 +1008,24 @@ paths:
                 vetting:
                   status: "PREVETTED"
                   status_timestamp: "Fri, 4 Apr 2025 18:18:49 GMT"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
   "/ccid/aam/v2/admin/account/{accountId}":
     get:
       summary: "Get Account"
@@ -1228,10 +1284,24 @@ paths:
                 vetting:
                   status: "PREVETTED"
                   status_timestamp: "Fri, 4 Apr 2025 18:18:49 GMT"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
     post:
       summary: "Update Account"
       description: "Update an existing account's details including contacts, address, billing configuration, vetting information, and more."
@@ -1683,10 +1753,24 @@ paths:
                 vetting:
                   status: "PREVETTED"
                   status_timestamp: "Fri, 4 Apr 2025 18:18:49 GMT"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
     delete:
       summary: "Delete Account"
       description: "Delete an account. All associated features, caller profiles, and TN assets must be removed before an account can be deleted."
@@ -1707,10 +1791,24 @@ paths:
       responses:
         "200":
           description: "OK"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
   "/ccid/sdpr/v4/admin/account/{accountId}/tcs":
     post:
       summary: "Attach Account TCS"
@@ -1777,10 +1875,24 @@ paths:
                 distributor:
                 - "AT&T"
                 account_id: "x59tj8rtv1"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
     get:
       summary: "Get Account TCS"
       description: "Retrieve the TCS configuration for an account, including lead generation source and active distributors."
@@ -1825,10 +1937,24 @@ paths:
                 distributor:
                 - "AT&T"
                 account_id: "x59tj8rtv1"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
   "/ccid/sdpr/v4/admin/account/{accountId}/feature":
     post:
       summary: "Attach Features"
@@ -2153,10 +2279,24 @@ paths:
                     created_date: "Fri, 20 Feb 2026 20:31:49 GMT"
                     updated_by: "user"
                     updated_date: "Wed, 25 Feb 2026 21:47:19 GMT"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
     get:
       summary: "Get Features"
       description: "Retrieve all features attached to an account, including per-carrier partner enablement statuses."
@@ -2283,10 +2423,24 @@ paths:
                 created_date: "Fri, 20 Feb 2026 20:31:49 GMT"
                 updated_by: "user"
                 updated_date: "Wed, 25 Feb 2026 21:47:19 GMT"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
     delete:
       summary: "Delete Features"
       description: "Delete all features from an account. All caller profiles and TN assets must be removed first."
@@ -2313,10 +2467,24 @@ paths:
                 type: "object"
                 properties: {}
               example: {}
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
   "/ccid/media/v1/admin/account/{accountId}/image":
     post:
       summary: "Create Image with URL"
@@ -2472,10 +2640,24 @@ paths:
                     created_date: "Sun, 3 May 2026 23:53:01 GMT"
                     updated_by: "UserID"
                     updated_date: "Sun, 3 May 2026 23:53:01 GMT"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
     get:
       summary: "List Images"
       description: "Retrieve a list of all images that exist under the specified account. Use the `limit` and `offset` query parameters to page through large result sets."
@@ -2588,10 +2770,24 @@ paths:
                 created_date: "Mon, 4 May 2026 10:15:22 GMT"
                 updated_by: "UserID"
                 updated_date: "Mon, 4 May 2026 10:15:22 GMT"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
   "/ccid/media/v1/admin/account/{accountId}/image/{imageId}":
     put:
       summary: "Update Image"
@@ -2748,8 +2944,16 @@ paths:
                   name: "Smiley-Face-256x256"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
     get:
       summary: "Get Image"
       description: "Retrieve an image by ID, including its CDN URL."
@@ -2850,10 +3054,24 @@ paths:
                 created_date: "Sun, 3 May 2026 23:53:01 GMT"
                 updated_by: "UserID"
                 updated_date: "Sun, 3 May 2026 23:53:01 GMT"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
     delete:
       summary: "Delete Image"
       description: "Delete an image from the account. The image must not be referenced by any active image profiles."
@@ -2880,10 +3098,24 @@ paths:
       responses:
         "200":
           description: "OK"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
   "/ccid/media/v1/admin/account/{accountId}/image/{imageId}.{ext}":
     get:
       summary: "View Image"
@@ -2917,10 +3149,24 @@ paths:
       responses:
         "200":
           description: "OK"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
   "/ccid/sdpr/v4/admin/account/{accountId}/image-profile":
     post:
       summary: "Create Image Profile"
@@ -3059,10 +3305,24 @@ paths:
                   status_timestamp: "Mon, 17 Oct 2022 00:00:00 GMT"
                 created_by: "user_v4_api_prod"
                 created_date: "Tue, 7 Apr 2026 06:47:25 GMT"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
     get:
       summary: "List Image Profiles"
       description: "Retrieve a list of all image profiles that exist under an account, including their vetting and per-carrier partner statuses. Use the `limit` and `offset` query parameters to page through large result sets."
@@ -3220,10 +3480,24 @@ paths:
                 created_date: "Wed, 22 Apr 2026 14:11:50 GMT"
                 updated_by: "user_v4_api_prod"
                 updated_date: "Wed, 22 Apr 2026 14:12:08 GMT"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
   "/ccid/sdpr/v4/admin/account/{accountId}/image-profile/{imageProfileId}":
     get:
       summary: "Get Image Profile"
@@ -3348,10 +3622,24 @@ paths:
                 created_date: "Tue, 7 Apr 2026 06:47:25 GMT"
                 updated_by: "user_v4_api_prod"
                 updated_date: "Tue, 8 Apr 2026 06:47:26 GMT"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
     delete:
       summary: "Delete Image Profile"
       description: "Delete an image profile from an account. The image profile must not be referenced by any active caller profiles."
@@ -3378,10 +3666,24 @@ paths:
       responses:
         "200":
           description: "OK"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
   "/ccid/sdpr/v4/admin/account/{accountId}/image-profile/count":
     get:
       summary: "Count Image Profiles"
@@ -3418,10 +3720,24 @@ paths:
               example:
                 total_count: 1
                 entity_type: "ImageProfile"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
   "/ccid/sdpr/v4/admin/account/{accountId}/business-profile":
     post:
       summary: "Create Business Profile"
@@ -3684,10 +4000,24 @@ paths:
                   status: "TU-Review-Requested"
                 created_by: "jtest-petr-uat-api"
                 created_date: "Mon, 6 Jul 2026 17:45:00 GMT"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
     get:
       summary: "List Business Profiles"
       description: "List all Business Profiles attached to an account. Each entry includes the BPO end client's details, carrier partner enablement statuses, and the parent account name. Use the `limit` and `offset` query parameters to page through large result sets."
@@ -3879,10 +4209,24 @@ paths:
                 created_by: "jtest-petr-uat-api"
                 created_date: "Mon, 6 Jul 2026 17:45:25 GMT"
                 account_name: "TEST_ACCOUNT03"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
   "/ccid/sdpr/v4/admin/account/{accountId}/business-profile/{businessProfileId}":
     get:
       summary: "Get Business Profile"
@@ -4052,10 +4396,24 @@ paths:
                   status: "TU-Review-Requested"
                 created_by: "jtest-petr-uat-api"
                 created_date: "Mon, 6 Jul 2026 17:45:25 GMT"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
   "/ccid/sdpr/v4/admin/account/{accountId}/caller-profile":
     post:
       summary: "Attach Rich BCD Caller Profile"
@@ -4367,10 +4725,24 @@ paths:
                       status_timestamp: "Wed, 25 Feb 2026 21:23:20 GMT"
                     created_by: "user_v4_api_prod"
                     created_date: "Wed, 25 Feb 2026 21:23:20 GMT"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
     get:
       summary: "List Caller Profiles"
       description: "List all caller profiles for an account. Use the `limit` and `offset` query parameters to page through large result sets."
@@ -4552,10 +4924,24 @@ paths:
                   status_timestamp: "Wed, 25 Feb 2026 21:23:20 GMT"
                 created_by: "user_v4_api_prod"
                 created_date: "Wed, 25 Feb 2026 21:23:20 GMT"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
   "/ccid/sdpr/v4/admin/account/{accountId}/caller-profile/{profileId}":
     get:
       summary: "Get Caller Profile"
@@ -4683,10 +5069,24 @@ paths:
                   status_timestamp: "Wed, 25 Feb 2026 21:23:20 GMT"
                 created_by: "user_v4_api_prod"
                 created_date: "Wed, 25 Feb 2026 21:23:20 GMT"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
   "/ccid/sdpr/v4/admin/account/{accountId}/caller-profile/count":
     get:
       summary: "Count Caller Profiles"
@@ -4723,10 +5123,24 @@ paths:
               example:
                 total_count: 1
                 entity_type: "CallerProfile"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
   "/ccid/sdpr/v4/admin/account/{accountId}/orig/tcs/asset":
     post:
       summary: "Create TN Asset"
@@ -5063,8 +5477,16 @@ paths:
                   "tn.orig.start": "+1.6782478115"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
     get:
       summary: "List TN Assets"
       description: "List all TN assets for an account, including their states, vetting statuses, and partner data. Use the `limit` and `offset` query parameters to page through large result sets."
@@ -5291,10 +5713,24 @@ paths:
                 created_date: "Thu, 26 Feb 2026 17:55:02 GMT"
                 updated_by: "PartnerAdmin"
                 updated_date: "Thu, 26 Feb 2026 17:55:05 GMT"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
   "/ccid/sdpr/v4/admin/account/{accountId}/orig/tcs/asset/{tnAssetId}":
     post:
       summary: "Update TN Asset"
@@ -5510,10 +5946,24 @@ paths:
                 created_date: "Thu, 5 Mar 2026 22:35:17 GMT"
                 updated_by: "user_v4_api_prod"
                 updated_date: "Thu, 5 Mar 2026 22:39:25 GMT"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
     get:
       summary: "Get TN Asset"
       description: "Retrieve a specific TN asset by its ID, including vetting status, partner enablement data, and caller profile association."
@@ -5713,10 +6163,24 @@ paths:
                 created_date: "Thu, 26 Feb 2026 17:55:02 GMT"
                 updated_by: "PartnerAdmin"
                 updated_date: "Thu, 26 Feb 2026 17:55:05 GMT"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
     delete:
       summary: "Delete TN Asset"
       description: "Remove a TN asset from an account. The TN will no longer be associated with any caller profile or service."
@@ -5743,10 +6207,24 @@ paths:
       responses:
         "200":
           description: "OK"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
   "/ccid/sdpr/v4/admin/account/{accountId}/orig/tcs/asset/count":
     get:
       summary: "Count TN Assets"
@@ -5783,10 +6261,217 @@ paths:
               example:
                 total_count: 120
                 entity_type: "TcsAsset"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "404":
           description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+  "/ccid/sdpr/v2/error":
+    get:
+      summary: "List Errors"
+      description: "Return the catalog of every error the API can generate, so your integration can map each error_id to its HTTP status, SIP code, and reason. Each entry omits the per-request timestamp, developer_message, and attributes fields. See Error Handling for the full error response structure."
+      operationId: "list-errors"
+      tags:
+      - "Errors"
+      security:
+      - BearerAuth: []
+      x-source-id: "list-errors"
+      x-source-name: "List Errors"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            "application/json":
+              schema:
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    error_id:
+                      type: "string"
+                      description: "Unique, stable error identifier. Use this value in your code to handle errors"
+                      x-constraints: "e.g., ObjectNotFound"
+                    http_status_code:
+                      type: "integer"
+                      description: "HTTP response status code returned with this error"
+                    sip_code:
+                      type: "integer"
+                      description: "SIP response code associated with the error"
+                    reason:
+                      type: "string"
+                      description: "Human-readable error text"
+              example:
+              - error_id: "Ok"
+                http_status_code: 200
+                sip_code: 200
+                reason: "OK"
+              - error_id: "AAMCompanyInvalid"
+                http_status_code: 400
+                sip_code: 400
+                reason: "AAM Company is invalid or does not exist"
+              - error_id: "AccessCredentialRequired"
+                http_status_code: 401
+                sip_code: 401
+                reason: "Client access credential is required"
+              - error_id: "AccessCredentialInvalid"
+                http_status_code: 401
+                sip_code: 401
+                reason: "Client access credential is invalid"
+              - error_id: "AccessTokenRequired"
+                http_status_code: 401
+                sip_code: 401
+                reason: "Client access token is required"
+              - error_id: "AccessTokenInvalid"
+                http_status_code: 401
+                sip_code: 401
+                reason: "Client access token is invalid"
+              - error_id: "AccessTokenExpired"
+                http_status_code: 401
+                sip_code: 401
+                reason: "Client access token has expired"
+              - error_id: "ApiKeyRequired"
+                http_status_code: 401
+                sip_code: 401
+                reason: "Client API key is required"
+              - error_id: "ApiKeyInvalid"
+                http_status_code: 401
+                sip_code: 401
+                reason: "Client API key is invalid"
+              - error_id: "ApiKeyExpired"
+                http_status_code: 401
+                sip_code: 401
+                reason: "Client API key has expired"
+              - error_id: "RequestNotAuthorized"
+                http_status_code: 401
+                sip_code: 401
+                reason: "Client request is not authorized"
+              - error_id: "IpAddressNotAuthorized"
+                http_status_code: 401
+                sip_code: 401
+                reason: "Client IP address is not authorized"
+              - error_id: "DateParseException"
+                http_status_code: 400
+                sip_code: 400
+                reason: "Date is expected to be in RFC 1123 format"
+              - error_id: "MediaTypeException"
+                http_status_code: 400
+                sip_code: 400
+                reason: "Content-Type is invalid or not supported"
+              - error_id: "MediaTypeNotAcceptableException"
+                http_status_code: 406
+                sip_code: 400
+                reason: "Content-Type is not acceptable"
+              - error_id: "MediaTypeNotSupportedException"
+                http_status_code: 415
+                sip_code: 400
+                reason: "Content-Type is invalid or not supported"
+              - error_id: "MethodNotSupportedException"
+                http_status_code: 400
+                sip_code: 400
+                reason: "Request method is not supported"
+              - error_id: "InvalidParameterException"
+                http_status_code: 400
+                sip_code: 400
+                reason: "Parameter is missing or invalid"
+              - error_id: "MessageParseException"
+                http_status_code: 400
+                sip_code: 400
+                reason: "Error in parsing the request"
+              - error_id: "RequiredParameterMissing"
+                http_status_code: 400
+                sip_code: 400
+                reason: "Required parameter is missing"
+              - error_id: "DuplicateParameterValue"
+                http_status_code: 400
+                sip_code: 400
+                reason: "Duplicate value for parameter"
+              - error_id: "RequiredDataMissing"
+                http_status_code: 400
+                sip_code: 400
+                reason: "Required data is missing"
+              - error_id: "ParameterValueInvalid"
+                http_status_code: 400
+                sip_code: 400
+                reason: "Parameter value is invalid"
+              - error_id: "ObjectAlreadyExisted"
+                http_status_code: 400
+                sip_code: 400
+                reason: "Object already existed"
+              - error_id: "ObjectNotFound"
+                http_status_code: 404
+                sip_code: 404
+                reason: "Object does not exist"
+              - error_id: "ObjectNotDeleted"
+                http_status_code: 400
+                sip_code: 400
+                reason: "Object failed to be deleted due to association"
+              - error_id: "ObjectNotUpdated"
+                http_status_code: 400
+                sip_code: 400
+                reason: "Object failed to be updated"
+              - error_id: "ObjectNotCreated"
+                http_status_code: 400
+                sip_code: 400
+                reason: "Object failed to be created"
+              - error_id: "ObjectNotUpdatedDueToAssociation"
+                http_status_code: 400
+                sip_code: 400
+                reason: "Object failed to be updated due to association"
+              - error_id: "ObjectNotAuthorized"
+                http_status_code: 400
+                sip_code: 400
+                reason: "Object association is not allowed"
+              - error_id: "ObjectStoreErrorRetry"
+                http_status_code: 503
+                sip_code: 503
+                reason: "Internal object store error - retry"
+              - error_id: "VersionMismatchOperation"
+                http_status_code: 409
+                sip_code: 409
+                reason: "Data created by a different version cannot be modified."
+              - error_id: "OperationNotAllowed"
+                http_status_code: 409
+                sip_code: 409
+                reason: "Operation is not allowed in current state"
+              - error_id: "PreconditionFailed"
+                http_status_code: 412
+                sip_code: 412
+                reason: "Operation is not allowed in current state"
+              - error_id: "InternalServerError"
+                http_status_code: 500
+                sip_code: 500
+                reason: "Internal server error"
+        "400":
+          description: "Bad Request — see error_id for the cause"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "401":
+          description: "Unauthorized — invalid or expired access token"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "404":
+          description: "Not Found — resource does not exist"
+          content:
+            "application/json":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
   "/ccid/analytics/v1/admin/account/{accountId}/tn":
     get:
       summary: "Single TN Analytics"
